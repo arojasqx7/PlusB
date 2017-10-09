@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/logincss")
+</head>
+<body>
+    <div class="wrapper-page">
+        <div class="panel panel-color panel-inverse">
+            <div class="panel-heading text-center">
+                <img src="~/img/sula/logo-h.png" height="100" width="100" />
+            </div>
+            <div class="panel-body">
+                @RenderBody()
+            </div>
+            <div class="panel-footer center-block text-center">
+                <strong>PlusB - Service Desk</strong>
+            </div>
+        </div>
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
