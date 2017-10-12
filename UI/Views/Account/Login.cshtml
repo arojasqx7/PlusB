@@ -5,16 +5,13 @@
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-
 <section id="loginForm">
     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
         <div class="form-group ">
             <div class="col-xs-12">
-                <div class="input-group">
+                <div class="input-group" >
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Username" })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
@@ -30,23 +27,19 @@
                 </div>
             </div>
         </div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+        <br />
         <div class="form-group">
-            <div class="col-md-offset-1 col-md-6">
-                <div class="checkbox">
-                    @Html.CheckBoxFor(m => m.RememberMe)
-                    @Html.LabelFor(m => m.RememberMe)
-                </div>
+            <div class="col-md-12">
+                <button class="btn btn-success" type="submit" style="width:347px;">Log In</button>
             </div>
         </div>
 
-                <div class="form-group text-right">
-                    <div class="col-xs-12">
-                        <button class="btn btn-success w-md" type="submit">Log In</button>
-                    </div>
-                </div>
-                <div class="form-group m-t-30">
-                    <div class="col-sm-7">
+                <br />
+
+                <div class="form-group text-center">
+                    <div class="col-md-12">
                         <a href="@Url.Action("ForgotPassword","Account")"><i class="fa fa-lock m-r-5"></i> Forgot your password?</a>
                     </div>
                 </div>
