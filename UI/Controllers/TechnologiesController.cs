@@ -8,119 +8,122 @@ using System.Web;
 using System.Web.Mvc;
 using Domain.DAL;
 using Domain.Entities;
+using Persistence.Repositories;
 
 namespace UI.Controllers
 {
     public class TechnologiesController : Controller
     {
-        private PlusBContext db = new PlusBContext();
+        private ITechnologyRepository technologyRepo;
+
+        public TechnologiesController()
+        {
+            this.technologyRepo = new TechnologyRepository(new PlusBContext());
+        }
+
+        public TechnologiesController(ITechnologyRepository technologyRepo)
+        {
+            this.technologyRepo = technologyRepo;
+        }
 
         // GET: Technologies
         public ActionResult Index()
         {
-            return View(db.Technologies.ToList());
+            var technologies = from s in technologyRepo.GetTechnologies()
+                               select s;
+            return View(technologies.ToList());
         }
 
         // GET: Technologies/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Technology technology = db.Technologies.Find(id);
-            if (technology == null)
-            {
-                return HttpNotFound();
-            }
-            return View(technology);
-        }
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Technology technology = db.Technologies.Find(id);
+        //    if (technology == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(technology);
+        //}
 
         // GET: Technologies/Create
-        public ActionResult Create()
+        public PartialViewResult Create()
         {
-            return View();
+            return PartialView();
         }
 
-        // POST: Technologies/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Description,Weight")] Technology technology)
         {
             if (ModelState.IsValid)
             {
-                db.Technologies.Add(technology);
-                db.SaveChanges();
+                technologyRepo.InsertTechnology(technology);
+                technologyRepo.Save();
                 return RedirectToAction("Index");
             }
 
-            return View(technology);
+            return RedirectToAction("Index");
         }
 
-        // GET: Technologies/Edit/5
-        public ActionResult Edit(int? id)
+        //GET: Technologies/Edit/5
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Technology technology = db.Technologies.Find(id);
-            if (technology == null)
-            {
-                return HttpNotFound();
-            }
-            return View(technology);
+            Technology technology = technologyRepo.GetTechnologyByID(id);
+            return PartialView("_editTechnology",technology);
         }
 
         // POST: Technologies/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name,Description,Weight")] Technology technology)
         {
+            try { 
             if (ModelState.IsValid)
             {
-                db.Entry(technology).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                technologyRepo.UpdateTechnology(technology);
+                technologyRepo.Save();
+                return Json(new { success = true });
             }
-            return View(technology);
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError(string.Empty, "Unable to save changes. Try again.");
+            }
+            return PartialView("_editTechnology", technology);
         }
 
         // GET: Technologies/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(bool? saveChangesError = false, int id = 0)
         {
-            if (id == null)
+            if (saveChangesError.GetValueOrDefault())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewBag.ErrorMessage = "Delete failed. Try again.";
             }
-            Technology technology = db.Technologies.Find(id);
-            if (technology == null)
-            {
-                return HttpNotFound();
-            }
-            return View(technology);
+            Technology technology = technologyRepo.GetTechnologyByID(id);
+            return PartialView("_deleteTechnology",technology);
         }
 
         // POST: Technologies/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete([Bind(Include = "ID,Name,Description,Weight")] int id)
         {
-            Technology technology = db.Technologies.Find(id);
-            db.Technologies.Remove(technology);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            Technology technology = technologyRepo.GetTechnologyByID(id);
+            technologyRepo.DeleteTechnology(id);
+            technologyRepo.Save();
+            return RedirectToAction("/Technologies/Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                technologyRepo.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -1,27 +1,26 @@
 ﻿@model IEnumerable<Domain.Entities.Technology>
 
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section class="content-header">
-    <h1> Technologies</h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">Technologies</li>
-    </ol>
+    <h1>Technologies</h1>
 </section>
 
+<br />
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <div class="box">
+            <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">Data Table With Full Features</h3>
+                    <h2 class="box-title">List of technologies </h2>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default" style="float:right;" data-toggle='tooltip' title='Create'>New Technology </button>
                 </div>
                 <div class="box-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="example1" class="table table-bordered table-hover">
                         <tr>
                             <th>
                                 @Html.DisplayNameFor(model => model.Name)
@@ -36,7 +35,7 @@
                         </tr>
 
                         @foreach (var item in Model)
-            {
+                        {
                             <tr>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Name)
@@ -48,13 +47,11 @@
                                     @Html.DisplayFor(modelItem => item.Weight)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                    @Html.Raw("<a data-modal='' href='/Technologies/Edit/" + item.ID + "' id='" + item.ID + "' class='btn btn-info' data-toggle='tooltip' title='Edit'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                                    @Html.Raw("<a data-modal='' href='/Technologies/Delete/" + item.ID + "' id='" + item.ID + "' class='btn btn-danger' data-toggle='tooltip' title='Delete'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                                 </td>
                             </tr>
                         }
-
                     </table>
                 </div>
             </div>
@@ -62,9 +59,40 @@
     </div>
 </section>
 
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">X</span>
+                </button>
+                <h4 class="modal-title">New Technology</h4>
+            </div>
+            <div class="modal-body">
+               @Html.Partial("_createTechnology", new Domain.Entities.Technology())
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
 
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/Technologies.js")
+    }
 <script>
-    $(function () {
-        $('#example1').DataTable()
-    })
+    $(document).ready(function () {
+        $('#example1').DataTable({
+            "bPaginate": true,
+            "bFilter": true,
+            "bInfo": true
+        });
+    });
 </script>
