@@ -9,7 +9,6 @@ namespace Domain.DAL
         public PlusBContext() : base("PlusBContext")
         {
         }
-
         public DbSet<Technology> Technologies {get; set;}
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

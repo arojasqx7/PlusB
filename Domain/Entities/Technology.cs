@@ -13,6 +13,6 @@ namespace Domain.Entities
         public string Description { get; set; }
 
         [Required]
-        public double Weight { get; set; }
+        public int Weight { get; set; }
     }
 }
