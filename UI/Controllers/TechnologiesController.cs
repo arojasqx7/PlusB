@@ -34,21 +34,6 @@ namespace UI.Controllers
             return View(technologies.ToList());
         }
 
-        // GET: Technologies/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Technology technology = db.Technologies.Find(id);
-        //    if (technology == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(technology);
-        //}
-
         // GET: Technologies/Create
         public PartialViewResult Create()
         {
@@ -74,7 +59,7 @@ namespace UI.Controllers
         public ActionResult Edit(int id)
         {
             Technology technology = technologyRepo.GetTechnologyByID(id);
-            return PartialView("_editTechnology",technology);
+            return PartialView("PartialTechnologies/_editTechnology",technology);
         }
 
         // POST: Technologies/Edit/5
@@ -94,7 +79,7 @@ namespace UI.Controllers
             {
                 ModelState.AddModelError(string.Empty, "Unable to save changes. Try again.");
             }
-            return PartialView("_editTechnology", technology);
+            return PartialView("PartialTechnologies/_editTechnology", technology);
         }
 
         // GET: Technologies/Delete/5
@@ -105,18 +90,18 @@ namespace UI.Controllers
                 ViewBag.ErrorMessage = "Delete failed. Try again.";
             }
             Technology technology = technologyRepo.GetTechnologyByID(id);
-            return PartialView("_deleteTechnology",technology);
+            return PartialView("PartialTechnologies/_deleteTechnology", technology);
         }
 
         // POST: Technologies/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete([Bind(Include = "ID,Name,Description,Weight")] int id)
+        public ActionResult DeleteConfirmed([Bind(Include = "ID,Name,Description,Weight")] int id)
         {
             Technology technology = technologyRepo.GetTechnologyByID(id);
             technologyRepo.DeleteTechnology(id);
             technologyRepo.Save();
-            return RedirectToAction("/Technologies/Index");
+            return Json(new { success = true });
         }
 
         protected override void Dispose(bool disposing)

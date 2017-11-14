@@ -10,6 +10,7 @@ namespace Domain.DAL
         {
         }
         public DbSet<Technology> Technologies {get; set;}
+        public DbSet<Consultant> Consultants { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

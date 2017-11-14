@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Domain.Entities.Technology>
+﻿@model IEnumerable<Domain.Entities.Consultant>
 
 @{
     ViewBag.Title = "Index";
@@ -6,7 +6,7 @@
 }
 
 <section class="content-header">
-    <h1>Technologies</h1>
+    <h1>Consultants</h1>
 </section>
 
 <br />
@@ -15,20 +15,29 @@
         <div class="col-xs-12">
             <div class="box box-success">
                 <div class="box-header">
-                    <h2 class="box-title">List of technologies </h2>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default" style="float:right;" data-toggle='tooltip' title='Create'>New Technology </button>
+                    <h2 class="box-title">List of consultants </h2>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default" style="float:right;" data-toggle='tooltip' title='Create'>New Consultant</button>
                 </div>
                 <div class="box-body">
                     <table id="example1" class="table table-bordered table-hover">
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Name)
+                                First Name
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Description)
+                                Last Name
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Weight)
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th>
+                                Country
+                            </th>
+                            <th>
+                                Phone Number
+                            </th>
+                            <th>
+                                Job Title
                             </th>
                             <th></th>
                         </tr>
@@ -37,20 +46,30 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
+                                    @Html.DisplayFor(modelItem => item.FirstName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
+                                    @Html.DisplayFor(modelItem => item.LastName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Weight)
+                                    @Html.DisplayFor(modelItem => item.Email)
                                 </td>
                                 <td>
-                                    @Html.Raw("<a data-modal='' href='/Technologies/Edit/" + item.ID + "' id='" + item.ID + "' class='btn btn-info' data-toggle='tooltip' title='Edit'> <span class='glyphicon glyphicon-edit'> </span> </a>")
-                                    @Html.Raw("<a data-modal='' href='/Technologies/Delete/" + item.ID + "' id='" + item.ID + "' class='btn btn-danger' data-toggle='tooltip' title='Delete'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                                    @Html.DisplayFor(modelItem => item.Pais)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.JobTitle)
+                                </td>
+                                <td>
+                                    @Html.Raw("<a data-modal='' href='/Consultants/Edit/" + item.ID + "' id='" + item.ID + "' class='btn btn-info' data-toggle='tooltip' title='Edit'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                                    @Html.Raw("<a data-modal='' href='/Consultants/Delete/" + item.ID + "' id='" + item.ID + "' class='btn btn-danger' data-toggle='tooltip' title='Delete'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                                 </td>
                             </tr>
                         }
+
                     </table>
                 </div>
             </div>
@@ -65,10 +84,10 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">X</span>
                 </button>
-                <h4 class="modal-title">New Technology</h4>
+                <h4 class="modal-title">New Consultant</h4>
             </div>
             <div class="modal-body">
-               @Html.Partial("PartialTechnologies/_createTechnology", new Domain.Entities.Technology())
+                @Html.Partial("PartialConsultants/_createConsultant", new Domain.Entities.Consultant())
             </div>
             <div class="modal-footer"></div>
         </div>
