@@ -1,0 +1,137 @@
+﻿@model Domain.Entities.Consultant
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">X</span>
+    </button>
+    <h4 class="modal-title">Edit Consultant</h4>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="control-label col-md-2">First Name:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            </div>
+        </div>
+        <br /><br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Last Name:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Date Of Birth:</label>
+            <div class="input-group date col-md-8">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control datepicker" } })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">ID:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.IdNumber, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Gender:</label>
+            <div class="col-md-8">
+                @Html.DropDownListFor(x => x.Gender, new List<SelectListItem>
+                        {
+                          new SelectListItem() {Text = "Male", Value="Male"},
+                          new SelectListItem() {Text = "Female", Value="Female"},
+                        }, new { @class = "form-control select2" })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Email:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", type = "email", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Country:</label>
+            <div class="col-md-8">
+                @Html.DropDownListFor(x => x.Pais, new SelectList(ViewBag.CountryList), new { @class = "form-control" })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Address:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Phone:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Job Title:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Hire Date:</label>
+            <div class="input-group date col-md-8">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                @Html.EditorFor(model => model.HireDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+            </div>
+        </div>
+
+        <br /><br />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+        <div class="modal-footer"></div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<link href="~/Content/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" /
+<script src="~/Scripts/jquery/dist/jquery.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $('.datepicker').datepicker("setDate", new Date());
+    $('.datepicker').datepicker("option", "dateFormat", "dd/mm/yyyy");
+</script>
+
+

@@ -198,6 +198,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ConsultantsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TechnologiesController.cs" />
@@ -5062,9 +5063,6 @@
     <Content Include="Scripts\jquery\dist\jquery.min.js" />
     <Content Include="Scripts\jquery\dist\jquery.slim.js" />
     <Content Include="Scripts\jquery\dist\jquery.slim.min.js" />
-    <Content Include="Scripts\jquery\external\sizzle\dist\sizzle.js" />
-    <Content Include="Scripts\jquery\external\sizzle\dist\sizzle.min.js" />
-    <Content Include="Scripts\jquery\external\sizzle\LICENSE.txt" />
     <Content Include="Scripts\jquery\src\ajax.js" />
     <Content Include="Scripts\jquery\src\ajax\jsonp.js" />
     <Content Include="Scripts\jquery\src\ajax\load.js" />
@@ -6523,7 +6521,6 @@
     <Content Include="bower_components\Ionicons\scss\_ionicons-variables.scss" />
     <Content Include="Scripts\jquery-ui\ui\.jshintrc" />
     <Content Include="Scripts\jquery\dist\jquery.min.map" />
-    <Content Include="Scripts\jquery\external\sizzle\dist\sizzle.min.map" />
     <Content Include="Scripts\jquery\src\.eslintrc.json" />
     <Content Include="bower_components\jvectormap\.bower.json" />
     <Content Include="bower_components\jvectormap\build.sh" />
@@ -6773,7 +6770,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\Technologies.js" />
+    <Content Include="Scripts\Modals.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -6810,9 +6807,13 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Technologies\Index.cshtml" />
-    <Content Include="Views\Shared\_createTechnology.cshtml" />
-    <Content Include="Views\Shared\_editTechnology.cshtml" />
-    <Content Include="Views\Shared\_deleteTechnology.cshtml" />
+    <Content Include="Views\Shared\PartialTechnologies\_createTechnology.cshtml" />
+    <Content Include="Views\Shared\PartialTechnologies\_editTechnology.cshtml" />
+    <Content Include="Views\Shared\PartialTechnologies\_deleteTechnology.cshtml" />
+    <Content Include="Views\Consultants\Index.cshtml" />
+    <Content Include="Views\Shared\PartialConsultants\_createConsultant.cshtml" />
+    <Content Include="Views\Shared\PartialConsultants\_editConsultant.cshtml" />
+    <Content Include="Views\Shared\PartialConsultants\_deleteConsultant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

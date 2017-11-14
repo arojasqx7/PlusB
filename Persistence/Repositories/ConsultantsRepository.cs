@@ -7,41 +7,41 @@ using System.Linq;
 
 namespace Persistence.Repositories
 {
-    public class TechnologyRepository : ITechnologyRepository, IDisposable
+    public class ConsultantsRepository : IConsultantsRepository, IDisposable
     {
         private PlusBContext context;
 
         // Initiliaze constructor
-        public TechnologyRepository(PlusBContext context)
+        public ConsultantsRepository(PlusBContext context)
         {
             this.context = context;
         }
 
         // Create methods to insert in controller
-        public IEnumerable<Technology> GetTechnologies()
+        public IEnumerable<Consultant> GetConsultants()
         {
-            return context.Technologies.ToList();
+            return context.Consultants.ToList();
         }
 
-        public Technology GetTechnologyByID(int id)
+        public Consultant GetConsultantByID(int id)
         {
-            return context.Technologies.Find(id);
+            return context.Consultants.Find(id);
         }
 
-        public void InsertTechnology(Technology technology)
+        public void InsertConsultant(Consultant consultant)
         {
-            context.Technologies.Add(technology);
+            context.Consultants.Add(consultant);
         }
 
-        public void DeleteTechnology(int technologyID)
+        public void DeleteConsultant(int consultantID)
         {
-            Technology technology = context.Technologies.Find(technologyID);
-            context.Technologies.Remove(technology);
+            Consultant consultant = context.Consultants.Find(consultantID);
+            context.Consultants.Remove(consultant);
         }
 
-        public void UpdateTechnology(Technology technology)
+        public void UpdateConsultant(Consultant consultant)
         {
-            context.Entry(technology).State = EntityState.Modified;
+            context.Entry(consultant).State = EntityState.Modified;
         }
 
         public void Save()

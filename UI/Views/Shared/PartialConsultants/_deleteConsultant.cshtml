@@ -1,0 +1,128 @@
+﻿@model Domain.Entities.Consultant  
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">X</span>
+    </button>
+    <h4 class="modal-title text-danger">Are you Sure to delete this Consultant?</h4>
+</div>
+
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <dt>
+                First Name:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt>
+               Last Name:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                Date Of Birth:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateOfBirth)
+            </dd>
+
+            <dt>
+                ID:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IdNumber)
+            </dd>
+
+            <dt>
+                Gender:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Gender)
+            </dd>
+
+            <dt>
+                Email:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                Country:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Pais)
+            </dd>
+
+            <dt>
+                Address:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+
+            <dt>
+                Phone Number:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+
+            <dt>
+                Job Title:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.JobTitle)
+            </dd>
+
+            <dt>
+                Hire Date:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HireDate)
+            </dd>
+        </dl>
+    </div>
+
+    <div class="modal-footer">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <button class="btn btn-danger" data-dismiss="modal">No</button>
+                <input  type="submit" class="btn btn-success"  id="DeleteConsultant" value="Yes"/>
+            }
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    $('#DeleteConsultant').click(function () {
+        $('#myModal').modal('hide');
+    });
+
+    // function to delete row
+    function confirmedDeletion($button){
+        $.post("@Url.Action("Delete", "ConsultantsController")", { id : id } , function (data) {
+        if(data.Success) {
+            $button.closest('tr').remove();
+        }
+    });
+    }
+</script>
