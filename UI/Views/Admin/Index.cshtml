@@ -1,0 +1,82 @@
+﻿@model IEnumerable<UI.Models.ExpandedUserDTO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>Administration</h1>
+</section>
+
+<br />
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-success">
+                <div class="box-header">
+                    <h2 class="box-title">List of Users</h2>
+                    <a data-modal='' href='/Admin/Create' class='btn btn-warning' data-toggle='tooltip' title='New User'>New User</a>  
+                    <a data-modal='' href='/Admin/AddRole' class='btn btn-success' data-toggle='tooltip' title='New Role'>New Role</a>     
+                    <a data-modal='' href='/Admin/ViewAllRoles' class='btn btn-danger' data-toggle='tooltip' title='View Roles'>View Roles</a>      
+                </div>
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-hover">
+                        <tr>
+                            <th> Email</th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td> @Html.DisplayFor(modelItem => item.Email)</td>
+                                <td> @Html.ActionLink("Edit", "EditUser", new { UserName = item.UserName }, new {@data_toggle= "modal", @data_target = "modal-editUser" })
+                                 </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<div class="modal fade" id="modal-editUser">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">X</span>
+                </button>
+                <h4 class="modal-title">Edit User</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("PartialAdmin/_EditUser")
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>*@
+
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/Modals.js")
+}
+<script>
+    $(document).ready(function () {
+        $('#example1').DataTable({
+            "bPaginate": true,
+            "bFilter": true,
+            "bInfo": true
+        });
+    });
+</script>
+

@@ -60,6 +60,10 @@
     <Compile Include="Migrations\201710222227444_mig2.Designer.cs">
       <DependentUpon>201710222227444_mig2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711231908387_Add-ApplicationUser-Reorder.cs" />
+    <Compile Include="Migrations\201711231908387_Add-ApplicationUser-Reorder.Designer.cs">
+      <DependentUpon>201711231908387_Add-ApplicationUser-Reorder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -73,6 +77,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710222227444_mig2.resx">
       <DependentUpon>201710222227444_mig2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711231908387_Add-ApplicationUser-Reorder.resx">
+      <DependentUpon>201711231908387_Add-ApplicationUser-Reorder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

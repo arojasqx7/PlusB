@@ -9,6 +9,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using UI.Models;
+using Domain.DAL;
+using Domain.Entities;
+using System.Configuration;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace UI.Controllers
 {
@@ -57,6 +61,7 @@ namespace UI.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            CreateAdminIfNeeded();
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -91,7 +96,6 @@ namespace UI.Controllers
             }
         }
 
-        //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
@@ -155,14 +159,7 @@ namespace UI.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);                  
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -209,12 +206,6 @@ namespace UI.Controllers
                     return View("ForgotPasswordConfirmation");
                 }
 
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -478,6 +469,52 @@ namespace UI.Controllers
                     properties.Dictionary[XsrfKey] = UserId;
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
+            }
+        }
+        #endregion
+
+        // Add RoleManager
+        #region public ApplicationRoleManager RoleManager
+        private ApplicationRoleManager _roleManager;
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
+        #endregion
+
+        // Add CreateAdminIfNeeded
+        #region private void CreateAdminIfNeeded()
+        private void CreateAdminIfNeeded()
+        {
+            // Get Admin Account
+            string AdminUserName = ConfigurationManager.AppSettings["AdminUserName"];
+            string AdminPassword = ConfigurationManager.AppSettings["AdminPassword"];
+
+            // See if Admin exists
+            var objAdminUser = UserManager.FindByEmail(AdminUserName);
+
+            if (objAdminUser == null)
+            {
+                //See if the Admin role exists
+                if (!RoleManager.RoleExists("Administrator"))
+                {
+                    // Create the Admin Role (if needed)
+                    IdentityRole objAdminRole = new IdentityRole("Administrator");
+                    RoleManager.Create(objAdminRole);
+                }
+
+                // Create Admin user
+                var objNewAdminUser = new ApplicationUser { UserName = AdminUserName, Email = AdminUserName };
+                var AdminUserCreateResult = UserManager.Create(objNewAdminUser, AdminPassword);
+                // Put user in Admin role
+                UserManager.AddToRole(objNewAdminUser.Id, "Administrator");
             }
         }
         #endregion

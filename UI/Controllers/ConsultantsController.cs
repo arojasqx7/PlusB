@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Domain.DAL;
 using Domain.Entities;
@@ -12,6 +8,7 @@ using System.Globalization;
 using Persistence.Repositories;
 
 namespace UI.Controllers
+
 {
     public class ConsultantsController : Controller
     {
@@ -44,11 +41,11 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                consultantRepo.InsertConsultant(consultant);
-                consultantRepo.Save();
-                return RedirectToAction("Index");
+                    consultantRepo.InsertConsultant(consultant);
+                    consultantRepo.Save();
+                    return RedirectToAction("Index");              
             }
-
+            //ModelState.Clear();
             return RedirectToAction("Index");
         }
 
