@@ -75,6 +75,7 @@ namespace UI
 
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
                       "~/Content/bootstrap.min.css",
+                      "~/Content/dropdowns.less",
                       "~/Content/bootstrap.css"));
 
             bundles.Add(new StyleBundle("~/Content/fontawesome").Include(

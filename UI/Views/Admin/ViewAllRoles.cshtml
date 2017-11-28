@@ -1,0 +1,69 @@
+﻿@model IEnumerable<UI.Models.RoleDTO>
+@{
+    ViewBag.Title = "Roles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>Administration - Roles</h1>
+</section>
+
+<br />
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-success">
+                <div class="box-header">
+                    <h2 class="box-title">List of Roles</h2>
+                    <a data-modal='' href='/Admin/AddRole' class='btn btn-success' data-toggle='tooltip' title='New Role' style="float:right;">New Role</a>
+                </div>
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-hover">
+                        <tr>
+                            <th>Role Name</th>
+                            <th></th>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RoleName)
+                                </td>
+                                <td>
+                                    @if (item.RoleName.ToLower() != "administrator")
+                                    {
+                                        @Html.ActionLink("Delete", "DeleteUserRole", new { RoleName = item.RoleName }, new { onclick = "return confirm('Are you sure to delete this role?');" })
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/Modals.js")
+}
+<script>
+    $(document).ready(function () {
+        $('#example1').DataTable({
+            "bPaginate": true,
+            "bFilter": true,
+            "bInfo": true
+        });
+    });
+</script>
+
+
+
