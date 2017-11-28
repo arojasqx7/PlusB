@@ -27,6 +27,7 @@ namespace UI.Controllers
         }
 
         // GET: Technologies
+        [Authorize(Roles ="Administrator")]
         public ActionResult Index()
         {
             var technologies = from s in technologyRepo.GetTechnologies()

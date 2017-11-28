@@ -7,7 +7,7 @@
 
 <section id="loginForm">
     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
+     {
         @Html.AntiForgeryToken()
         <div class="form-group ">
             <div class="col-xs-12">
@@ -27,23 +27,24 @@
                 </div>
             </div>
         </div>
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <br />
-        <div class="form-group">
-            <div class="col-md-12">
-                <button class="btn btn-success" type="submit" style="width:347px;">Log In</button>
-            </div>
-        </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <br />
-
-                <div class="form-group text-center">
-                    <div class="col-md-12">
-                        <a href="@Url.Action("ForgotPassword","Account")"><i class="fa fa-lock m-r-5"></i> Forgot your password?</a>
-                    </div>
+            <br />
+            <div class="form-group">
+                <div class="col-md-12">
+                    <button class="btn btn-success" type="submit" style="width:347px;">Log In</button>
                 </div>
-    }
+            </div>
+
+            <br />
+
+            <div class="form-group text-center">
+                <div class="col-md-12">
+                    <a href="@Url.Action("ForgotPassword","Account")"><i class="fa fa-lock m-r-5"></i> Forgot your password?</a>
+                </div>
+            </div>
+            }
 </section>
 
 @section Scripts {

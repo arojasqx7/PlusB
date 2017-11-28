@@ -153,8 +153,8 @@ namespace UI.Controllers
                     {
                         UserManager.AddToRole(objNewAdminUser.Id, strNewRole);
                     }
-
-                    return RedirectToAction("Index");
+                    return Json(new { success = true });
+                    //return RedirectToAction("Index");
                 }
                 else
                 {
@@ -168,7 +168,8 @@ namespace UI.Controllers
             {
                 ViewBag.Roles = GetAllRolesAsSelectList();
                 // ModelState.AddModelError(string.Empty, "Error: " + ex);
-                return RedirectToAction("Index");
+
+                return Json(new { success = true });
             }
         }
         #endregion
@@ -184,7 +185,7 @@ namespace UI.Controllers
         #endregion
 
         // PUT: /Admin/EditUser
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         #region public ActionResult EditUser(ExpandedUserDTO paramExpandedUserDTO)
@@ -215,7 +216,7 @@ namespace UI.Controllers
         #endregion
 
         // DELETE: /Admin/DeleteUser
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         #region public ActionResult DeleteUser(string UserName)
         public ActionResult DeleteUser(string UserName)
         {
@@ -256,34 +257,24 @@ namespace UI.Controllers
         #endregion
 
         // GET: /Admin/EditRoles/TestUser 
-        //[Authorize(Roles = "Administrator")]
-        #region ActionResult EditRoles(string UserName)
-        public ActionResult EditRoles(string UserName)
+        [Authorize(Roles = "Administrator")]
+        #region PartialViewResult EditRoles(string UserName)
+        public PartialViewResult EditRoles(string UserName)
         {
-            if (UserName == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
             UserName = UserName.ToLower();
 
             // Check that we have an actual user
             ExpandedUserDTO objExpandedUserDTO = GetUser(UserName);
 
-            if (objExpandedUserDTO == null)
-            {
-                return HttpNotFound();
-            }
-
             UserAndRolesDTO objUserAndRolesDTO =
                 GetUserAndRoles(UserName);
 
-            return View(objUserAndRolesDTO);
+            return PartialView("PartialAdmin/_EditRoles",objUserAndRolesDTO);
         }
         #endregion
 
         // PUT: /Admin/EditRoles/TestUser 
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         #region public ActionResult EditRoles(UserAndRolesDTO paramUserAndRolesDTO)
@@ -313,18 +304,20 @@ namespace UI.Controllers
                 UserAndRolesDTO objUserAndRolesDTO =
                     GetUserAndRoles(UserName);
 
-                return View(objUserAndRolesDTO);
+                //  return View(objUserAndRolesDTO);
+                return RedirectToAction("Index", "Admin");
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, "Error: " + ex);
-                return View("EditRoles");
+                //return PartialView("PartialAdmin/_EditRoles");
+                return RedirectToAction("Index", "Admin");
             }
         }
         #endregion
 
         // DELETE: /Admin/DeleteRole?UserName="TestUser&RoleName=Administrator
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         #region public ActionResult DeleteRole(string UserName, string RoleName)
         public ActionResult DeleteRole(string UserName, string RoleName)
         {
@@ -359,8 +352,7 @@ namespace UI.Controllers
                 UserManager.Update(user);
 
                 ViewBag.AddRole = new SelectList(RolesUserIsNotIn(UserName));
-
-                return RedirectToAction("EditRoles", new { UserName = UserName });
+                return RedirectToAction("Index", "Admin");
             }
             catch (Exception ex)
             {
@@ -370,8 +362,7 @@ namespace UI.Controllers
 
                 UserAndRolesDTO objUserAndRolesDTO =
                     GetUserAndRoles(UserName);
-
-                return View("EditRoles", objUserAndRolesDTO);
+                return RedirectToAction("Index", "Admin");
             }
         }
         #endregion
@@ -379,9 +370,9 @@ namespace UI.Controllers
         // Roles *****************************
 
         // GET: /Admin/ViewAllRoles
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         #region public ActionResult ViewAllRoles()
-        public PartialViewResult ViewAllRoles()
+        public ActionResult ViewAllRoles()
         {
             var roleManager =
                 new RoleManager<IdentityRole>
@@ -396,7 +387,7 @@ namespace UI.Controllers
                                             RoleName = objRole.Name
                                         }).ToList();
 
-            return PartialView("PartialAdmin/_ViewRoles",colRoleDTO);
+            return View("ViewAllRoles", colRoleDTO);
         }
         #endregion
 
@@ -412,7 +403,7 @@ namespace UI.Controllers
         #endregion
 
         // PUT: /Admin/AddRole
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         #region public ActionResult AddRole(RoleDTO paramRoleDTO)
@@ -443,7 +434,8 @@ namespace UI.Controllers
                     roleManager.Create(new IdentityRole(RoleName));
                 }
 
-                return Redirect("~/Admin/ViewAllRoles");
+               // return RedirectToAction("Index");
+                return Json(new { success = true });
             }
             catch (Exception ex)
             {
@@ -454,7 +446,7 @@ namespace UI.Controllers
         #endregion
 
         // DELETE: /Admin/DeleteUserRole?RoleName=TestRole
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         #region public ActionResult DeleteUserRole(string RoleName)
         public ActionResult DeleteUserRole(string RoleName)
         {
@@ -494,7 +486,7 @@ namespace UI.Controllers
                                                 RoleName = objRole.Name
                                             }).ToList();
 
-                return RedirectToAction("Index","Admin",colRoleDTO);
+                return RedirectToAction("ViewAllRoles","Admin",colRoleDTO);
             }
             catch (Exception ex)
             {
@@ -511,7 +503,7 @@ namespace UI.Controllers
                                                 RoleName = objRole.Name
                                             }).ToList();
 
-                return RedirectToAction("Index", "Admin", colRoleDTO);
+                return RedirectToAction("ViewAllRoles", "Admin", colRoleDTO);
             }
         }
         #endregion

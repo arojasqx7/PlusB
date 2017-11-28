@@ -20,6 +20,7 @@ namespace UI.Controllers
         }
 
         // GET: Consultants
+        [Authorize(Roles ="Administrator")]
         public ActionResult Index()
         {
             ListOfCountries();

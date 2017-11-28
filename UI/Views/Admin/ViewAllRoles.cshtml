@@ -1,12 +1,11 @@
-﻿@model IEnumerable<UI.Models.ExpandedUserDTO>
-
+﻿@model IEnumerable<UI.Models.RoleDTO>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Roles";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section class="content-header">
-    <h1>Administration - Users</h1>
+    <h1>Administration - Roles</h1>
 </section>
 
 <br />
@@ -15,31 +14,30 @@
         <div class="col-xs-12">
             <div class="box box-success">
                 <div class="box-header">
-                    <h2 class="box-title">List of Users</h2>
-                    <a data-modal='' href='/Admin/Create' class='btn btn-success' data-toggle='tooltip' title='New User' style="float:right;">New User</a>      
+                    <h2 class="box-title">List of Roles</h2>
+                    <a data-modal='' href='/Admin/AddRole' class='btn btn-success' data-toggle='tooltip' title='New Role' style="float:right;">New Role</a>
                 </div>
                 <div class="box-body">
                     <table id="example1" class="table table-bordered table-hover">
                         <tr>
-                            <th> Email</th>
-                            <th> Options</th>
+                            <th>Role Name</th>
+                            <th></th>
                         </tr>
-
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td> @Html.DisplayFor(modelItem => item.Email)</td>
                                 <td>
-                                    @Html.ActionLink("Edit Roles", "EditRoles", new { UserName = item.UserName })  | 
-                                    @if ((item.UserName.ToLower() != this.User.Identity.Name.ToLower()))
+                                    @Html.DisplayFor(modelItem => item.RoleName)
+                                </td>
+                                <td>
+                                    @if (item.RoleName.ToLower() != "administrator")
                                     {
-                                        @Html.ActionLink("Remove", "DeleteUser", new { UserName = item.UserName }, new { onclick = "return confirm('Are you sure you want to remove this user?');" })
+                                        @Html.ActionLink("Delete", "DeleteUserRole", new { RoleName = item.RoleName }, new { onclick = "return confirm('Are you sure to delete this role?');" })
                                     }
                                 </td>
                             </tr>
                         }
                     </table>
-
                 </div>
             </div>
         </div>
@@ -57,7 +55,6 @@
 @section Scripts{
     @Scripts.Render("~/Scripts/Modals.js")
 }
-
 <script>
     $(document).ready(function () {
         $('#example1').DataTable({
@@ -67,4 +64,6 @@
         });
     });
 </script>
+
+
 
