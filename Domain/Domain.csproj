@@ -51,6 +51,10 @@
   <ItemGroup>
     <Compile Include="DAL\PlusBContext.cs" />
     <Compile Include="Entities\Consultant.cs" />
+    <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\Impact.cs" />
+    <Compile Include="Entities\Severity.cs" />
+    <Compile Include="Entities\TaskType.cs" />
     <Compile Include="Entities\Technology.cs" />
     <Compile Include="Migrations\201710092059345_InitialCreate.cs" />
     <Compile Include="Migrations\201710092059345_InitialCreate.Designer.cs">
@@ -63,6 +67,14 @@
     <Compile Include="Migrations\201711231908387_Add-ApplicationUser-Reorder.cs" />
     <Compile Include="Migrations\201711231908387_Add-ApplicationUser-Reorder.Designer.cs">
       <DependentUpon>201711231908387_Add-ApplicationUser-Reorder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711292017148_Add-Customer-Info.cs" />
+    <Compile Include="Migrations\201711292017148_Add-Customer-Info.Designer.cs">
+      <DependentUpon>201711292017148_Add-Customer-Info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711300604327_Add-New-Ticket-Entities.cs" />
+    <Compile Include="Migrations\201711300604327_Add-New-Ticket-Entities.Designer.cs">
+      <DependentUpon>201711300604327_Add-New-Ticket-Entities.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +92,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711231908387_Add-ApplicationUser-Reorder.resx">
       <DependentUpon>201711231908387_Add-ApplicationUser-Reorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711292017148_Add-Customer-Info.resx">
+      <DependentUpon>201711292017148_Add-Customer-Info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711300604327_Add-New-Ticket-Entities.resx">
+      <DependentUpon>201711300604327_Add-New-Ticket-Entities.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

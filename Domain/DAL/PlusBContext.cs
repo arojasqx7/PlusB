@@ -11,6 +11,10 @@ namespace Domain.DAL
         }
         public DbSet<Technology> Technologies {get; set;}
         public DbSet<Consultant> Consultants { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<TaskType> TaskTypes { get; set; }
+        public DbSet<Severity> Severities { get; set; }
+        public DbSet<Impact> Impacts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Domain.DAL;
+using Domain.Entities;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using PagedList;
@@ -16,8 +18,7 @@ namespace UI.Controllers
     {
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
-
-        // Controllers
+        private PlusBContext db = new PlusBContext();
 
         // GET: /Admin/
         [Authorize(Roles = "Administrator")]
@@ -104,6 +105,7 @@ namespace UI.Controllers
             ExpandedUserDTO objExpandedUserDTO = new ExpandedUserDTO();
 
             ViewBag.Roles = GetAllRolesAsSelectList();
+            ViewBag.Customers = GetCustomers();
 
             return PartialView("PartialAdmin/_CreateUser",objExpandedUserDTO);
         }
@@ -126,18 +128,7 @@ namespace UI.Controllers
                 var Email = paramExpandedUserDTO.Email.Trim();
                 var UserName = paramExpandedUserDTO.Email.Trim();
                 var Password = paramExpandedUserDTO.Password.Trim();
-
-                if (Email == "")
-                {
-                    throw new Exception("No Email");
-                }
-
-                if (Password == "")
-                {
-                    throw new Exception("No Password");
-                }
-
-
+                var clientId = paramExpandedUserDTO.CustomerID;
                 UserName = Email.ToLower();
 
                 // Create user
@@ -159,8 +150,7 @@ namespace UI.Controllers
                 else
                 {
                     ViewBag.Roles = GetAllRolesAsSelectList();
-                    ModelState.AddModelError(string.Empty,
-                        "Error: Failed to create the user. Check password requirements.");
+                    ModelState.AddModelError("PassRequirements", "Error: Failed to create the user. Check password requirements.");
                     return View(paramExpandedUserDTO);
                 }
             }
@@ -543,15 +533,12 @@ namespace UI.Controllers
         }
         #endregion
 
-        #region private List<SelectListItem> GetAllRolesAsSelectList()
+        #region GetAllRolesAsSelectList()
         private List<SelectListItem> GetAllRolesAsSelectList()
         {
-            List<SelectListItem> SelectRoleListItems =
-                new List<SelectListItem>();
+            List<SelectListItem> SelectRoleListItems = new List<SelectListItem>();
 
-            var roleManager =
-                new RoleManager<IdentityRole>(
-                    new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
             var colRoleSelectList = roleManager.Roles.OrderBy(x => x.Name).ToList();
 
@@ -569,7 +556,15 @@ namespace UI.Controllers
         }
         #endregion
 
-        #region private ExpandedUserDTO GetUser(string paramUserName)
+        // This method hopefully brings all Customer's ids
+        #region GetCustomers()
+        private IEnumerable<SelectListItem> GetCustomers()
+        {
+                return db.Customers.ToList().Select(d => new SelectListItem { Text = d.CompanyName, Value = d.Id.ToString() });
+        }
+        #endregion
+
+        #region GetUser()
         private ExpandedUserDTO GetUser(string paramUserName)
         {
             ExpandedUserDTO objExpandedUserDTO = new ExpandedUserDTO();
