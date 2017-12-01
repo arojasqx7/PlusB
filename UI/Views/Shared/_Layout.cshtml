@@ -300,7 +300,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                            @*<li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>*@
                         </ul>
                     </li>
 
@@ -310,12 +310,26 @@
                         <a href="#">
                             <i class="fa fa-cog"></i> <span>Administration</span>
                             <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
+                                <i class="fa fa-angle-left pull-left"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="active"><a href="@Url.Action("Index","Admin")"><i class="fa fa-users"></i> Users</a></li>
-                            <li class="active"><a href="@Url.Action("ViewAllRoles","Admin")"><i class="fa fa-tasks"></i> Roles</a></li>
+                            <li><a href="@Url.Action("Index","Admin")"><i class="fa fa-users"></i> Users</a></li>
+                            <li><a href="@Url.Action("ViewAllRoles","Admin")"><i class="fa fa-tasks"></i> Roles</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-edit"></i> <span>Ticket Management</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-left"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Index","Severities")"><i class="fa fa-check-square-o"></i>Severities</a></li>
+                            <li><a href="@Url.Action("Index","Severities")"><i class="fa fa-list-alt"></i>Impacts</a></li>
+                            <li><a href="@Url.Action("Index","Severities")"><i class="fa fa-bug"></i>Task Types</a></li>
                         </ul>
                     </li>
 
@@ -332,17 +346,49 @@
                     </li>    
                     }
 
-                    else
+                    else if(User.IsInRole("Consultant")) 
                     {
                     <li>
                         <a href="pages/calendar.html">
-                            <i class="fa fa-calendar"></i> <span>Calendar</span>
+                            <i class="fa fa-calendar"></i> <span>Consultant</span>
                             <span class="pull-right-container">
                                 <small class="label pull-right bg-red">3</small>
                                 <small class="label pull-right bg-blue">17</small>
                             </span>
                         </a>
                     </li>
+                    }
+                    else if(User.IsInRole("Customer"))
+                    {
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-edit"></i> <span>Customer</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
+                                <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+                                <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-table"></i> <span>Visitante sin role</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            @*<ul class="treeview-menu">
+                                <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
+                                <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+                            </ul>*@
+                        </li>
+
                     }
 
                    @* <li class="treeview">
@@ -362,31 +408,7 @@
             <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
         </ul>
     </li>
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-edit"></i> <span>Forms</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-            <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-            <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-        </ul>
-    </li>
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-table"></i> <span>Tables</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
-        </ul>
-    </li>
+   
 
     <li>
         <a href="pages/mailbox/mailbox.html">

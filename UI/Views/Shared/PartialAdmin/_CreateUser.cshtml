@@ -11,11 +11,12 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Email, "Email:", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-8">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", required="required"} })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -24,20 +25,28 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Password, "Password:", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-8">
-                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
         <br /><br />
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Roles, "Rol:", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Roles, "Role:", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-8">
-                @Html.DropDownList("Roles", null, "-- Choose Role --", new { @class = "form-control" })
+                @Html.DropDownList("Roles", null, "-- Choose Role --", new { @class = "form-control",required="required", @id="DropRoles"})
             </div>
         </div>
 
         <br /><br />
+        <div class="form-group" id="CustomerDiv" >
+            @Html.LabelFor(model => model.CustomerID, "Customer:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-8">
+                @Html.DropDownListFor(m=>m.CustomerID, (IEnumerable<SelectListItem>)ViewData["Customers"], "-- Choose Customer --", new { @class = "form-control" })
+            </div>
+        </div>
+        <br /><br />
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -48,3 +57,18 @@
 </div>
 
 <div class="modal-footer"></div>
+
+
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>  
+    $(function() {
+        $('#CustomerDiv').hide();
+        $('#DropRoles').change(function () {
+            if ($('#DropRoles').val() == 'Customer') {
+                $('#CustomerDiv').show();
+            } else {
+                $('#CustomerDiv').hide();
+            } 
+        });
+    });
+</script>

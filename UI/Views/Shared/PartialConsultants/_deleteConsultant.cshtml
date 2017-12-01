@@ -99,14 +99,16 @@
         </dl>
     </div>
 
-    <div class="modal-footer">
-            @using (Html.BeginForm())
+<div class="modal-footer">
+    @using (Html.BeginForm())
             {
-                @Html.AntiForgeryToken()
-                <button class="btn btn-danger" data-dismiss="modal">No</button>
-                <input  type="submit" class="btn btn-success"  id="DeleteConsultant" value="Yes"/>
-            }
-    </div>
+        @Html.AntiForgeryToken()
+        <button class="btn btn-danger" data-dismiss="modal">No</button>
+                <input type="submit" class="btn btn-success" id="DeleteConsultant" value="Yes" />
+    }
+</div>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -21,7 +21,7 @@
                     <table id="example1" class="table table-bordered table-hover">
                         <tr>
                             <th>Role Name</th>
-                            <th></th>
+                            <th>Options</th>
                         </tr>
                         @foreach (var item in Model)
                         {
@@ -32,7 +32,7 @@
                                 <td>
                                     @if (item.RoleName.ToLower() != "administrator")
                                     {
-                                        @Html.ActionLink("Delete", "DeleteUserRole", new { RoleName = item.RoleName }, new { onclick = "return confirm('Are you sure to delete this role?');" })
+                                        @Html.ActionLink("Remove", "DeleteUserRole", new { RoleName = item.RoleName }, new { onclick = "return confirm('Are you sure to delete this role?');" })
                                     }
                                 </td>
                             </tr>
