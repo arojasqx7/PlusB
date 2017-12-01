@@ -5,36 +5,83 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<section class="content-header">
+    <h1>Severities</h1>
+</section>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.SeverityName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SeverityNumber)
-        </th>
-        <th></th>
-    </tr>
+<br />
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-success">
+                <div class="box-header">
+                    <h2 class="box-title">List of Severities</h2>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default" style="float:right;" data-toggle='tooltip' title='Create'>New Severity </button>
+                </div>
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-hover">
+                        <tr>
+                            <th> Severity Name: </th>
+                            <th> Severity Number:</th>
+                            <th></th>
+                        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SeverityName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SeverityNumber)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SeverityName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SeverityNumber)
+                                </td>
+                                <td>
+                                    @Html.Raw("<a data-modal='' href='/Severities/Edit/" + item.Id + "' id='" + item.Id + "' class='btn btn-info' data-toggle='tooltip' title='Edit'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                                    @Html.Raw("<a data-modal='' href='/Severities/Delete/" + item.Id + "' id='" + item.Id + "' class='btn btn-danger' data-toggle='tooltip' title='Delete'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">X</span>
+                </button>
+                <h4 class="modal-title">New Consultant</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("PartialSeverities/_createSeverity", new Domain.Entities.Severity())
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/Modals.js")
 }
-
-</table>
+<script>
+    $(document).ready(function () {
+        $('#example1').DataTable({
+            "bPaginate": true,
+            "bFilter": true,
+            "bInfo": true
+        });
+    });
+</script>

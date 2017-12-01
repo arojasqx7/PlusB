@@ -310,12 +310,26 @@
                         <a href="#">
                             <i class="fa fa-cog"></i> <span>Administration</span>
                             <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
+                                <i class="fa fa-angle-left pull-left"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="active"><a href="@Url.Action("Index","Admin")"><i class="fa fa-users"></i> Users</a></li>
-                            <li class="active"><a href="@Url.Action("ViewAllRoles","Admin")"><i class="fa fa-tasks"></i> Roles</a></li>
+                            <li><a href="@Url.Action("Index","Admin")"><i class="fa fa-users"></i> Users</a></li>
+                            <li><a href="@Url.Action("ViewAllRoles","Admin")"><i class="fa fa-tasks"></i> Roles</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-edit"></i> <span>Ticket Management</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-left"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Index","Severities")"><i class="fa fa-check-square-o"></i>Severities</a></li>
+                            <li><a href="@Url.Action("Index","Severities")"><i class="fa fa-list-alt"></i>Impacts</a></li>
+                            <li><a href="@Url.Action("Index","Severities")"><i class="fa fa-bug"></i>Task Types</a></li>
                         </ul>
                     </li>
 

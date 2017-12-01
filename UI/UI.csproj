@@ -6704,7 +6704,6 @@
     <Content Include="dist\css\adminlte.min.css.map" />
     <Content Include="plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="plugins\input-mask\phone-codes\phone-codes.json" />
-    <Content Include="composer.json" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -6771,11 +6770,10 @@
     <Content Include="Views\Shared\PartialAdmin\_EditUser.cshtml" />
     <Content Include="Views\Admin\ViewAllRoles.cshtml" />
     <Content Include="Views\Shared\PartialAdmin\_EditRoles.cshtml" />
-    <Content Include="Views\Severities\Create.cshtml" />
-    <Content Include="Views\Severities\Delete.cshtml" />
-    <Content Include="Views\Severities\Details.cshtml" />
-    <Content Include="Views\Severities\Edit.cshtml" />
     <Content Include="Views\Severities\Index.cshtml" />
+    <Content Include="Views\Shared\PartialSeverities\_createSeverity.cshtml" />
+    <Content Include="Views\Shared\PartialSeverities\_editSeverity.cshtml" />
+    <Content Include="Views\Shared\PartialSeverities\_deleteSeverity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

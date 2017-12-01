@@ -1,126 +1,110 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Domain.DAL;
 using Domain.Entities;
+using Persistence.Repositories;
+using Domain.DAL;
+using System.Data;
 
 namespace UI.Controllers
 {
     public class SeveritiesController : Controller
     {
-        private PlusBContext db = new PlusBContext();
+        private ISeverityRepository severityRepo;
 
-        // GET: Severities
-        public ActionResult Index()
+        public SeveritiesController()
         {
-            return View(db.Severities.ToList());
+            this.severityRepo = new SeveritiesRepository(new PlusBContext());
         }
 
-        // GET: Severities/Details/5
-        public ActionResult Details(int? id)
+        // GET: Severities
+        [Authorize(Roles ="Administrator")] 
+        public ActionResult Index()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Severity severity = db.Severities.Find(id);
-            if (severity == null)
-            {
-                return HttpNotFound();
-            }
-            return View(severity);
+            var severities =   from s in severityRepo.GetSeverities()
+                               select s;
+            return View(severities.ToList());
         }
 
         // GET: Severities/Create
-        public ActionResult Create()
+        public PartialViewResult Create()
         {
-            return View();
+            return PartialView("PartialSeverities/_createSeverity");
         }
 
         // POST: Severities/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create([Bind(Include = "Id,SeverityName,SeverityNumber")] Severity severity)
         {
             if (ModelState.IsValid)
             {
-                db.Severities.Add(severity);
-                db.SaveChanges();
+                severityRepo.InsertSeverity(severity);
+                severityRepo.Save();
                 return RedirectToAction("Index");
             }
 
-            return View(severity);
+            return RedirectToAction("Index");
         }
 
         // GET: Severities/Edit/5
-        public ActionResult Edit(int? id)
+        [Authorize(Roles = "Administrator")]
+        public PartialViewResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Severity severity = db.Severities.Find(id);
-            if (severity == null)
-            {
-                return HttpNotFound();
-            }
-            return View(severity);
+            Severity severity = severityRepo.GetSeverityByID(id);
+            return PartialView("PartialSeverities/_editSeverity",severity);
         }
 
         // POST: Severities/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,SeverityName,SeverityNumber")] Severity severity)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(severity).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+            try { 
+                if (ModelState.IsValid)
+                {
+                    severityRepo.UpdateSeverity(severity);
+                    severityRepo.Save();
+                    return Json(new { success = true });
+                }
             }
-            return View(severity);
+            catch (DataException)
+            {
+                ModelState.AddModelError(string.Empty, "Unable to save changes. Try again.");
+            }
+            return PartialView("PartialSeverities/_editSeverity", severity);
         }
 
         // GET: Severities/Delete/5
-        public ActionResult Delete(int? id)
+        [Authorize(Roles = "Administrator")]
+        public PartialViewResult Delete(bool? saveChangesError = false, int id = 0)
         {
-            if (id == null)
+            if (saveChangesError.GetValueOrDefault())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewBag.ErrorMessage = "Delete failed. Try again.";
             }
-            Severity severity = db.Severities.Find(id);
-            if (severity == null)
-            {
-                return HttpNotFound();
-            }
-            return View(severity);
+            Severity severity = severityRepo.GetSeverityByID(id);
+            return PartialView("PartialSeverities/_deleteSeverity",severity);
         }
 
         // POST: Severities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed([Bind(Include = "Id,SeverityName,SeverityNumber")] int id)
         {
-            Severity severity = db.Severities.Find(id);
-            db.Severities.Remove(severity);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            Severity severity = severityRepo.GetSeverityByID(id);
+            severityRepo.DeleteSeverity(id);
+            severityRepo.Save();
+            return Json(new { success = true });
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                severityRepo.Dispose();
             }
             base.Dispose(disposing);
         }
