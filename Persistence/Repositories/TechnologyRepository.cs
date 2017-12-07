@@ -3,6 +3,7 @@ using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 
 namespace Persistence.Repositories
@@ -41,7 +42,7 @@ namespace Persistence.Repositories
 
         public void UpdateTechnology(Technology technology)
         {
-            context.Entry(technology).State = EntityState.Modified;
+            context.Set<Technology>().AddOrUpdate(technology);
         }
 
         public void Save()

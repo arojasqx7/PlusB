@@ -1,11 +1,11 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Net;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Domain.Entities;
 using Persistence.Repositories;
 using Domain.DAL;
 using System.Data;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 
 namespace UI.Controllers
 {
@@ -41,11 +41,25 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                severityRepo.InsertSeverity(severity);
-                severityRepo.Save();
-                return RedirectToAction("Index");
+                try
+                {
+                    severityRepo.InsertSeverity(severity);
+                    severityRepo.Save();
+                    return RedirectToAction("Index");
+                }
+                catch (DbUpdateException sqlExc)
+                {
+                    var sqlException = sqlExc.GetBaseException() as SqlException;
+                    if (sqlException != null)
+                    {
+                        ViewBag.Message = "Record already exists.";
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
-
             return RedirectToAction("Index");
         }
 
@@ -62,17 +76,26 @@ namespace UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,SeverityName,SeverityNumber")] Severity severity)
         {
-            try { 
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                try
                 {
                     severityRepo.UpdateSeverity(severity);
                     severityRepo.Save();
                     return Json(new { success = true });
                 }
-            }
-            catch (DataException)
-            {
-                ModelState.AddModelError(string.Empty, "Unable to save changes. Try again.");
+                catch (DbUpdateException sqlExc)
+                {
+                    var sqlException = sqlExc.GetBaseException() as SqlException;
+                    if (sqlException != null)
+                    {
+                        ViewBag.Message = "Record already exists.";
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
             return PartialView("PartialSeverities/_editSeverity", severity);
         }

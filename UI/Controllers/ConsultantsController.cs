@@ -6,9 +6,10 @@ using Domain.DAL;
 using Domain.Entities;
 using System.Globalization;
 using Persistence.Repositories;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 
 namespace UI.Controllers
-
 {
     public class ConsultantsController : Controller
     {
@@ -42,11 +43,25 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
+                try
+                {
                     consultantRepo.InsertConsultant(consultant);
                     consultantRepo.Save();
-                    return RedirectToAction("Index");              
+                    return Json(new { success = true });
+                }
+                catch (DbUpdateException sqlExc)
+                {
+                    var sqlException = sqlExc.GetBaseException() as SqlException;
+                    if (sqlException != null)
+                    {
+                        ViewBag.Message = "Record already exists.";
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }        
             }
-            //ModelState.Clear();
             return RedirectToAction("Index");
         }
 
@@ -63,18 +78,27 @@ namespace UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,DateOfBirth,IdNumber,Gender,Email,Pais,Address,PhoneNumber,JobTitle,HireDate")] Consultant consultant)
         {
-            try
-            {
+            ListOfCountries();
                 if (ModelState.IsValid)
                 {
-                    consultantRepo.UpdateConsultant(consultant);
-                    consultantRepo.Save();
-                    return Json(new { success = true });
-                }
-            }
-            catch (DataException)
-            {
-                ModelState.AddModelError(string.Empty, "Unable to save changes. Try again.");
+                    try
+                    {
+                       consultantRepo.UpdateConsultant(consultant);
+                       consultantRepo.Save();
+                       return Json(new { success = true });
+                    }
+                    catch (DbUpdateException sqlExc)
+                    {
+                           var sqlException = sqlExc.GetBaseException() as SqlException;
+                           if (sqlException != null)
+                        {
+                           ViewBag.Message = "Record already exists.";
+                        }
+                            else
+                        {
+                                throw;
+                        }
+                    }
             }
             return PartialView("PartialConsultants/_editConsultant", consultant);
         }

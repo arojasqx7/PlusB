@@ -76,6 +76,14 @@
     <Compile Include="Migrations\201711300604327_Add-New-Ticket-Entities.Designer.cs">
       <DependentUpon>201711300604327_Add-New-Ticket-Entities.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712072246569_Add-Unique-To-Id.cs" />
+    <Compile Include="Migrations\201712072246569_Add-Unique-To-Id.Designer.cs">
+      <DependentUpon>201712072246569_Add-Unique-To-Id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712072322433_Add-Unique-Ids3.cs" />
+    <Compile Include="Migrations\201712072322433_Add-Unique-Ids3.Designer.cs">
+      <DependentUpon>201712072322433_Add-Unique-Ids3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -98,6 +106,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711300604327_Add-New-Ticket-Entities.resx">
       <DependentUpon>201711300604327_Add-New-Ticket-Entities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712072246569_Add-Unique-To-Id.resx">
+      <DependentUpon>201712072246569_Add-Unique-To-Id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712072322433_Add-Unique-Ids3.resx">
+      <DependentUpon>201712072322433_Add-Unique-Ids3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
