@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using Domain.DAL;
 using Domain.Entities;
 using Persistence.Repositories;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 
 namespace UI.Controllers
 {
@@ -48,11 +50,25 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                technologyRepo.InsertTechnology(technology);
-                technologyRepo.Save();
-                return RedirectToAction("Index");
+                try
+                {
+                    technologyRepo.InsertTechnology(technology);
+                    technologyRepo.Save();
+                    return RedirectToAction("Index");
+                }
+                catch (DbUpdateException sqlExc)
+                {
+                    var sqlException = sqlExc.GetBaseException() as SqlException;
+                    if (sqlException != null)
+                    {
+                        ViewBag.Message = "Record already exists.";
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
-
             return RedirectToAction("Index");
         }
 
@@ -68,17 +84,26 @@ namespace UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name,Description,Weight")] Technology technology)
         {
-            try { 
             if (ModelState.IsValid)
             {
-                technologyRepo.UpdateTechnology(technology);
-                technologyRepo.Save();
-                return Json(new { success = true });
-            }
-            }
-            catch (DataException)
-            {
-                ModelState.AddModelError(string.Empty, "Unable to save changes. Try again.");
+                try
+                {
+                    technologyRepo.UpdateTechnology(technology);
+                    technologyRepo.Save();
+                    return Json(new { success = true });
+                }
+                catch (DbUpdateException sqlExc)
+                {
+                    var sqlException = sqlExc.GetBaseException() as SqlException;
+                    if (sqlException != null)
+                    {
+                        ViewBag.Message = "Record already exists.";
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
             return PartialView("PartialTechnologies/_editTechnology", technology);
         }
