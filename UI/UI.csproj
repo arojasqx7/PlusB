@@ -214,6 +214,7 @@
     <Compile Include="Controllers\SeveritiesController.cs" />
     <Compile Include="Controllers\TaskTypesController.cs" />
     <Compile Include="Controllers\TechnologiesController.cs" />
+    <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -6784,6 +6785,11 @@
     <Content Include="Views\Shared\PartialTasks\_editTask.cshtml" />
     <Content Include="Views\Shared\PartialTasks\_deleteTask.cshtml" />
     <Content Include="Views\TaskTypes\Index.cshtml" />
+    <Content Include="Views\Tickets\Create.cshtml" />
+    <Content Include="Views\Tickets\Delete.cshtml" />
+    <Content Include="Views\Tickets\Details.cshtml" />
+    <Content Include="Views\Tickets\Edit.cshtml" />
+    <Content Include="Views\Tickets\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
