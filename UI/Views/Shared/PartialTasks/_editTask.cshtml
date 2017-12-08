@@ -1,0 +1,43 @@
+﻿@model Domain.Entities.TaskType
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">X</span>
+    </button>
+    <h4 class="modal-title">Edit Task</h4>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="modal-body">
+        <div class="form-group">
+           <label class="control-label col-md-2">Task Name:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TaskName, new { htmlAttributes = new { @class = "form-control", required="required"} })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <div class="col-md-8">
+                <span class="text-danger">@Html.Raw(ViewBag.Message)</span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer"></div>
+}
+
+
+
+
+
