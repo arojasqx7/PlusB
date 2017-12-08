@@ -209,6 +209,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ConsultantsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImpactsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SeveritiesController.cs" />
     <Compile Include="Controllers\TechnologiesController.cs" />
@@ -6774,6 +6775,10 @@
     <Content Include="Views\Shared\PartialSeverities\_createSeverity.cshtml" />
     <Content Include="Views\Shared\PartialSeverities\_editSeverity.cshtml" />
     <Content Include="Views\Shared\PartialSeverities\_deleteSeverity.cshtml" />
+    <Content Include="Views\Impacts\Index.cshtml" />
+    <Content Include="Views\Shared\PartialImpacts\_createImpact.cshtml" />
+    <Content Include="Views\Shared\PartialImpacts\_editImpact.cshtml" />
+    <Content Include="Views\Shared\PartialImpacts\_deleteImpact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
