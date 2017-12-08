@@ -1,54 +1,50 @@
-﻿using System.Data;
+﻿using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
-using Domain.DAL;
 using Domain.Entities;
 using Persistence.Repositories;
+using Domain.DAL;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 
 namespace UI.Controllers
 {
-    public class TechnologiesController : Controller
+    public class ImpactsController : Controller
     {
-        private ITechnologyRepository technologyRepo;
+        private IImpactRepository impactRepo;
 
-        public TechnologiesController()
+        public ImpactsController()
         {
-            this.technologyRepo = new TechnologyRepository(new PlusBContext());
+            this.impactRepo = new ImpactsRepository(new PlusBContext());
         }
 
-        public TechnologiesController(ITechnologyRepository technologyRepo)
-        {
-            this.technologyRepo = technologyRepo;
-        }
-
-        // GET: Technologies
-        [Authorize(Roles ="Administrator")]
+        // GET: Impacts
+        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
-            var technologies = from s in technologyRepo.GetTechnologies()
-                               select s;
-            return View(technologies.ToList());
+            var impacts = from s in impactRepo.GetImpacts()
+                             select s;
+            return View(impacts.ToList());
         }
 
-        // GET: Technologies/Create
+        // GET: Impacts/Create
         public PartialViewResult Create()
         {
-            return PartialView();
+            return PartialView("PartialImpacts/_createImpact");
         }
 
-
-        [HttpPost, ValidateInput(false)]
+        // POST: Impacts/Create
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Description,Weight")] Technology technology)
+        public ActionResult Create([Bind(Include = "Id,ImpactName,ImpactNumber")] Impact impact)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    technologyRepo.InsertTechnology(technology);
-                    technologyRepo.Save();
+                    impactRepo.InsertImpact(impact);
+                    impactRepo.Save();
                     return RedirectToAction("Index");
                 }
                 catch (DbUpdateException sqlExc)
@@ -67,24 +63,25 @@ namespace UI.Controllers
             return RedirectToAction("Index");
         }
 
-        //GET: Technologies/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Impacts/Edit/5
+        [Authorize(Roles = "Administrator")]
+        public PartialViewResult Edit(int id)
         {
-            Technology technology = technologyRepo.GetTechnologyByID(id);
-            return PartialView("PartialTechnologies/_editTechnology",technology);
+            Impact impact = impactRepo.GetImpactByID(id);
+            return PartialView("PartialImpacts/_editImpact", impact);
         }
 
-        // POST: Technologies/Edit/5
+        // POST: Impacts/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Description,Weight")] Technology technology)
+        public ActionResult Edit([Bind(Include = "Id,ImpactName,ImpactNumber")] Impact impact)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    technologyRepo.UpdateTechnology(technology);
-                    technologyRepo.Save();
+                    impactRepo.UpdateImpact(impact);
+                    impactRepo.Save();
                     return Json(new { success = true });
                 }
                 catch (DbUpdateException sqlExc)
@@ -100,28 +97,29 @@ namespace UI.Controllers
                     }
                 }
             }
-            return PartialView("PartialTechnologies/_editTechnology", technology);
+            return PartialView("PartialImpacts/_editImpact", impact);
         }
 
-        // GET: Technologies/Delete/5
-        public ActionResult Delete(bool? saveChangesError = false, int id = 0)
+        // GET: Impacts/Delete/5
+        [Authorize(Roles = "Administrator")]
+        public PartialViewResult Delete(bool? saveChangesError = false, int id = 0)
         {
             if (saveChangesError.GetValueOrDefault())
             {
                 ViewBag.ErrorMessage = "Delete failed. Try again.";
             }
-            Technology technology = technologyRepo.GetTechnologyByID(id);
-            return PartialView("PartialTechnologies/_deleteTechnology", technology);
+            Impact impact = impactRepo.GetImpactByID(id);
+            return PartialView("PartialImpacts/_deleteImpact", impact);
         }
 
-        // POST: Technologies/Delete/5
+        // POST: Impacts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed([Bind(Include = "ID,Name,Description,Weight")] int id)
+        public ActionResult DeleteConfirmed([Bind(Include = "Id,ImpactName,ImpactNumber")] int id)
         {
-            Technology technology = technologyRepo.GetTechnologyByID(id);
-            technologyRepo.DeleteTechnology(id);
-            technologyRepo.Save();
+            Impact impact = impactRepo.GetImpactByID(id);
+            impactRepo.DeleteImpact(id);
+            impactRepo.Save();
             return Json(new { success = true });
         }
 
@@ -129,7 +127,7 @@ namespace UI.Controllers
         {
             if (disposing)
             {
-                technologyRepo.Dispose();
+                impactRepo.Dispose();
             }
             base.Dispose(disposing);
         }
