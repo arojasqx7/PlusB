@@ -212,6 +212,7 @@
     <Compile Include="Controllers\ImpactsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SeveritiesController.cs" />
+    <Compile Include="Controllers\TaskTypesController.cs" />
     <Compile Include="Controllers\TechnologiesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -6779,6 +6780,10 @@
     <Content Include="Views\Shared\PartialImpacts\_createImpact.cshtml" />
     <Content Include="Views\Shared\PartialImpacts\_editImpact.cshtml" />
     <Content Include="Views\Shared\PartialImpacts\_deleteImpact.cshtml" />
+    <Content Include="Views\Shared\PartialTasks\_createTask.cshtml" />
+    <Content Include="Views\Shared\PartialTasks\_editTask.cshtml" />
+    <Content Include="Views\Shared\PartialTasks\_deleteTask.cshtml" />
+    <Content Include="Views\TaskTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
