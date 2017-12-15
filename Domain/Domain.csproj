@@ -89,6 +89,10 @@
     <Compile Include="Migrations\201712082145065_Add-Ticket-Entity.Designer.cs">
       <DependentUpon>201712082145065_Add-Ticket-Entity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712140026436_Add-OpenTime-toTickets.cs" />
+    <Compile Include="Migrations\201712140026436_Add-OpenTime-toTickets.Designer.cs">
+      <DependentUpon>201712140026436_Add-OpenTime-toTickets.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -120,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712082145065_Add-Ticket-Entity.resx">
       <DependentUpon>201712082145065_Add-Ticket-Entity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712140026436_Add-OpenTime-toTickets.resx">
+      <DependentUpon>201712140026436_Add-OpenTime-toTickets.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

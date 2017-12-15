@@ -49,6 +49,10 @@ namespace UI.Controllers
                     consultantRepo.Save();
                     return Json(new { success = true });
                 }
+                /*If the record already exists (using ID validation), as per the constraint Unique validation 
+                 * implemented in the model, the debugger will run to the CATCH where the ViewBag.Message will 
+                 * display a message to the View.
+                 */
                 catch (DbUpdateException sqlExc)
                 {
                     var sqlException = sqlExc.GetBaseException() as SqlException;
@@ -125,6 +129,7 @@ namespace UI.Controllers
             return Json(new { success = true });
         }
 
+        //This method lists all countries and send them in a ViewBag.CountryList
         public void ListOfCountries()
         {
             List<string> CountryList = new List<string>();

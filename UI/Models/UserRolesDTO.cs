@@ -16,7 +16,7 @@ namespace UI.Models
         public int AccessFailedCount { get; set; }
         public string PhoneNumber { get; set; }
         public IEnumerable<UserRolesDTO> Roles { get; set; }
-        public int? CustomerID { get; set; } // this will be used to handle Customer access linked to a company
+        public string CustomerID { get; set; } // this will be used to handle Customer access linked to a company
     }
 
     public class UserRolesDTO

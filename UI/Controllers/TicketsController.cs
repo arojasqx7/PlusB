@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Domain.DAL;
 using Domain.Entities;
+using UI.Extensions;
+using System;
 
 namespace UI.Controllers
 {
     public class TicketsController : Controller
     {
         private PlusBContext db = new PlusBContext();
+        private int custID;
 
         // GET: Tickets
+        [Authorize(Roles ="Customer")]
         public ActionResult Index()
         {
             var tickets = db.Tickets.Include(t => t.Consultant).Include(t => t.Customer).Include(t => t.Impact).Include(t => t.Severity).Include(t => t.TaskType).Include(t => t.Technology);
@@ -38,10 +38,11 @@ namespace UI.Controllers
         }
 
         // GET: Tickets/Create
+        [Authorize(Roles = "Customer")]
         public ActionResult Create()
         {
+            ViewBag.Id_Customer = int.Parse(User.Identity.GetCustomerId());
             ViewBag.Id_Consultant = new SelectList(db.Consultants, "ID", "FirstName");
-            ViewBag.Id_Customer = new SelectList(db.Customers, "Id", "CompanyName");
             ViewBag.Id_Impact = new SelectList(db.Impacts, "Id", "ImpactName");
             ViewBag.Id_Severity = new SelectList(db.Severities, "Id", "SeverityName");
             ViewBag.Id_TaskType = new SelectList(db.TaskTypes, "Id", "TaskName");
@@ -50,21 +51,19 @@ namespace UI.Controllers
         }
 
         // POST: Tickets/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Date,Id_Customer,ShortDescription,LongDescription,Environment,Id_Technology,Id_Severity,Id_Impact,Id_TaskType,Status,Id_Consultant")] Ticket ticket)
+        [Authorize(Roles = "Customer")]
+        public ActionResult Create([Bind(Include = "Id,Date,OpenTime,Id_Customer,ShortDescription,LongDescription,Environment,Id_Technology,Id_Severity,Id_Impact,Id_TaskType,Status,Id_Consultant")] Ticket ticket)
         {
             if (ModelState.IsValid)
-            {
+            {                
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.Id_Customer = int.Parse(User.Identity.GetCustomerId());
             ViewBag.Id_Consultant = new SelectList(db.Consultants, "ID", "FirstName", ticket.Id_Consultant);
-            ViewBag.Id_Customer = new SelectList(db.Customers, "Id", "CompanyName", ticket.Id_Customer);
             ViewBag.Id_Impact = new SelectList(db.Impacts, "Id", "ImpactName", ticket.Id_Impact);
             ViewBag.Id_Severity = new SelectList(db.Severities, "Id", "SeverityName", ticket.Id_Severity);
             ViewBag.Id_TaskType = new SelectList(db.TaskTypes, "Id", "TaskName", ticket.Id_TaskType);
@@ -94,11 +93,9 @@ namespace UI.Controllers
         }
 
         // POST: Tickets/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Date,Id_Customer,ShortDescription,LongDescription,Environment,Id_Technology,Id_Severity,Id_Impact,Id_TaskType,Status,Id_Consultant")] Ticket ticket)
+        public ActionResult Edit([Bind(Include = "Id,Date,OpenTime,Id_Customer,ShortDescription,LongDescription,Environment,Id_Technology,Id_Severity,Id_Impact,Id_TaskType,Status,Id_Consultant")] Ticket ticket)
         {
             if (ModelState.IsValid)
             {

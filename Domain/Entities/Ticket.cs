@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
@@ -7,15 +8,21 @@ namespace Domain.Entities
     {
         public int Id { get; set; }
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
+
+        public TimeSpan OpenTime { get; set; }
 
         [ForeignKey("Customer")]
         public int Id_Customer {get;set;}
 
         public string ShortDescription { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string LongDescription { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string Environment { get; set; }
 
         [ForeignKey("Technology")]

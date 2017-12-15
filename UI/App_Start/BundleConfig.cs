@@ -108,6 +108,9 @@ namespace UI
 
             bundles.Add(new StyleBundle("~/Content/datatables.net-bs").Include(
                     "~/Content/datatables.net-bs/dataTables.bootstrap.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/placeholder-icons").Include(
+                    "~/Content/placeholder-icons.css"));
         }
     }
 }
