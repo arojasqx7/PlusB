@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web;
 
 namespace Domain.Entities
 {
@@ -41,6 +42,8 @@ namespace Domain.Entities
 
         [ForeignKey("Consultant")]
         public int Id_Consultant { get; set; }
+
+        public HttpPostedFileBase[] files { get; set; }
 
         public virtual Technology Technology { get; set; }
         public virtual Severity Severity { get; set; }

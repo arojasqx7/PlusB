@@ -6,6 +6,7 @@
 }
 
 @Styles.Render("~/Content/placeholder-icons")
+
 <section class="content-header">
     <h1>New Ticket</h1>
 </section>
@@ -23,9 +24,9 @@
                 </div>
                 <div class="box-body">
                     <br />
-                    @using (Html.BeginForm())
+                    @using (Html.BeginForm("Create","Tickets",FormMethod.Post, new { enctype="multipart/form-data"}))
                     {
-                    @Html.AntiForgeryToken()
+                        @Html.AntiForgeryToken()
 
                         <label class="control-label col-md-2">Date & Time:</label>
                         <div style="display:inline-flex;">
@@ -33,7 +34,7 @@
                                 <div class="col-xs-10">
                                     <div class="right-inner-addon">
                                         <i class="glyphicon glyphicon-calendar"></i>
-                                        @Html.TextBoxFor(x => x.Date, new { @class = "form-control", @readonly = "readonly", @Value = @DateTime.Now.ToShortDateString() ,@style="background-color:#fff;" })
+                                        @Html.TextBoxFor(x => x.Date, new { @class = "form-control", @readonly = "readonly", @Value = @DateTime.Now.ToShortDateString(), @style = "background-color:#fff;" })
                                     </div>
                                 </div>
                             </div>
@@ -42,19 +43,19 @@
                                 <div class="col-xs-8">
                                     <div class="right-inner-addon">
                                         <i class="glyphicon glyphicon-time"></i>
-                                        @Html.TextBoxFor(x => x.OpenTime, new { @class = "form-control", @readonly = "readonly", @Value = DateTime.Now.ToLongTimeString(), @style= "margin-right:-30px;background-color:#fff;" })
+                                        @Html.TextBoxFor(x => x.OpenTime, new { @class = "form-control", @readonly = "readonly", @Value = DateTime.Now.ToLongTimeString(), @style = "margin-right:-30px;background-color:#fff;" })
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    <br /> <br />
+                        <br /> <br />
 
                         @Html.Hidden("Id_Customer")
 
                         <div class="form-group">
                             <label class="control-label col-md-2">Subject:</label>
                             <div class="col-xs-4">
-                                @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder="Subject" } })
+                                @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "Subject" } })
                             </div>
                         </div>
                         <br /><br />
@@ -78,7 +79,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-2">Technology:</label>
                             <div class="col-xs-4">
-                                @Html.DropDownList("Id_Technology", null, "-- Choose One --",htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("Id_Technology", null, "-- Choose One --", htmlAttributes: new { @class = "form-control", required = "required" })
                             </div>
                         </div>
                         <br /><br />
@@ -86,7 +87,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-2">Severity:</label>
                             <div class="col-xs-4">
-                                @Html.DropDownList("Id_Severity", null, "-- Choose One --", htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("Id_Severity", null, "-- Choose One --", htmlAttributes: new { @class = "form-control", required = "required" })
                             </div>
                         </div>
                         <br /><br />
@@ -94,7 +95,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-2">Impact:</label>
                             <div class="col-xs-4">
-                                @Html.DropDownList("Id_Impact", null, "-- Choose One --", htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("Id_Impact", null, "-- Choose One --", htmlAttributes: new { @class = "form-control", required = "required" })
                             </div>
                         </div>
                         <br /><br />
@@ -102,7 +103,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-2">Task Type:</label>
                             <div class="col-xs-4">
-                                @Html.DropDownList("Id_TaskType", null, "-- Choose One --", htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("Id_TaskType", null, "-- Choose One --", htmlAttributes: new { @class = "form-control", required = "required" })
                             </div>
                         </div>
                         <br /><br />
@@ -113,7 +114,7 @@
                                 @Html.DropDownListFor(x => x.Status, new List<SelectListItem>
                                     {
                                       new SelectListItem() {Text = "Open", Value="Open"}
-                                    }, new { @class = "form-control select2" })
+                                    }, new { @class = "form-control select2", @readonly = "readonly", @style = "background-color:#fff;" })
                             </div>
                         </div>
                         <br /><br />
@@ -124,19 +125,25 @@
                                 @Html.DropDownList("Id_Consultant", null, htmlAttributes: new { @class = "form-control" })
                             </div>
                         </div>
-                        <br /><br /><br />
+                        <br /><br /><br/>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Attachments:</label>
+                            <div class="col-xs-4">
+                               @Html.TextBoxFor(model => model.files, "", new { @type = "file", @multiple = "multiple" }) 
+                            </div>
+                        </div>
+                        <br /><br />
 
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Submit Ticket" class="btn btn-success col-xs-4"style="width:325px;"/>
+                                <input type="submit" value="Submit Ticket" class="btn btn-success col-xs-4" style="width:325px;" />
                             </div>
                         </div>
-
                         <br /><br />
                     }
-                    </div>
+                </div>
                 </div>
             </div>
         </div>
     </section>
-

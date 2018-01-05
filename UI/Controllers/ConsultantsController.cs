@@ -26,7 +26,8 @@ namespace UI.Controllers
         {
             ListOfCountries();
             var consultants = from s in consultantRepo.GetConsultants()
-                               select s;
+                              where !s.FirstName.Contains("Unassigned")
+                              select s;
             return View(consultants.ToList());
         }
 
@@ -47,7 +48,7 @@ namespace UI.Controllers
                 {
                     consultantRepo.InsertConsultant(consultant);
                     consultantRepo.Save();
-                    return Json(new { success = true });
+                    return RedirectToAction("Index");
                 }
                 /*If the record already exists (using ID validation), as per the constraint Unique validation 
                  * implemented in the model, the debugger will run to the CATCH where the ViewBag.Message will 

@@ -6797,13 +6797,14 @@
     <Content Include="Views\Shared\PartialTasks\_deleteTask.cshtml" />
     <Content Include="Views\TaskTypes\Index.cshtml" />
     <Content Include="Views\Tickets\Create.cshtml" />
-    <Content Include="Views\Tickets\Delete.cshtml" />
-    <Content Include="Views\Tickets\Details.cshtml" />
-    <Content Include="Views\Tickets\Edit.cshtml" />
     <Content Include="Views\Tickets\Index.cshtml" />
+    <Content Include="Views\Shared\PartialTickets\_detailsTicket.cshtml" />
+    <Content Include="Views\Shared\PartialTickets\_deleteTicket.cshtml" />
+    <Content Include="Views\Shared\PartialTickets\_editTicket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="TicketAttachments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
