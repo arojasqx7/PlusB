@@ -1,0 +1,122 @@
+﻿@model Domain.Entities.Ticket
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">X</span>
+    </button>
+    <h4 class="modal-title">Edit Ticket - @Html.DisplayFor(model => model.Customer.CompanyName)</h4>
+</div>
+
+@using (Html.BeginForm("Edit", "Tickets", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="modal-body">
+
+        <label class="control-label col-md-2">Date & Time:</label>
+        <div style="display:inline-flex;">
+            <div class="form-group">
+                <div class="col-xs-10">
+                        @Html.TextBoxFor(x => x.Date, new { @class = "form-control", @readonly = "readonly", @style = "background-color:#fff;" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-8">
+                        @Html.TextBoxFor(x => x.OpenTime, new { @class = "form-control", @readonly = "readonly", @style = "margin-right:-30px;background-color:#fff;" })
+                </div>
+            </div>
+        </div>
+        <br /> <br />
+
+        @Html.HiddenFor(model => model.Id_Customer)
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Subject:</label>
+            <div class="col-xs-8">
+                @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "Subject" } })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Description:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.LongDescription, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <br /><br /><br/>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Environment:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Environment, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <br /><br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Technology:</label>
+            <div class="col-md-8">
+                @Html.DropDownList("Id_Technology", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Severity:</label>
+            <div class="col-md-8">
+                @Html.DropDownList("Id_Severity", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Impact:</label>
+            <div class="col-md-8">
+                @Html.DropDownList("Id_Impact", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Task:</label>
+            <div class="col-md-8">
+                @Html.DropDownList("Id_TaskType", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Id_TaskType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-8">
+               @Html.DropDownListFor(x => x.Status, new List<SelectListItem>
+                   {
+                    new SelectListItem() {Text = "Open", Value="Open"},
+                    new SelectListItem() {Text = "Work In Progress", Value="Work In Progress"},
+                   }, new { @class = "form-control select2" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.Id_Consultant)
+    </div>
+
+
+    <div class="modal-footer">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-success" id="editButton"/>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $('#editButton').click(function () {
+        $('#myModal').modal('hide');
+        window.location.reload();
+    });
+</script>

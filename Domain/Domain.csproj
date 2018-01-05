@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +57,7 @@
     <Compile Include="Entities\Severity.cs" />
     <Compile Include="Entities\TaskType.cs" />
     <Compile Include="Entities\Technology.cs" />
+    <Compile Include="Entities\Ticket.cs" />
     <Compile Include="Migrations\201710092059345_InitialCreate.cs" />
     <Compile Include="Migrations\201710092059345_InitialCreate.Designer.cs">
       <DependentUpon>201710092059345_InitialCreate.cs</DependentUpon>
@@ -83,6 +85,14 @@
     <Compile Include="Migrations\201712072322433_Add-Unique-Ids3.cs" />
     <Compile Include="Migrations\201712072322433_Add-Unique-Ids3.Designer.cs">
       <DependentUpon>201712072322433_Add-Unique-Ids3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712082145065_Add-Ticket-Entity.cs" />
+    <Compile Include="Migrations\201712082145065_Add-Ticket-Entity.Designer.cs">
+      <DependentUpon>201712082145065_Add-Ticket-Entity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712140026436_Add-OpenTime-toTickets.cs" />
+    <Compile Include="Migrations\201712140026436_Add-OpenTime-toTickets.Designer.cs">
+      <DependentUpon>201712140026436_Add-OpenTime-toTickets.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -112,6 +122,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712072322433_Add-Unique-Ids3.resx">
       <DependentUpon>201712072322433_Add-Unique-Ids3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712082145065_Add-Ticket-Entity.resx">
+      <DependentUpon>201712082145065_Add-Ticket-Entity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712140026436_Add-OpenTime-toTickets.resx">
+      <DependentUpon>201712140026436_Add-OpenTime-toTickets.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

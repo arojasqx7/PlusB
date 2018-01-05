@@ -1,0 +1,149 @@
+﻿@model Domain.Entities.Ticket
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/placeholder-icons")
+
+<section class="content-header">
+    <h1>New Ticket</h1>
+</section>
+
+<br />
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h2 class="box-title">Ticket Information</h2>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <br />
+                    @using (Html.BeginForm("Create","Tickets",FormMethod.Post, new { enctype="multipart/form-data"}))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <label class="control-label col-md-2">Date & Time:</label>
+                        <div style="display:inline-flex;">
+                            <div class="form-group">
+                                <div class="col-xs-10">
+                                    <div class="right-inner-addon">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                        @Html.TextBoxFor(x => x.Date, new { @class = "form-control", @readonly = "readonly", @Value = @DateTime.Now.ToShortDateString(), @style = "background-color:#fff;" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-8">
+                                    <div class="right-inner-addon">
+                                        <i class="glyphicon glyphicon-time"></i>
+                                        @Html.TextBoxFor(x => x.OpenTime, new { @class = "form-control", @readonly = "readonly", @Value = DateTime.Now.ToLongTimeString(), @style = "margin-right:-30px;background-color:#fff;" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br /> <br />
+
+                        @Html.Hidden("Id_Customer")
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Subject:</label>
+                            <div class="col-xs-4">
+                                @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "Subject" } })
+                            </div>
+                        </div>
+                        <br /><br />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Description:</label>
+                            <div class="col-xs-4">
+                                @Html.EditorFor(model => model.LongDescription, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "Description" } })
+                            </div>
+                        </div>
+                        <br /><br /><br />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Environment:</label>
+                            <div class="col-xs-4">
+                                @Html.EditorFor(model => model.Environment, new { htmlAttributes = new { @class = "form-control", placeholder = "Environment" } })
+                            </div>
+                        </div>
+                        <br /><br /><br />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Technology:</label>
+                            <div class="col-xs-4">
+                                @Html.DropDownList("Id_Technology", null, "-- Choose One --", htmlAttributes: new { @class = "form-control", required = "required" })
+                            </div>
+                        </div>
+                        <br /><br />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Severity:</label>
+                            <div class="col-xs-4">
+                                @Html.DropDownList("Id_Severity", null, "-- Choose One --", htmlAttributes: new { @class = "form-control", required = "required" })
+                            </div>
+                        </div>
+                        <br /><br />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Impact:</label>
+                            <div class="col-xs-4">
+                                @Html.DropDownList("Id_Impact", null, "-- Choose One --", htmlAttributes: new { @class = "form-control", required = "required" })
+                            </div>
+                        </div>
+                        <br /><br />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Task Type:</label>
+                            <div class="col-xs-4">
+                                @Html.DropDownList("Id_TaskType", null, "-- Choose One --", htmlAttributes: new { @class = "form-control", required = "required" })
+                            </div>
+                        </div>
+                        <br /><br />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Status:</label>
+                            <div class="col-xs-4">
+                                @Html.DropDownListFor(x => x.Status, new List<SelectListItem>
+                                    {
+                                      new SelectListItem() {Text = "Open", Value="Open"}
+                                    }, new { @class = "form-control select2", @readonly = "readonly", @style = "background-color:#fff;" })
+                            </div>
+                        </div>
+                        <br /><br />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Consultant Assigned:</label>
+                            <div class="col-xs-4">
+                                @Html.DropDownList("Id_Consultant", null, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <br /><br /><br/>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Attachments:</label>
+                            <div class="col-xs-4">
+                               @Html.TextBoxFor(model => model.files, "", new { @type = "file", @multiple = "multiple" }) 
+                            </div>
+                        </div>
+                        <br /><br />
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Submit Ticket" class="btn btn-success col-xs-4" style="width:325px;" />
+                            </div>
+                        </div>
+                        <br /><br />
+                    }
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>

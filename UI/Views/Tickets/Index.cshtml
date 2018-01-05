@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Domain.Entities.Ticket>
+
+@{
+    ViewBag.Title = "My Tickets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>My Tickets</h1>
+</section>
+
+<br />
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-success">
+                <div class="box-header">
+                    <h2 class="box-title">List of tickets </h2>
+                </div>
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-hover">
+                        <tr>
+                            <th> Date & Time Opened</th>
+                            <th> Short Description</th>
+                            <th> Severity</th>
+                            <th> Task</th>
+                            <th> Consultant Assigned</th>
+                            <th> Status</th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td> @Html.DisplayFor(modelItem => item.Date) @Html.DisplayFor(modelItem => item.OpenTime)</td>
+                                <td> @Html.DisplayFor(modelItem => item.ShortDescription)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Severity.SeverityName)</td>
+                                <td> @Html.DisplayFor(modelItem => item.TaskType.TaskName)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Consultant.FirstName)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                                <td>
+                                     @Html.Raw("<a data-modal='' href='/Tickets/Details/" + item.Id + "' id='" + item.Id + "' class='btn btn-warning' data-toggle='tooltip' title='View Details'> <span class='glyphicon glyphicon-resize-full'> </span> </a>")
+                                     @Html.Raw("<a data-modal='' href='/Tickets/Edit/" + item.Id + "' id='" + item.Id + "' class='btn btn-info' data-toggle='tooltip' title='Edit Ticket'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                                     @Html.Raw("<a data-modal='' href='/Tickets/Delete/" + item.Id + "' id='" + item.Id + "' class='btn btn-danger' data-toggle='tooltip' title='Delete Ticket'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+@Scripts.Render("~/Scripts/Modals.js")
+<script>
+    $(document).ready(function () {
+        $('#example1').DataTable({
+            "bPaginate": true,
+            "bFilter": true,
+            "bInfo": true
+        });
+    });
+</script>
+}

@@ -15,6 +15,7 @@ namespace Domain.DAL
         public DbSet<TaskType> TaskTypes { get; set; }
         public DbSet<Severity> Severities { get; set; }
         public DbSet<Impact> Impacts { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

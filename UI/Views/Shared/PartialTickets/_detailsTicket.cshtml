@@ -1,0 +1,52 @@
+﻿@model Domain.Entities.Ticket
+
+<style>
+    #tblDetails th {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+ }
+</style>
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">X</span>
+    </button>
+    <h4 class="modal-title">Ticket Details - @Html.DisplayFor(model => model.Customer.CompanyName)</h4>
+</div>
+
+<div class="modal-body">
+     <strong>Date & Time Opened: </strong>  @Html.DisplayFor(model => model.Date) @Html.DisplayFor(model => model.OpenTime)
+     <br />
+     <strong>Consultant Assigned:</strong>  @Html.DisplayFor(model => model.Consultant.FirstName) @Html.DisplayFor(model => model.Consultant.LastName)
+     <br />
+     <strong>Task:</strong>     @Html.DisplayFor(model => model.TaskType.TaskName)
+     <br />
+     <strong>Impact:</strong>   @Html.DisplayFor(model => model.Impact.ImpactName)
+     <br />
+     <strong>Severity:</strong>     @Html.DisplayFor(model => model.Severity.SeverityName)
+     <br />
+     <strong>Technology:</strong>   @Html.DisplayFor(model => model.Technology.Name)
+     <br />
+     <strong>Status:</strong>     @Html.DisplayFor(model => model.Status)
+
+     <br /><br />
+     <table class="table table-bordered" id="tblDetails">
+            <tr>
+                <th> Short Description</th>
+                <th> Long Description</th>
+                <th> Environment</th>
+            </tr>
+
+            <tr>
+                <td> @Html.DisplayFor(model => model.ShortDescription)</td>
+                <td> @Html.DisplayFor(model => model.LongDescription)</td>
+                <td> @Html.DisplayFor(model => model.Environment)</td>
+            </tr>
+
+</table>
+</div>
+
+    <div class="modal-footer">
+        <button class="btn btn-warning" data-dismiss="modal">Close</button>    
+    </div>
+

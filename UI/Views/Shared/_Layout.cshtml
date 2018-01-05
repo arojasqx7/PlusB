@@ -362,15 +362,14 @@
                     {
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-edit"></i> <span>Customer</span>
+                                <i class="fa fa-file-text-o"></i> <span>Tickets</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-                                <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-                                <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+                                <li><a href="@Url.Action("Create","Tickets")"><i class="fa fa-plus-square"></i>New Ticket</a></li>
+                                <li><a href="@Url.Action("Index","Tickets")"><i class="fa fa-eye"></i>My Tickets</a></li>   
                             </ul>
                         </li>
                     }

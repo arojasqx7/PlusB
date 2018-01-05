@@ -1,5 +1,5 @@
 ﻿using Domain.DAL;
-using Domain.Entities;
+using UI.Extensions;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -128,12 +128,11 @@ namespace UI.Controllers
                 var Email = paramExpandedUserDTO.Email.Trim();
                 var UserName = paramExpandedUserDTO.Email.Trim();
                 var Password = paramExpandedUserDTO.Password.Trim();
-                var clientId = paramExpandedUserDTO.CustomerID;
+                var CustomerID = paramExpandedUserDTO.CustomerID.ToString(); // here we include the CustomerID in case user is customer.
                 UserName = Email.ToLower();
 
                 // Create user
-
-                var objNewAdminUser = new ApplicationUser { UserName = UserName, Email = Email };
+                var objNewAdminUser = new ApplicationUser { UserName = UserName, Email = Email, CustomerID = CustomerID };
                 var AdminUserCreateResult = UserManager.Create(objNewAdminUser, Password);
 
                 if (AdminUserCreateResult.Succeeded == true)
@@ -560,7 +559,10 @@ namespace UI.Controllers
         #region GetCustomers()
         private IEnumerable<SelectListItem> GetCustomers()
         {
-                return db.Customers.ToList().Select(d => new SelectListItem { Text = d.CompanyName, Value = d.Id.ToString() });
+                return db.Customers.
+                ToList()
+                .Where(x=>x.Id != 1)
+                .Select(d => new SelectListItem { Text = d.CompanyName, Value = d.Id.ToString() });
         }
         #endregion
 

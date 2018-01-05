@@ -57,9 +57,11 @@
     <Compile Include="Repositories\ISeverityRepository.cs" />
     <Compile Include="Repositories\ITaskTypesRepository.cs" />
     <Compile Include="Repositories\ITechnologyRepository.cs" />
+    <Compile Include="Repositories\ITicketsRepository.cs" />
     <Compile Include="Repositories\SeveritiesRepository.cs" />
     <Compile Include="Repositories\TaskTypesRepository.cs" />
     <Compile Include="Repositories\TechnologyRepository.cs" />
+    <Compile Include="Repositories\TicketsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">

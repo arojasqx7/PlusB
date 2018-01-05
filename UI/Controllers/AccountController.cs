@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -9,10 +6,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using UI.Models;
-using Domain.DAL;
-using Domain.Entities;
 using System.Configuration;
 using Microsoft.AspNet.Identity.EntityFramework;
+using UI.Extensions;
 
 namespace UI.Controllers
 {
@@ -81,6 +77,8 @@ namespace UI.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var test = User.Identity.GetCustomerId();
+
             switch (result)
             {
                 case SignInStatus.Success:
