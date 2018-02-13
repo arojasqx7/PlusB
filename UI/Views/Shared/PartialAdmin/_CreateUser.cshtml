@@ -1,5 +1,4 @@
 ﻿@model UI.Models.ExpandedUserDTO
-@using UI.Extensions
 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -43,7 +42,7 @@
         <div class="form-group" id="CustomerDiv" >
             @Html.LabelFor(model => model.CustomerID, "Customer:", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-8">
-                @Html.DropDownListFor(m=>m.CustomerID, (IEnumerable<SelectListItem>)ViewData["Customers"], "-- Choose Customer --", new { @class = "form-control" })
+                @Html.DropDownListFor(m=>m.CustomerID, (IEnumerable<SelectListItem>)ViewData["Customers"], "-- Choose Company --", new { @class = "form-control" })
             </div>
         </div>
         <br /><br />

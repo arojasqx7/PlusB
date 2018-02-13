@@ -1,9 +1,10 @@
-﻿@model Domain.Entities.Consultant
+﻿@model UI.Models.ConsultantUserModel
 
 <link href="~/Content/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
-@using (Html.BeginForm("Create","Consultants",FormMethod.Post))
+@using (Html.BeginForm("Create", "ConsultantUser", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    <input type="hidden" value="@Model.ID" name="Id" />
        <div class="form-group">
            <label class="control-label col-md-2">First Name:</label>
             <div class="col-md-8">
@@ -99,6 +100,22 @@
                     <i class="fa fa-calendar"></i>
                 </div>
                 @Html.EditorFor(model => model.HireDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Username:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Password:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type="password" } })
             </div>
         </div>
         <br /><br />

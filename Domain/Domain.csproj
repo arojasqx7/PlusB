@@ -66,10 +66,6 @@
     <Compile Include="Migrations\201710222227444_mig2.Designer.cs">
       <DependentUpon>201710222227444_mig2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711231908387_Add-ApplicationUser-Reorder.cs" />
-    <Compile Include="Migrations\201711231908387_Add-ApplicationUser-Reorder.Designer.cs">
-      <DependentUpon>201711231908387_Add-ApplicationUser-Reorder.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201711292017148_Add-Customer-Info.cs" />
     <Compile Include="Migrations\201711292017148_Add-Customer-Info.Designer.cs">
       <DependentUpon>201711292017148_Add-Customer-Info.cs</DependentUpon>
@@ -77,10 +73,6 @@
     <Compile Include="Migrations\201711300604327_Add-New-Ticket-Entities.cs" />
     <Compile Include="Migrations\201711300604327_Add-New-Ticket-Entities.Designer.cs">
       <DependentUpon>201711300604327_Add-New-Ticket-Entities.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712072246569_Add-Unique-To-Id.cs" />
-    <Compile Include="Migrations\201712072246569_Add-Unique-To-Id.Designer.cs">
-      <DependentUpon>201712072246569_Add-Unique-To-Id.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201712072322433_Add-Unique-Ids3.cs" />
     <Compile Include="Migrations\201712072322433_Add-Unique-Ids3.Designer.cs">
@@ -108,17 +100,11 @@
     <EmbeddedResource Include="Migrations\201710222227444_mig2.resx">
       <DependentUpon>201710222227444_mig2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711231908387_Add-ApplicationUser-Reorder.resx">
-      <DependentUpon>201711231908387_Add-ApplicationUser-Reorder.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711292017148_Add-Customer-Info.resx">
       <DependentUpon>201711292017148_Add-Customer-Info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711300604327_Add-New-Ticket-Entities.resx">
       <DependentUpon>201711300604327_Add-New-Ticket-Entities.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712072246569_Add-Unique-To-Id.resx">
-      <DependentUpon>201712072246569_Add-Unique-To-Id.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712072322433_Add-Unique-Ids3.resx">
       <DependentUpon>201712072322433_Add-Unique-Ids3.cs</DependentUpon>

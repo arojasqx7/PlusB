@@ -208,6 +208,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ConsultantsController.cs" />
+    <Compile Include="Controllers\ConsultantUserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImpactsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -229,6 +230,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ConsultantUserModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UserRolesDTO.cs" />
@@ -6801,6 +6803,10 @@
     <Content Include="Views\Shared\PartialTickets\_detailsTicket.cshtml" />
     <Content Include="Views\Shared\PartialTickets\_deleteTicket.cshtml" />
     <Content Include="Views\Shared\PartialTickets\_editTicket.cshtml" />
+    <Content Include="Views\Tickets\UnassignedList.cshtml" />
+    <Content Include="Views\Shared\PartialTickets\_assignTicket.cshtml" />
+    <Content Include="Views\Tickets\MyTickets.cshtml" />
+    <Content Include="Views\ConsultantUser\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

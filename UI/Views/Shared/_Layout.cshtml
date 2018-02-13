@@ -340,25 +340,28 @@
                     </li>
 
                     <li>
-                        <a href="@Url.Action("Index","Consultants")">
-                            <i class="fa fa-server"></i> <span>Consultants</span>
-                        </a>
-                    </li>    
-                    }
-
-                    else if(User.IsInRole("Consultant")) 
-                    {
-                    <li>
-                        <a href="pages/calendar.html">
-                            <i class="fa fa-calendar"></i> <span>Consultant</span>
-                            <span class="pull-right-container">
-                                <small class="label pull-right bg-red">3</small>
-                                <small class="label pull-right bg-blue">17</small>
-                            </span>
+                        <a href="@Url.Action("Index","ConsultantUser")">
+                            <i class="fa fa-user-plus"></i> <span>Consultants</span>
                         </a>
                     </li>
                     }
-                    else if(User.IsInRole("Customer"))
+
+                    else if (User.IsInRole("Consultant"))
+                    {
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-file-text-o"></i> <span>Tickets</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="@Url.Action("UnassignedList","Tickets")"><i class="fa fa-bars"></i>Unassigned tickets</a></li>
+                                <li><a href="@Url.Action("MyTickets","Tickets")"><i class="fa fa-list-ul"></i>My Tickets</a></li>
+                            </ul>
+                        </li>
+                    }
+                    else if (User.IsInRole("Customer"))
                     {
                         <li class="treeview">
                             <a href="#">

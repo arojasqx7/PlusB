@@ -1,8 +1,8 @@
-﻿using System.Data.Entity;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 
 namespace UI.Models
 {
@@ -13,13 +13,22 @@ namespace UI.Models
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+
             // Add custom user claims here
+            try { 
             userIdentity.AddClaim(new Claim("CustomerID", this.CustomerID.ToString()));
+            userIdentity.AddClaim(new Claim("ConsultantID", this.ConsultantID.ToString()));
+                return userIdentity;
+            }
+            catch (Exception exe) { 
+                
+            }
             return userIdentity;
         }
 
-        //CustomerID Extended property
+        //CustomerID & ConsultantID Extended properties NEW COLUMNS 
         public string CustomerID { get; set; }
+        public string ConsultantID { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

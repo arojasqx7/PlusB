@@ -488,7 +488,8 @@ namespace UI.Controllers
         #endregion
 
         // Add CreateAdminIfNeeded
-        #region private void CreateAdminIfNeeded()
+
+        #region CreateAdminIfNeeded()
         private void CreateAdminIfNeeded()
         {
             // Get Admin Account
