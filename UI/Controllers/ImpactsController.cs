@@ -50,14 +50,14 @@ namespace UI.Controllers
                 catch (DbUpdateException sqlExc)
                 {
                     var sqlException = sqlExc.GetBaseException() as SqlException;
-                    if (sqlException != null)
-                    {
-                        ViewBag.Message = "Record already exists.";
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                        if (sqlException != null)
+                        {
+                            ViewBag.Message = "Record already exists.";
+                        }
+                        else
+                        {
+                            throw;
+                        }
                 }
             }
             return RedirectToAction("Index");

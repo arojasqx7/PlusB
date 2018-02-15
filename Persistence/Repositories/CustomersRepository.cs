@@ -7,41 +7,41 @@ using System.Linq;
 
 namespace Persistence.Repositories
 {
-    public class ConsultantsRepository : IConsultantsRepository, IDisposable
+    public class CustomersRepository: ICustomersRepository,IDisposable
     {
         private PlusBContext context;
 
         // Initiliaze constructor
-        public ConsultantsRepository(PlusBContext context)
+        public CustomersRepository(PlusBContext context)
         {
             this.context = context;
         }
 
         // Create methods to insert in controller
-        public IEnumerable<Consultant> GetConsultants()
+        public IEnumerable<Customer> GetCustomers()
         {
-            return context.Consultants.ToList();
+            return context.Customers.ToList();
         }
 
-        public Consultant GetConsultantByID(int id)
+        public Customer GetCustomerByID(int id)
         {
-            return context.Consultants.Find(id);
+            return context.Customers.Find(id);
         }
 
-        public void InsertConsultant(Consultant consultant)
+        public void InsertCustomer(Customer customer)
         {
-            context.Consultants.Add(consultant);
+            context.Customers.Add(customer);
         }
 
-        public void DeleteConsultant(int consultantID)
+        public void DeleteCustomer(int customerID)
         {
-            Consultant consultant = context.Consultants.Find(consultantID);
-            context.Consultants.Remove(consultant);
+            Customer customer = context.Customers.Find(customerID);
+            context.Customers.Remove(customer);
         }
 
-        public void UpdateConsultant(Consultant consultant)
+        public void UpdateCustomer(Customer consultant)
         {
-            context.Set<Consultant>().AddOrUpdate(consultant);
+            context.Set<Customer>().AddOrUpdate(consultant);
         }
 
         public void Save()
