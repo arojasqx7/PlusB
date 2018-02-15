@@ -1,7 +1,7 @@
-﻿@model Domain.Entities.Consultant
+﻿@model UI.Models.ConsultantUserModel
 
 <link href="~/Content/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
-@using (Html.BeginForm("Create","Consultants",FormMethod.Post))
+@using (Html.BeginForm("Create", "ConsultantUser", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
        <div class="form-group">
@@ -102,6 +102,23 @@
             </div>
         </div>
         <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Username:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Password:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type="password" } })
+            </div>
+        </div>
+        <br /><br />
+        @Html.HiddenFor(model=>model.ConsultantID)
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

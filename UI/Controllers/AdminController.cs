@@ -28,7 +28,7 @@ namespace UI.Controllers
             try
             {
                 int intPage = 1;
-                int intPageSize = 5;
+                int intPageSize = 10;
                 int intTotalPageCount = 0;
 
                 if (searchStringUserNameOrEmail != null)
@@ -132,8 +132,8 @@ namespace UI.Controllers
                 UserName = Email.ToLower();
 
                 // Create user
-                var objNewAdminUser = new ApplicationUser { UserName = UserName, Email = Email, CustomerID = CustomerID };
-                var AdminUserCreateResult = UserManager.Create(objNewAdminUser, Password);
+                var user = new ApplicationUser { UserName = UserName, Email = Email, CustomerID = CustomerID };
+                var AdminUserCreateResult = UserManager.Create(user, Password);
 
                 if (AdminUserCreateResult.Succeeded == true)
                 {
@@ -141,7 +141,7 @@ namespace UI.Controllers
 
                     if (strNewRole != "0")
                     {
-                        UserManager.AddToRole(objNewAdminUser.Id, strNewRole);
+                        UserManager.AddToRole(user.Id, strNewRole);
                     }
                     return Json(new { success = true });
                     //return RedirectToAction("Index");

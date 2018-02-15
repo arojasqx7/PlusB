@@ -9,6 +9,7 @@ using Persistence.Repositories;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 
+
 namespace UI.Controllers
 {
     public class ConsultantsController : Controller
@@ -42,6 +43,14 @@ namespace UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,FirstName,LastName,DateOfBirth,IdNumber,Gender,Email,Pais,Address,PhoneNumber,JobTitle,HireDate")] Consultant consultant)
         {
+
+            // Create user
+            //var consultantUser = new ApplicationUser {
+            //    UserName = UserName,
+            //    Email = Email
+            //};
+            //var CreateConsultantUser = UserManager.Create(consultantUser, Password);
+
             if (ModelState.IsValid)
             {
                 try
