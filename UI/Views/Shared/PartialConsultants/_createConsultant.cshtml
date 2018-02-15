@@ -4,7 +4,6 @@
 @using (Html.BeginForm("Create", "ConsultantUser", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    <input type="hidden" value="@Model.ID" name="Id" />
        <div class="form-group">
            <label class="control-label col-md-2">First Name:</label>
             <div class="col-md-8">
@@ -119,6 +118,7 @@
             </div>
         </div>
         <br /><br />
+        @Html.HiddenFor(model=>model.ConsultantID)
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

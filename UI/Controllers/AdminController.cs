@@ -28,7 +28,7 @@ namespace UI.Controllers
             try
             {
                 int intPage = 1;
-                int intPageSize = 5;
+                int intPageSize = 10;
                 int intTotalPageCount = 0;
 
                 if (searchStringUserNameOrEmail != null)

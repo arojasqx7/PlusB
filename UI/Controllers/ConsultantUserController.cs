@@ -6,6 +6,7 @@ using Persistence.Repositories;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using UI.Models;
@@ -16,19 +17,19 @@ namespace UI.Controllers
     {
         private ApplicationUserManager _userManager;
         private PlusBContext db = new PlusBContext();
-        //private IConsultantsRepository consultantUserRepo;
+        private IConsultantsRepository consultantUserRepo;
 
-        //public ConsultantUserController()
-        //{
-        //    this.consultantUserRepo = new ConsultantsRepository(new PlusBContext());
-        //}
+        public ConsultantUserController()
+        {
+            this.consultantUserRepo = new ConsultantsRepository(new PlusBContext());
+        }
 
         // GET: ConsultantUser
         [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             ListOfCountries();
-            var consultants = from s in db.Consultants
+            var consultants = from s in consultantUserRepo.GetConsultants()
                               where !s.FirstName.Contains("Unassigned")
                               select s;
             return View(consultants.ToList());
@@ -42,39 +43,44 @@ namespace UI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ConsultantUserModel model)
-        {
+        public async Task<ActionResult> Create(ConsultantUserModel model)
+        {    
+            //insert into table Consultant        
             var ConsultantDetails = new Consultant {
-                ID= model.ID,
-                FirstName=model.FirstName,
-                LastName=model.LastName,
-                DateOfBirth=model.DateOfBirth,
-                IdNumber=model.IdNumber,
-                Gender=model.Gender,
-                Email= model.Email,
-                Pais=model.Pais,
-                Address=model.Address,
-                PhoneNumber=model.PhoneNumber,
-                JobTitle=model.JobTitle,
-                HireDate=model.HireDate
+                ID = model.ID,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                DateOfBirth = model.DateOfBirth,
+                IdNumber = model.IdNumber,
+                Gender = model.Gender,
+                Email = model.Email,
+                Pais = model.Pais,
+                Address = model.Address,
+                PhoneNumber = model.PhoneNumber,
+                JobTitle = model.JobTitle,
+                HireDate = model.HireDate
             };
+            using (var context = new PlusBContext())
+            {
+                context.Consultants.Add(ConsultantDetails);
+                context.SaveChanges();
+            }
+            //ends of insert consultant post
 
-            // Create user
+            //insert into AspNetUser table to login the user next time and assign consultant claim
             var Password = model.Password;
-            string consultantID = model.ID.ToString();
+            var lastConsultantId = (from i in consultantUserRepo.GetConsultants()
+                                    orderby i.ID descending
+                                    select i.ID).First();
             var consultantUser = new ApplicationUser
             {
                 UserName = model.UserName,
                 Email = model.Email,
-                ConsultantID = consultantID
+                ConsultantID = lastConsultantId.ToString()
             };
 
-            using (var context = new PlusBContext())
-            {
-                context.Consultants.Add(ConsultantDetails);
-                context.SaveChanges();              
-            }
             var CreateConsultantUser = UserManager.Create(consultantUser, Password);
+            var roleConsultant = UserManager.AddToRole(consultantUser.Id,"Consultant");
             return RedirectToAction("Index");
         }
 
