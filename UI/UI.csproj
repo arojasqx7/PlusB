@@ -207,6 +207,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AttachmentController.cs" />
     <Compile Include="Controllers\ConsultantsController.cs" />
     <Compile Include="Controllers\ConsultantUserController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="Controllers\SeveritiesController.cs" />
     <Compile Include="Controllers\TaskTypesController.cs" />
     <Compile Include="Controllers\TechnologiesController.cs" />
+    <Compile Include="Controllers\TicketAttachmentController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -255,6 +257,7 @@
     <Content Include="bower_components\bootstrap-colorpicker\src\js\colorpicker-component.js" />
     <Content Include="bower_components\bootstrap-colorpicker\src\js\colorpicker-defaults.js" />
     <Content Include="bower_components\bootstrap-colorpicker\src\js\colorpicker-plugin-wrapper.js" />
+    <Content Include="Content\dropzone.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\placeholder-icons.css" />
     <Content Include="Images\PBlog2.png" />
@@ -3319,6 +3322,7 @@
     <Content Include="Content\datatables.net-bs\dataTables.bootstrap.min.css" />
     <Content Include="Scripts\dataTables.bootstrap.js" />
     <Content Include="Scripts\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\dropzone.js" />
     <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="bower_components\eve-raphael\e.html" />
@@ -6799,7 +6803,6 @@
     <Content Include="Views\Shared\PartialTasks\_editTask.cshtml" />
     <Content Include="Views\Shared\PartialTasks\_deleteTask.cshtml" />
     <Content Include="Views\TaskTypes\Index.cshtml" />
-    <Content Include="Views\Tickets\Create.cshtml" />
     <Content Include="Views\Tickets\Index.cshtml" />
     <Content Include="Views\Shared\PartialTickets\_detailsTicket.cshtml" />
     <Content Include="Views\Shared\PartialTickets\_deleteTicket.cshtml" />
@@ -6812,10 +6815,14 @@
     <Content Include="Views\Shared\PartialCustomers\_createCustomer.cshtml" />
     <Content Include="Views\Shared\PartialCustomers\_editCustomer.cshtml" />
     <Content Include="Views\Shared\PartialCustomers\_deleteCustomer.cshtml" />
+    <Content Include="Views\TicketAttachment\Create.cshtml" />
+    <Content Include="Views\Tickets\Assigned.cshtml" />
+    <Content Include="Views\Shared\PartialAttachments\FileDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="TicketAttachments\" />
+    <Folder Include="Views\Attachment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

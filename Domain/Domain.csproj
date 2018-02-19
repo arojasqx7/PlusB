@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\PlusBContext.cs" />
+    <Compile Include="Entities\Attachment.cs" />
     <Compile Include="Entities\Consultant.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\Impact.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Entities\TaskType.cs" />
     <Compile Include="Entities\Technology.cs" />
     <Compile Include="Entities\Ticket.cs" />
+    <Compile Include="Entities\TicketAttachmentModel.cs" />
     <Compile Include="Migrations\201710092059345_InitialCreate.cs" />
     <Compile Include="Migrations\201710092059345_InitialCreate.Designer.cs">
       <DependentUpon>201710092059345_InitialCreate.cs</DependentUpon>
@@ -90,6 +92,10 @@
     <Compile Include="Migrations\201802151914012_Add-Unique-CustomerName.Designer.cs">
       <DependentUpon>201802151914012_Add-Unique-CustomerName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802190704013_Add-Attachment-Entity.cs" />
+    <Compile Include="Migrations\201802190704013_Add-Attachment-Entity.Designer.cs">
+      <DependentUpon>201802190704013_Add-Attachment-Entity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -121,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802151914012_Add-Unique-CustomerName.resx">
       <DependentUpon>201802151914012_Add-Unique-CustomerName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802190704013_Add-Attachment-Entity.resx">
+      <DependentUpon>201802190704013_Add-Attachment-Entity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
