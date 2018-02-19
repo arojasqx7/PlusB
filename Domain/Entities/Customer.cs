@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
@@ -6,8 +8,10 @@ namespace Domain.Entities
     {
         public int Id { get; set; }
 
+        [Index(IsUnique = true)]
         public string CompanyName { get; set; }
 
+        [Index(IsUnique = true)]
         public string CompanyId { get; set; }
 
         public string CompanyDescription { get; set; }
@@ -24,6 +28,7 @@ namespace Domain.Entities
 
         public string SupportType { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime InitialDate { get; set; }
     }
 }

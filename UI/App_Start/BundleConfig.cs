@@ -69,6 +69,10 @@ namespace UI
                  "~/Scripts/jquery.dataTables.min.js",
                  "~/Scripts/dataTables.bootstrap.min.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/dropzone").Include(
+                       "~/Scripts/dropzone.js"));
+
+            //Start of CSS Bundles
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
@@ -111,6 +115,9 @@ namespace UI
 
             bundles.Add(new StyleBundle("~/Content/placeholder-icons").Include(
                     "~/Content/placeholder-icons.css"));
+
+            bundles.Add(new StyleBundle("~/Content/dropzone").Include(
+                    "~/Content/dropzone.css"));
         }
     }
 }

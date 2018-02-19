@@ -16,6 +16,7 @@ namespace Domain.DAL
         public DbSet<Severity> Severities { get; set; }
         public DbSet<Impact> Impacts { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Attachment> Attachments { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

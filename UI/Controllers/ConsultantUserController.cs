@@ -35,6 +35,7 @@ namespace UI.Controllers
             return View(consultants.ToList());
         }
 
+        [Authorize(Roles = "Administrator")]
         public PartialViewResult Create()
         {
             ConsultantUserModel consultantUser = new ConsultantUserModel();
@@ -105,9 +106,7 @@ namespace UI.Controllers
         {
             get
             {
-                return _userManager ??
-                    HttpContext.GetOwinContext()
-                    .GetUserManager<ApplicationUserManager>();
+                return _userManager ??HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
             private set
             {

@@ -44,8 +44,8 @@
                                 <td> @Html.DisplayFor(modelItem => item.Consultant.Email)</td>
                                 <td> @Html.DisplayFor(modelItem => item.Status)</td>
                                 <td>
-                                    @Html.Raw("<a data-modal='' href='/Tickets/Details/" + item.Id + "' id='" + item.Id + "' class='btn btn-warning' data-toggle='tooltip' title='View Details'> <span class='glyphicon glyphicon-resize-full'> </span> </a>")
-                                    @Html.Raw("<a data-modal='' href='/Tickets/AssignTicket/" + item.Id + "' id='" + item.Id + "' class='btn btn-success' data-toggle='tooltip' title='Assign Ticket to Me'> <span class='glyphicon glyphicon-saved'> </span> </a>")
+                                    @Html.Raw("<a href='/Tickets/Assigned/" + item.Id + "' id='" + item.Id + "' title='Open Incident'>View</a>")
+                                   
                                 </td>
                             </tr>
 

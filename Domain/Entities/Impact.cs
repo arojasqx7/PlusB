@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
@@ -7,6 +8,7 @@ namespace Domain.Entities
         public int Id { get; set; }
 
         [Index(IsUnique = true)]
+        [StringLength(450)]
         public string ImpactName { get; set; }
 
         public int ImpactNumber { get; set; }

@@ -1,12 +1,9 @@
 ﻿using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web.Mvc;
 using Domain.DAL;
 using Domain.Entities;
 using UI.Extensions;
-using System.Web;
-using System.IO;
 using Persistence.Repositories;
 
 namespace UI.Controllers
@@ -55,51 +52,6 @@ namespace UI.Controllers
         {
             Ticket ticket = ticketRepo.GetTicketByID(id);
             return PartialView("PartialTickets/_detailsTicket", ticket);
-        }
-
-        // GET: Tickets/Create
-        [Authorize(Roles = "Customer")]
-        public ActionResult Create()
-        {
-            ViewBag.Id_Customer = int.Parse(User.Identity.GetCustomerId());
-            ViewBag.Id_Consultant = new SelectList(db.Consultants.Where(x=>x.FirstName.Contains("Unassigned")), "ID", "FirstName");
-            ViewBag.Id_Impact = new SelectList(db.Impacts, "Id", "ImpactName");
-            ViewBag.Id_Severity = new SelectList(db.Severities, "Id", "SeverityName");
-            ViewBag.Id_TaskType = new SelectList(db.TaskTypes, "Id", "TaskName");
-            ViewBag.Id_Technology = new SelectList(db.Technologies, "ID", "Name");
-            return View();
-        }
-
-        // POST: Tickets/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer")]
-        public ActionResult Create([Bind(Include = "Id,Date,OpenTime,Id_Customer,ShortDescription,LongDescription,Environment,Id_Technology,Id_Severity,Id_Impact,Id_TaskType,Status,Id_Consultant,files")] Ticket ticket, HttpPostedFileBase [] files)
-        {
-            if (ModelState.IsValid)
-            {
-                foreach (HttpPostedFileBase file in files)
-                {
-                    //Checking file is available to save.  
-                    if (file != null)
-                    {
-                        var InputFileName =  Path.GetFileName(file.FileName);
-                        var ServerSavePath = Path.Combine(Server.MapPath("~/TicketAttachments/") + InputFileName);
-                        file.SaveAs(ServerSavePath);
-                    }
-                }
-                db.Tickets.Add(ticket);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.Id_Customer = int.Parse(User.Identity.GetCustomerId());
-            ViewBag.Id_Consultant = new SelectList(db.Consultants.Where(x=>x.FirstName.Contains("Unassigned")), "ID", "FirstName", ticket.Id_Consultant);
-            ViewBag.Id_Impact = new SelectList(db.Impacts, "Id", "ImpactName", ticket.Id_Impact);
-            ViewBag.Id_Severity = new SelectList(db.Severities, "Id", "SeverityName", ticket.Id_Severity);
-            ViewBag.Id_TaskType = new SelectList(db.TaskTypes, "Id", "TaskName", ticket.Id_TaskType);
-            ViewBag.Id_Technology = new SelectList(db.Technologies, "ID", "Name", ticket.Id_Technology);
-            return View(ticket);
         }
 
         //   get: tickets/edit/5
@@ -171,13 +123,21 @@ namespace UI.Controllers
         [HttpPost]
         public ActionResult AssignTicket(Ticket objTicket)
         {
-            int idConsultant = int.Parse(User.Identity.GetCustomerId()); // obtain id from claims
+            int idConsultant = int.Parse(User.Identity.GetConsultantId()); // obtain id from claims
             Ticket ticket = ticketRepo.GetTicketByID(objTicket.Id); // Get all ticket details
             ticket.Id_Consultant = idConsultant; //assigning consultantID to ticket
             ticketRepo.UpdateTicket(ticket);
             ticketRepo.Save();
            // return Json(new { success = true });
             return RedirectToAction("MyTickets");
+        }
+
+        // GET
+        [Authorize(Roles = "Consultant")]
+        public ActionResult Assigned(int id)
+        {
+            Ticket ticket = ticketRepo.GetTicketByID(id);
+            return View(ticket);
         }
 
         protected override void Dispose(bool disposing)

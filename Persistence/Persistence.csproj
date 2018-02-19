@@ -51,7 +51,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ConsultantsRepository.cs" />
+    <Compile Include="Repositories\CustomersRepository.cs" />
     <Compile Include="Repositories\IConsultantsRepository.cs" />
+    <Compile Include="Repositories\ICustomersRepository.cs" />
     <Compile Include="Repositories\IImpactRepository.cs" />
     <Compile Include="Repositories\ImpactsRepository.cs" />
     <Compile Include="Repositories\ISeverityRepository.cs" />

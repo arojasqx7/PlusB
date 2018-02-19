@@ -1,10 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web;
 
 namespace Domain.Entities
 {
-    public class Ticket
+    public class TicketAttachmentModel
     {
         public int Id { get; set; }
 
@@ -15,7 +16,7 @@ namespace Domain.Entities
         public TimeSpan OpenTime { get; set; }
 
         [ForeignKey("Customer")]
-        public int Id_Customer {get;set;}
+        public int Id_Customer { get; set; }
 
         public string ShortDescription { get; set; }
 
@@ -42,11 +43,20 @@ namespace Domain.Entities
         [ForeignKey("Consultant")]
         public int Id_Consultant { get; set; }
 
+        public string FileName { get; set; }
+        public byte[] FileContent { get; set; }
+        public int IdTicket { get; set; }
+
+        [NotMapped]
+        [DataType(DataType.Upload)]
+        public HttpPostedFileBase files { get; set; }
+
         public virtual Technology Technology { get; set; }
         public virtual Severity Severity { get; set; }
         public virtual Impact Impact { get; set; }
         public virtual TaskType TaskType { get; set; }
         public virtual Consultant Consultant { get; set; }
         public virtual Customer Customer { get; set; }
+        public virtual Ticket Ticket { get; set; }
     }
 }
