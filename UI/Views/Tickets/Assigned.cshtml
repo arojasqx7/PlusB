@@ -1,0 +1,47 @@
+﻿@model Domain.Entities.Ticket
+@{
+    ViewBag.Title = "Assigned";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>Incident</h1>
+</section>
+
+<br />
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-danger">
+                <div class="box-header">
+                    <h2 class="box-title">Attachments</h2>
+                </div>
+                <div class="box-body">
+                    @Html.Action("FileDetails", "Attachment", new { id = Model.Id })
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    @Scripts.Render("~/Scripts/Modals.js")
+    <script>
+    $(document).ready(function () {
+        $('#example1').DataTable({
+            "bPaginate": true,
+            "bFilter": true,
+            "bInfo": true
+        });
+    });
+    </script>
+}

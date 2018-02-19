@@ -257,7 +257,6 @@
     <Content Include="bower_components\bootstrap-colorpicker\src\js\colorpicker-component.js" />
     <Content Include="bower_components\bootstrap-colorpicker\src\js\colorpicker-defaults.js" />
     <Content Include="bower_components\bootstrap-colorpicker\src\js\colorpicker-plugin-wrapper.js" />
-    <Content Include="Content\dropzone.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\placeholder-icons.css" />
     <Content Include="Images\PBlog2.png" />
@@ -3322,7 +3321,6 @@
     <Content Include="Content\datatables.net-bs\dataTables.bootstrap.min.css" />
     <Content Include="Scripts\dataTables.bootstrap.js" />
     <Content Include="Scripts\dataTables.bootstrap.min.js" />
-    <Content Include="Scripts\dropzone.js" />
     <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="bower_components\eve-raphael\e.html" />
