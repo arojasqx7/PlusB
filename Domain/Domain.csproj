@@ -59,6 +59,7 @@
     <Compile Include="Entities\TaskType.cs" />
     <Compile Include="Entities\Technology.cs" />
     <Compile Include="Entities\Ticket.cs" />
+    <Compile Include="Entities\TicketActivity.cs" />
     <Compile Include="Entities\TicketAttachmentModel.cs" />
     <Compile Include="Migrations\201710092059345_InitialCreate.cs" />
     <Compile Include="Migrations\201710092059345_InitialCreate.Designer.cs">
@@ -96,6 +97,10 @@
     <Compile Include="Migrations\201802190704013_Add-Attachment-Entity.Designer.cs">
       <DependentUpon>201802190704013_Add-Attachment-Entity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802200729243_Add-TicketActivity-Entity.cs" />
+    <Compile Include="Migrations\201802200729243_Add-TicketActivity-Entity.Designer.cs">
+      <DependentUpon>201802200729243_Add-TicketActivity-Entity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -130,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802190704013_Add-Attachment-Entity.resx">
       <DependentUpon>201802190704013_Add-Attachment-Entity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802200729243_Add-TicketActivity-Entity.resx">
+      <DependentUpon>201802200729243_Add-TicketActivity-Entity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

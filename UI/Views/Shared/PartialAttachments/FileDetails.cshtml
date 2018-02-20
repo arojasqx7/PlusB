@@ -1,17 +1,22 @@
 ﻿@model IEnumerable<Domain.Entities.Attachment>
 
+<style>
+    .txtHover:hover {
+        color: #dfae1f;
+    }
+</style>
 
-<table class="table table-bordered table-hover">
+<table class="table table-bordered">
     <tr>
-        <th class="col-md-4">File Name</th>
-        <th class="col-md-2">Download </th>
+        <th class="col-md-4"><span class="glyphicon glyphicon-align-left"></span>   File Name</th>
+        <th class="col-md-2 text-center"><span class="glyphicon glyphicon-cloud-download"></span>   Download </th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td> @Html.DisplayFor(modelItem => item.FileName)</td>
-            <td> @Html.ActionLink("Download", "DownLoadFile", new { id = item.Id, idTicket = item.IdTicket })</td>
+            <td class="txtHover">    @Html.DisplayFor(modelItem => item.FileName)</td>
+            <td class="text-center txtHover"> @Html.ActionLink("Download", "DownLoadFile", new { id = item.Id, idTicket = item.IdTicket })</td>
         </tr>
     }
 </table>
