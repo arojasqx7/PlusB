@@ -259,6 +259,7 @@
     <Content Include="bower_components\bootstrap-colorpicker\src\js\colorpicker-plugin-wrapper.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\placeholder-icons.css" />
+    <Content Include="Images\empty-icon.png" />
     <Content Include="Images\PBlog2.png" />
     <Content Include="Scripts\bootstrap-datepicker\dist\css\bootstrap-datepicker.css" />
     <Content Include="Content\datepicker\bootstrap-datepicker.min.css" />
