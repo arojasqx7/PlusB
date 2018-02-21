@@ -140,6 +140,14 @@ namespace UI.Controllers
             return View(ticket);
         }
 
+        // GET
+        [Authorize(Roles = "Customer")]
+        public ActionResult incidentCreated(int id)
+        {
+            Ticket ticket = ticketRepo.GetTicketByID(id);
+            return View(ticket);
+        }
+
         [HttpPost]
         public ActionResult UpdateStatus(int id, string status)
         {
@@ -147,7 +155,15 @@ namespace UI.Controllers
             ticket.Status = status;
             ticketRepo.UpdateTicket(ticket);
             ticketRepo.Save();
-            return RedirectToAction("MyTickets", "Tickets");
+
+            if (User.IsInRole("Consultant"))
+            {
+                return RedirectToAction("MyTickets", "Tickets");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Tickets");
+            }
         }
 
         protected override void Dispose(bool disposing)

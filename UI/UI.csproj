@@ -6820,10 +6820,10 @@
     <Content Include="Views\Shared\PartialAttachments\FileDetails.cshtml" />
     <Content Include="Views\Shared\PartialTicketActivity\_addActivity.cshtml" />
     <Content Include="Views\Shared\PartialTicketActivity\_insertedActivity.cshtml" />
+    <Content Include="Views\Tickets\incidentCreated.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Attachment\" />
     <Folder Include="Views\TicketActivity\" />
   </ItemGroup>
   <ItemGroup>

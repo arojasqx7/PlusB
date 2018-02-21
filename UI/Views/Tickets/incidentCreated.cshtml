@@ -1,63 +1,57 @@
 ﻿@model Domain.Entities.Ticket
 @{
-    ViewBag.Title = "Assigned";
+    ViewBag.Title = "incidentCreated";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <style>
-    .txtHover:hover
-    {
-        color:#dfae1f;
+    .txtHover:hover {
+        color: #dfae1f;
     }
-    .timeline:before
-    {
-        bottom:-30px;
+
+    .timeline:before {
+        bottom: -30px;
     }
 </style>
 
 <section class="content-header">
-        <h1>Incident: @Html.DisplayFor(model => model.Id)</h1>
-        <h4>
-            Current status:
-            @if (Model.Status == "Open")
+    <h1>Incident: @Html.DisplayFor(model => model.Id)</h1>
+    <h4>
+        Current status:
+        @if (Model.Status == "Open")
             {
-                <span class="label label-danger">@Html.DisplayFor(model => model.Status)</span>
-            }
-            else if (Model.Status == "Work In Progress")
-            {
-                <span class="label label-warning">@Html.DisplayFor(model => model.Status)</span>
-            }
-            else if (Model.Status == "Solution Suggested")
-            {
-                <span class="label label-success">@Html.DisplayFor(model => model.Status)</span>
-            }
-            else if (Model.Status == "Callback")
-            {
-                <span class="label label-default">@Html.DisplayFor(model => model.Status)</span>
-            }
-            else
-            {
-                <span class="label label-success">@Html.DisplayFor(model => model.Status)</span>
+            <span class="label label-danger">@Html.DisplayFor(model => model.Status)</span>
+        }
+        else if (Model.Status == "Work In Progress")
+        {
+            <span class="label label-warning">@Html.DisplayFor(model => model.Status)</span>
+        }
+        else if (Model.Status == "Solution Suggested")
+        {
+            <span class="label label-success">@Html.DisplayFor(model => model.Status)</span>
+        }
+        else
+        {
+            <span class="label label-success">@Html.DisplayFor(model => model.Status)</span>
 
-            }
-        </h4>
+        }
+    </h4>
     @using (Html.BeginForm("UpdateStatus", "Tickets", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.Id)
 
-       <div class="col-xs-4" style="float:right;margin-top:-50px; margin-right:-15px;display:inline-flex;">
-                @Html.DropDownListFor(x => x.Status, new List<SelectListItem>
+        <div class="col-xs-4" style="float:right;margin-top:-50px; margin-right:-15px;display:inline-flex;">
+            @Html.DropDownListFor(x => x.Status, new List<SelectListItem>
                {
                   new SelectListItem() {Text = "Work In Progress", Value="Work In Progress"},
-                  new SelectListItem() {Text = "Callback", Value="Callback"},
                   new SelectListItem() {Text = "Pending Customer", Value="Pending Customer"},
-                  new SelectListItem() {Text = "Solution Suggested", Value="Solution Suggested"},
-                  new SelectListItem() {Text = "Closed", Value="Closed"}
+                  new SelectListItem() {Text = "Callback", Value="Callback"}
                }, "--Select Status--", new { @class = "form-control select2", @style = "background-color:#fff;" })
 
-               <button type="submit" class="btn btn-success" title="Update Status" data-toggle='tooltip' style="margin-left:10px;">
-                    <span class="glyphicon glyphicon-refresh"></span>
-               </button>
+            <button type="submit" class="btn btn-success" title="Update Status" data-toggle='tooltip' style="margin-left:10px;">
+                <span class="glyphicon glyphicon-refresh"></span>
+            </button>
         </div>
     }
 </section>
@@ -77,8 +71,8 @@
                             <br /><br />
                             <strong>Environment:</strong>  <span class="txtHover"> @Html.DisplayFor(model => model.Environment)</span>
                             <br /><br />
-                            <strong>Description:</strong>  <span class="txtHover"> @Html.DisplayFor(model => model.LongDescription)</span>  
-                    </div>
+                            <strong>Description:</strong>  <span class="txtHover"> @Html.DisplayFor(model => model.LongDescription)</span>
+                        </div>
                         <div class="col-md-6">
                             <strong>Severity:</strong> <span class="txtHover"> @Html.DisplayFor(model => model.Severity.SeverityName)</span>
                             <br />
@@ -87,8 +81,8 @@
                             <strong>Technology:</strong> <span class="txtHover"> @Html.DisplayFor(model => model.Technology.Name)</span>
                             <br />
                             <strong>Task:</strong>  <span class="txtHover"> @Html.DisplayFor(model => model.TaskType.TaskName)</span>
-                         </div>
-                   </div>
+                        </div>
+                    </div>
 
                     <br /><br />
                     <div class="box-header">
@@ -105,15 +99,15 @@
                     <div class="box-header">
                         <h2 class="box-title"><span style="margin-left:-10px;">Add Activity</span></h2>
                     </div>
-                            <!--Renders the text area to add a new activity-->
-                            @Html.Action("addActivity", "TicketActivity", new { id = Model.Id})
+                    <!--Renders the text area to add a new activity-->
+                    @Html.Action("addActivity", "TicketActivity", new { id = Model.Id })
                     <br /><br />
 
                     <div class="row">
-                             <!--Renders the activity already added to the ticket-->
-                            @Html.Action("insertedActivity", "TicketActivity", new { id = Model.Id })
+                        <!--Renders the activity already added to the ticket-->
+                        @Html.Action("insertedActivity", "TicketActivity", new { id = Model.Id })
                     </div>
-                 </div>
+                </div>
             </div>
         </div>
     </div>
@@ -141,3 +135,4 @@
     });
     </script>
 }
+
