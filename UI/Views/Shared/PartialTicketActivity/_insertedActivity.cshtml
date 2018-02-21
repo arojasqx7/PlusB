@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Domain.Entities.TicketActivity>
+
+@foreach (var item in Model.OrderByDescending(x=>x.Date).ThenByDescending(y=>y.Time)) {
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- The time line -->
+            <ul class="timeline">
+                <!-- timeline item -->
+                <li>
+                    <i class="fa fa-comments bg-yellow"></i>
+                    <div class="timeline-item">
+                        <span class="time"><i class="fa fa-clock-o"></i><strong> @Html.DisplayFor(modelItem => item.Date) - @Html.DisplayFor(modelItem => item.Time)</strong></span>
+                        <h3 class="timeline-header"><a>@Html.DisplayFor(modelItem => item.Ticket.Consultant.Email)</a> says</h3>
+                        <div class="timeline-body">
+                           @Html.DisplayFor(modelItem => item.Activity)
+                        </div>
+                    </div>
+                </li>
+                <!-- END timeline item -->
+                <li>
+                        @*<i class="fa fa-clock-o bg-gray"></i>*@
+                </li>
+            </ul>
+        </div>
+    </div>
+}

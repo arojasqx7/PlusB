@@ -2088,7 +2088,7 @@ a:focus {
   content: '';
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: -30px;
   width: 4px;
   background: #ddd;
   left: 31px;

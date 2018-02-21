@@ -217,6 +217,7 @@
     <Compile Include="Controllers\SeveritiesController.cs" />
     <Compile Include="Controllers\TaskTypesController.cs" />
     <Compile Include="Controllers\TechnologiesController.cs" />
+    <Compile Include="Controllers\TicketActivityController.cs" />
     <Compile Include="Controllers\TicketAttachmentController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Extensions\IdentityExtensions.cs" />
@@ -6817,11 +6818,13 @@
     <Content Include="Views\TicketAttachment\Create.cshtml" />
     <Content Include="Views\Tickets\Assigned.cshtml" />
     <Content Include="Views\Shared\PartialAttachments\FileDetails.cshtml" />
+    <Content Include="Views\Shared\PartialTicketActivity\_addActivity.cshtml" />
+    <Content Include="Views\Shared\PartialTicketActivity\_insertedActivity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="TicketAttachments\" />
     <Folder Include="Views\Attachment\" />
+    <Folder Include="Views\TicketActivity\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

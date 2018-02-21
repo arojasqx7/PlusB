@@ -72,7 +72,7 @@ namespace UI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Customer")]
-        public ActionResult Edit([Bind(Include = "Id,Date,OpenTime,Id_Customer,ShortDescription,LongDescription,Environment,Id_Technology,Id_Severity,Id_Impact,Id_TaskType,Status,Id_Consultant,files")] Ticket ticket)
+        public ActionResult Edit([Bind(Include = "Id,Date,OpenTime,Id_Customer,ShortDescription,LongDescription,Environment,Id_Technology,Id_Severity,Id_Impact,Id_TaskType,Status,Id_Consultant")] Ticket ticket)
         {
             if (ModelState.IsValid)
             {
@@ -138,6 +138,16 @@ namespace UI.Controllers
         {
             Ticket ticket = ticketRepo.GetTicketByID(id);
             return View(ticket);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateStatus(int id, string status)
+        {
+            Ticket ticket = ticketRepo.GetTicketByID(id);
+            ticket.Status = status;
+            ticketRepo.UpdateTicket(ticket);
+            ticketRepo.Save();
+            return RedirectToAction("MyTickets", "Tickets");
         }
 
         protected override void Dispose(bool disposing)

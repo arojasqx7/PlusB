@@ -42,7 +42,20 @@
                                 <td> @Html.DisplayFor(modelItem => item.Severity.SeverityName)</td>
                                 <td> @Html.DisplayFor(modelItem => item.ShortDescription)</td>
                                 <td> @Html.DisplayFor(modelItem => item.Consultant.Email)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                                <td> 
+                                     @if (item.Status == "Open")
+                                     {
+                                        <span class="label label-danger">@Html.DisplayFor(modelItem => item.Status)</span>
+                                     }
+                                     else if (item.Status == "Work In Progress")
+                                     {
+                                        <span class="label label-warning">@Html.DisplayFor(modelItem => item.Status)</span>
+                                     }
+                                     else
+                                     {
+                                        <span class="label label-success">@Html.DisplayFor(modelItem => item.Status)</span>
+                                     }
+                                </td>
                                 <td>
                                     @Html.Raw("<a href='/Tickets/Assigned/" + item.Id + "' id='" + item.Id + "' title='Open Incident'>View</a>")
                                    
