@@ -11,7 +11,7 @@
                     <i class="fa fa-comments bg-yellow"></i>
                     <div class="timeline-item">
                         <span class="time"><i class="fa fa-clock-o"></i><strong> @Html.DisplayFor(modelItem => item.Date) - @Html.DisplayFor(modelItem => item.Time)</strong></span>
-                        <h3 class="timeline-header"><a>@Html.DisplayFor(modelItem => item.Ticket.Consultant.Email)</a> says</h3>
+                        <h3 class="timeline-header"><a>@Html.DisplayFor(modelItem => item.User)</a> says</h3>
                         <div class="timeline-body">
                            @Html.DisplayFor(modelItem => item.Activity)
                         </div>

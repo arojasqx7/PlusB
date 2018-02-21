@@ -17,6 +17,8 @@ namespace Domain.Entities
 
         public string Activity { get; set;}
 
+        public string User { get; set; }
+
         [ForeignKey("Ticket")]
         public int idTicket { get; set; }
         public virtual Ticket Ticket { get; set; }

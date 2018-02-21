@@ -39,7 +39,20 @@
                             <tr class="@colorClass">
                                 <td><strong> @Html.DisplayFor(modelItem => item.Date) @Html.DisplayFor(modelItem => item.OpenTime)</strong></td>
                                 <td> @Html.DisplayFor(modelIem => item.Customer.CompanyName)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Severity.SeverityName)</td>
+                                <td>
+                                    @if (item.Severity.SeverityName == "Critical")
+                                    {
+                                        <span class="label label-danger"> @Html.DisplayFor(modelItem => item.Severity.SeverityName)</span>
+                                    }
+                                    else if (item.Severity.SeverityName == "Major")
+                                    {
+                                        <span class="label label-warning"> @Html.DisplayFor(modelItem => item.Severity.SeverityName)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-info"> @Html.DisplayFor(modelItem => item.Severity.SeverityName)</span>
+                                    }
+                                </td>
                                 <td> @Html.DisplayFor(modelItem => item.ShortDescription)</td>
                                 <td> @Html.DisplayFor(modelItem => item.Consultant.Email)</td>
                                 <td> 
@@ -51,9 +64,13 @@
                                      {
                                         <span class="label label-warning">@Html.DisplayFor(modelItem => item.Status)</span>
                                      }
-                                     else
+                                     else if(item.Status == "Solution Suggested")
                                      {
                                         <span class="label label-success">@Html.DisplayFor(modelItem => item.Status)</span>
+                                     }
+                                     else
+                                     {
+                                        <span class="label label-default">@Html.DisplayFor(modelItem => item.Status)</span>
                                      }
                                 </td>
                                 <td>
