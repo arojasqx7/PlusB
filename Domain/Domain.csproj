@@ -105,6 +105,10 @@
     <Compile Include="Migrations\201802211716546_Add-Email-Column-TicketActivity.Designer.cs">
       <DependentUpon>201802211716546_Add-Email-Column-TicketActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802242113399_Add-CreatorField-To-Ticket.cs" />
+    <Compile Include="Migrations\201802242113399_Add-CreatorField-To-Ticket.Designer.cs">
+      <DependentUpon>201802242113399_Add-CreatorField-To-Ticket.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -145,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802211716546_Add-Email-Column-TicketActivity.resx">
       <DependentUpon>201802211716546_Add-Email-Column-TicketActivity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802242113399_Add-CreatorField-To-Ticket.resx">
+      <DependentUpon>201802242113399_Add-CreatorField-To-Ticket.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

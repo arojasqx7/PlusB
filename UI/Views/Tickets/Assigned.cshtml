@@ -17,7 +17,7 @@
 <section class="content-header">
         <h1>Incident: @Html.DisplayFor(model => model.Id)</h1>
         <h4>
-            Current status:
+            Status:
             @if (Model.Status == "Open")
             {
                 <span class="label label-danger">@Html.DisplayFor(model => model.Status)</span>
@@ -40,6 +40,7 @@
 
             }
         </h4>
+        <h4>Creator: @Html.DisplayFor(model => model.Creator)</h4>
     @using (Html.BeginForm("UpdateStatus", "Tickets", FormMethod.Post))
     {
         @Html.AntiForgeryToken()

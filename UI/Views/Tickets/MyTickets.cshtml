@@ -5,7 +5,7 @@
 }
 
 <section class="content-header">
-    <h1>My Tickets</h1>
+    <h1>My Incidents</h1>
 </section>
 
 <br />
@@ -14,7 +14,7 @@
         <div class="col-xs-12">
             <div class="box box-danger">
                 <div class="box-header">
-                    <h2 class="box-title">List of tickets assigned to me</h2>
+                    <h2 class="box-title">List of incidents assigned to me</h2>
                 </div>
                 <div class="box-body">
                     <table id="example1" class="table table-bordered table-hover">
@@ -65,6 +65,10 @@
                                         <span class="label label-warning">@Html.DisplayFor(modelItem => item.Status)</span>
                                      }
                                      else if(item.Status == "Solution Suggested")
+                                     {
+                                        <span class="label label-success">@Html.DisplayFor(modelItem => item.Status)</span>
+                                     }
+                                     else if (item.Status == "Pending Customer")
                                      {
                                         <span class="label label-success">@Html.DisplayFor(modelItem => item.Status)</span>
                                      }
