@@ -42,6 +42,8 @@ namespace Domain.Entities
         [ForeignKey("Consultant")]
         public int Id_Consultant { get; set; }
 
+        public string Creator { get; set; }
+
         public virtual Technology Technology { get; set; }
         public virtual Severity Severity { get; set; }
         public virtual Impact Impact { get; set; }

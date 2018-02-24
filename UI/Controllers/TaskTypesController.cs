@@ -5,11 +5,13 @@ using Domain.Entities;
 using Persistence.Repositories;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
+using log4net;
 
 namespace UI.Controllers
 {
     public class TaskTypesController : Controller
     {
+        ILog logger = LogManager.GetLogger(typeof(TaskTypesController));
         private ITaskTypesRepository taskRepo;
 
         public TaskTypesController()
@@ -50,6 +52,7 @@ namespace UI.Controllers
                     var sqlException = sqlExc.GetBaseException() as SqlException;
                     if (sqlException != null)
                     {
+                        logger.Error(sqlExc.ToString());
                         ViewBag.Message = "Record already exists.";
                     }
                     else
@@ -87,6 +90,7 @@ namespace UI.Controllers
                     var sqlException = sqlExc.GetBaseException() as SqlException;
                     if (sqlException != null)
                     {
+                        logger.Error(sqlExc.ToString());
                         ViewBag.Message = "Record already exists.";
                     }
                     else

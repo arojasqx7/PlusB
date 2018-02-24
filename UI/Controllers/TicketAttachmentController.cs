@@ -9,13 +9,18 @@ using UI.Extensions;
 using Domain.Entities;
 using System.Threading.Tasks;
 using System.IO;
+using Microsoft.AspNet.Identity;
+using log4net;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace UI.Controllers
 {
     public class TicketAttachmentController : Controller
     {
+        private ApplicationUserManager _userManager;
         private ITicketsRepository ticketRepo;
         private PlusBContext db = new PlusBContext();
+        ILog logger = LogManager.GetLogger(typeof(TicketAttachmentController));
 
         public TicketAttachmentController()
         {
@@ -39,6 +44,7 @@ namespace UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(TicketAttachmentModel model, IEnumerable<HttpPostedFileBase> files)
         {
+            var user = UserManager.FindById(User.Identity.GetUserId());
             //insert into table Ticket        
             var ticketDetails = new Ticket
             {
@@ -54,7 +60,8 @@ namespace UI.Controllers
                 Id_Impact = model.Id_Impact,
                 Id_TaskType = model.Id_TaskType,
                 Status = model.Status,
-                Id_Consultant = model.Id_Consultant
+                Id_Consultant = model.Id_Consultant,
+                Creator = user.Email 
             };
 
             using (var context = new PlusBContext())
@@ -94,9 +101,24 @@ namespace UI.Controllers
             }
             catch (Exception ex)
             {
+                logger.Error(ex.ToString());
                 return RedirectToAction("Index", "Tickets");
             }
             return RedirectToAction("Index", "Tickets");
         }
+
+        #region public ApplicationUserManager UserManager
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+        #endregion
     }
 }
