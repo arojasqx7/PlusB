@@ -54,7 +54,7 @@ namespace UI.Controllers
                 DateOfBirth = model.DateOfBirth,
                 IdNumber = model.IdNumber,
                 Gender = model.Gender,
-                Email = model.Email,
+                Email = model.UserName,
                 Pais = model.Pais,
                 Address = model.Address,
                 PhoneNumber = model.PhoneNumber,
@@ -73,15 +73,16 @@ namespace UI.Controllers
             var lastConsultantId = (from i in consultantUserRepo.GetConsultants()
                                     orderby i.ID descending
                                     select i.ID).First();
+
             var consultantUser = new ApplicationUser
             {
                 UserName = model.UserName,
-                Email = model.Email,
+                Email = model.UserName,
                 ConsultantID = lastConsultantId.ToString()
             };
 
             var CreateConsultantUser = UserManager.Create(consultantUser, Password);
-            var roleConsultant = UserManager.AddToRole(consultantUser.Id,"Consultant");
+            var roleConsultant = UserManager.AddToRole(consultantUser.Id, "Consultant");
             return RedirectToAction("Index");
         }
 

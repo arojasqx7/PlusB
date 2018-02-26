@@ -8,7 +8,6 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 

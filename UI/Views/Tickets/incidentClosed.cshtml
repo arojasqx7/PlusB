@@ -1,0 +1,88 @@
+﻿@model Domain.Entities.Ticket
+@{
+    ViewBag.Title = "incidentClosed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .txtHover:hover {
+        color: #dfae1f;
+    }
+
+    .timeline:before {
+        bottom: -30px;
+    }
+</style>
+
+<section class="content-header">
+    <h1>Incident: @Html.DisplayFor(model => model.Id)</h1>
+    <h4>Status:<span class="label label-default">@Html.DisplayFor(model => model.Status)</span></h4>
+    <h4>Creator: @Html.DisplayFor(model => model.Creator)</h4>
+</section>
+
+<br /><br />
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-default">
+                <div class="box-header">
+                    <h2 class="box-title ">Subject: <span class="text-bold txtHover" style="margin-left:25px;">@Html.DisplayFor(model => model.ShortDescription)</span></h2>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Date & Time Opened: </strong> <span class="txtHover"> @Html.DisplayFor(model => model.Date) @Html.DisplayFor(model => model.OpenTime)</span>
+                            <br /><br />
+                            <strong>Environment:</strong>  <span class="txtHover"> @Html.DisplayFor(model => model.Environment)</span>
+                            <br /><br />
+                            <strong>Description:</strong>  <span class="txtHover"> @Html.DisplayFor(model => model.LongDescription)</span>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Severity:</strong> <span class="txtHover"> @Html.DisplayFor(model => model.Severity.SeverityName)</span>
+                            <br />
+                            <strong>Impact:</strong> <span class="txtHover"> @Html.DisplayFor(model => model.Impact.ImpactName)</span>
+                            <br />
+                            <strong>Technology:</strong> <span class="txtHover"> @Html.DisplayFor(model => model.Technology.Name)</span>
+                            <br />
+                            <strong>Task:</strong>  <span class="txtHover"> @Html.DisplayFor(model => model.TaskType.TaskName)</span>
+                        </div>
+                    </div>
+
+                    <br /><br />
+                    <div class="box-header">
+                        <h2 class="box-title"><span style="margin-left:-10px;">Attachments</span></h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!--Renders the attachment list inside tickets-->
+                            @Html.Action("FileDetails", "Attachment", new { id = Model.Id })
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="box-header">
+                        <h2 class="box-title"><span style="margin-left:-10px;">Incident Activity</span></h2>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <!--Renders the activity already added to the ticket-->
+                        @Html.Action("insertedActivity", "TicketActivity", new { id = Model.Id })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts{
+    <script>
+    $(document).ready(function () {
+        $('#example1').DataTable({
+            "bPaginate": true,
+            "bFilter": true,
+            "bInfo": true
+        });
+    });
+    </script>
+}
+

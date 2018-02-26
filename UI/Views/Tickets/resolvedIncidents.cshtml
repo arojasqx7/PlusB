@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Domain.Entities.Ticket>
+@{
+    ViewBag.Title = "resolvedIncidents";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>Resolved Incidents</h1>
+</section>
+
+<br />
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-danger">
+                <div class="box-header">
+                    <h2 class="box-title">List of incidents resolved requested by me</h2>
+                </div>
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-hover">
+                        <tr>
+                            <th> Date & Time Opened</th>
+                            <th> Company</th>
+                            <th> Severity</th>
+                            <th> Short Description</th>
+                            <th> Assignment</th>
+                            <th> Status</th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            var colorClass = "Black";
+                            if (item.Id_Severity.Equals(4))
+                            {
+                                colorClass = "Red";
+                            }
+
+                            <tr class="@colorClass">
+                                <td><strong> @Html.DisplayFor(modelItem => item.Date) @Html.DisplayFor(modelItem => item.OpenTime)</strong></td>
+                                <td> @Html.DisplayFor(modelIem => item.Customer.CompanyName)</td>
+                                <td>
+                                    @if (item.Severity.SeverityName == "Critical")
+                                    {
+                                        <span class="label label-danger"> @Html.DisplayFor(modelItem => item.Severity.SeverityName)</span>
+                                    }
+                                    else if (item.Severity.SeverityName == "Major")
+                                    {
+                                        <span class="label label-warning"> @Html.DisplayFor(modelItem => item.Severity.SeverityName)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-info"> @Html.DisplayFor(modelItem => item.Severity.SeverityName)</span>
+                                    }
+                                </td>
+                                <td> @Html.DisplayFor(modelItem => item.ShortDescription)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Consultant.Email)</td>
+                                <td> <span class="label label-default">@Html.DisplayFor(modelItem => item.Status)</span></td>
+                                <td>
+                                    @Html.Raw("<a href='/Tickets/incidentClosed/" + item.Id + "' id='" + item.Id + "' title='Open Incident'>View</a>")
+                                </td>
+                            </tr>
+
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script>
+    $(document).ready(function () {
+        $('#example1').DataTable({
+            "bPaginate": true,
+            "bFilter": true,
+            "bInfo": true
+        });
+    });
+    </script>
+}

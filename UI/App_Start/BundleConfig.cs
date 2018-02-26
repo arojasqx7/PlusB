@@ -69,10 +69,10 @@ namespace UI
                  "~/Scripts/jquery.dataTables.min.js",
                  "~/Scripts/dataTables.bootstrap.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/dropzone").Include(
-                       "~/Scripts/dropzone.js"));
+            bundles.Add(new ScriptBundle("~/bundles/chart.js").Include(
+                       "~/Scripts/Chart.js"));
 
-            //Start of CSS Bundles
+            //***************Start of CSS Bundles*************************
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));

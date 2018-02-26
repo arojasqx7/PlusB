@@ -291,7 +291,7 @@
             <section class="sidebar">
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="treeview">
+                    @*<li class="treeview">
                         <a href="#">
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             <span class="pull-right-container">
@@ -300,60 +300,72 @@
                         </a>
                         <ul class="treeview-menu">
                             <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                            @*<li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>*@
+                            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
                         </ul>
-                    </li>
+                    </li>*@
 
                     @if (User.IsInRole("Administrator"))
                     {
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-cog"></i> <span>Administration</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-left"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="@Url.Action("Index","Admin")"><i class="fa fa-users"></i> Users</a></li>
-                            <li><a href="@Url.Action("ViewAllRoles","Admin")"><i class="fa fa-tasks"></i> Roles</a></li>
-                        </ul>
-                    </li>
+                        <li>
+                            <a href="@Url.Action("adminDashboard","Dashboard")">
+                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            </a>
+                        </li>
 
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-edit"></i> <span>Incident Management</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-left"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="@Url.Action("Index","Severities")"><i class="fa fa-check-square-o"></i>Severities</a></li>
-                            <li><a href="@Url.Action("Index","Impacts")"><i class="fa fa-list-alt"></i>Impacts</a></li>
-                            <li><a href="@Url.Action("Index","TaskTypes")"><i class="fa fa-bug"></i>Task Types</a></li>
-                        </ul>
-                    </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-cog"></i> <span>Administration</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-left"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="@Url.Action("Index","Admin")"><i class="fa fa-users"></i> Users</a></li>
+                                <li><a href="@Url.Action("ViewAllRoles","Admin")"><i class="fa fa-tasks"></i> Roles</a></li>
+                            </ul>
+                        </li>
 
-                    <li>
-                        <a href="@Url.Action("Index","Customers")">
-                            <i class="fa fa-handshake-o"></i> <span>Customers</span>
-                        </a>
-                    </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-edit"></i> <span>Incident Management</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-left"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="@Url.Action("Index","Severities")"><i class="fa fa-check-square-o"></i>Severities</a></li>
+                                <li><a href="@Url.Action("Index","Impacts")"><i class="fa fa-list-alt"></i>Impacts</a></li>
+                                <li><a href="@Url.Action("Index","TaskTypes")"><i class="fa fa-bug"></i>Task Types</a></li>
+                            </ul>
+                        </li>
 
-                    <li>
-                        <a href="@Url.Action("Index","Technologies")">
-                            <i class="fa fa-code-fork"></i><span>Technologies</span>
-                        </a>
-                    </li>
+                        <li>
+                            <a href="@Url.Action("Index","Customers")">
+                                <i class="fa fa-handshake-o"></i> <span>Customers</span>
+                            </a>
+                        </li>
 
-                    <li>
-                        <a href="@Url.Action("Index","ConsultantUser")">
-                            <i class="fa fa-user-plus"></i> <span>Consultants</span>
-                        </a>
-                    </li>
+                        <li>
+                            <a href="@Url.Action("Index","Technologies")">
+                                <i class="fa fa-code-fork"></i><span>Technologies</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("Index","ConsultantUser")">
+                                <i class="fa fa-user-plus"></i> <span>Consultants</span>
+                            </a>
+                        </li>
                     }
 
                     else if (User.IsInRole("Consultant"))
                     {
+                        <li>
+                            <a href="@Url.Action("consultantDashboard","Dashboard")">
+                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            </a>
+                        </li>
+
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-file-text-o"></i> <span>Incidents</span>
@@ -364,11 +376,18 @@
                             <ul class="treeview-menu">
                                 <li><a href="@Url.Action("UnassignedList","Tickets")"><i class="fa fa-bars"></i>Unassigned</a></li>
                                 <li><a href="@Url.Action("MyTickets","Tickets")"><i class="fa fa-list-ul"></i>My Incidents</a></li>
+                                <li><a href="@Url.Action("Resolved","Tickets")"><i class="fa fa-check"></i>Resolved</a></li>
                             </ul>
                         </li>
                     }
                     else if (User.IsInRole("Customer"))
                     {
+                        <li>
+                            <a href="@Url.Action("customerDashboard","Dashboard")">
+                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            </a>
+                        </li>
+
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-file-text-o"></i> <span>Incidents</span>
@@ -379,6 +398,7 @@
                             <ul class="treeview-menu">
                                 <li><a href="@Url.Action("Create","TicketAttachment")"><i class="fa fa-plus-square"></i>New Incident</a></li>
                                 <li><a href="@Url.Action("Index","Tickets")"><i class="fa fa-eye"></i>My Incidents</a></li>   
+                                <li><a href="@Url.Action("resolvedIncidents","Tickets")"><i class="fa fa-check"></i>Resolved</a></li>
                             </ul>
                         </li>
                     }

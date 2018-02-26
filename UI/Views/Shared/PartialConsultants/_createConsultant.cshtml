@@ -51,13 +51,7 @@
         </div>
         <br /><br />
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Email:</label>
-            <div class="col-md-8">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", type="email", required = "required" } })
-            </div>
-        </div>
-        <br /><br />
+        @Html.HiddenFor(x=>x.Email)
 
         <div class="form-group">
             <label class="control-label col-md-2">Country:</label>
@@ -105,7 +99,7 @@
         <div class="form-group">
             <label class="control-label col-md-2">Username:</label>
             <div class="col-md-8">
-                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @type="email" } })
             </div>
         </div>
         <br /><br />
