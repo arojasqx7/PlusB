@@ -1,0 +1,152 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style> 
+    .lblCount{font-size: 90%;}
+    .box-body{height:250px;}
+</style>
+
+<section class="content-header">
+    <h1>Consultant Dashboard</h1>
+</section>
+
+<br />
+<section class="content">
+        <div class="box box-primary col-md-3" style="width:35%;">
+            <div class="box-header with-border">
+                <h3 class="box-title text-center">Current incident status</h3>
+            </div>
+            <div class="box-body">
+                <ul class="products-list product-list-in-box">
+                    <li class="item">
+                        <div class="product-info">
+                            <a href="javascript:void(0)" class="product-title">In Backlog
+                                <span class="label label-info pull-right lblCount" id="totalBacklog"></span>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="product-info">
+                            <a href="javascript:void(0)" class="product-title">Open
+                                <span class="label label-warning pull-right lblCount" id="openTickets"></span>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="product-info">
+                            <a href="javascript:void(0)" class="product-title">Work In Progress
+                                <span class="label label-danger pull-right lblCount" id="wipTickets"></span>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="product-info">
+                            <a href="javascript:void(0)" class="product-title">Pending Customer
+                                <span class="label label-success pull-right lblCount" id="pendingTickets"></span>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="product-info">
+                            <a href="javascript:void(0)" class="product-title">Solution Suggested
+                                <span class="label label-warning pull-right lblCount" id="ssTickets"></span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+   
+        <div class="box box-danger col-md-3"  style="width:45%;margin-left:25px;">
+            <div class="box-header with-border">
+                <h3 class="box-title">Incident Severities in Backlog</h3>
+            </div>
+            <div class="box-body">
+                <canvas id="pieChart" style="height:200px"></canvas>
+            </div>
+        </div>
+
+         <span id="test" hidden="hidden"></span>
+         <span id="test2" hidden="hidden"></span>
+         <span id="test3" hidden="hidden"></span>
+
+@*
+      <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+              <span class="info-box-icon bg-red-active"><i class="fa fa-star-o"></i></span>
+              <div class="info-box-content">
+                  <span class="info-box-text">Assigned Today</span>
+                  <span class="info-box-number" id="totalAssignedToday"></span>
+              </div>
+          </div>
+      </div>
+*@
+</section>
+
+@section Scripts
+{
+@Scripts.Render("~/bundles/chart.js")
+<script>
+    $(document).ready(function () {
+        $.get("/Dashboard/ticketsInBacklogConsultant",function(message){
+            $('#totalBacklog').html(message);
+        });
+
+        $.get("/Dashboard/openTicketsConsultant",function(message){
+            $('#openTickets').html(message);
+        });
+
+        $.get("/Dashboard/WIPticketsConsultant",function(message){
+            $('#wipTickets').html(message);
+        });
+
+        $.get("/Dashboard/pendingTicketsConsultant",function(message){
+            $('#pendingTickets').html(message);
+        });
+
+        $.get("/Dashboard/solutionSuggestedTicketsConsultant",function(message){
+            $('#ssTickets').html(message);
+        });
+    });
+    //****************** PIE CHART ***************************
+    var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
+    var pieChart = new Chart(pieChartCanvas);
+    
+    var PieData = [
+      {
+          value: @ViewBag.Data1,
+          color: '#f56954',
+          highlight: '#f56954',
+          label: 'Critical'
+      },
+      {
+          value: @ViewBag.Data2,
+          color: '#f39c12',
+          highlight: '#f39c12',
+          label: 'Major'
+      },
+      {
+          value: @ViewBag.Data3,
+          color: '#00a65a',
+          highlight: '#00a65a',
+          label: 'Minor'
+      }
+    ]
+    var pieOptions = {
+        segmentShowStroke: true,
+        segmentStrokeColor: '#fff',
+        segmentStrokeWidth: 2,
+        percentageInnerCutout: 50,
+        animationSteps: 100,
+        animationEasing: 'easeOutBounce',
+        animateRotate: true,
+        animateScale: false,
+        responsive: true,
+        maintainAspectRatio: true,
+        legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+    }
+    pieChart.Doughnut(PieData, pieOptions)
+        //************ END PIE CHART **************
+   
+</script>
+}

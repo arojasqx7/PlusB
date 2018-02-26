@@ -220,7 +220,7 @@
     <Compile Include="Controllers\ConsultantsController.cs" />
     <Compile Include="Controllers\ConsultantUserController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ImpactsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SeveritiesController.cs" />
@@ -490,18 +490,7 @@
     <Content Include="bower_components\bootstrap\js\tooltip.js" />
     <Content Include="bower_components\bootstrap\js\transition.js" />
     <Content Include="bower_components\bootstrap\package.js" />
-    <Content Include="bower_components\chart.js\.gitignore" />
-    <Content Include="bower_components\chart.js\Chart.js" />
-    <Content Include="bower_components\chart.js\Chart.min.js" />
-    <Content Include="bower_components\chart.js\gulpfile.js" />
-    <Content Include="bower_components\chart.js\samples\bar.html" />
-    <Content Include="bower_components\chart.js\samples\doughnut.html" />
-    <Content Include="bower_components\chart.js\samples\line-customTooltips.html" />
-    <Content Include="bower_components\chart.js\samples\line.html" />
-    <Content Include="bower_components\chart.js\samples\pie-customTooltips.html" />
-    <Content Include="bower_components\chart.js\samples\pie.html" />
-    <Content Include="bower_components\chart.js\samples\polar-area.html" />
-    <Content Include="bower_components\chart.js\samples\radar.html" />
+    <Content Include="Scripts\Chart.js" />
     <Content Include="bower_components\chart.js\src\Chart.Bar.js" />
     <Content Include="bower_components\chart.js\src\Chart.Core.js" />
     <Content Include="bower_components\chart.js\src\Chart.Doughnut.js" />
@@ -6116,8 +6105,6 @@
     <Content Include="fonts\ionicons.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="index.html" />
-    <Content Include="index2.html" />
     <Content Include="pages\calendar.html" />
     <Content Include="pages\charts\chartjs.html" />
     <Content Include="pages\charts\flot.html" />
@@ -6445,21 +6432,6 @@
     <Content Include="bower_components\bootstrap\nuget\MyGet.ps1" />
     <Content Include="bower_components\bootstrap\package.json" />
     <Content Include="bower_components\bootstrap\README.md" />
-    <Content Include="bower_components\chart.js\.bower.json" />
-    <Content Include="bower_components\chart.js\.travis.yml" />
-    <Content Include="bower_components\chart.js\bower.json" />
-    <Content Include="bower_components\chart.js\CONTRIBUTING.md" />
-    <Content Include="bower_components\chart.js\docs\00-Getting-Started.md" />
-    <Content Include="bower_components\chart.js\docs\01-Line-Chart.md" />
-    <Content Include="bower_components\chart.js\docs\02-Bar-Chart.md" />
-    <Content Include="bower_components\chart.js\docs\03-Radar-Chart.md" />
-    <Content Include="bower_components\chart.js\docs\04-Polar-Area-Chart.md" />
-    <Content Include="bower_components\chart.js\docs\05-Pie-Doughnut-Chart.md" />
-    <Content Include="bower_components\chart.js\docs\06-Advanced.md" />
-    <Content Include="bower_components\chart.js\docs\07-Notes.md" />
-    <Content Include="bower_components\chart.js\LICENSE.md" />
-    <Content Include="bower_components\chart.js\package.json" />
-    <Content Include="bower_components\chart.js\README.md" />
     <Content Include="bower_components\ckeditor\.bower.json" />
     <Content Include="bower_components\ckeditor\.github\ISSUE_TEMPLATE" />
     <Content Include="bower_components\ckeditor\bower.json" />
@@ -6752,6 +6724,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Modals.js" />
+    <Content Include="Scripts\SeveritiesPieChart.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -6764,9 +6737,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -6830,6 +6800,12 @@
     <Content Include="Views\Shared\PartialTicketActivity\_addActivity.cshtml" />
     <Content Include="Views\Shared\PartialTicketActivity\_insertedActivity.cshtml" />
     <Content Include="Views\Tickets\incidentCreated.cshtml" />
+    <Content Include="Views\Dashboard\consultantDashboard.cshtml" />
+    <Content Include="Views\Dashboard\customerDashboard.cshtml" />
+    <Content Include="Views\Dashboard\adminDashboard.cshtml" />
+    <Content Include="Views\Tickets\Resolved.cshtml" />
+    <Content Include="Views\Tickets\incidentClosed.cshtml" />
+    <Content Include="Views\Tickets\resolvedIncidents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

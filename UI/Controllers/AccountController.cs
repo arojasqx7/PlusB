@@ -73,16 +73,24 @@ namespace UI.Controllers
             {
                 return View(model);
             }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var user = await UserManager.FindByNameAsync(model.Email);
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            var test = User.Identity.GetCustomerId();
 
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    if (await UserManager.IsInRoleAsync(user.Id,"Administrator"))
+                    {
+                        return RedirectToLocal("/Dashboard/adminDashboard");
+                    }
+                    else if (await UserManager.IsInRoleAsync(user.Id,"Consultant"))
+                    {
+                        return RedirectToLocal("/Dashboard/consultantDashboard");
+                    }
+                    else
+                    {
+                        return RedirectToLocal("/Dashboard/customerDashboard");
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

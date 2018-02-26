@@ -5,6 +5,8 @@ using Domain.DAL;
 using Domain.Entities;
 using UI.Extensions;
 using Persistence.Repositories;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace UI.Controllers
 {
@@ -12,6 +14,9 @@ namespace UI.Controllers
     {
         private PlusBContext db = new PlusBContext();
         private ITicketsRepository ticketRepo;
+        private static int IDTicket;
+        private static string emailToSend;
+        private static string statusToSend;
 
         public TicketsController()
         {
@@ -23,7 +28,9 @@ namespace UI.Controllers
         public ActionResult Index()
         { 
             int idCustomer = int.Parse(User.Identity.GetCustomerId());
-            var tickets = db.Tickets.Include(t => t.Consultant).Include(t => t.Customer).Include(t => t.Impact).Include(t => t.Severity).Include(t => t.TaskType).Include(t => t.Technology).Where(x=>x.Id_Customer.Equals(idCustomer));
+            var tickets = db.Tickets.Include(t => t.Consultant).Include(t => t.Customer).Include(t => t.Impact).Include(t => t.Severity).Include(t => t.TaskType).Include(t => t.Technology)
+                          .Where(x=>x.Id_Customer.Equals(idCustomer))
+                          .Where(y => !y.Status.Equals("Closed")); ;
             return View(tickets.ToList());
         }
 
@@ -42,8 +49,29 @@ namespace UI.Controllers
         {
             int idConsultantLogged = int.Parse(User.Identity.GetConsultantId());
             var myTickets = db.Tickets.Include(t => t.Consultant).Include(t => t.Customer).Include(t => t.Impact).Include(t => t.Severity).Include(t => t.TaskType).Include(t => t.Technology)
-                                    .Where(x => x.Id_Consultant.Equals(idConsultantLogged));
+                                    .Where(x => x.Id_Consultant.Equals(idConsultantLogged))
+                                    .Where(y => !y.Status.Equals("Closed"));
             return View(myTickets.ToList());
+        }
+
+        [Authorize(Roles = "Consultant")]
+        public ActionResult Resolved()
+        {
+            int idConsultantLogged = int.Parse(User.Identity.GetConsultantId());
+            var resolved = db.Tickets.Include(t => t.Consultant).Include(t => t.Customer).Include(t => t.Impact).Include(t => t.Severity).Include(t => t.TaskType).Include(t => t.Technology)
+                                    .Where(x => x.Id_Consultant.Equals(idConsultantLogged))
+                                    .Where(y => y.Status.Equals("Closed"));
+            return View(resolved.ToList());
+        }
+
+        [Authorize(Roles = "Customer")]
+        public ActionResult resolvedIncidents()
+        {
+            int idCustomer = int.Parse(User.Identity.GetCustomerId());
+            var resolved = db.Tickets.Include(t => t.Consultant).Include(t => t.Customer).Include(t => t.Impact).Include(t => t.Severity).Include(t => t.TaskType).Include(t => t.Technology)
+                                    .Where(x => x.Id_Customer.Equals(idCustomer))
+                                    .Where(y => y.Status.Equals("Closed"));
+            return View(resolved.ToList());
         }
 
         // GET: Tickets/Details/5
@@ -140,6 +168,13 @@ namespace UI.Controllers
             return View(ticket);
         }
 
+        [Authorize(Roles = "Consultant, Customer")]
+        public ActionResult incidentClosed(int id)
+        {
+            Ticket ticket = ticketRepo.GetTicketByID(id);
+            return View(ticket);
+        }
+
         // GET
         [Authorize(Roles = "Customer")]
         public ActionResult incidentCreated(int id)
@@ -151,6 +186,7 @@ namespace UI.Controllers
         [HttpPost]
         public ActionResult UpdateStatus(int id, string status)
         {
+            IDTicket = id;
             Ticket ticket = ticketRepo.GetTicketByID(id);
             ticket.Status = status;
             ticketRepo.UpdateTicket(ticket);
@@ -158,12 +194,35 @@ namespace UI.Controllers
 
             if (User.IsInRole("Consultant"))
             {
+                var customerEmail = db.Tickets.Where(x => x.Id.Equals(IDTicket)).Select(x => x.Creator).FirstOrDefault();
+                emailToSend = customerEmail;
+                statusToSend = status;
+                SendEmail(); // send notification
                 return RedirectToAction("MyTickets", "Tickets");
             }
             else
             {
+                var consultantEmail = db.Tickets.Where(x => x.Id.Equals(IDTicket)).Select(x => x.Id_Consultant).FirstOrDefault();
+                var consultant_Email = db.Consultants.Where(y => y.ID.Equals(consultantEmail)).Select(y => y.Email).FirstOrDefault();
+                emailToSend = consultant_Email;
+                statusToSend = status;
+                SendEmail(); // send notification
                 return RedirectToAction("Index", "Tickets");
             }
+        }
+
+        private void SendEmail()
+        {
+            var apiKey = "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";
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("notifications@plusb.com", "PlusB Service Desk Notification");
+            var subject = "Status update Incident #  " + IDTicket;
+            var to = new EmailAddress(emailToSend, "Customer");
+            var plainTextContent = "Incident Status update";
+            var htmlContent = "<p>The incident status was changed to </p><br/>" +
+                                statusToSend;
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = client.SendEmailAsync(msg);
         }
 
         protected override void Dispose(bool disposing)
