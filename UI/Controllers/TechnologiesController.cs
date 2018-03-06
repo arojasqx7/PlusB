@@ -7,6 +7,8 @@ using Persistence.Repositories;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using log4net;
+using PagedList;
+using System;
 
 namespace UI.Controllers
 {
@@ -27,11 +29,28 @@ namespace UI.Controllers
 
         // GET: Technologies
         [Authorize(Roles ="Administrator")]
-        public ActionResult Index()
+        public ViewResult Index(string currentFilter, string searchString, int? page)
         {
-            var technologies = from s in technologyRepo.GetTechnologies()
-                               select s;
-            return View(technologies.ToList());
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var technologies = technologyRepo.GetTechnologies();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                technologies = technologies.Where(s => s.Name.Contains(searchString));
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(technologies.OrderBy(x => x.Name).ToPagedList(pageNumber,pageSize));
         }
 
         // GET: Technologies/Create

@@ -44,6 +44,20 @@ namespace Domain.Entities
 
         public string Creator { get; set; }
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime? AssignmentDate { get; set; }
+
+        public TimeSpan? AssignmentTime { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime? ClosedDate { get; set; }
+
+        public TimeSpan? ClosedTime { get; set; }
+
+        public decimal? AverageResolution { get; set; }
+
         public virtual Technology Technology { get; set; }
         public virtual Severity Severity { get; set; }
         public virtual Impact Impact { get; set; }

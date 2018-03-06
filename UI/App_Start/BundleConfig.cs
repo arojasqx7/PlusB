@@ -118,6 +118,12 @@ namespace UI
 
             bundles.Add(new StyleBundle("~/Content/dropzone").Include(
                     "~/Content/dropzone.css"));
+
+            bundles.Add(new StyleBundle("~/Content/pagedList").Include(
+                    "~/Content/PagedList.css"));
+
+            bundles.Add(new StyleBundle("~/Content/clearSearch").Include(
+                    "~/Content/clearTextbox.css"));
         }
     }
 }

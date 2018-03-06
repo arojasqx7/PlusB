@@ -4,6 +4,7 @@
 <style> 
     .lblCount{font-size: 90%;}
     .box-body{height:250px;}
+    .info-box-number{font-size:30px;}
 </style>
 
 <section class="content-header">
@@ -66,21 +67,38 @@
             </div>
         </div>
 
-         <span id="test" hidden="hidden"></span>
-         <span id="test2" hidden="hidden"></span>
-         <span id="test3" hidden="hidden"></span>
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red-active"><i class="fa fa-star-o"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Assigned Today</span>
+                    <span class="info-box-number" id="totalAssignedToday"></span>
+                </div>
+            </div>
+        </div>
 
-@*
-      <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-              <span class="info-box-icon bg-red-active"><i class="fa fa-star-o"></i></span>
-              <div class="info-box-content">
-                  <span class="info-box-text">Assigned Today</span>
-                  <span class="info-box-number" id="totalAssignedToday"></span>
-              </div>
-          </div>
-      </div>
-*@
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green-active"><i class="fa fa-thumbs-o-up"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Resolved Today</span>
+                    <span class="info-box-number" id="totalResolvedToday"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red-active"><i class="ion ion-stats-bars"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Average weight technology</span>
+                    <span class="info-box-number" id="techAvg"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
 
 @section Scripts
@@ -106,6 +124,18 @@
 
         $.get("/Dashboard/solutionSuggestedTicketsConsultant",function(message){
             $('#ssTickets').html(message);
+        });
+
+        $.get("/Dashboard/AssignedToday_Consultant",function(message){
+            $('#totalAssignedToday').html(message);
+        });
+
+        $.get("/Dashboard/ResolvedToday_Consultant",function(message){
+            $('#totalResolvedToday').html(message);
+        });
+
+        $.get("/Dashboard/techAvgConsultant",function(message){
+            $('#techAvg').html(message);
         });
     });
     //****************** PIE CHART ***************************

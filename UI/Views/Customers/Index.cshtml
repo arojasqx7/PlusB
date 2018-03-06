@@ -12,7 +12,7 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <div class="box box-primary">
+            <div class="box box-default">
                 <div class="box-header">
                     <h2 class="box-title">List of customers </h2>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default" style="float:right;" data-toggle='tooltip' title='Create'>New Customer</button>
@@ -36,8 +36,8 @@
                                 <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
                                 <td>@Html.DisplayFor(modelItem => item.SupportType)</td>
                                 <td>
-                                    @Html.Raw("<a data-modal='' href='/Customers/Edit/" + item.Id + "' id='" + item.Id + "' class='btn btn-info' data-toggle='tooltip' title='Edit'> <span class='glyphicon glyphicon-edit'> </span> </a>")
-                                    @Html.Raw("<a data-modal='' href='/Customers/Delete/" + item.Id + "' id='" + item.Id + "' class='btn btn-danger' data-toggle='tooltip' title='Delete'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default-edit" data-toggle="tooltip" title="Edit"><span class='glyphicon glyphicon-edit'> </span></button>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default-delete" data-toggle="tooltip" title="Delete"><span class='glyphicon glyphicon-trash'> </span></button>
                                 </td>
                             </tr>
                         }
@@ -65,10 +65,22 @@
     </div>
 </div>
 
-<div id='myModal' class='modal fade in'>
+<div class="modal fade" id="modal-default-edit">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div id='myModalContent'></div>
+            <div class="modal-body">
+                @Html.Partial("PartialCustomers/_editCustomer", new Domain.Entities.Customer())
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-default-delete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                @Html.Partial("PartialCustomers/_deleteCustomer", new Domain.Entities.Customer())
+            </div>
         </div>
     </div>
 </div>
@@ -77,12 +89,3 @@
 {
     @Scripts.Render("~/Scripts/Modals.js")
 }
-<script>
-    $(document).ready(function () {
-        $('#example1').DataTable({
-            "bPaginate": true,
-            "bFilter": true,
-            "bInfo": true
-        });
-    });
-</script>

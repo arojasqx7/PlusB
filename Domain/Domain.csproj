@@ -109,6 +109,22 @@
     <Compile Include="Migrations\201802242113399_Add-CreatorField-To-Ticket.Designer.cs">
       <DependentUpon>201802242113399_Add-CreatorField-To-Ticket.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803031823135_Add-ClosedDate-To-Ticket.cs" />
+    <Compile Include="Migrations\201803031823135_Add-ClosedDate-To-Ticket.Designer.cs">
+      <DependentUpon>201803031823135_Add-ClosedDate-To-Ticket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803031845135_Add-AssignmentDate-To-Ticket.cs" />
+    <Compile Include="Migrations\201803031845135_Add-AssignmentDate-To-Ticket.Designer.cs">
+      <DependentUpon>201803031845135_Add-AssignmentDate-To-Ticket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803060451537_AvgResolutionToTicket.cs" />
+    <Compile Include="Migrations\201803060451537_AvgResolutionToTicket.Designer.cs">
+      <DependentUpon>201803060451537_AvgResolutionToTicket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803060545047_timesToTicket.cs" />
+    <Compile Include="Migrations\201803060545047_timesToTicket.Designer.cs">
+      <DependentUpon>201803060545047_timesToTicket.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -152,6 +168,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802242113399_Add-CreatorField-To-Ticket.resx">
       <DependentUpon>201802242113399_Add-CreatorField-To-Ticket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803031823135_Add-ClosedDate-To-Ticket.resx">
+      <DependentUpon>201803031823135_Add-ClosedDate-To-Ticket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803031845135_Add-AssignmentDate-To-Ticket.resx">
+      <DependentUpon>201803031845135_Add-AssignmentDate-To-Ticket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803060451537_AvgResolutionToTicket.resx">
+      <DependentUpon>201803060451537_AvgResolutionToTicket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803060545047_timesToTicket.resx">
+      <DependentUpon>201803060545047_timesToTicket.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
