@@ -1,8 +1,10 @@
-﻿@model IEnumerable<Domain.Entities.Ticket>
+﻿@model PagedList.IPagedList<Domain.Entities.Ticket>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "My Tickets";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Styles.Render("~/Content/clearSearch")
 
 <section class="content-header">
     <h1>My Incidents</h1>
@@ -15,6 +17,21 @@
             <div class="box box-danger">
                 <div class="box-header">
                     <h2 class="box-title">List of incidents assigned to me</h2>
+                    <br />
+                    <br />
+                    <div>
+                        <div class="pull-left">
+                            @using (Html.BeginForm("MyTickets", "Tickets", FormMethod.Get))
+                            {
+                                <div class="input-group col-md-3" style="margin-left:-15px;">
+                                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @id = "txtSearch", @placeholder = "Search..", @type = "search" })
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                    </span>
+                                </div>
+                            }
+                        </div>
+                    </div>
                 </div>
                 <div class="box-body">
                     <table id="example1" class="table table-bordered table-hover">
@@ -27,7 +44,6 @@
                             <th> Status</th>
                             <th></th>
                         </tr> 
-
                         @foreach (var item in Model)
                         {
                             var colorClass = "Black";
@@ -78,13 +94,15 @@
                                      }
                                 </td>
                                 <td>
-                                    @Html.Raw("<a href='/Tickets/Assigned/" + item.Id + "' id='" + item.Id + "' title='Open Incident'>View</a>")
-                                   
+                                    @Html.Raw("<a href='/Tickets/Assigned/" + item.Id + "' id='" + item.Id + "' title='Open Incident'>View</a>")                              
                                 </td>
                             </tr>
-
                         }
                     </table>
+                    <br />
+                    <div class="pull-right">
+                        @Html.PagedListPager(Model, page => Url.Action("MyTickets", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,18 +116,4 @@
         </div>
     </div>
 </div>
-
-@section Scripts{
-
-    @Scripts.Render("~/Scripts/Modals.js")
-    <script>
-    $(document).ready(function () {
-        $('#example1').DataTable({
-            "bPaginate": true,
-            "bFilter": true,
-            "bInfo": true
-        });
-    });
-    </script>
-}
 

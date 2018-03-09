@@ -85,7 +85,7 @@ namespace UI.Controllers
 
         // GET: Customers/Edit/5
         [Authorize(Roles = "Administrator")]
-        public PartialViewResult Edit(int id)
+        public ActionResult Edit(int id)
         {
             ListOfCountries();
             Customer customer = customerRepo.GetCustomerByID(id);

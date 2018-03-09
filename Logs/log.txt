@@ -82,3 +82,13 @@ The statement has been terminated.
    en UI.Controllers.TaskTypesController.Create(TaskType taskType) en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Controllers\TaskTypesController.cs:línea 47
 ERROR 2018-02-24 15:26:40,036 126361ms etAttachmentController MoveNext           - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
    en UI.Controllers.TicketAttachmentController.<Create>d__6.MoveNext() en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Controllers\TicketAttachmentController.cs:línea 78
+ERROR 2018-03-03 12:26:56,935 49368ms etAttachmentController MoveNext           - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Controllers.TicketAttachmentController.<Create>d__6.MoveNext() en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Controllers\TicketAttachmentController.cs:línea 79
+ERROR 2018-03-03 13:44:26,998 22472ms etAttachmentController MoveNext           - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Controllers.TicketAttachmentController.<Create>d__6.MoveNext() en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Controllers\TicketAttachmentController.cs:línea 79
+ERROR 2018-03-03 13:50:29,546 25142ms etAttachmentController MoveNext           - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Controllers.TicketAttachmentController.<Create>d__6.MoveNext() en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Controllers\TicketAttachmentController.cs:línea 79
+ERROR 2018-03-05 22:44:37,009 40488ms etAttachmentController MoveNext           - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Controllers.TicketAttachmentController.<Create>d__6.MoveNext() en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Controllers\TicketAttachmentController.cs:línea 79
+ERROR 2018-03-05 23:57:36,096 47119ms etAttachmentController MoveNext           - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Controllers.TicketAttachmentController.<Create>d__6.MoveNext() en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Controllers\TicketAttachmentController.cs:línea 79

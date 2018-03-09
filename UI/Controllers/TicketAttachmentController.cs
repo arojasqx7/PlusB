@@ -61,7 +61,8 @@ namespace UI.Controllers
                 Id_TaskType = model.Id_TaskType,
                 Status = model.Status,
                 Id_Consultant = model.Id_Consultant,
-                Creator = user.Email 
+                Creator = user.Email,
+                ClosedDate = null
             };
 
             using (var context = new PlusBContext())

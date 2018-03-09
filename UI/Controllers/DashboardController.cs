@@ -11,10 +11,11 @@ namespace UI.Controllers
 {
     public class DashboardController : Controller
     {
-        private PlusBContext db = new PlusBContext();
-        private ApplicationUserManager _userManager;
+    private PlusBContext db = new PlusBContext();
+    private ApplicationUserManager _userManager;
+    DateTime today = Convert.ToDateTime(DateTime.Today.ToShortDateString());
 
-        [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
         public ActionResult adminDashboard()
         {
             return View();
@@ -48,32 +49,32 @@ namespace UI.Controllers
         public int ticketsInBacklogConsultant()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            var tickets = db.Tickets.Where(y => y.Consultant.Email.Equals(user.Email))
-                         .Where(z=>!z.Status.Equals("Closed")).Count();
+            var tickets = db.Tickets.Where(y => y.Consultant.Email.Equals(user.Email)
+                          && !y.Status.Equals("Closed")).Count();
             return tickets;
         }
 
         public int WIPticketsConsultant()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            var tickets = db.Tickets.Where(y => y.Consultant.Email.Equals(user.Email))
-                         .Where(z =>z.Status.Equals("Work In Progress")).Count();
+            var tickets = db.Tickets.Where(y => y.Consultant.Email.Equals(user.Email)
+                          && y.Status.Equals("Work In Progress")).Count();
             return tickets;
         }
 
         public int pendingTicketsConsultant()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            var tickets = db.Tickets.Where(y => y.Consultant.Email.Equals(user.Email))
-                         .Where(z =>z.Status.Equals("Pending Customer")).Count();
+            var tickets = db.Tickets.Where(y => y.Consultant.Email.Equals(user.Email)
+                          && y.Status.Equals("Pending Customer")).Count();
             return tickets;
         }
 
         public int solutionSuggestedTicketsConsultant()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            var tickets = db.Tickets.Where(y => y.Consultant.Email.Equals(user.Email))
-                         .Where(z => z.Status.Equals("Solution Suggested")).Count();
+            var tickets = db.Tickets.Where(y => y.Consultant.Email.Equals(user.Email)
+                          && y.Status.Equals("Solution Suggested")).Count();
             return tickets;
         }
         #endregion
@@ -107,6 +108,41 @@ namespace UI.Controllers
                          .Where(z => z.Id_Severity.Equals(3))
                          .Where(w => !w.Status.Equals("Closed")).Count();
             return tickets;
+        }
+
+        #endregion
+
+        #region Assigned today
+        public int AssignedToday_Consultant()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            var tickets = (from a in db.Tickets where (a.Consultant.Email.Equals(user.Email)
+                           && a.AssignmentDate == today)
+                           select a).Count();
+            return tickets;
+        }
+        #endregion
+
+        #region Resolved today
+        public int ResolvedToday_Consultant()
+        {          
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            var tickets = (from a in db.Tickets
+                           where (a.Consultant.Email.Equals(user.Email) && a.ClosedDate == today)
+                           select a).Count();
+            return tickets;
+        }
+        #endregion
+
+        #region TechAverage_Consultant 
+        public decimal techAvgConsultant()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            var techAvg = db.Tickets.Where(x => x.Consultant.Email.Equals(user.Email) && !x.Status.Equals("Closed"))
+                          .Select(x=>x.Technology.Weight).Sum();
+            int backlog = ticketsInBacklogConsultant();
+            decimal tecnologyAvg = techAvg / backlog;
+            return tecnologyAvg;
         }
         #endregion
 

@@ -1,8 +1,10 @@
-﻿@model IEnumerable<Domain.Entities.Ticket>
+﻿@model PagedList.IPagedList<Domain.Entities.Ticket>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Resolved";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Styles.Render("~/Content/clearSearch")
 
 <section class="content-header">
     <h1>Resolved Incidents</h1>
@@ -15,6 +17,21 @@
             <div class="box box-danger">
                 <div class="box-header">
                     <h2 class="box-title">List of incidents resolved by me</h2>
+                    <br />
+                    <br />
+                    <div>
+                        <div class="pull-left">
+                            @using (Html.BeginForm("Resolved", "Tickets", FormMethod.Get))
+                            {
+                                <div class="input-group col-md-3" style="margin-left:-15px;">
+                                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @id = "txtSearch", @placeholder = "Search..", @type = "search" })
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                    </span>
+                                </div>
+                            }
+                        </div>
+                    </div>
                 </div>
                 <div class="box-body">
                     <table id="example1" class="table table-bordered table-hover">
@@ -60,24 +77,14 @@
                                      @Html.Raw("<a href='/Tickets/incidentClosed/" + item.Id + "' id='" + item.Id + "' title='Open Incident'>View</a>")
                                 </td>
                             </tr>
-
                         }
                     </table>
+                    <br />
+                    <div class="pull-right">
+                        @Html.PagedListPager(Model, page => Url.Action("Resolved", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-@section Scripts{
-    <script>
-    $(document).ready(function () {
-        $('#example1').DataTable({
-            "bPaginate": true,
-            "bFilter": true,
-            "bInfo": true
-        });
-    });
-    </script>
-}
-

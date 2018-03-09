@@ -8,7 +8,8 @@ using System.Globalization;
 using Persistence.Repositories;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
-
+using System;
+using PagedList;
 
 namespace UI.Controllers
 {
@@ -23,13 +24,32 @@ namespace UI.Controllers
 
         // GET: Consultants
         [Authorize(Roles ="Administrator")]
-        public ActionResult Index()
+        public ViewResult Index(string currentFilter, string searchString, int? page)
         {
             ListOfCountries();
-            var consultants = from s in consultantRepo.GetConsultants()
-                              where !s.FirstName.Contains("Unassigned")
-                              select s;
-            return View(consultants.ToList());
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var consultants = consultantRepo.GetConsultants()
+                              .Where(x => !x.FirstName.Contains("Unassigned"));
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                consultants = consultants.Where(s => s.FirstName.Contains(searchString)
+                                                || s.LastName.Contains(searchString));
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(consultants.OrderBy(x => x.FirstName).ThenBy(y=>y.LastName).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Consultants/Create

@@ -1,9 +1,10 @@
-﻿@model IEnumerable<Domain.Entities.Ticket>
-
+﻿@model PagedList.IPagedList<Domain.Entities.Ticket>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "My Tickets";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Styles.Render("~/Content/clearSearch")
 
 <section class="content-header">
     <h1>My Incidents</h1>
@@ -16,6 +17,21 @@
             <div class="box box-default">
                 <div class="box-header">
                     <h2 class="box-title">List of tickets </h2>
+                    <br />
+                    <br />
+                    <div>
+                        <div class="pull-left">
+                            @using (Html.BeginForm("Index", "Tickets", FormMethod.Get))
+                            {
+                                <div class="input-group col-md-3" style="margin-left:-15px;">
+                                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @id = "txtSearch", @placeholder = "Search..", @type = "search" })
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                    </span>
+                                </div>
+                            }
+                        </div>
+                    </div>
                 </div>
                 <div class="box-body">
                     <table id="example1" class="table table-bordered table-hover">
@@ -82,13 +98,16 @@
                                     }                                
                                 </td>
                                 <td>
-                                     @Html.Raw("<a data-modal='' href='/Tickets/Edit/" + item.Id + "' id='" + item.Id + "' class='btn btn-info' data-toggle='tooltip' title='Edit Ticket'> <span class='glyphicon glyphicon-pencil'> </span> </a>")
-                                     @*@Html.Raw("<a data-modal='' href='/Tickets/Details/" + item.Id + "' id='" + item.Id + "' class='btn btn-warning' data-toggle='tooltip' title='View Details'> <span class='glyphicon glyphicon-resize-full'> </span> </a>")*@
+                                     @Html.Raw("<a data-modal='' href='/Tickets/Edit/" + item.Id + "' id='" + item.Id + "' class='btn btn-default' data-toggle='tooltip' title='Edit Ticket'> <span class='glyphicon glyphicon-pencil'> </span> </a>")
                                      @Html.Raw("<a href='/Tickets/incidentCreated/" + item.Id + "' id='" + item.Id + "' class='btn btn-success' data-toggle='tooltip' title='View Incident'> <span class='glyphicon glyphicon-eye-open'> </span> </a>")
                                 </td>
                             </tr>
                         }
                     </table>
+                    <br />
+                    <div class="pull-right">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                    </div>
                 </div>
             </div>
         </div>
@@ -102,17 +121,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts{
-
-@Scripts.Render("~/Scripts/Modals.js")
-<script>
-    $(document).ready(function () {
-        $('#example1').DataTable({
-            "bPaginate": true,
-            "bFilter": true,
-            "bInfo": true
-        });
-    });
-</script>
-}

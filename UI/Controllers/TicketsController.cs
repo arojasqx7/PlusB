@@ -7,6 +7,8 @@ using UI.Extensions;
 using Persistence.Repositories;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using System;
+using PagedList;
 
 namespace UI.Controllers
 {
@@ -25,53 +27,139 @@ namespace UI.Controllers
 
         // GET: Tickets
         [Authorize(Roles ="Customer")]
-        public ActionResult Index()
-        { 
+        public ViewResult Index(string currentFilter, string searchString, int? page)
+        {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
             int idCustomer = int.Parse(User.Identity.GetCustomerId());
             var tickets = db.Tickets.Include(t => t.Consultant).Include(t => t.Customer).Include(t => t.Impact).Include(t => t.Severity).Include(t => t.TaskType).Include(t => t.Technology)
-                          .Where(x=>x.Id_Customer.Equals(idCustomer))
-                          .Where(y => !y.Status.Equals("Closed")); ;
-            return View(tickets.ToList());
+                          .Where(x=>x.Id_Customer.Equals(idCustomer) && !x.Status.Equals("Closed"));
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                tickets = tickets.Where(s => s.ShortDescription.Contains(searchString));
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(tickets.OrderBy(x => x.Severity.SeverityNumber).ThenBy(x => x.Date).ToPagedList(pageNumber, pageSize));
         }
 
         //Show Unassigned Tickets list 
         [Authorize(Roles = "Consultant")]
-        public ActionResult UnassignedList()
+        public ViewResult UnassignedList(string currentFilter, string searchString, int? page)
         {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
             var unassignedTickets = db.Tickets.Include(t => t.Consultant).Include(t => t.Customer).Include(t => t.Impact).Include(t => t.Severity).Include(t => t.TaskType).Include(t => t.Technology)
                                     .Where(x => x.Consultant.FirstName.Equals("Unassigned"));
-            return View(unassignedTickets.ToList());
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                unassignedTickets = unassignedTickets.Where(s => s.ShortDescription.Contains(searchString));
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(unassignedTickets.OrderBy(x => x.Severity.SeverityNumber).ThenBy(x => x.Date).ToPagedList(pageNumber, pageSize));
         }
 
         //Show List of assigned tickets (Logged consultant). 
         [Authorize(Roles = "Consultant")]
-        public ActionResult MyTickets()
+        public ViewResult MyTickets(string currentFilter, string searchString, int? page)
         {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
             int idConsultantLogged = int.Parse(User.Identity.GetConsultantId());
             var myTickets = db.Tickets.Include(t => t.Consultant).Include(t => t.Customer).Include(t => t.Impact).Include(t => t.Severity).Include(t => t.TaskType).Include(t => t.Technology)
-                                    .Where(x => x.Id_Consultant.Equals(idConsultantLogged))
-                                    .Where(y => !y.Status.Equals("Closed"));
-            return View(myTickets.ToList());
+                                    .Where(x => x.Id_Consultant.Equals(idConsultantLogged) && !x.Status.Equals("Closed"));
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                myTickets = myTickets.Where(s => s.ShortDescription.Contains(searchString));
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(myTickets.OrderBy(x => x.Severity.SeverityNumber).ThenBy(x => x.Date).ToPagedList(pageNumber, pageSize));
         }
 
         [Authorize(Roles = "Consultant")]
-        public ActionResult Resolved()
+        public ViewResult Resolved(string currentFilter, string searchString, int? page)
         {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
             int idConsultantLogged = int.Parse(User.Identity.GetConsultantId());
             var resolved = db.Tickets.Include(t => t.Consultant).Include(t => t.Customer).Include(t => t.Impact).Include(t => t.Severity).Include(t => t.TaskType).Include(t => t.Technology)
-                                    .Where(x => x.Id_Consultant.Equals(idConsultantLogged))
-                                    .Where(y => y.Status.Equals("Closed"));
-            return View(resolved.ToList());
+                                    .Where(x => x.Id_Consultant.Equals(idConsultantLogged) && x.Status.Equals("Closed"));
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                resolved = resolved.Where(s => s.ShortDescription.Contains(searchString));
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(resolved.OrderBy(x => x.Severity.SeverityNumber).ThenBy(x => x.Date).ToPagedList(pageNumber, pageSize));
         }
 
         [Authorize(Roles = "Customer")]
-        public ActionResult resolvedIncidents()
+        public ViewResult resolvedIncidents(string currentFilter, string searchString, int? page)
         {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
             int idCustomer = int.Parse(User.Identity.GetCustomerId());
             var resolved = db.Tickets.Include(t => t.Consultant).Include(t => t.Customer).Include(t => t.Impact).Include(t => t.Severity).Include(t => t.TaskType).Include(t => t.Technology)
-                                    .Where(x => x.Id_Customer.Equals(idCustomer))
-                                    .Where(y => y.Status.Equals("Closed"));
-            return View(resolved.ToList());
+                                    .Where(x => x.Id_Customer.Equals(idCustomer) && x.Status.Equals("Closed"));
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                resolved = resolved.Where(s => s.ShortDescription.Contains(searchString));
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(resolved.OrderBy(x => x.Severity.SeverityNumber).ThenBy(x => x.Date).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Tickets/Details/5
@@ -151,9 +239,13 @@ namespace UI.Controllers
         [HttpPost]
         public ActionResult AssignTicket(Ticket objTicket)
         {
+            DateTime today = DateTime.Now;
+            var shortDate = today.Date;
             int idConsultant = int.Parse(User.Identity.GetConsultantId()); // obtain id from claims
             Ticket ticket = ticketRepo.GetTicketByID(objTicket.Id); // Get all ticket details
             ticket.Id_Consultant = idConsultant; //assigning consultantID to ticket
+            ticket.AssignmentDate = shortDate;
+            ticket.AssignmentTime = today.TimeOfDay;
             ticketRepo.UpdateTicket(ticket);
             ticketRepo.Save();
            // return Json(new { success = true });
@@ -183,32 +275,73 @@ namespace UI.Controllers
             return View(ticket);
         }
 
+        //public double obtainAvgResolution()
+        //{
+        //    Ticket ticket = ticketRepo.GetTicketByID(IDTicket);
+        //    double avg = 0;
+        //    double severityWeight = 0;
+        //    double techWeight = ticket.Technology.Weight;
+        //    DateTime hourTicketOpened = ticket.Date + ticket.OpenTime;
+        //   // DateTime hourTicketClosed = ticket.ClosedDate + ticket////;
+
+        //    switch (ticket.Severity.SeverityName)
+        //    {
+        //        case "Critical":
+        //            severityWeight = 90;
+        //            break;
+        //        case "Major":
+        //            severityWeight = 70;
+        //            break;
+        //        case "Minor":
+        //            severityWeight = 40;
+        //            break;
+        //    }
+
+
+
+        //    return ;
+        //}
+
         [HttpPost]
         public ActionResult UpdateStatus(int id, string status)
         {
+            DateTime today = DateTime.Now;
+            var shortDate = today.Date;
             IDTicket = id;
             Ticket ticket = ticketRepo.GetTicketByID(id);
             ticket.Status = status;
-            ticketRepo.UpdateTicket(ticket);
-            ticketRepo.Save();
-
-            if (User.IsInRole("Consultant"))
-            {
-                var customerEmail = db.Tickets.Where(x => x.Id.Equals(IDTicket)).Select(x => x.Creator).FirstOrDefault();
-                emailToSend = customerEmail;
-                statusToSend = status;
-                SendEmail(); // send notification
-                return RedirectToAction("MyTickets", "Tickets");
-            }
-            else
-            {
-                var consultantEmail = db.Tickets.Where(x => x.Id.Equals(IDTicket)).Select(x => x.Id_Consultant).FirstOrDefault();
-                var consultant_Email = db.Consultants.Where(y => y.ID.Equals(consultantEmail)).Select(y => y.Email).FirstOrDefault();
-                emailToSend = consultant_Email;
-                statusToSend = status;
-                SendEmail(); // send notification
-                return RedirectToAction("Index", "Tickets");
-            }
+         //   ticket.AverageResolution = obtainAvgResolution();
+            if (status == "Closed")
+                {
+                    ticket.ClosedDate = shortDate;
+                 //   ticket.AverageResolution = obtainAvgResolution();
+                    ticketRepo.UpdateTicket(ticket);
+                    ticketRepo.Save();
+                }
+                else
+                {
+                    ticket.ClosedDate = null;
+                    ticketRepo.UpdateTicket(ticket);
+                    ticketRepo.Save();
+                }
+           
+                if (User.IsInRole("Consultant"))
+                {
+                    var customerEmail = db.Tickets.Where(x => x.Id.Equals(IDTicket)).Select(x => x.Creator).FirstOrDefault();
+                    emailToSend = customerEmail;
+                    statusToSend = status;
+                    SendEmail(); // send notification
+                    return RedirectToAction("MyTickets", "Tickets");
+                }
+                else
+                {
+                    var consultantEmail = db.Tickets.Where(x => x.Id.Equals(IDTicket)).Select(x => x.Id_Consultant).FirstOrDefault();
+                    var consultant_Email = db.Consultants.Where(y => y.ID.Equals(consultantEmail)).Select(y => y.Email).FirstOrDefault();
+                    emailToSend = consultant_Email;
+                    statusToSend = status;
+                    SendEmail(); // send notification
+                    return RedirectToAction("Index", "Tickets");
+                }
         }
 
         private void SendEmail()
