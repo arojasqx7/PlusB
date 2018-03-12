@@ -13,10 +13,10 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <div class="box box-success">
+            <div class="box box-default">
                 <div class="box-header">
                     <h2 class="box-title">List of Severities</h2>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default" style="float:right;" data-toggle='tooltip' title='Create'>New Severity </button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default" style="float:right;" data-toggle='tooltip' title='Create'>New Severity </button>
                 </div>
                 <div class="box-body">
                     <table id="example1" class="table table-bordered table-hover">
@@ -36,7 +36,7 @@
                                     @Html.DisplayFor(modelItem => item.SeverityNumber)
                                 </td>
                                 <td>
-                                    @Html.Raw("<a data-modal='' href='/Severities/Edit/" + item.Id + "' id='" + item.Id + "' class='btn btn-info' data-toggle='tooltip' title='Edit'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                                    @Html.Raw("<a data-modal='' href='/Severities/Edit/" + item.Id + "' id='" + item.Id + "' class='btn btn-default' data-toggle='tooltip' title='Edit'> <span class='glyphicon glyphicon-edit'> </span> </a>")
                                     @Html.Raw("<a data-modal='' href='/Severities/Delete/" + item.Id + "' id='" + item.Id + "' class='btn btn-danger' data-toggle='tooltip' title='Delete'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                                 </td>
                             </tr>

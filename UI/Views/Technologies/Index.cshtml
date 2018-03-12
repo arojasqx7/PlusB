@@ -15,13 +15,13 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <div class="box box-danger">
+            <div class="box box-default">
                 <div class="box-header">
                     <h2 class="box-title">List of technologies </h2>
                     <br />
                     <br />
                     <div>
-                        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modal-default" data-toggle='tooltip' title='Create'>
+                        <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-default" data-toggle='tooltip' title='Create'>
                             <span class="glyphicon glyphicon-plus"></span>  New Technology
                         </button>
 
@@ -60,7 +60,7 @@
                                     @Html.DisplayFor(modelItem => item.Weight)
                                 </td>
                                 <td>
-                                    @Html.Raw("<a data-modal='' href='/Technologies/Edit/" + item.ID + "' id='" + item.ID + "' class='btn btn-info' data-toggle='tooltip' title='Edit'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                                    @Html.Raw("<a data-modal='' href='/Technologies/Edit/" + item.ID + "' id='" + item.ID + "' class='btn btn-default' data-toggle='tooltip' title='Edit'> <span class='glyphicon glyphicon-edit'> </span> </a>")
                                     @Html.Raw("<a data-modal='' href='/Technologies/Delete/" + item.ID + "' id='" + item.ID + "' class='btn btn-danger' data-toggle='tooltip' title='Delete'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                                 </td>
                             </tr>

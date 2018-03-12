@@ -30,5 +30,6 @@ namespace Domain.Entities
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime InitialDate { get; set; }
+
     }
 }

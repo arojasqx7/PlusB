@@ -62,7 +62,12 @@ namespace UI.Controllers
                 Status = model.Status,
                 Id_Consultant = model.Id_Consultant,
                 Creator = user.Email,
-                ClosedDate = null
+                ClosedDate = null,
+                AssignmentDate = null,
+                AverageResolution=null,
+                AssignmentTime=null,
+                ClosedTime=null,
+                TotalResolutionHours=null
             };
 
             using (var context = new PlusBContext())

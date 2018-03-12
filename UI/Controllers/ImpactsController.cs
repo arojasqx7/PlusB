@@ -6,6 +6,7 @@ using Domain.DAL;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using log4net;
+using UI.toastr;
 
 namespace UI.Controllers
 {
@@ -45,6 +46,7 @@ namespace UI.Controllers
                 {
                     impactRepo.InsertImpact(impact);
                     impactRepo.Save();
+                    this.AddToastMessage("Impacts", "Impact created successfully!", ToastType.Success);
                     return RedirectToAction("Index");
                 }
                 catch (DbUpdateException sqlExc)
@@ -53,7 +55,7 @@ namespace UI.Controllers
                         if (sqlException != null)
                         {
                             logger.Error(sqlExc.ToString());
-                            ViewBag.Message = "Record already exists.";
+                            this.AddToastMessage("Impacts", "This impact already exists, please verify.", ToastType.Error);
                         }
                         else
                         {
@@ -83,6 +85,7 @@ namespace UI.Controllers
                 {
                     impactRepo.UpdateImpact(impact);
                     impactRepo.Save();
+                    this.AddToastMessage("Impacts", "Impact edited successfully!", ToastType.Success);
                     return Json(new { success = true });
                 }
                 catch (DbUpdateException sqlExc)
@@ -91,7 +94,7 @@ namespace UI.Controllers
                     if (sqlException != null)
                     {
                         logger.Error(sqlExc.ToString());
-                        ViewBag.Message = "Record already exists.";
+                        this.AddToastMessage("Impacts", "This impact already exists, please verify.", ToastType.Error);
                     }
                     else
                     {
@@ -122,6 +125,7 @@ namespace UI.Controllers
             Impact impact = impactRepo.GetImpactByID(id);
             impactRepo.DeleteImpact(id);
             impactRepo.Save();
+            this.AddToastMessage("Impacts", "Impact has been deleted.", ToastType.Success);
             return Json(new { success = true });
         }
 

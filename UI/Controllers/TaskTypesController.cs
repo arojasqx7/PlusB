@@ -6,6 +6,7 @@ using Persistence.Repositories;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using log4net;
+using UI.toastr;
 
 namespace UI.Controllers
 {
@@ -45,6 +46,7 @@ namespace UI.Controllers
                 {
                     taskRepo.InsertTaskType(taskType);
                     taskRepo.Save();
+                    this.AddToastMessage("Task Type", "Task created successfully!", ToastType.Success);
                     return RedirectToAction("Index");
                 }
                 catch (DbUpdateException sqlExc)
@@ -53,7 +55,7 @@ namespace UI.Controllers
                     if (sqlException != null)
                     {
                         logger.Error(sqlExc.ToString());
-                        ViewBag.Message = "Record already exists.";
+                        this.AddToastMessage("Task Type", "This task already exists, please verify.", ToastType.Error);
                     }
                     else
                     {
@@ -83,6 +85,7 @@ namespace UI.Controllers
                 {
                     taskRepo.UpdateTaskType(taskType);
                     taskRepo.Save();
+                    this.AddToastMessage("Task Type", "Task edited successfully!", ToastType.Success);
                     return Json(new { success = true });
                 }
                 catch (DbUpdateException sqlExc)
@@ -91,7 +94,7 @@ namespace UI.Controllers
                     if (sqlException != null)
                     {
                         logger.Error(sqlExc.ToString());
-                        ViewBag.Message = "Record already exists.";
+                        this.AddToastMessage("Task Type", "This task already exists, please verify.", ToastType.Error);
                     }
                     else
                     {
@@ -122,6 +125,7 @@ namespace UI.Controllers
             TaskType taskType = taskRepo.GetTaskTypeByID(id);
             taskRepo.DeleteTaskType(id);
             taskRepo.Save();
+            this.AddToastMessage("Task Type", "Task has been deleted.", ToastType.Success);
             return Json(new { success = true });
         }
 

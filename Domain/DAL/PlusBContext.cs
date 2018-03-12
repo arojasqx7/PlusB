@@ -18,6 +18,11 @@ namespace Domain.DAL
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
         public DbSet<TicketActivity> TicketActivities { get; set; }
+        public DbSet<SLA> SLAS { get; set; }
+        public DbSet<KnowledgeBase> KnowledgeBases { get; set; }
+        public DbSet<KPI> KPIS { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
+        public DbSet<CustomerSLA> CustomerSLAS { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
