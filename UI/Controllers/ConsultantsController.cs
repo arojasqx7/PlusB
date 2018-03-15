@@ -61,7 +61,7 @@ namespace UI.Controllers
         // POST: Consultants/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,DateOfBirth,IdNumber,Gender,Email,Pais,Address,PhoneNumber,JobTitle,HireDate")] Consultant consultant)
+        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,DateOfBirth,IdNumber,Gender,Email,Pais,Address,PhoneNumber,JobTitle,Education,HireDate")] Consultant consultant)
         {
 
             // Create user
@@ -110,7 +110,7 @@ namespace UI.Controllers
         // POST: Consultants/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,DateOfBirth,IdNumber,Gender,Email,Pais,Address,PhoneNumber,JobTitle,HireDate")] Consultant consultant)
+        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,DateOfBirth,IdNumber,Gender,Email,Pais,Address,PhoneNumber,JobTitle,Education,HireDate")] Consultant consultant)
         {
             ListOfCountries();
                 if (ModelState.IsValid)

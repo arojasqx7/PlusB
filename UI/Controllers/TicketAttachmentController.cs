@@ -12,6 +12,7 @@ using System.IO;
 using Microsoft.AspNet.Identity;
 using log4net;
 using Microsoft.AspNet.Identity.Owin;
+using UI.toastr;
 
 namespace UI.Controllers
 {
@@ -74,6 +75,7 @@ namespace UI.Controllers
             {
                 context.Tickets.Add(ticketDetails);
                 context.SaveChanges();
+                this.AddToastMessage("Incident", "Incident created successfully.", ToastType.Success);
             }
 
             try

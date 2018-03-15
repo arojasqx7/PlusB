@@ -278,6 +278,7 @@
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="Images\empty-icon.png" />
+    <Content Include="Images\noprofile.png" />
     <Content Include="Images\PBlog2.png" />
     <Content Include="Scripts\bootstrap-datepicker\dist\css\bootstrap-datepicker.css" />
     <Content Include="Content\datepicker\bootstrap-datepicker.min.css" />

@@ -316,6 +316,20 @@
 
                         <li class="treeview">
                             <a href="#">
+                                <i class="fa fa-eye"></i> <span>Incident Monitor</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-left"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="@Url.Action("","")"><i class="fa fa-plus-square"></i>New Incident</a></li>
+                                <li><a href="@Url.Action("","")"><i class="fa fa-bars"></i>View Unassigned</a></li>
+                                <li><a href="@Url.Action("","")"><i class="fa fa-check"></i>View Resolved</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="treeview">
+                            <a href="#">
                                 <i class="fa fa-edit"></i> <span>Incident Management</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-left"></i>
@@ -355,7 +369,6 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="@Url.Action("","")"><i class="fa fa-level-up"></i>Performance Evaluation</a></li>
-                                <li><a href="@Url.Action("","")"><i class="fa fa-gears"></i>Incidents by Consultant</a></li>
                             </ul>
                         </li>
                      }

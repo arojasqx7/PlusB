@@ -15,5 +15,9 @@ namespace Domain.Entities
         public string Objective { get; set; }
 
         public double FormulaValue { get; set; }
+
+        public int IdConsultant { get; set; }
+
+        public virtual Consultant Consultant { get;set;}
     }
 }

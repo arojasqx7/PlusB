@@ -138,6 +138,14 @@
     <Compile Include="Migrations\201803122238464_AllNewEntities.Designer.cs">
       <DependentUpon>201803122238464_AllNewEntities.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803130404016_Consultant-KPI-Relation.cs" />
+    <Compile Include="Migrations\201803130404016_Consultant-KPI-Relation.Designer.cs">
+      <DependentUpon>201803130404016_Consultant-KPI-Relation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803150628494_AddEducationToConsultant.cs" />
+    <Compile Include="Migrations\201803150628494_AddEducationToConsultant.Designer.cs">
+      <DependentUpon>201803150628494_AddEducationToConsultant.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -199,6 +207,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803122238464_AllNewEntities.resx">
       <DependentUpon>201803122238464_AllNewEntities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803130404016_Consultant-KPI-Relation.resx">
+      <DependentUpon>201803130404016_Consultant-KPI-Relation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803150628494_AddEducationToConsultant.resx">
+      <DependentUpon>201803150628494_AddEducationToConsultant.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

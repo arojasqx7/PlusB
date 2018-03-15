@@ -10,6 +10,7 @@ using System;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UI.toastr;
 
 namespace UI.Controllers
 {
@@ -63,6 +64,7 @@ namespace UI.Controllers
                 {
                     context.TicketActivities.Add(ticketActivity);
                     context.SaveChanges();
+                    this.AddToastMessage("Incident", "Activity added to the incident number " + ticketActivity.idTicket, ToastType.Success);
                 }
 
                 if (User.IsInRole("Consultant"))

@@ -59,6 +59,7 @@ namespace UI.Controllers
                 Address = model.Address,
                 PhoneNumber = model.PhoneNumber,
                 JobTitle = model.JobTitle,
+                Education = model.Education,
                 HireDate = model.HireDate
             };
             using (var context = new PlusBContext())

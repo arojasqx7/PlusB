@@ -10,6 +10,7 @@ using SendGrid.Helpers.Mail;
 using System;
 using PagedList;
 using log4net;
+using UI.toastr;
 
 namespace UI.Controllers
 {
@@ -253,8 +254,8 @@ namespace UI.Controllers
             ticket.AssignmentTime = currentHour;
             ticketRepo.UpdateTicket(ticket);
             ticketRepo.Save();
-           // return Json(new { success = true });
-            return RedirectToAction("MyTickets");
+            this.AddToastMessage("Incidents", "Incident # " + ticket.Id + " assigned to me!", ToastType.Success);
+            return RedirectToAction("MyTickets", "Tickets");
         }
 
         // GET
@@ -334,28 +335,38 @@ namespace UI.Controllers
             ticket.Status = status;
 
             if (status == "Closed")
+            {
+                try
                 {
-                    try
-                    { 
-                        ticket.ClosedDate = shortDate;
-                        ticket.ClosedTime = currentCloseHour;
-                        ticket.AverageResolution = obtainAvgResolution();
-                        ticket.TotalResolutionHours = hoursResult;
-                        ticketRepo.UpdateTicket(ticket);
-                        ticketRepo.Save();
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.Error(ex.ToString());
-                    }
+                    ticket.ClosedDate = shortDate;
+                    ticket.ClosedTime = currentCloseHour;
+                    ticket.AverageResolution = obtainAvgResolution();
+                    ticket.TotalResolutionHours = hoursResult;
+                    ticketRepo.UpdateTicket(ticket);
+                    ticketRepo.Save();
+                    this.AddToastMessage("Incidents", "Incident number " + ticket.Id + " updated to " + ticket.Status, ToastType.Success);
                 }
-                else
+                catch (Exception ex)
+                {
+                    logger.Error(ex.ToString());
+                }
+            }
+            else
+            {
+                try
                 {
                     ticket.ClosedDate = null;
                     ticketRepo.UpdateTicket(ticket);
                     ticketRepo.Save();
+                    this.AddToastMessage("Incidents", "Incident number " + ticket.Id + " updated to " + ticket.Status, ToastType.Success);
                 }
+                catch (Exception ex)
+                {
+                    logger.Error(ex.ToString());
+                }
+            }
            
+                //return to proper page according to role
                 if (User.IsInRole("Consultant"))
                 {
                     var customerEmail = db.Tickets.Where(x => x.Id.Equals(IDTicket)).Select(x => x.Creator).FirstOrDefault();
