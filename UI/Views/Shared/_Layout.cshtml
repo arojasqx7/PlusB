@@ -15,6 +15,7 @@
         @Styles.Render("~/Content/wysihtml5")
         @Styles.Render("~/Content/datatables.net-bs")
         @Styles.Render("~/Content/pagedList")
+        @Styles.Render("~/Content/toastr")
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
@@ -292,20 +293,7 @@
             <section class="sidebar">
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    @*<li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-                        </ul>
-                    </li>*@
-
-                    @if (User.IsInRole("Administrator"))
+                     @if (User.IsInRole("Administrator"))
                     {
                         <li>
                             <a href="@Url.Action("adminDashboard","Dashboard")">
@@ -323,6 +311,20 @@
                             <ul class="treeview-menu">
                                 <li><a href="@Url.Action("Index","Admin")"><i class="fa fa-users"></i> Users</a></li>
                                 <li><a href="@Url.Action("ViewAllRoles","Admin")"><i class="fa fa-tasks"></i> Roles</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-eye"></i> <span>Incident Monitor</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-left"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="@Url.Action("","")"><i class="fa fa-plus-square"></i>New Incident</a></li>
+                                <li><a href="@Url.Action("","")"><i class="fa fa-bars"></i>View Unassigned</a></li>
+                                <li><a href="@Url.Action("","")"><i class="fa fa-check"></i>View Resolved</a></li>
                             </ul>
                         </li>
 
@@ -357,10 +359,22 @@
                                 <i class="fa fa-user-plus"></i> <span>Consultants</span>
                             </a>
                         </li>
-                    }
 
-                    else if (User.IsInRole("Consultant"))
-                    {
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-line-chart"></i> <span>Metrics</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-left"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="@Url.Action("","")"><i class="fa fa-level-up"></i>Performance Evaluation</a></li>
+                            </ul>
+                        </li>
+                     }
+
+                     else if (User.IsInRole("Consultant"))
+                     {
                         <li>
                             <a href="@Url.Action("consultantDashboard","Dashboard")">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -694,6 +708,8 @@
     <!-- ./wrapper -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/bundles/toastr")
+    @Html.Partial("_Toastr")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/morris")
     @Scripts.Render("~/bundles/raphael")
@@ -710,6 +726,5 @@
     @Scripts.Render("~/bundles/datatables")
     <script>$.widget.bridge('uibutton', $.ui.button);</script>
     @RenderSection("scripts", required: false)
-
 </body>
 </html>

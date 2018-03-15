@@ -33,6 +33,8 @@ namespace UI.Models
 
         public string JobTitle { get; set; }
 
+        public string Education { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime HireDate { get; set; }
 

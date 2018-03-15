@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using log4net;
+using UI.toastr;
 
 namespace UI.Controllers
 {
@@ -47,6 +48,7 @@ namespace UI.Controllers
                 {
                     severityRepo.InsertSeverity(severity);
                     severityRepo.Save();
+                    this.AddToastMessage("Severities", "Severity created successfully!", ToastType.Success);
                     return RedirectToAction("Index");
                 }
                 catch (DbUpdateException sqlExc)
@@ -55,7 +57,7 @@ namespace UI.Controllers
                     if (sqlException != null)
                     {
                         logger.Error(sqlExc.ToString());
-                        ViewBag.Message = "Record already exists.";
+                        this.AddToastMessage("Severities", "This severity already exists, please verify.", ToastType.Error);
                     }
                     else
                     {
@@ -85,6 +87,7 @@ namespace UI.Controllers
                 {
                     severityRepo.UpdateSeverity(severity);
                     severityRepo.Save();
+                    this.AddToastMessage("Severities", "Severity edited successfully!", ToastType.Success);
                     return Json(new { success = true });
                 }
                 catch (DbUpdateException sqlExc)
@@ -93,6 +96,7 @@ namespace UI.Controllers
                     if (sqlException != null)
                     {
                         logger.Error(sqlExc.ToString());
+                        this.AddToastMessage("Severities", "This severity already exists, please verify.", ToastType.Error);
                         ViewBag.Message = "Record already exists.";
                     }
                     else
@@ -124,6 +128,7 @@ namespace UI.Controllers
             Severity severity = severityRepo.GetSeverityByID(id);
             severityRepo.DeleteSeverity(id);
             severityRepo.Save();
+            this.AddToastMessage("Severities", "Severity has been deleted.", ToastType.Success);
             return Json(new { success = true });
         }
 

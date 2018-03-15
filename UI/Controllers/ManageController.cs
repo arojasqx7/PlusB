@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -7,6 +6,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using UI.Models;
+using UI.toastr;
+using UI.Extensions;
+using Domain.DAL;
+using Persistence.Repositories;
 
 namespace UI.Controllers
 {
@@ -15,6 +18,8 @@ namespace UI.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private PlusBContext db = new PlusBContext();
+        private IConsultantsRepository consultantRepo;
 
         public ManageController()
         {
@@ -215,8 +220,30 @@ namespace UI.Controllers
 
         //
         // GET: /Manage/ChangePassword
+        [Authorize]
         public ActionResult ChangePassword()
         {
+            if (User.IsInRole("Consultant"))
+            {
+                int idConsultantLogged = int.Parse(User.Identity.GetConsultantId());
+                string usernameLogged = User.Identity.GetUserName();
+                var consultantInfo = from x in db.Consultants
+                                     where x.ID.Equals(idConsultantLogged)
+                                     select x;
+
+                //Get User ticket activity...
+                var ticketActivity = db.TicketActivities.Where(x=>x.User.Equals(usernameLogged)).OrderByDescending(x=>x.Date).ThenByDescending(x=>x.Time).Take(5);
+                    
+                ViewBag.data = consultantInfo;
+                ViewBag.activityData = ticketActivity;
+            }
+            else if (User.IsInRole("Administrator"))
+            {
+                var adminInfo =      from x in db.Consultants
+                                     where x.FirstName.Equals("Unassigned")
+                                     select x;
+                ViewBag.data = adminInfo;
+            }
             return View();
         }
 
@@ -227,7 +254,7 @@ namespace UI.Controllers
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
-            {
+            {          
                 return View(model);
             }
             var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
@@ -238,7 +265,8 @@ namespace UI.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                this.AddToastMessage("Update Password", "New password updated successfully.", ToastType.Success);
+                return RedirectToAction("ChangePassword", "Manage");
             }
             AddErrors(result);
             return View(model);

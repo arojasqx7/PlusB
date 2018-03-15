@@ -9,16 +9,20 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
 using PagedList;
+using log4net;
+using UI.toastr;
 
 namespace UI.Controllers
 {
     public class TicketsController : Controller
     {
+        ILog logger = LogManager.GetLogger(typeof(TicketsController));
         private PlusBContext db = new PlusBContext();
         private ITicketsRepository ticketRepo;
         private static int IDTicket;
         private static string emailToSend;
         private static string statusToSend;
+        private static double hoursResult;
 
         public TicketsController()
         {
@@ -240,16 +244,18 @@ namespace UI.Controllers
         public ActionResult AssignTicket(Ticket objTicket)
         {
             DateTime today = DateTime.Now;
+            TimeSpan currentHour = TimeSpan.Parse(today.ToString("HH:mm:ss tt"));
             var shortDate = today.Date;
             int idConsultant = int.Parse(User.Identity.GetConsultantId()); // obtain id from claims
+
             Ticket ticket = ticketRepo.GetTicketByID(objTicket.Id); // Get all ticket details
             ticket.Id_Consultant = idConsultant; //assigning consultantID to ticket
             ticket.AssignmentDate = shortDate;
-            ticket.AssignmentTime = today.TimeOfDay;
+            ticket.AssignmentTime = currentHour;
             ticketRepo.UpdateTicket(ticket);
             ticketRepo.Save();
-           // return Json(new { success = true });
-            return RedirectToAction("MyTickets");
+            this.AddToastMessage("Incidents", "Incident # " + ticket.Id + " assigned to me!", ToastType.Success);
+            return RedirectToAction("MyTickets", "Tickets");
         }
 
         // GET
@@ -275,56 +281,92 @@ namespace UI.Controllers
             return View(ticket);
         }
 
-        //public double obtainAvgResolution()
-        //{
-        //    Ticket ticket = ticketRepo.GetTicketByID(IDTicket);
-        //    double avg = 0;
-        //    double severityWeight = 0;
-        //    double techWeight = ticket.Technology.Weight;
-        //    DateTime hourTicketOpened = ticket.Date + ticket.OpenTime;
-        //   // DateTime hourTicketClosed = ticket.ClosedDate + ticket////;
+        /// <summary>
+        /// This function calculates the Average Resolution percentage for the ticket which is being CLOSED. 
+        /// </summary>
 
-        //    switch (ticket.Severity.SeverityName)
-        //    {
-        //        case "Critical":
-        //            severityWeight = 90;
-        //            break;
-        //        case "Major":
-        //            severityWeight = 70;
-        //            break;
-        //        case "Minor":
-        //            severityWeight = 40;
-        //            break;
-        //    }
+       public double obtainAvgResolution()
+        {
+            Ticket ticket = ticketRepo.GetTicketByID(IDTicket);
+            double resolutionAvg =0;
+            double severityWeight;
+            double techWeight = ticket.Technology.Weight;
+            DateTime  hourTicketOpened =  ticket.Date + ticket.OpenTime;
+            DateTime?  hourTicketClosed =  ticket.ClosedDate + ticket.ClosedTime;
+            
+            //sustract times 
+            TimeSpan hoursDiff = Convert.ToDateTime(hourTicketClosed).Subtract(hourTicketOpened);
+            hoursResult = hoursDiff.TotalHours;
 
+            switch (ticket.Severity.SeverityName)
+            {
+                case "Critical":
+                    severityWeight = 90;
+                    resolutionAvg = severityWeight + hoursResult + techWeight;
+                    break;
 
+                case "Major":
+                    severityWeight = 70;
+                    resolutionAvg = severityWeight + hoursResult + techWeight;
+                    break;
 
-        //    return ;
-        //}
+                case "Minor":
+                    severityWeight = 40;
+                    resolutionAvg = severityWeight + hoursResult + techWeight;
+                    break;
+            }
+
+            return resolutionAvg;
+        }
+
+        /// <summary>
+        /// This method assign the closed date & time, Avg resolution 
+        /// Also updates the ticket status and call SendMail() function. 
+        /// </summary>
 
         [HttpPost]
         public ActionResult UpdateStatus(int id, string status)
         {
             DateTime today = DateTime.Now;
+            TimeSpan currentCloseHour = TimeSpan.Parse(today.ToString("HH:mm:ss tt"));
             var shortDate = today.Date;
             IDTicket = id;
             Ticket ticket = ticketRepo.GetTicketByID(id);
             ticket.Status = status;
-         //   ticket.AverageResolution = obtainAvgResolution();
+
             if (status == "Closed")
+            {
+                try
                 {
                     ticket.ClosedDate = shortDate;
-                 //   ticket.AverageResolution = obtainAvgResolution();
+                    ticket.ClosedTime = currentCloseHour;
+                    ticket.AverageResolution = obtainAvgResolution();
+                    ticket.TotalResolutionHours = hoursResult;
                     ticketRepo.UpdateTicket(ticket);
                     ticketRepo.Save();
+                    this.AddToastMessage("Incidents", "Incident number " + ticket.Id + " updated to " + ticket.Status, ToastType.Success);
                 }
-                else
+                catch (Exception ex)
+                {
+                    logger.Error(ex.ToString());
+                }
+            }
+            else
+            {
+                try
                 {
                     ticket.ClosedDate = null;
                     ticketRepo.UpdateTicket(ticket);
                     ticketRepo.Save();
+                    this.AddToastMessage("Incidents", "Incident number " + ticket.Id + " updated to " + ticket.Status, ToastType.Success);
                 }
+                catch (Exception ex)
+                {
+                    logger.Error(ex.ToString());
+                }
+            }
            
+                //return to proper page according to role
                 if (User.IsInRole("Consultant"))
                 {
                     var customerEmail = db.Tickets.Where(x => x.Id.Equals(IDTicket)).Select(x => x.Creator).FirstOrDefault();
@@ -352,8 +394,8 @@ namespace UI.Controllers
             var subject = "Status update Incident #  " + IDTicket;
             var to = new EmailAddress(emailToSend, "Customer");
             var plainTextContent = "Incident Status update";
-            var htmlContent = "<p>The incident status was changed to </p><br/>" +
-                                statusToSend;
+            var htmlContent = "<h1 class='text-center'>The incident status was changed to " + statusToSend + "</h1 >";
+
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             var response = client.SendEmailAsync(msg);
         }

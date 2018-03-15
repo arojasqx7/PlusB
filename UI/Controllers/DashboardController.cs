@@ -1,8 +1,8 @@
 ﻿using Domain.DAL;
+using log4net;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +13,7 @@ namespace UI.Controllers
     {
     private PlusBContext db = new PlusBContext();
     private ApplicationUserManager _userManager;
+    ILog logger = LogManager.GetLogger(typeof(TicketAttachmentController));
     DateTime today = Convert.ToDateTime(DateTime.Today.ToShortDateString());
 
     [Authorize(Roles = "Administrator")]
@@ -137,12 +138,22 @@ namespace UI.Controllers
         #region TechAverage_Consultant 
         public decimal techAvgConsultant()
         {
-            var user = UserManager.FindById(User.Identity.GetUserId());
-            var techAvg = db.Tickets.Where(x => x.Consultant.Email.Equals(user.Email) && !x.Status.Equals("Closed"))
-                          .Select(x=>x.Technology.Weight).Sum();
-            int backlog = ticketsInBacklogConsultant();
-            decimal tecnologyAvg = techAvg / backlog;
-            return tecnologyAvg;
+            decimal tecnologyAvg;
+            try
+            { 
+                var user = UserManager.FindById(User.Identity.GetUserId());
+                var techAvg = db.Tickets.Where(x => x.Consultant.Email.Equals(user.Email) && !x.Status.Equals("Closed"))
+                              .Select(x=>x.Technology.Weight).Sum();
+                int backlog = ticketsInBacklogConsultant();
+                tecnologyAvg = techAvg / backlog;
+                return tecnologyAvg;
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return tecnologyAvg = 0;
+            }
+
         }
         #endregion
 

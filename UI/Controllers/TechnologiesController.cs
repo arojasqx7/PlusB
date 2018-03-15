@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using log4net;
 using PagedList;
 using System;
+using UI.toastr;
 
 namespace UI.Controllers
 {
@@ -59,7 +60,6 @@ namespace UI.Controllers
             return PartialView();
         }
 
-
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Description,Weight")] Technology technology)
@@ -70,6 +70,7 @@ namespace UI.Controllers
                 {
                     technologyRepo.InsertTechnology(technology);
                     technologyRepo.Save();
+                    this.AddToastMessage("Technologies", "Technology created successfully!", ToastType.Success);
                     return RedirectToAction("Index");
                 }
                 catch (DbUpdateException sqlExc)
@@ -78,7 +79,7 @@ namespace UI.Controllers
                     if (sqlException != null)
                     {
                         logger.Error(sqlExc.ToString());
-                        ViewBag.Message = "Record already exists.";
+                        this.AddToastMessage("Technologies", "Technology already exists, please verify.", ToastType.Error);
                     }
                     else
                     {
@@ -107,6 +108,7 @@ namespace UI.Controllers
                 {
                     technologyRepo.UpdateTechnology(technology);
                     technologyRepo.Save();
+                    this.AddToastMessage("Technology", "Technology edited successfully", ToastType.Success);
                     return Json(new { success = true });
                 }
                 catch (DbUpdateException sqlExc)
@@ -115,7 +117,7 @@ namespace UI.Controllers
                     if (sqlException != null)
                     {
                         logger.Error(sqlExc.ToString());
-                        ViewBag.Message = "Record already exists.";
+                        this.AddToastMessage("Technologies", "Technology already exists, please verify.", ToastType.Error);
                     }
                     else
                     {
@@ -145,8 +147,10 @@ namespace UI.Controllers
             Technology technology = technologyRepo.GetTechnologyByID(id);
             technologyRepo.DeleteTechnology(id);
             technologyRepo.Save();
+            this.AddToastMessage("Technologies", "Technology has been deleted.", ToastType.Success);
             return Json(new { success = true });
         }
+
 
         protected override void Dispose(bool disposing)
         {

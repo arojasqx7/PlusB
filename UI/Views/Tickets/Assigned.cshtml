@@ -81,7 +81,7 @@
                             <strong>Description:</strong>  <span class="txtHover"> @Html.DisplayFor(model => model.LongDescription)</span>  
                     </div>
                         <div class="col-md-6">
-                            <strong>Assignment Date:</strong> <span class="txtHover"> @Html.DisplayFor(model => model.AssignmentDate)</span>
+                            <strong>Assignment Date:</strong> <span class="txtHover"> @Html.DisplayFor(model => model.AssignmentDate)  @Html.DisplayFor(model => model.AssignmentTime)</span>
                             <br />
                             <strong>Severity:</strong> <span class="txtHover"> @Html.DisplayFor(model => model.Severity.SeverityName)</span>
                             <br />
@@ -126,11 +126,6 @@
 @section Scripts{
     <script>
     $(document).ready(function () {
-        $('#example1').DataTable({
-            "bPaginate": true,
-            "bFilter": true,
-            "bInfo": true
-        });
         $("#txtActivity").focus();
     });
 

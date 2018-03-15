@@ -12,6 +12,7 @@ using System.IO;
 using Microsoft.AspNet.Identity;
 using log4net;
 using Microsoft.AspNet.Identity.Owin;
+using UI.toastr;
 
 namespace UI.Controllers
 {
@@ -62,13 +63,19 @@ namespace UI.Controllers
                 Status = model.Status,
                 Id_Consultant = model.Id_Consultant,
                 Creator = user.Email,
-                ClosedDate = null
+                ClosedDate = null,
+                AssignmentDate = null,
+                AverageResolution=null,
+                AssignmentTime=null,
+                ClosedTime=null,
+                TotalResolutionHours=null
             };
 
             using (var context = new PlusBContext())
             {
                 context.Tickets.Add(ticketDetails);
                 context.SaveChanges();
+                this.AddToastMessage("Incident", "Incident created successfully.", ToastType.Success);
             }
 
             try

@@ -10,10 +10,10 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <div class="box box-success">
+            <div class="box box-default">
                 <div class="box-header">
                     <h2 class="box-title">List of consultants </h2>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default" style="float:right;" data-toggle='tooltip' title='Create'>New Consultant</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default" style="float:right;" data-toggle='tooltip' title='Create'>New Consultant</button>
                 </div>
                 <div class="box-body">
                     <table id="example1" class="table table-bordered table-hover">
@@ -60,7 +60,7 @@
                                     @Html.DisplayFor(modelItem => item.JobTitle)
                                 </td>
                                 <td>
-                                    @Html.Raw("<a data-modal='' href='/Consultants/Edit/" + item.ID + "' id='" + item.ID + "' class='btn btn-info' data-toggle='tooltip' title='Edit'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                                    @Html.Raw("<a data-modal='' href='/Consultants/Edit/" + item.ID + "' id='" + item.ID + "' class='btn btn-default' data-toggle='tooltip' title='Edit'> <span class='glyphicon glyphicon-edit'> </span> </a>")
                                     @Html.Raw("<a data-modal='' href='/Consultants/Delete/" + item.ID + "' id='" + item.ID + "' class='btn btn-danger' data-toggle='tooltip' title='Delete'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                                 </td>
                             </tr>

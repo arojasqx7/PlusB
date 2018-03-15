@@ -1,0 +1,36 @@
+﻿@using UI.toastr
+@helper ShowToastMessages(Toastr toastr)
+{
+if (toastr != null)
+{
+        <script>
+      $(document).ready(function () {
+        toastr.options = {
+              "closeButton": true,
+              "positionClass": "toast-bottom-right",
+              "preventDuplicates": false,
+              "showDuration": "8000",
+              "hideDuration": "8000",
+              "timeOut": "5000",
+              "extendedTimeOut": "2500",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+            }
+
+        @foreach (ToastMessage message in toastr.ToastMessages)
+        {
+          string toastTypeValue = message.ToastType.ToString("F").ToLower();
+          @: var optionsOverride = { /* Add message specific options here */ };
+          if (message.IsSticky)
+          {
+            @:optionsOverride.timeOut = 0;
+            @:optionsOverride.extendedTimeout = 0;
+          }
+          @:toastr['@toastTypeValue']('@message.Message', '@message.Title', optionsOverride);
+        }
+      });
+        </script>
+}
+}

@@ -72,6 +72,9 @@ namespace UI
             bundles.Add(new ScriptBundle("~/bundles/chart.js").Include(
                        "~/Scripts/Chart.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/toastr").Include(
+                      "~/Scripts/toastr.js"));
+
             //***************Start of CSS Bundles*************************
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
@@ -124,6 +127,9 @@ namespace UI
 
             bundles.Add(new StyleBundle("~/Content/clearSearch").Include(
                     "~/Content/clearTextbox.css"));
+
+            bundles.Add(new StyleBundle("~/content/toastr").Include(
+                    "~/Content/toastr.css"));
         }
     }
 }

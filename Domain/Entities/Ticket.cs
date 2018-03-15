@@ -56,7 +56,11 @@ namespace Domain.Entities
 
         public TimeSpan? ClosedTime { get; set; }
 
-        public decimal? AverageResolution { get; set; }
+        public double? AverageResolution { get; set; }
+
+        public double? TotalResolutionHours { get; set; }
+
+        public int AutoAssigned { get; set; }
 
         public virtual Technology Technology { get; set; }
         public virtual Severity Severity { get; set; }
