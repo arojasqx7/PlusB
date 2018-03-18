@@ -66,85 +66,9 @@
     <Compile Include="Entities\Ticket.cs" />
     <Compile Include="Entities\TicketActivity.cs" />
     <Compile Include="Entities\TicketAttachmentModel.cs" />
-    <Compile Include="Migrations\201710092059345_InitialCreate.cs" />
-    <Compile Include="Migrations\201710092059345_InitialCreate.Designer.cs">
-      <DependentUpon>201710092059345_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710222227444_mig2.cs" />
-    <Compile Include="Migrations\201710222227444_mig2.Designer.cs">
-      <DependentUpon>201710222227444_mig2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711292017148_Add-Customer-Info.cs" />
-    <Compile Include="Migrations\201711292017148_Add-Customer-Info.Designer.cs">
-      <DependentUpon>201711292017148_Add-Customer-Info.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711300604327_Add-New-Ticket-Entities.cs" />
-    <Compile Include="Migrations\201711300604327_Add-New-Ticket-Entities.Designer.cs">
-      <DependentUpon>201711300604327_Add-New-Ticket-Entities.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712072322433_Add-Unique-Ids3.cs" />
-    <Compile Include="Migrations\201712072322433_Add-Unique-Ids3.Designer.cs">
-      <DependentUpon>201712072322433_Add-Unique-Ids3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712082145065_Add-Ticket-Entity.cs" />
-    <Compile Include="Migrations\201712082145065_Add-Ticket-Entity.Designer.cs">
-      <DependentUpon>201712082145065_Add-Ticket-Entity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712140026436_Add-OpenTime-toTickets.cs" />
-    <Compile Include="Migrations\201712140026436_Add-OpenTime-toTickets.Designer.cs">
-      <DependentUpon>201712140026436_Add-OpenTime-toTickets.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802151914012_Add-Unique-CustomerName.cs" />
-    <Compile Include="Migrations\201802151914012_Add-Unique-CustomerName.Designer.cs">
-      <DependentUpon>201802151914012_Add-Unique-CustomerName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802190704013_Add-Attachment-Entity.cs" />
-    <Compile Include="Migrations\201802190704013_Add-Attachment-Entity.Designer.cs">
-      <DependentUpon>201802190704013_Add-Attachment-Entity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802200729243_Add-TicketActivity-Entity.cs" />
-    <Compile Include="Migrations\201802200729243_Add-TicketActivity-Entity.Designer.cs">
-      <DependentUpon>201802200729243_Add-TicketActivity-Entity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802211716546_Add-Email-Column-TicketActivity.cs" />
-    <Compile Include="Migrations\201802211716546_Add-Email-Column-TicketActivity.Designer.cs">
-      <DependentUpon>201802211716546_Add-Email-Column-TicketActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802242113399_Add-CreatorField-To-Ticket.cs" />
-    <Compile Include="Migrations\201802242113399_Add-CreatorField-To-Ticket.Designer.cs">
-      <DependentUpon>201802242113399_Add-CreatorField-To-Ticket.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803031823135_Add-ClosedDate-To-Ticket.cs" />
-    <Compile Include="Migrations\201803031823135_Add-ClosedDate-To-Ticket.Designer.cs">
-      <DependentUpon>201803031823135_Add-ClosedDate-To-Ticket.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803031845135_Add-AssignmentDate-To-Ticket.cs" />
-    <Compile Include="Migrations\201803031845135_Add-AssignmentDate-To-Ticket.Designer.cs">
-      <DependentUpon>201803031845135_Add-AssignmentDate-To-Ticket.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803060451537_AvgResolutionToTicket.cs" />
-    <Compile Include="Migrations\201803060451537_AvgResolutionToTicket.Designer.cs">
-      <DependentUpon>201803060451537_AvgResolutionToTicket.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803060545047_timesToTicket.cs" />
-    <Compile Include="Migrations\201803060545047_timesToTicket.Designer.cs">
-      <DependentUpon>201803060545047_timesToTicket.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803092140386_AddResolutionHours.cs" />
-    <Compile Include="Migrations\201803092140386_AddResolutionHours.Designer.cs">
-      <DependentUpon>201803092140386_AddResolutionHours.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803122238464_AllNewEntities.cs" />
-    <Compile Include="Migrations\201803122238464_AllNewEntities.Designer.cs">
-      <DependentUpon>201803122238464_AllNewEntities.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803130404016_Consultant-KPI-Relation.cs" />
-    <Compile Include="Migrations\201803130404016_Consultant-KPI-Relation.Designer.cs">
-      <DependentUpon>201803130404016_Consultant-KPI-Relation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803150628494_AddEducationToConsultant.cs" />
-    <Compile Include="Migrations\201803150628494_AddEducationToConsultant.Designer.cs">
-      <DependentUpon>201803150628494_AddEducationToConsultant.cs</DependentUpon>
+    <Compile Include="Migrations\201803182045033_SLANameConstraint.cs" />
+    <Compile Include="Migrations\201803182045033_SLANameConstraint.Designer.cs">
+      <DependentUpon>201803182045033_SLANameConstraint.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,65 +78,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710092059345_InitialCreate.resx">
-      <DependentUpon>201710092059345_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710222227444_mig2.resx">
-      <DependentUpon>201710222227444_mig2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711292017148_Add-Customer-Info.resx">
-      <DependentUpon>201711292017148_Add-Customer-Info.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711300604327_Add-New-Ticket-Entities.resx">
-      <DependentUpon>201711300604327_Add-New-Ticket-Entities.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712072322433_Add-Unique-Ids3.resx">
-      <DependentUpon>201712072322433_Add-Unique-Ids3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712082145065_Add-Ticket-Entity.resx">
-      <DependentUpon>201712082145065_Add-Ticket-Entity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712140026436_Add-OpenTime-toTickets.resx">
-      <DependentUpon>201712140026436_Add-OpenTime-toTickets.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802151914012_Add-Unique-CustomerName.resx">
-      <DependentUpon>201802151914012_Add-Unique-CustomerName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802190704013_Add-Attachment-Entity.resx">
-      <DependentUpon>201802190704013_Add-Attachment-Entity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802200729243_Add-TicketActivity-Entity.resx">
-      <DependentUpon>201802200729243_Add-TicketActivity-Entity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802211716546_Add-Email-Column-TicketActivity.resx">
-      <DependentUpon>201802211716546_Add-Email-Column-TicketActivity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802242113399_Add-CreatorField-To-Ticket.resx">
-      <DependentUpon>201802242113399_Add-CreatorField-To-Ticket.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803031823135_Add-ClosedDate-To-Ticket.resx">
-      <DependentUpon>201803031823135_Add-ClosedDate-To-Ticket.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803031845135_Add-AssignmentDate-To-Ticket.resx">
-      <DependentUpon>201803031845135_Add-AssignmentDate-To-Ticket.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803060451537_AvgResolutionToTicket.resx">
-      <DependentUpon>201803060451537_AvgResolutionToTicket.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803060545047_timesToTicket.resx">
-      <DependentUpon>201803060545047_timesToTicket.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803092140386_AddResolutionHours.resx">
-      <DependentUpon>201803092140386_AddResolutionHours.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803122238464_AllNewEntities.resx">
-      <DependentUpon>201803122238464_AllNewEntities.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803130404016_Consultant-KPI-Relation.resx">
-      <DependentUpon>201803130404016_Consultant-KPI-Relation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803150628494_AddEducationToConsultant.resx">
-      <DependentUpon>201803150628494_AddEducationToConsultant.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803182045033_SLANameConstraint.resx">
+      <DependentUpon>201803182045033_SLANameConstraint.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

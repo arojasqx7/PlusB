@@ -7,13 +7,13 @@ namespace Domain.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddUniqueIds3 : IMigrationMetadata
+    public sealed partial class SLANameConstraint : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddUniqueIds3));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SLANameConstraint));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712072322433_Add-Unique-Ids3"; }
+            get { return "201803182045033_SLANameConstraint"; }
         }
         
         string IMigrationMetadata.Source

@@ -57,11 +57,13 @@
     <Compile Include="Repositories\IImpactRepository.cs" />
     <Compile Include="Repositories\ImpactsRepository.cs" />
     <Compile Include="Repositories\ISeverityRepository.cs" />
+    <Compile Include="Repositories\ISLARepository.cs" />
     <Compile Include="Repositories\ITaskTypesRepository.cs" />
     <Compile Include="Repositories\ITechnologyRepository.cs" />
     <Compile Include="Repositories\ITicketActivityRepository.cs" />
     <Compile Include="Repositories\ITicketsRepository.cs" />
     <Compile Include="Repositories\SeveritiesRepository.cs" />
+    <Compile Include="Repositories\SLARepository.cs" />
     <Compile Include="Repositories\TaskTypesRepository.cs" />
     <Compile Include="Repositories\TechnologyRepository.cs" />
     <Compile Include="Repositories\TicketActivitiesRepository.cs" />

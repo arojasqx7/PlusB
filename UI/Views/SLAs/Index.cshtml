@@ -1,0 +1,110 @@
+﻿@model PagedList.IPagedList<Domain.Entities.SLA>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/clearSearch")
+
+<section class="content-header">
+    <h1>Service Level Agreement</h1>
+</section>
+
+<br />
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-default">
+                <div class="box-header">
+                    <h2 class="box-title">List of SLAs </h2>
+                    <br />
+                    <br />
+                    <div>
+                        <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-default" data-toggle='tooltip' title='Create'>
+                            <span class="glyphicon glyphicon-plus"></span>  New SLA
+                        </button>
+
+                        <div class="pull-left">
+                            @using (Html.BeginForm("Index", "SLAs", FormMethod.Get))
+                            {
+                                <div class="input-group col-md-3" style="margin-top:-30px;">
+                                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @id = "txtSearch", @placeholder = "Search..", @type = "search" })
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                    </span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table id="table1" class="table table-bordered table-hover">
+                        <tr>
+                            <th>Name</th>
+                            <th>Creation Date</th>
+                            <th>Scope</th>
+                            <th>Support Type</th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreationDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Scope)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SupportType)
+                                </td>
+                                <td>
+                                    @Html.Raw("<a data-modal='' href='/SLAs/Edit/" + item.ID + "' id='" + item.ID + "' class='btn btn-default' data-toggle='tooltip' title='Edit'> <span class='glyphicon glyphicon-edit'> </span> </a>")
+                                    @Html.Raw("<a data-modal='' href='/SLAs/Delete/" + item.ID + "' id='" + item.ID + "' class='btn btn-danger' data-toggle='tooltip' title='Delete'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                    <br />
+                    <div class="pull-right">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">X</span>
+                </button>
+                <h4 class="modal-title">New Service Level Agreement</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("PartialSLA/_createSLA", new Domain.Entities.SLA())
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/Modals.js")
+}

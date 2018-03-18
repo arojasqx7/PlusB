@@ -1,0 +1,67 @@
+﻿@model Domain.Entities.SLA
+
+@using (Html.BeginForm("Create", "SLAs",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Date:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.CreationDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @Value = @DateTime.Now.ToShortDateString(), @style = "background-color:#fff;" } })
+            </div>
+        </div>
+        <br /><br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Name:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder="SLA Name", @required="required"} })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Scope:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Scope, new { htmlAttributes = new { @class = "form-control", @placeholder = "SLA Scope", @required = "required" } })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Resolution Average:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.ResolutionTimeAverage, new { htmlAttributes = new { @class = "form-control", @placeholder = "Resolution Average", @required = "required" } })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Support Type:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.SupportType, new { htmlAttributes = new { @class = "form-control", @placeholder = "Support Type" } })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Priority:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.PriorityName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Priority", @required = "required" } })
+            </div>
+        </div>
+        <br /><br />
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Response Time:</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.ResponseTime, new { htmlAttributes = new { @class = "form-control", @placeholder = "Response Time" } })
+            </div>
+        </div>
+        <br /><br /><br />
+
+             <input type="submit" value="Submit" class="btn btn-success pull-right" />
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -225,6 +225,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MetricsController.cs" />
     <Compile Include="Controllers\SeveritiesController.cs" />
+    <Compile Include="Controllers\SLAsController.cs" />
     <Compile Include="Controllers\TaskTypesController.cs" />
     <Compile Include="Controllers\TechnologiesController.cs" />
     <Compile Include="Controllers\TicketActivityController.cs" />
@@ -6714,11 +6715,14 @@
     <Content Include="Views\Tickets\resolvedIncidents.cshtml" />
     <Content Include="App_Code\ToastrBuilder.cshtml" />
     <Content Include="Views\Shared\_Toastr.cshtml" />
-    <Content Include="Views\Metrics\incidentsByConsultant.cshtml" />
+    <Content Include="Views\Metrics\PerformanceEvaluation.cshtml" />
+    <Content Include="Views\SLAs\Index.cshtml" />
+    <Content Include="Views\Shared\PartialSLA\_createSLA.cshtml" />
+    <Content Include="Views\Shared\PartialSLA\_deleteSLA.cshtml" />
+    <Content Include="Views\Shared\PartialSLA\_editSLA.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\TicketActivity\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
