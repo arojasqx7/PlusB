@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
@@ -10,11 +11,19 @@ namespace Domain.Entities
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime CreationDate { get; set; }
 
+        [Index(IsUnique = true)]
+        [StringLength(450)]
         public string Name { get; set; }
 
-        public double Value { get; set; }
+        public string Scope { get; set; }
 
-        public string Priority { get; set; }
+        public double ResolutionTimeAverage { get; set; }
+
+        public string SupportType { get; set; }
+
+        public string PriorityName { get; set; }
+
+        public double ResponseTime { get; set; }
 
     }
 }

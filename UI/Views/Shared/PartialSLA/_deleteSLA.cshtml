@@ -1,0 +1,52 @@
+﻿@model Domain.Entities.SLA
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">X</span>
+    </button>
+    <h4 class="modal-title text-danger">Are you Sure to delete this SLA?</h4>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <dt> Creation Date:</dt>
+            <dd> @Html.DisplayFor(model => model.CreationDate)</dd>
+            <dt> Name:</dt>
+            <dd> @Html.DisplayFor(model => model.Name)</dd>
+            <dt> Scope:</dt>
+            <dd> @Html.DisplayFor(model => model.Scope) </dd>
+            <dt> Resolution Time Average:</dt>
+            <dd> @Html.DisplayFor(model => model.ResolutionTimeAverage)</dd>
+            <dt> Support Type:</dt>
+            <dd> @Html.DisplayFor(model => model.SupportType)</dd>
+            <dt> Priority:</dt>
+            <dd> @Html.DisplayFor(model => model.PriorityName)</dd>
+            <dt> Response Time:</dt>
+            <dd> @Html.DisplayFor(model => model.ResponseTime)</dd>
+        </dl>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-danger" data-dismiss="modal">No</button>
+        <button class="btn btn-success" type="submit" id="DeleteSLA">Yes</button>
+    </div>
+}
+
+<script>
+    $('#DeleteSLA').click(function () {
+        $('#myModal').modal('hide');
+    });
+
+    // function to delete row
+    function confirmedDeletion($button){
+        $.post("@Url.Action("Delete", "SLAsController")", { id : id } , function (data) {
+        if(data.Success) {
+            $button.closest('tr').remove();
+        }
+    });
+   }
+</script>
