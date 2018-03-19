@@ -23,6 +23,7 @@ namespace UI.Controllers
         private static string emailToSend;
         private static string statusToSend;
         private static double hoursResult;
+        private static int idCustomerIndex;
 
         public TicketsController()
         {
@@ -30,7 +31,7 @@ namespace UI.Controllers
         }
 
         // GET: Tickets
-        [Authorize(Roles ="Customer")]
+        [Authorize(Roles ="Customer, Administrator")]
         public ViewResult Index(string currentFilter, string searchString, int? page)
         {
             if (searchString != null)
@@ -43,9 +44,17 @@ namespace UI.Controllers
             }
             ViewBag.CurrentFilter = searchString;
 
-            int idCustomer = int.Parse(User.Identity.GetCustomerId());
+            if (User.IsInRole("Administrator"))
+            {
+                idCustomerIndex = 1;
+            }
+            else
+            {
+                idCustomerIndex = int.Parse(User.Identity.GetCustomerId());
+            }
+            
             var tickets = db.Tickets.Include(t => t.Consultant).Include(t => t.Customer).Include(t => t.Impact).Include(t => t.Severity).Include(t => t.TaskType).Include(t => t.Technology)
-                          .Where(x=>x.Id_Customer.Equals(idCustomer) && !x.Status.Equals("Closed"));
+                          .Where(x=>x.Id_Customer.Equals(idCustomerIndex) && !x.Status.Equals("Closed"));
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -58,7 +67,7 @@ namespace UI.Controllers
         }
 
         //Show Unassigned Tickets list 
-        [Authorize(Roles = "Consultant")]
+        [Authorize(Roles = "Consultant, Administrator")]
         public ViewResult UnassignedList(string currentFilter, string searchString, int? page)
         {
             if (searchString != null)
@@ -99,6 +108,7 @@ namespace UI.Controllers
             ViewBag.CurrentFilter = searchString;
 
             int idConsultantLogged = int.Parse(User.Identity.GetConsultantId());
+
             var myTickets = db.Tickets.Include(t => t.Consultant).Include(t => t.Customer).Include(t => t.Impact).Include(t => t.Severity).Include(t => t.TaskType).Include(t => t.Technology)
                                     .Where(x => x.Id_Consultant.Equals(idConsultantLogged) && !x.Status.Equals("Closed"));
 
@@ -166,8 +176,31 @@ namespace UI.Controllers
             return View(resolved.OrderBy(x => x.Severity.SeverityNumber).ThenBy(x => x.Date).ToPagedList(pageNumber, pageSize));
         }
 
+        // GET ticket resolved by Consultant for Admin 
+        [Authorize(Roles = "Administrator")]
+        public ActionResult resolvedIncidentsByConsultant()
+        {
+            ViewBag.Id_Consultant = new SelectList(db.Consultants.Where(x => !x.FirstName.Contains("Unassigned")).OrderBy(x => x.FirstName), "ID", "FullName");
+            return View();
+        }
+
+        //POST for Incidents by consultant
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public ViewResult resolvedIncidentsByConsultant(int Id_Consultant, DateTime DateFrom, DateTime DateTo)
+        {
+            var ticketsResolvedbyRange =  ticketRepo.GetTickets()
+                                         .Where(x=>x.ClosedDate >= DateFrom && x.ClosedDate <= DateTo && x.Id_Consultant.Equals(Id_Consultant))
+                                         .OrderBy(x => x.ClosedDate)
+                                         .ToList();
+
+            ViewBag.TodalTickets = ticketsResolvedbyRange.Count();
+            ViewBag.Id_Consultant = new SelectList(db.Consultants.Where(x => !x.FirstName.Contains("Unassigned")).OrderBy(x => x.FirstName), "ID", "FullName");
+            return View(ticketsResolvedbyRange);
+        }
+
         // GET: Tickets/Details/5
-        [Authorize(Roles = "Customer,Consultant")]
+        [Authorize(Roles = "Administrator,Customer,Consultant")]
         public ActionResult Details(int id)
         {
             Ticket ticket = ticketRepo.GetTicketByID(id);
@@ -175,7 +208,7 @@ namespace UI.Controllers
         }
 
         //   get: tickets/edit/5
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = "Customer, Administrator")]
         public PartialViewResult Edit(int id)
         {
             Ticket ticket = ticketRepo.GetTicketByID(id);
@@ -191,7 +224,7 @@ namespace UI.Controllers
         // POST: Tickets/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = "Customer, Administrator")]
         public ActionResult Edit([Bind(Include = "Id,Date,OpenTime,Id_Customer,ShortDescription,LongDescription,Environment,Id_Technology,Id_Severity,Id_Impact,Id_TaskType,Status,Id_Consultant")] Ticket ticket)
         {
             if (ModelState.IsValid)
@@ -266,7 +299,7 @@ namespace UI.Controllers
             return View(ticket);
         }
 
-        [Authorize(Roles = "Consultant, Customer")]
+        [Authorize]
         public ActionResult incidentClosed(int id)
         {
             Ticket ticket = ticketRepo.GetTicketByID(id);
@@ -274,7 +307,7 @@ namespace UI.Controllers
         }
 
         // GET
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = "Administrator, Customer")]
         public ActionResult incidentCreated(int id)
         {
             Ticket ticket = ticketRepo.GetTicketByID(id);
