@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Domain.Entities.CustomerSLA>
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var item in Model.Take(1))
+{
+<section class="content-header">
+    <h1>Assign new SLA for @item.Customer.CompanyName</h1>
+</section>
+}
+
+<br />
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-default">
+                <div class="box-header">
+                    <h2 class="box-title">Available SLAs</h2>
+                </div>
+                <br />
+                <div class="box-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("IdCustomer", new { @Value = ViewBag.IdCustomer })
+
+                        <div style="display:inline-flex;" class="col-md-12">
+                            <div class="form-group col-md-8">
+                                <label class="col-md-2">Select SLA:</label>
+                                <div class="col-md-10">
+                                    @Html.DropDownList("IdSLA", null, "----   Choose Service Level Agreement   ----", htmlAttributes: new { @class = "form-control", @required = "required" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div>
+                                    <button type="submit" value="" class="btn btn-success" data-toggle="tooltip" title="Assign"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <br />
+                    <br />
+
+                    <div class="box-header">
+                        <h2 class="box-title" style="margin-left:-10px;">List of assigned SLAs</h2>
+                    </div>
+
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Company</th>
+                            <th>SLA Name</th>
+                            <th></th>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Customer.CompanyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SLA.Name)
+                                </td>
+                                <td>
+                                    @Html.Raw("<a href='/CustomerSLAs/Delete/" + item.ID + "' id='" + item.ID + "' class='btn btn-danger' data-toggle='tooltip' title='Delete'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<br />
+    <div>
+        @Html.ActionLink("Back", "Index", "Customers")
+    </div>*@
+
+<div class="modal fade" id="modal-default-delete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">X</span>
+                </button>
+                <h4 class="modal-title">Delete SLA</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("PartialCustomerSLA/_deleteSLACustomer", new Domain.Entities.CustomerSLA())
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/Modals.js")
+}

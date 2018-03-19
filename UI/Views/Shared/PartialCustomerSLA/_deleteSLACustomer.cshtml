@@ -1,0 +1,45 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">X</span>
+    </button>
+    <h4 class="modal-title text-danger">Are you Sure to delete this SLA?</h4>
+</div>
+
+<div class="modal-body">
+    @*<dl class="dl-horizontal">
+        <dt> Company Name: </dt>
+        <dd> @Html.DisplayFor(model => model.Customer.CompanyName) </dd>
+        <dt> SLA Name: </dt>
+        <dd> @Html.DisplayFor(model => model.SLA.Name) </dd>
+        <dt> SLA Scope: </dt>
+        <dd> @Html.DisplayFor(model => model.SLA.Scope) </dd>
+    </dl>*@
+</div>
+
+<div class="modal-footer">
+    @using (Html.BeginForm("Delete", "CustomerSLAs", new { id = 11}, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <button class="btn btn-danger" data-dismiss="modal">No</button>
+        <input type="submit" class="btn btn-success" id="DeleteSLA" value="Yes" />
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    $('#DeleteSLA').click(function () {
+        $('#myModal').modal('hide');
+    });
+
+    // function to delete row
+    function confirmedDeletion($button){
+        $.post("@Url.Action("Delete", "CustomerSLAsController")", { id : id } , function (data) {
+        if(data.Success) {
+            $button.closest('tr').remove();
+        }
+    });
+    }
+</script>

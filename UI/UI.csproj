@@ -220,6 +220,7 @@
     <Compile Include="Controllers\ConsultantsController.cs" />
     <Compile Include="Controllers\ConsultantUserController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\CustomerSLAsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ImpactsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -6720,6 +6721,10 @@
     <Content Include="Views\Shared\PartialSLA\_createSLA.cshtml" />
     <Content Include="Views\Shared\PartialSLA\_deleteSLA.cshtml" />
     <Content Include="Views\Shared\PartialSLA\_editSLA.cshtml" />
+    <Content Include="Views\CustomerSLAs\Create.cshtml" />
+    <Content Include="Views\CustomerSLAs\Delete.cshtml" />
+    <Content Include="Views\CustomerSLAs\Index.cshtml" />
+    <Content Include="Views\Shared\PartialCustomerSLA\_deleteSLACustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
