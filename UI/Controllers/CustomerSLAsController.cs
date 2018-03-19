@@ -50,7 +50,7 @@ namespace UI.Controllers
                     }
                     else
                     {
-                        this.AddToastMessage("Assign SLA", "This SLA already exists, please verify", ToastType.Error);
+                        this.AddToastMessage("Assign SLA", "This SLA already exists for this company, please verify", ToastType.Error);
                         return RedirectToAction("Create", "CustomerSLAs", new { IdCustomer = customerSLA.IdCustomer });
                     }
                     

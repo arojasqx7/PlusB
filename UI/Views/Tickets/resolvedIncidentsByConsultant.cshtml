@@ -1,0 +1,141 @@
+﻿@model IEnumerable<Domain.Entities.Ticket>
+@{
+    ViewBag.Title = "resolvedIncidentsByConsultant";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>Incidents Resolved by Consultant</h1>
+</section>
+
+<br />
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-default">
+                <div class="box-header">
+                </div>
+                <div class="box-body">
+                    @using (Html.BeginForm("resolvedIncidentsByConsultant", "Tickets", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">Choose Consultant:</label>
+                                <div class="col-sm-6">
+                                    @Html.DropDownList("Id_Consultant", (IEnumerable<SelectListItem>)ViewBag.Id_Consultant, "----- Choose consultant to check his/her information -----", new { @class = "form-control", @required = "required" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <input type="submit" value="View" class="btn btn-success" style="margin-top:-20px;" />
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">From:</label>
+
+                                <div class="col-sm-3" style="display:inline-flex;">
+                                    @Html.TextBox("DateFrom", null, new { @class = "form-control datepicker", @placeholder = "From..", @required = "required" })
+                                </div>
+
+                                <div class="col-sm-3" style="display:inline-flex;">
+                                    <label for="to" class="control-label">To:</label>
+                                    @Html.TextBox("DateTo", null, new { @class = "form-control datepicker", @placeholder = "To..", @required = "required", @style = "margin-left:10px;" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <br />
+                    <br />
+                    <div class="box-header">
+                        <h2 class="box-title" style="margin-left:-10px;">List of Incidents</h2>
+                        <h4 class="box-title pull-right">Total: @ViewBag.TodalTickets</h4>
+                    </div>
+
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th> Date & Time Closed</th>
+                            <th> Short Description</th>
+                            <th> Severity</th>
+                            <th> Task</th>
+                            <th> Consultant Assigned</th>
+                            <th> Status</th>
+                            <th></th>
+                        </tr>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                            <tr>
+                                <td> @Html.DisplayFor(modelItem => item.ClosedDate) @Html.DisplayFor(modelItem => item.ClosedTime)</td>
+                                <td> @Html.DisplayFor(modelItem => item.ShortDescription)</td>
+                                <td>
+                                    @if (item.Severity.SeverityName == "Critical")
+                                    {
+                                        <span class="label label-danger"> @Html.DisplayFor(modelItem => item.Severity.SeverityName)</span>
+                                    }
+                                    else if (item.Severity.SeverityName == "Major")
+                                    {
+                                        <span class="label label-warning"> @Html.DisplayFor(modelItem => item.Severity.SeverityName)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-info"> @Html.DisplayFor(modelItem => item.Severity.SeverityName)</span>
+                                    }
+                                </td>
+                                <td> @Html.DisplayFor(modelItem => item.TaskType.TaskName)</td>
+                                <td>
+                                    @if (item.Consultant.Email == "info@plusb.com")
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Consultant.FirstName)
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Consultant.FirstName) <span style="margin-left:1px;">@Html.DisplayFor(modelItem => item.Consultant.LastName)</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Status == "Open")
+                                    {
+                                        <span class="label label-danger">@Html.DisplayFor(model => item.Status)</span>
+                                    }
+                                    else if (item.Status == "Work In Progress")
+                                    {
+                                        <span class="label label-warning">@Html.DisplayFor(model => item.Status)</span>
+                                    }
+                                    else if (item.Status == "Solution Suggested")
+                                    {
+                                        <span class="label label-success">@Html.DisplayFor(model => item.Status)</span>
+                                    }
+                                    else if (item.Status == "Pending Customer")
+                                    {
+                                        <span class="label label-success">@Html.DisplayFor(model => item.Status)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-default">@Html.DisplayFor(model => item.Status)</span>
+                                    }
+                                </td>
+                                <td>
+                                    @Html.Raw("<a href='/Tickets/incidentClosed/" + item.Id + "' id='" + item.Id + "' title='Open Incident'>View</a>")
+                                </td>
+                            </tr>
+                            }
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Scripts/jquery/dist/jquery.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script>
+        $('.datepicker').datepicker("option", "dateFormat", "dd/mm/yyyy");
+</script>
+
+

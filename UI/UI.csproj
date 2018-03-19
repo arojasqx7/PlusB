@@ -6659,7 +6659,6 @@
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
@@ -6721,10 +6720,9 @@
     <Content Include="Views\Shared\PartialSLA\_createSLA.cshtml" />
     <Content Include="Views\Shared\PartialSLA\_deleteSLA.cshtml" />
     <Content Include="Views\Shared\PartialSLA\_editSLA.cshtml" />
-    <Content Include="Views\CustomerSLAs\Create.cshtml" />
-    <Content Include="Views\CustomerSLAs\Delete.cshtml" />
-    <Content Include="Views\CustomerSLAs\Index.cshtml" />
     <Content Include="Views\Shared\PartialCustomerSLA\_deleteSLACustomer.cshtml" />
+    <Content Include="Views\Tickets\resolvedIncidentsByConsultant.cshtml" />
+    <Content Include="Views\CustomerSLAs\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -320,9 +320,10 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="@Url.Action("","")"><i class="fa fa-plus-square"></i>New Incident</a></li>
-                                <li><a href="@Url.Action("","")"><i class="fa fa-bars"></i>View Unassigned</a></li>
-                                <li><a href="@Url.Action("","")"><i class="fa fa-check"></i>View Resolved</a></li>
+                                <li><a href="@Url.Action("Create","TicketAttachment")"><i class="fa fa-plus-square"></i>New Incident</a></li>
+                                <li><a href="@Url.Action("Index","Tickets")"><i class="fa fa-list-ul"></i>View my Incidents</a></li>
+                                <li><a href="@Url.Action("UnassignedList","Tickets")"><i class="fa fa-bars"></i>View Unassigned</a></li>
+                                <li><a href="@Url.Action("resolvedIncidentsByConsultant","Tickets")"><i class="fa fa-check"></i>View Resolved by Consultant</a></li>
                             </ul>
                         </li>
 

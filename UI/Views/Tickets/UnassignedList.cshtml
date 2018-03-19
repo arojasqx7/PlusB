@@ -94,8 +94,16 @@
                                     } 
                                 </td>
                                 <td>
-                                    @Html.Raw("<a data-modal='' href='/Tickets/Details/" + item.Id + "' id='" + item.Id + "' class='btn btn-default' data-toggle='tooltip' title='View Details'> <span class='glyphicon glyphicon-resize-full'> </span> </a>")
-                                    @Html.Raw("<a data-modal='' href='/Tickets/AssignTicket/" + item.Id + "' id='" + item.Id + "' class='btn btn-success' data-toggle='tooltip' title='Assign Ticket to Me'> <span class='glyphicon glyphicon-saved'> </span> </a>")                              
+                                    @if (User.IsInRole("Administrator"))
+                                    {
+                                        @Html.Raw("<a data-modal='' href='/Tickets/Details/" + item.Id + "' id='" + item.Id + "' class='btn btn-default' data-toggle='tooltip' title='View Details'> <span class='glyphicon glyphicon-resize-full'> </span> </a>")
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("<a data-modal='' href='/Tickets/Details/" + item.Id + "' id='" + item.Id + "' class='btn btn-default' data-toggle='tooltip' title='View Details'> <span class='glyphicon glyphicon-resize-full'> </span> </a>")
+
+                                        @Html.Raw("<a data-modal='' href='/Tickets/AssignTicket/" + item.Id + "' id='" + item.Id + "' class='btn btn-success' data-toggle='tooltip' title='Assign Ticket to Me' style='margin-left:5px;'> <span class='glyphicon glyphicon-saved'> </span> </a>")
+                                    }                                 
                                 </td>
                             </tr>
                         }

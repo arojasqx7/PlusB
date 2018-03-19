@@ -28,10 +28,18 @@ namespace UI.Controllers
             this.ticketRepo = new TicketsRepository(new PlusBContext());
         }
 
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = "Customer, Administrator")]
         public ActionResult Create()
         {
-            ViewBag.Id_Customer = int.Parse(User.Identity.GetCustomerId());
+            if (User.IsInRole("Administrator"))
+            {
+                ViewBag.Id_Customer = 1;
+            }
+            else
+            {
+                ViewBag.Id_Customer = int.Parse(User.Identity.GetCustomerId());
+            }
+            
             ViewBag.Id_Consultant = new SelectList(db.Consultants.Where(x => x.FirstName.Contains("Unassigned")), "ID", "FirstName");
             ViewBag.Id_Impact = new SelectList(db.Impacts, "Id", "ImpactName");
             ViewBag.Id_Severity = new SelectList(db.Severities, "Id", "SeverityName");
@@ -40,7 +48,7 @@ namespace UI.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = "Customer, Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(TicketAttachmentModel model, IEnumerable<HttpPostedFileBase> files)
@@ -110,9 +118,18 @@ namespace UI.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
+               // return RedirectToAction("Index", "Tickets");
+            }
+
+            if (User.IsInRole("Customer"))
+            {
                 return RedirectToAction("Index", "Tickets");
             }
-            return RedirectToAction("Index", "Tickets");
+            else
+            {
+                return RedirectToAction("UnassignedList", "Tickets");
+            }
+            
         }
 
         #region public ApplicationUserManager UserManager

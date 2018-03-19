@@ -14,7 +14,7 @@ using UI.toastr;
 
 namespace UI.Controllers
 {
-    [Authorize(Roles = "Consultant,Customer")]
+    [Authorize]
     public class TicketActivityController : Controller
     {
         private static int IDTicket;

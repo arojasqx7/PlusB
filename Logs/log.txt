@@ -470,3 +470,11 @@ The statement has been terminated.
    en System.Data.Entity.DbContext.SaveChanges()
    en Persistence.Repositories.SLARepository.Save() en C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\Persistence\Repositories\SLARepository.cs:línea 49
    en UI.Controllers.SLAsController.Create(SLA sLA) en C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Controllers\SLAsController.cs:línea 70
+ERROR 2018-03-19 08:56:06,435 96488ms etAttachmentController MoveNext           - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Controllers.TicketAttachmentController.<Create>d__6.MoveNext() en C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Controllers\TicketAttachmentController.cs:línea 86
+ERROR 2018-03-19 09:13:05,548 38077ms etAttachmentController MoveNext           - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Controllers.TicketAttachmentController.<Create>d__6.MoveNext() en C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Controllers\TicketAttachmentController.cs:línea 94
+ERROR 2018-03-19 09:15:09,054 161583ms etAttachmentController MoveNext           - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Controllers.TicketAttachmentController.<Create>d__6.MoveNext() en C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Controllers\TicketAttachmentController.cs:línea 94
+ERROR 2018-03-19 09:16:36,514 41068ms etAttachmentController MoveNext           - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Controllers.TicketAttachmentController.<Create>d__6.MoveNext() en C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Controllers\TicketAttachmentController.cs:línea 94
