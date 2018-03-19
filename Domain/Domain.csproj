@@ -70,6 +70,10 @@
     <Compile Include="Migrations\201803182045033_SLANameConstraint.Designer.cs">
       <DependentUpon>201803182045033_SLANameConstraint.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803182248179_AddFK_SLACustomer.cs" />
+    <Compile Include="Migrations\201803182248179_AddFK_SLACustomer.Designer.cs">
+      <DependentUpon>201803182248179_AddFK_SLACustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -80,6 +84,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201803182045033_SLANameConstraint.resx">
       <DependentUpon>201803182045033_SLANameConstraint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803182248179_AddFK_SLACustomer.resx">
+      <DependentUpon>201803182248179_AddFK_SLACustomer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

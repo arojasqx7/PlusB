@@ -39,8 +39,8 @@
                                     <span data-toggle="modal" data-target="#modal-default-edit">
                                         <a data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-default"><span class='glyphicon glyphicon-edit'> </span></a>
                                     </span>
-                                    <span data-toggle="modal" data-target="#modal-default-edit">
-                                        <a data-toggle="tooltip" data-placement="top" title="Assign SLA" class="btn btn-default"><span class='glyphicon glyphicon-cloud-upload'> </span></a>
+                                    <span>
+                                        <a href="@Url.Action("Create","CustomerSLAs", new { IdCustomer= item.Id})" data-toggle="tooltip" data-placement="top" title="Assign SLA" class="btn btn-default"><span class='glyphicon glyphicon-cloud-upload'> </span></a>
                                     </span>
                                     <span data-toggle="modal" data-target="#modal-default-delete">
                                         <a data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger"><span class='glyphicon glyphicon-trash'> </span></a>
