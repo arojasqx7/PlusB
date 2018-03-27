@@ -38,12 +38,12 @@
                                 <label for="inputName" class="col-sm-2 control-label">From:</label>
 
                                 <div class="col-sm-3" style="display:inline-flex;">
-                                    @Html.TextBox("DateFrom", null, new { @class = "form-control datepicker", @placeholder = "From..", @required = "required" })
+                                    @Html.TextBox("DateFrom", null, new { @class = "form-control datepicker", @placeholder = "From..", @required = "required", @readonly="readonly", @style= "background-color: #fff;" })
                                 </div>
 
                                 <div class="col-sm-3" style="display:inline-flex;">
                                     <label for="to" class="control-label">To:</label>
-                                    @Html.TextBox("DateTo", null, new { @class = "form-control datepicker", @placeholder = "To..", @required = "required", @style = "margin-left:10px;" })
+                                    @Html.TextBox("DateTo", null, new { @class = "form-control datepicker", @placeholder = "To..", @required = "required", @style = "margin-left:10px;background-color: #fff;", @readonly = "readonly" })
                                 </div>
                             </div>
                         </div>

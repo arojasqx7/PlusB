@@ -75,6 +75,9 @@ namespace UI
             bundles.Add(new ScriptBundle("~/bundles/toastr").Include(
                       "~/Scripts/toastr.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/dashboard2").Include(
+                      "~/Scripts/dashboard2.js"));
+
             //***************Start of CSS Bundles*************************
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

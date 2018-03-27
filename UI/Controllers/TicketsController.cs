@@ -419,6 +419,26 @@ namespace UI.Controllers
                 }
         }
 
+        [HttpPost]
+        public ActionResult EscalateTicket(int id, string escalateReason)
+        {
+            try
+            {
+                Ticket ticket = ticketRepo.GetTicketByID(id);
+                ticket.Status = "Escalated";
+                ticket.EscalationReason = escalateReason;
+                ticketRepo.UpdateTicket(ticket);
+                ticketRepo.Save();
+                this.AddToastMessage("Incidents", "Incident number " + ticket.Id + " was " + ticket.Status, ToastType.Success);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+            }
+
+            return RedirectToAction("Index", "Tickets");
+        }
+
         private void SendEmail()
         {
             var apiKey = "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";

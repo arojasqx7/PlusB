@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<Domain.Entities.PerformanceEvaluation>
+
 @{
     ViewBag.Title = "PerformanceEvaluation";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,7 +17,7 @@
                 <div class="box-header">
                 </div>
                 <div class="box-body">
-                @using (Html.BeginForm("consultPerformance", "Metrics", FormMethod.Post))
+                @using (Html.BeginForm("PerformanceEvaluation", "Metrics", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
                     <div class="row">
@@ -38,16 +39,48 @@
                             <label for="inputName" class="col-sm-2 control-label">From:</label>
 
                             <div class="col-sm-3" style="display:inline-flex;">
-                                @Html.TextBox("DateFrom", null, new { @class = "form-control datepicker", @placeholder = "From..", @required="required", @readonly="readonly"})
+                                @Html.TextBox("DateFrom", null, new { @class = "form-control datepicker", @placeholder = "From..", @required="required", @readonly="readonly", @style = "margin-left:10px;background-color: #fff;"})
                             </div>
 
                             <div class="col-sm-3" style="display:inline-flex;">
                                 <label for="to" class="control-label">To:</label>
-                                @Html.TextBox("DateFrom", null, new { @class = "form-control datepicker", @placeholder = "To..", @required = "required", @style = "margin-left:10px;", @readonly = "readonly" })
+                                @Html.TextBox("DateTo", null, new { @class = "form-control datepicker", @placeholder = "To..", @required = "required", @style = "margin-left:10px;background-color: #fff;", @readonly = "readonly" })
                             </div>                        
                         </div>
                     </div>
                 }
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <table class="table table-bordered table-hover text-center">
+                        <tr>
+                            <th> Date </th>
+                            <th> Incidents Resolved</th>
+                            <th> Incidents Assigned</th>
+                            <th> Technology Weight</th>
+                            <th> Inverted Hours</th>
+                            <th> Performance Average</th>
+                            <th> Details</th>
+                        </tr>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => item.Date) </td>
+                                    <td> @Html.DisplayFor(modelItem => item.TotalResolvedIncidents)</td>
+                                    <td> @Html.DisplayFor(modelItem => item.TotalAssignedIncidents) </td>
+                                    <td> @Html.DisplayFor(modelItem => item.TechWeightAverage) </td>
+                                    <td> @Html.DisplayFor(modelItem => item.TotalHoursTaken) </td>
+                                    <td class="text-bold"> @Html.DisplayFor(modelItem => item.PerformanceAverage) </td>
+                                    <td>
+                                        @Html.Raw("<a href='/Metrics/viewDetails/" + item.ID  + "' title='View More Metrics'>View</a>")
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
                 </div>
             </div>
         </div>

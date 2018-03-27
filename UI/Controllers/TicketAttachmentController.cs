@@ -76,7 +76,9 @@ namespace UI.Controllers
                 AverageResolution=null,
                 AssignmentTime=null,
                 ClosedTime=null,
-                TotalResolutionHours=null
+                TotalResolutionHours=null,
+                AutoAssigned=0,
+                EscalationReason=null
             };
 
             using (var context = new PlusBContext())
