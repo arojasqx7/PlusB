@@ -633,3 +633,59 @@ ERROR 2018-03-26 17:03:40,482 108617ms MetricsController      Execute           
    en System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
    en System.Linq.Queryable.Count[TSource](IQueryable`1 source)
    en UI.Jobs.performanceEvalutionJob.Execute(IJobExecutionContext context) en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Jobs\performanceEvalutionJob.cs:línea 27
+ERROR 2018-03-27 02:06:26,457 45728ms etAttachmentController techAvgConsultant  - System.InvalidOperationException: The cast to value type 'System.Int32' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.
+   en System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   en lambda_method(Closure , Shaper )
+   en System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   en System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__3[TResult](IEnumerable`1 sequence)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   en System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   en System.Linq.Queryable.Sum(IQueryable`1 source)
+   en UI.Controllers.DashboardController.techAvgConsultant() en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Controllers\DashboardController.cs:línea 145
+ERROR 2018-03-27 02:06:46,555 65825ms etAttachmentController techAvgConsultant  - System.InvalidOperationException: The cast to value type 'System.Int32' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.
+   en System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   en lambda_method(Closure , Shaper )
+   en System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   en System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__3[TResult](IEnumerable`1 sequence)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   en System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   en System.Linq.Queryable.Sum(IQueryable`1 source)
+   en UI.Controllers.DashboardController.techAvgConsultant() en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Controllers\DashboardController.cs:línea 145
+ERROR 2018-03-27 11:58:20,518 1856720ms etAttachmentController techAvgConsultant  - System.InvalidOperationException: The cast to value type 'System.Int32' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.
+   en System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   en lambda_method(Closure , Shaper )
+   en System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   en System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__3[TResult](IEnumerable`1 sequence)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   en System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   en System.Linq.Queryable.Sum(IQueryable`1 source)
+   en UI.Controllers.DashboardController.techAvgConsultant() en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Controllers\DashboardController.cs:línea 145
+ERROR 2018-03-27 12:11:49,794 383947ms etAttachmentController MoveNext           - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Controllers.TicketAttachmentController.<Create>d__6.MoveNext() en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Controllers\TicketAttachmentController.cs:línea 94
+ERROR 2018-03-27 12:31:55,712 371327ms etAttachmentController MoveNext           - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Controllers.TicketAttachmentController.<Create>d__6.MoveNext() en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Controllers\TicketAttachmentController.cs:línea 94
+ERROR 2018-03-27 12:32:17,601 393216ms etAttachmentController techAvgConsultant  - System.InvalidOperationException: The cast to value type 'System.Int32' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.
+   en System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   en lambda_method(Closure , Shaper )
+   en System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   en System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__3[TResult](IEnumerable`1 sequence)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   en System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   en System.Linq.Queryable.Sum(IQueryable`1 source)
+   en UI.Controllers.DashboardController.techAvgConsultant() en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Controllers\DashboardController.cs:línea 145

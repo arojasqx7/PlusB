@@ -1,0 +1,20 @@
+﻿@model Domain.Entities.Ticket
+
+@using (Html.BeginForm("EscalateTicket", "Tickets", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Escalate reason:</label>
+        <div class="col-md-8">
+            <input type="text" name="escalateReason" required="required" class="form-control" placeholder="Reason..." />
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class="modal-footer">
+        <input type="submit" value="Escalate" class="btn btn-danger" />
+    </div>
+}

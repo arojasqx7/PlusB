@@ -26,14 +26,17 @@
         {
             <span class="label label-warning">@Html.DisplayFor(model => model.Status)</span>
         }
+        else if (Model.Status == "Pending Customer")
+        {
+            <span class="label label-success">@Html.DisplayFor(model => model.Status)</span>
+        }
         else if (Model.Status == "Solution Suggested")
         {
             <span class="label label-success">@Html.DisplayFor(model => model.Status)</span>
         }
         else
         {
-            <span class="label label-success">@Html.DisplayFor(model => model.Status)</span>
-
+            <span class="label label-danger">@Html.DisplayFor(model => model.Status)</span>
         }
     </h4>
     @using (Html.BeginForm("UpdateStatus", "Tickets", FormMethod.Post))
@@ -53,7 +56,14 @@
                 <span class="glyphicon glyphicon-refresh"></span>
             </button>
         </div>
-    }
+        }   
+        
+        @if (User.IsInRole("Customer") && Model.Status != "Escalated")
+        {
+            <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#modal-escalate" data-toggle='tooltip' title='Escalate Incident'>
+                <span class="glyphicon glyphicon-warning-sign"></span>  Escalate
+            </button>
+        }
 </section>
 
 <br /><br />
@@ -113,6 +123,21 @@
     </div>
 </section>
 
+<div class="modal fade" id="modal-escalate">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">X</span>
+                </button>
+                <h4 class="modal-title">Provide a reason to escalate:</h4>
+            </div>
+                <div class="modal-body">
+                    @Html.Partial("PartialTickets/_escalateTicket", new Domain.Entities.Ticket())
+                </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts{
     <script>

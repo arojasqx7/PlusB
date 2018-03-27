@@ -75,6 +75,10 @@
     <Compile Include="Migrations\201803262043459_AddPerfEvaluationTable.Designer.cs">
       <DependentUpon>201803262043459_AddPerfEvaluationTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803271912202_AddEscalationReason.cs" />
+    <Compile Include="Migrations\201803271912202_AddEscalationReason.Designer.cs">
+      <DependentUpon>201803271912202_AddEscalationReason.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -88,6 +92,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803262043459_AddPerfEvaluationTable.resx">
       <DependentUpon>201803262043459_AddPerfEvaluationTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803271912202_AddEscalationReason.resx">
+      <DependentUpon>201803271912202_AddEscalationReason.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

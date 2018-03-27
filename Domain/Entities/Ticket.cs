@@ -62,6 +62,8 @@ namespace Domain.Entities
 
         public int AutoAssigned { get; set; }
 
+        public string EscalationReason { get; set; }
+
         public virtual Technology Technology { get; set; }
         public virtual Severity Severity { get; set; }
         public virtual Impact Impact { get; set; }
