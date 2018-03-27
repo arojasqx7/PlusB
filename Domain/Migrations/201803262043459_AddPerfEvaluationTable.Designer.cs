@@ -7,13 +7,13 @@ namespace Domain.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class SLANameConstraint : IMigrationMetadata
+    public sealed partial class AddPerfEvaluationTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SLANameConstraint));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddPerfEvaluationTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201803182045033_SLANameConstraint"; }
+            get { return "201803262043459_AddPerfEvaluationTable"; }
         }
         
         string IMigrationMetadata.Source

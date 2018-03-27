@@ -23,6 +23,7 @@ namespace Domain.DAL
         public DbSet<KPI> KPIS { get; set; }
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<CustomerSLA> CustomerSLAS { get; set; }
+        public DbSet<PerformanceEvaluation> PerformanceEvalutions { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

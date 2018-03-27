@@ -9,6 +9,7 @@ namespace Domain.Entities
         public int Id { get; set; }
 
         [Index(IsUnique = true)]
+        [StringLength(450)]
         public string CompanyName { get; set; }
 
         [Index(IsUnique = true)]

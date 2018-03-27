@@ -10,22 +10,30 @@ namespace Domain.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(DAL.PlusBContext context)
+        protected override void Seed(Domain.DAL.PlusBContext context)
         {
             //  This method will be called after migrating to the latest version.
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
             context.Customers.AddOrUpdate(
-              p => p.Id,
-              new Customer { Id = 1, CompanyName="PlusB Consulting", CompanyId="ADM", CompanyDescription="Consulting Provider",
-                  ManagerName ="Francisco Alvarado", Country="Costa Rica", Address="Escazu", PhoneNumber="22244852",
-                  EmailAddress="info@plusb.com", SupportType=null, InitialDate =Convert.ToDateTime("01/01/2000")}
-            );
+             p => p.Id,
+             new Customer
+             {
+                 Id = 1,
+                 CompanyName = "PlusB Consulting",
+                 CompanyId = "ADM",
+                 CompanyDescription = "Consulting Provider",
+                 ManagerName = "Francisco Alvarado",
+                 Country = "Costa Rica",
+                 Address = "Escazu",
+                 PhoneNumber = "22244852",
+                 EmailAddress = "info@plusb.com",
+                 SupportType = null,
+                 InitialDate = Convert.ToDateTime("01/01/2000")
+             }
+           );
 
             context.Customers.AddOrUpdate(
               p => p.Id,
@@ -63,6 +71,7 @@ namespace Domain.Migrations
                     HireDate = Convert.ToDateTime("01/01/2000")
                 }
                 );
+
         }
     }
 }
