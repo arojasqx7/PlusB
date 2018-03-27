@@ -16,6 +16,7 @@ namespace Domain.Entities
         public DateTime DateOfBirth { get; set; }
 
         [Index(IsUnique = true)]
+        [StringLength(450)]
         public string IdNumber { get; set; }
 
         public string Gender { get; set; }

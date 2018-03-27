@@ -191,7 +191,7 @@ namespace UI.Controllers
         {
             var ticketsResolvedbyRange =  ticketRepo.GetTickets()
                                          .Where(x=>x.ClosedDate >= DateFrom && x.ClosedDate <= DateTo && x.Id_Consultant.Equals(Id_Consultant))
-                                         .OrderBy(x => x.ClosedDate)
+                                         .OrderBy(x => x.ClosedDate).ThenBy(x=>x.ClosedTime)
                                          .ToList();
 
             ViewBag.TodalTickets = ticketsResolvedbyRange.Count();

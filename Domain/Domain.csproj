@@ -58,6 +58,7 @@
     <Compile Include="Entities\Impact.cs" />
     <Compile Include="Entities\KnowledgeBase.cs" />
     <Compile Include="Entities\KPI.cs" />
+    <Compile Include="Entities\PerformanceEvaluation.cs" />
     <Compile Include="Entities\Severity.cs" />
     <Compile Include="Entities\SLA.cs" />
     <Compile Include="Entities\Survey.cs" />
@@ -66,13 +67,13 @@
     <Compile Include="Entities\Ticket.cs" />
     <Compile Include="Entities\TicketActivity.cs" />
     <Compile Include="Entities\TicketAttachmentModel.cs" />
-    <Compile Include="Migrations\201803182045033_SLANameConstraint.cs" />
-    <Compile Include="Migrations\201803182045033_SLANameConstraint.Designer.cs">
-      <DependentUpon>201803182045033_SLANameConstraint.cs</DependentUpon>
+    <Compile Include="Migrations\201803232150327_Initial2.cs" />
+    <Compile Include="Migrations\201803232150327_Initial2.Designer.cs">
+      <DependentUpon>201803232150327_Initial2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803182248179_AddFK_SLACustomer.cs" />
-    <Compile Include="Migrations\201803182248179_AddFK_SLACustomer.Designer.cs">
-      <DependentUpon>201803182248179_AddFK_SLACustomer.cs</DependentUpon>
+    <Compile Include="Migrations\201803262043459_AddPerfEvaluationTable.cs" />
+    <Compile Include="Migrations\201803262043459_AddPerfEvaluationTable.Designer.cs">
+      <DependentUpon>201803262043459_AddPerfEvaluationTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,11 +83,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803182045033_SLANameConstraint.resx">
-      <DependentUpon>201803182045033_SLANameConstraint.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803232150327_Initial2.resx">
+      <DependentUpon>201803232150327_Initial2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803182248179_AddFK_SLACustomer.resx">
-      <DependentUpon>201803182248179_AddFK_SLACustomer.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803262043459_AddPerfEvaluationTable.resx">
+      <DependentUpon>201803262043459_AddPerfEvaluationTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

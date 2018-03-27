@@ -1,7 +1,7 @@
-﻿using System.IO;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using UI.Jobs;
 
 namespace UI
 {
@@ -14,6 +14,7 @@ namespace UI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             log4net.Config.XmlConfigurator.Configure();
+            JobScheduler.Start();
         }
     }
 }
