@@ -231,6 +231,7 @@
     <Compile Include="Controllers\CustomerSLAsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ImpactsController.cs" />
+    <Compile Include="Controllers\KnowledgeBasesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MetricsController.cs" />
     <Compile Include="Controllers\SeveritiesController.cs" />
@@ -278,6 +279,7 @@
     <Content Include="Content\clearTextbox.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\placeholder-icons.css" />
+    <Content Include="Content\KnowledgeBaseStyle.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="Images\empty-icon.png" />
@@ -5926,14 +5928,6 @@
     <Content Include="bower_components\select2\tests\vendor\qunit-1.23.1.css" />
     <Content Include="bower_components\select2\tests\vendor\qunit-1.23.1.js" />
     <Content Include="bower_components\select2\vendor\jquery-2.1.0.js" />
-    <Content Include="build\js\BoxRefresh.js" />
-    <Content Include="build\js\BoxWidget.js" />
-    <Content Include="build\js\ControlSidebar.js" />
-    <Content Include="build\js\DirectChat.js" />
-    <Content Include="build\js\Layout.js" />
-    <Content Include="build\js\PushMenu.js" />
-    <Content Include="build\js\TodoList.js" />
-    <Content Include="build\js\Tree.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
@@ -6542,9 +6536,6 @@
     <Content Include="bower_components\select2\src\scss\_dropdown.scss" />
     <Content Include="bower_components\select2\src\scss\_multiple.scss" />
     <Content Include="bower_components\select2\src\scss\_single.scss" />
-    <Content Include="build\grunt\.jshintrc" />
-    <Content Include="build\js\.jscsrc" />
-    <Content Include="build\js\.jshintrc" />
     <Content Include="dist\css\adminlte.css.map" />
     <Content Include="dist\css\adminlte.min.css.map" />
     <Content Include="plugins\input-mask\phone-codes\phone-be.json" />
@@ -6667,6 +6658,11 @@
     <Content Include="Views\CustomerSLAs\Create.cshtml" />
     <Content Include="Views\Metrics\viewDetails.cshtml" />
     <Content Include="Views\Shared\PartialTickets\_escalateTicket.cshtml" />
+    <Content Include="Views\KnowledgeBases\Index.cshtml" />
+    <Content Include="Views\Shared\PartialKnowledgeBase\_createSolution.cshtml" />
+    <Content Include="Views\KnowledgeBases\singleArticle.cshtml" />
+    <Content Include="Views\KnowledgeBases\singleCategory.cshtml" />
+    <Content Include="Views\Shared\PartialKnowledgeBase\_deleteSolution.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

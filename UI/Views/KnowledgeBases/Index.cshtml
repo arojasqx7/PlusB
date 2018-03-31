@@ -1,0 +1,153 @@
+﻿@model IEnumerable<Domain.Entities.KnowledgeBase>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/KnowledgeBase")
+<style>
+    .txtHover:hover {
+        color: #dfae1f;
+    }
+    .txtNormal:hover{
+        color: #18456c;
+    }
+</style>
+
+<br />
+<section class="content-header" style="display:inline-flex;">
+    <h1 style="margin-left:40px;">Knowledge Base</h1>
+
+    <div class="input-group col-md-6" style="margin-left:100px;">
+        <input type="text" class="form-control" placeholder="What do you need help with?">
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default btn-flat">Search</button>
+        </span>
+    </div>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default" style="margin-left: 125px;" data-toggle='tooltip' title='Create'>New Solution </button>
+</section>
+
+<br />
+<br />
+<br />
+<br />
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="fb-heading-small">
+                Article Categories
+            </div>
+            <hr class="style-three">
+            <div class="row">
+                <div class="col-md-6 margin-bottom-20">
+                    <div class="fat-heading-abb">
+                        <a href="#"><i class="fa fa-folder"></i> General <span class="cat-count">(@ViewBag.generalCount)</span></a>
+                    </div>
+                    <div class="fat-content-small padding-left-30">
+                        <ul>
+                            @foreach (var item in ViewBag.GeneralList)
+                            {
+                            <li> <a href="@Url.Action("singleArticle","KnowledgeBases", new { id = @item.ID})"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 margin-bottom-20">
+                    <div class="fat-heading-abb">
+                        <a href="single-category.html"><i class="fa fa-folder"></i> Account Settings <span class="cat-count">(@ViewBag.accSettingsCount)</span></a>
+                    </div>
+                    <div class="fat-content-small padding-left-30">
+                        <ul>
+                            @foreach (var item in ViewBag.accSettList)
+                            {
+                                <li> <a href="@Url.Action("singleArticle","KnowledgeBases", new { id = @item.ID})"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 margin-bottom-20">
+                    <div class="fat-heading-abb">
+                        <a href="single-category.html"><i class="fa fa-folder"></i> Configurations <span class="cat-count">(@ViewBag.configurationsCount)</span></a>
+                    </div>
+                    <div class="fat-content-small padding-left-30">
+                        <ul>
+                            @foreach (var item in ViewBag.ConfigurationList)
+                            {
+                                <li> <a href="@Url.Action("singleArticle","KnowledgeBases", new { id = @item.ID})"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 margin-bottom-20">
+                    <div class="fat-heading-abb">
+                        <a href="single-category.html"><i class="fa fa-folder"></i> Security <span class="cat-count">(@ViewBag.securityCount)</span></a>
+                    </div>
+                    <div class="fat-content-small padding-left-30">
+                        <ul>
+                            @foreach (var item in ViewBag.SecurityList)
+                            {
+                                <li> <a href="@Url.Action("singleArticle","KnowledgeBases", new { id = @item.ID})"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+               <a href="knowledge-base.html" class="btn btn-primary" style="margin-left: 325px;">
+                    <i class="fa fa-align-justify"></i> View All
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="fb-heading-small">
+                        Popular Articles
+                    </div>
+                    <hr class="style-three">
+                    <div class="fat-content-small padding-left-10">
+                        <ul>
+                            <li> <a href="#"><i class="fa fa-file-text-o"></i> How to change account password?</a> </li>
+                            <li> <a href="#"><i class="fa fa-file-text-o"></i> How to edit order details?</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row margin-top-20">
+                <div class="col-md-12">
+                    <div class="fb-heading-small">
+                        Latest Articles
+                    </div>
+                    <hr class="style-three">
+                    <div class="fat-content-small padding-left-10">
+                        <ul>
+                            <li> <a href="#"><i class="fa fa-file-text-o"></i> How to change username?</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+</section>
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">X</span>
+                </button>
+                <h4 class="modal-title">New Solution</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("PartialKnowledgeBase/_createSolution", new Domain.Entities.KnowledgeBase())
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/Modals.js")
+}

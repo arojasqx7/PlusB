@@ -131,8 +131,11 @@ namespace UI
             bundles.Add(new StyleBundle("~/Content/clearSearch").Include(
                     "~/Content/clearTextbox.css"));
 
-            bundles.Add(new StyleBundle("~/content/toastr").Include(
+            bundles.Add(new StyleBundle("~/Content/toastr").Include(
                     "~/Content/toastr.css"));
+
+            bundles.Add(new StyleBundle("~/Content/KnowledgeBase").Include(
+                  "~/Content/KnowledgeBaseStyle.css"));
         }
     }
 }

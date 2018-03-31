@@ -4,13 +4,13 @@
 {
     @Html.AntiForgeryToken()
 
-        <div class="form-group">
+        <div class="form-group" style="display:none;">
             <label class="control-label col-md-2">Date:</label>
             <div class="col-md-8">
                 @Html.EditorFor(model => model.CreationDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @Value = @DateTime.Now.ToShortDateString(), @style = "background-color:#fff;" } })
             </div>
         </div>
-        <br /><br /><br />
+        <br />
 
         <div class="form-group">
             <label class="control-label col-md-2">Name:</label>
@@ -28,18 +28,21 @@
         </div>
         <br /><br />
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Resolution Average:</label>
-            <div class="col-md-8">
-                @Html.EditorFor(model => model.ResolutionTimeAverage, new { htmlAttributes = new { @class = "form-control", @placeholder = "Resolution Average", @required = "required" } })
-            </div>
+        <label class="control-label col-md-2">Resolution Average:</label>
+        <div class="input-group col-md-8">
+            @Html.EditorFor(model => model.ResolutionTimeAverage, new { htmlAttributes = new { @class = "form-control", @placeholder = "Resolution Average", @required = "required" } })
+            <span class="input-group-addon"><strong>%</strong></span>
         </div>
-        <br /><br />
+        <br /><br /><br />
 
         <div class="form-group">
             <label class="control-label col-md-2">Support Type:</label>
             <div class="col-md-8">
-                @Html.EditorFor(model => model.SupportType, new { htmlAttributes = new { @class = "form-control", @placeholder = "Support Type" } })
+               @Html.DropDownListFor(x => x.SupportType, new List<SelectListItem>
+                        {
+                          new SelectListItem() {Text = "Standard", Value="Standard"},
+                          new SelectListItem() {Text = "Premier", Value="Premier"}
+                        }, new { @class = "form-control select2", @required = "required" })
             </div>
         </div>
         <br /><br />
@@ -47,20 +50,26 @@
         <div class="form-group">
             <label class="control-label col-md-2">Priority:</label>
             <div class="col-md-8">
-                @Html.EditorFor(model => model.PriorityName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Priority", @required = "required" } })
+                @Html.DropDownListFor(x => x.PriorityName, new List<SelectListItem>
+                        {
+                          new SelectListItem() {Text = "High", Value="High"},
+                          new SelectListItem() {Text = "Medium", Value="Medium"},
+                          new SelectListItem() {Text = "Low", Value="Low"}
+                        }, new { @class = "form-control select2", @required="required" })
             </div>
         </div>
         <br /><br />
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Response Time:</label>
-            <div class="col-md-8">
-                @Html.EditorFor(model => model.ResponseTime, new { htmlAttributes = new { @class = "form-control", @placeholder = "Response Time" } })
-            </div>
+        <label class="control-label col-md-2">Response Time:</label>
+        <div class="input-group col-md-8">
+            @Html.EditorFor(model => model.ResponseTime, new { htmlAttributes = new { @class = "form-control", @placeholder = "Response Time" } })
+            <span class="input-group-addon"><strong>Hours</strong></span>
         </div>
-        <br /><br /><br />
 
-             <input type="submit" value="Submit" class="btn btn-success pull-right" />
+        <br />
+        <br />
+        <br />
+        <input type="submit" value="Submit" class="btn btn-success pull-right" />
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

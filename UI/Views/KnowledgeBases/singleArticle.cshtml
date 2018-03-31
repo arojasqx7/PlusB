@@ -1,0 +1,94 @@
+﻿@model Domain.Entities.KnowledgeBase
+@{
+    ViewBag.Title = "singleArticle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/KnowledgeBase")
+<style>
+    .featured-area-default 
+    {
+        background-color: #ecf0f5;
+    }
+</style>
+
+<div class="container featured-area-default padding-30">
+    <div class="row">
+        <div class="col-md-8 padding-20">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="article-heading margin-bottom-5">
+                        <a href="#"><i class="fa fa-pencil-square-o"></i>@Html.DisplayFor(model => model.Solution) </a>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <a data-target="#modal-delete" data-toggle="modal"><i class="fa fa-trash-o pull-right" style="color: #dd4b39;"></i></a>
+                        }                  
+                    </div>
+                    <div class="article-info">
+                        <div class="art-date"><a href="#"><i class="fa fa-calendar-o"></i> @Html.DisplayFor(model => model.CreationDate) </a></div>
+                        <div class="art-category"><a href="#"><i class="fa fa-folder"></i> @Html.DisplayFor(model => model.Category) </a></div>
+                            @if (Model.Consultant.FirstName == "Unassigned")
+                            {
+                                <div class="art-category"><a href="#"><i class="fa fa-user"></i>   Created by Administrator </a></div>
+                            }
+                            else
+                            {
+                                <div class="art-category"><a href="#"><i class="fa fa-user"></i>   Created by @Html.DisplayFor(model => model.Consultant.FullName) </a></div>
+                            }   
+                    </div>
+                    <div class="article-content">
+                        <p>@Html.DisplayFor(model => model.Details)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 padding-20">
+            <div class="row margin-top-20">
+                <div class="col-md-12">
+                    <div class="fb-heading-small">
+                        Popular Articles
+                    </div>
+                    <hr class="style-three">
+                    <div class="fat-content-small padding-left-10">
+                        <ul>
+                            <li> <a href="#"><i class="fa fa-file-text-o"></i> How to change account password?</a> </li>
+                            <li> <a href="#"><i class="fa fa-file-text-o"></i> How to edit order details?</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row margin-top-20">
+                <div class="col-md-12">
+                    <div class="fb-heading-small">
+                        Latest Articles
+                    </div>
+                    <hr class="style-three">
+                    <div class="fat-content-small padding-left-10">
+                        <ul>
+                            <li> <a href="#"><i class="fa fa-file-text-o"></i> How to change username?</a> </li>
+                            <li> <a href="#"><i class="fa fa-file-text-o"></i> How to change currency in gomac?</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-delete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">X</span>
+                </button>
+                <h4 class="modal-title text-danger">Are you sure you want to delete this solution?</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("PartialKnowledgeBase/_deleteSolution", new Domain.Entities.KnowledgeBase())
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>

@@ -19,7 +19,7 @@ namespace UI.Jobs
               (s =>
                  s.WithIntervalInHours(24)
                 .OnEveryDay()
-                .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(23, 58))
+                .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(12, 43))
               )
             .Build();
 

@@ -1,0 +1,15 @@
+﻿@model Domain.Entities.KnowledgeBase
+@{
+    var id = Request.Url.Segments[3];
+}
+
+@using (Html.BeginForm("Delete", "KnowledgeBases", new { ID= id}, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="pull-right">
+        <button class="btn btn-danger" data-dismiss="modal">No</button>
+        <input type="submit" class="btn btn-success" id="DeleteKB" value="Yes" />
+    </div>
+    <br />
+    <br />
+}
