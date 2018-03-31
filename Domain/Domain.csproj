@@ -79,6 +79,22 @@
     <Compile Include="Migrations\201803271912202_AddEscalationReason.Designer.cs">
       <DependentUpon>201803271912202_AddEscalationReason.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803272211309_AddEscalationDate.cs" />
+    <Compile Include="Migrations\201803272211309_AddEscalationDate.Designer.cs">
+      <DependentUpon>201803272211309_AddEscalationDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803300114538_FKKPI.cs" />
+    <Compile Include="Migrations\201803300114538_FKKPI.Designer.cs">
+      <DependentUpon>201803300114538_FKKPI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803310347097_FKKb.cs" />
+    <Compile Include="Migrations\201803310347097_FKKb.Designer.cs">
+      <DependentUpon>201803310347097_FKKb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803310616362_KB-Modification.cs" />
+    <Compile Include="Migrations\201803310616362_KB-Modification.Designer.cs">
+      <DependentUpon>201803310616362_KB-Modification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -95,6 +111,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803271912202_AddEscalationReason.resx">
       <DependentUpon>201803271912202_AddEscalationReason.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803272211309_AddEscalationDate.resx">
+      <DependentUpon>201803272211309_AddEscalationDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803300114538_FKKPI.resx">
+      <DependentUpon>201803300114538_FKKPI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803310347097_FKKb.resx">
+      <DependentUpon>201803310347097_FKKb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803310616362_KB-Modification.resx">
+      <DependentUpon>201803310616362_KB-Modification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

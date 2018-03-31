@@ -422,11 +422,15 @@ namespace UI.Controllers
         [HttpPost]
         public ActionResult EscalateTicket(int id, string escalateReason)
         {
+            DateTime today = DateTime.Now;
+            var shortDate = today.Date;
+
             try
             {
                 Ticket ticket = ticketRepo.GetTicketByID(id);
                 ticket.Status = "Escalated";
                 ticket.EscalationReason = escalateReason;
+                ticket.EscalationDate = shortDate;
                 ticketRepo.UpdateTicket(ticket);
                 ticketRepo.Save();
                 this.AddToastMessage("Incidents", "Incident number " + ticket.Id + " was " + ticket.Status, ToastType.Success);

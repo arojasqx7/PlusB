@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
@@ -10,13 +11,19 @@ namespace Domain.Entities
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime CreationDate { get; set; }
 
+        public string Category { get; set; }
+
+        [Index(IsUnique = true)]
+        [StringLength(450)]
         public string Solution { get; set; }
 
-        public string SpecialDetails { get; set; }
+        public string Details { get; set; }
 
-        public int IdTicket { get; set; }
+        [ForeignKey("Consultant")]
+        public int idConsultant { get; set; }
 
-        public virtual Ticket Ticket { get; set; }
+        public virtual Consultant Consultant { get; set; }
+
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Domain.DAL;
 using Domain.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Web.Mvc;
@@ -8,7 +9,8 @@ namespace UI.Controllers
 {
     public class MetricsController : Controller
     {
-        private PlusBContext db = new PlusBContext(); 
+        private PlusBContext db = new PlusBContext();
+        private static int idPerfEval;
 
         [Authorize(Roles ="Administrator")]
         public ActionResult PerformanceEvaluation()
@@ -33,7 +35,7 @@ namespace UI.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult viewDetails(int id)
         {
-
+            idPerfEval = id;
             PerformanceEvaluation perfEval = db.PerformanceEvalutions.Find(id);
 
             var technologyList = (from x in db.Tickets
@@ -48,13 +50,31 @@ namespace UI.Controllers
                                   join y in db.Tickets
                                   on x.idConsultant equals y.Id_Consultant
                                   where y.Status == "Escalated" && 
-                                  y.AssignmentDate == perfEval.Date &&
+                                  y.EscalationDate == perfEval.Date &&
                                   y.Id_Consultant == perfEval.idConsultant
                                   select y).Count();
 
+
             ViewBag.Techdata = technologyList.ToList();
             ViewBag.EscalateData = escalatedCount;
+            ViewBag.datePerf = perfEval.Date.Date;
             return View();
+        }
+
+        public ContentResult GetIncidentsList()
+        {
+            PerformanceEvaluation perfEval = db.PerformanceEvalutions.Find(idPerfEval);
+
+            var incidentsList = (from x in db.PerformanceEvalutions
+                                 join y in db.Tickets
+                                 on x.idConsultant equals y.Id_Consultant
+                                 where y.Id_Consultant == perfEval.idConsultant &&
+                                 y.ClosedDate == perfEval.Date
+                                 select y.Id);
+
+            ViewBag.IncidentList = incidentsList.ToList();
+
+            return Content(JsonConvert.SerializeObject(incidentsList));
         }
     }
 }

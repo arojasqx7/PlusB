@@ -33,11 +33,27 @@ namespace UI.Jobs
                                         on x.Id_Technology equals y.ID
                                         where x.AssignmentDate == shortDate && x.Id_Consultant == i.ID
                                         select (int?)y.Weight).Sum() ?? 0;
-                    techWeightAvg = techWeightAvg / totalAssignedTickets;
+                    if (techWeightAvg == 0)
+                    {
+                        techWeightAvg = 0;
+                    }
+                    else
+                    {
+                        techWeightAvg = techWeightAvg / totalAssignedTickets;
+                    }
 
                     double? totalHoursTaken =  db.Tickets.Where(x =>x.ClosedDate == shortDate && x.Id_Consultant == i.ID).Select(x=>x.TotalResolutionHours).Sum();
 
                     double? perfAvg = totalResolvedTickets + totalAssignedTickets + techWeightAvg + totalHoursTaken;
+
+                    if (totalHoursTaken == null )
+                    {
+                        totalHoursTaken = 0;
+                    }
+                    if (perfAvg == null)
+                    {
+                        perfAvg = 0;
+                    }
 
                     try
                         {
