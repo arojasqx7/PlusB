@@ -10,6 +10,7 @@ using System.Data.Entity.Infrastructure;
 using log4net;
 using System.Data.SqlClient;
 using UI.toastr;
+using System;
 
 namespace UI.Controllers
 {
@@ -22,40 +23,65 @@ namespace UI.Controllers
         private static int currentArticleId;
 
         // GET: KnowledgeBases
-        public ActionResult Index()
+        public ViewResult Index(string currentFilter, string searchString)
         {
             var generalCount = db.KnowledgeBases.Where(x => x.Category == "General");
             var accSettingsCount = db.KnowledgeBases.Where(x => x.Category == "Account Settings");
             var configurationsCount = db.KnowledgeBases.Where(x => x.Category == "Configurations");
             var securityCount = db.KnowledgeBases.Where(x => x.Category == "Security");
+            var latestArticle = db.KnowledgeBases.OrderBy(x => x.CreationDate);
+            var popularArticle = db.KnowledgeBases.Where(x=> x.Solution.Contains("SAP"));
 
-            // ViewBags for counters 
-            ViewBag.generalCount = generalCount.Count();
-            ViewBag.accSettingsCount = accSettingsCount.Count();
-            ViewBag.configurationsCount = configurationsCount.Count();
-            ViewBag.securityCount = securityCount.Count();
+            if (searchString == null)
+            {
+                searchString = currentFilter;
+            }
+            
+            ViewBag.CurrentFilter = searchString;
 
-            //ViewBags for data in foreachs 
-            ViewBag.GeneralList = generalCount.Take(5).ToList();
-            ViewBag.accSettList = accSettingsCount.Take(5).ToList();
-            ViewBag.ConfigurationList = configurationsCount.Take(5).ToList();
-            ViewBag.SecurityList = securityCount.Take(5).ToList();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                ViewBag.flag = 1;
+                var searchedArticle = db.KnowledgeBases.Where(x => x.Solution.Contains(searchString));
+                ViewBag.latestArticle = latestArticle.Take(3).ToList();
+                ViewBag.popularArticle = popularArticle.Take(3).ToList();
+                ViewBag.searchedArticle = searchedArticle.ToList();
+                return View(searchedArticle.OrderBy(x=>x.Solution));
+            }
 
-            return View();
+            else
+            {
+                ViewBag.flag = 0;
+
+                // ViewBags for counters 
+                ViewBag.generalCount = generalCount.Count();
+                ViewBag.accSettingsCount = accSettingsCount.Count();
+                ViewBag.configurationsCount = configurationsCount.Count();
+                ViewBag.securityCount = securityCount.Count();
+
+                //ViewBags for data in foreachs 
+                ViewBag.GeneralList = generalCount.Take(5).ToList();
+                ViewBag.accSettList = accSettingsCount.Take(5).ToList();
+                ViewBag.ConfigurationList = configurationsCount.Take(5).ToList();
+                ViewBag.SecurityList = securityCount.Take(5).ToList();
+                ViewBag.latestArticle = latestArticle.Take(3).ToList();
+                ViewBag.popularArticle = popularArticle.Take(3).ToList();
+
+                return View();
+            }
+
         }
 
         public ActionResult singleArticle(int id)
         {
             currentArticleId = id;
+            var latestArticle = db.KnowledgeBases.OrderBy(x => x.CreationDate);
+            var popularArticle = db.KnowledgeBases.Where(x => x.Solution.Contains("SAP"));
+            ViewBag.latestArticle = latestArticle.Take(3).ToList();
+            ViewBag.popularArticle = popularArticle.Take(3).ToList();
             KnowledgeBase knowledgeBase = db.KnowledgeBases.Find(id);
-            return View(knowledgeBase);
-        }
 
-        public ActionResult singleCategory(int id)
-        {
-            KnowledgeBase knowledgeBase = db.KnowledgeBases.Find(id);
-            var solutionsByCategory = db.KnowledgeBases.Where(x => x.Category == knowledgeBase.Category);
-            return View(solutionsByCategory.ToList());
+            return View(knowledgeBase);
         }
 
         // GET: KnowledgeBases/Details/5
@@ -81,7 +107,7 @@ namespace UI.Controllers
         }
 
         // POST: KnowledgeBases/Create
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,CreationDate,Category,Solution,Details,idConsultant")] KnowledgeBase knowledgeBase)
         {

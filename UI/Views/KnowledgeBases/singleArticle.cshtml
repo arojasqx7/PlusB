@@ -51,8 +51,10 @@
                     <hr class="style-three">
                     <div class="fat-content-small padding-left-10">
                         <ul>
-                            <li> <a href="#"><i class="fa fa-file-text-o"></i> How to change account password?</a> </li>
-                            <li> <a href="#"><i class="fa fa-file-text-o"></i> How to edit order details?</a> </li>
+                           @foreach (var item in ViewBag.popularArticle)
+                           {
+                            <li> <a href="@Url.Action("singleArticle","KnowledgeBases", new { id = @item.ID})"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
+                           }
                         </ul>
                     </div>
                 </div>
@@ -66,8 +68,10 @@
                     <hr class="style-three">
                     <div class="fat-content-small padding-left-10">
                         <ul>
-                            <li> <a href="#"><i class="fa fa-file-text-o"></i> How to change username?</a> </li>
-                            <li> <a href="#"><i class="fa fa-file-text-o"></i> How to change currency in gomac?</a> </li>
+                            @foreach (var item in ViewBag.latestArticle)
+                            {
+                                <li> <a href="@Url.Action("singleArticle","KnowledgeBases", new { id = @item.ID})"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
+                            }
                         </ul>
                     </div>
                 </div>

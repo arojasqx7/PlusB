@@ -14,16 +14,21 @@
 </style>
 
 <br />
-<section class="content-header" style="display:inline-flex;">
-    <h1 style="margin-left:40px;">Knowledge Base</h1>
+<section class="content-header col-md-12" style="display:inline-flex;">
+    <h1>Knowledge Base</h1>
 
-    <div class="input-group col-md-6" style="margin-left:100px;">
-        <input type="text" class="form-control" placeholder="What do you need help with?">
-        <span class="input-group-btn">
-            <button type="button" class="btn btn-default btn-flat">Search</button>
-        </span>
+    <div class="input-group col-md-6" style="margin-left:100px;display:inline-flex;">
+        @using (Html.BeginForm("Index", "KnowledgeBases", FormMethod.Get))
+        {
+            <div class="input-group">
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @id = "txtSearch", @placeholder = "What do you need help with?", @type = "search" })
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Search</button>
+                </span>
+            </div>
+        }
     </div>
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default" style="margin-left: 125px;" data-toggle='tooltip' title='Create'>New Solution </button>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default" style="margin-left: 125px;height:35px;" data-toggle='tooltip' title='Create'>New Solution </button>
 </section>
 
 <br />
@@ -39,62 +44,85 @@
             </div>
             <hr class="style-three">
             <div class="row">
-                <div class="col-md-6 margin-bottom-20">
-                    <div class="fat-heading-abb">
-                        <a href="#"><i class="fa fa-folder"></i> General <span class="cat-count">(@ViewBag.generalCount)</span></a>
+                @if (ViewBag.flag == 0)
+                {
+                    <div class="col-md-6 margin-bottom-20">
+                        <div class="fat-heading-abb">
+                            <a href="#"><i class="fa fa-folder"></i> General <span class="cat-count">(@ViewBag.generalCount)</span></a>
+                        </div>
+                        <div class="fat-content-small padding-left-30">
+                            <ul>
+                                @foreach (var item in ViewBag.GeneralList)
+                                {
+                                    <li> <a href="@Url.Action("singleArticle","KnowledgeBases", new { id = @item.ID})"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
+                                }
+                            </ul>
+                        </div>
                     </div>
-                    <div class="fat-content-small padding-left-30">
-                        <ul>
-                            @foreach (var item in ViewBag.GeneralList)
-                            {
-                            <li> <a href="@Url.Action("singleArticle","KnowledgeBases", new { id = @item.ID})"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
-                            }
-                        </ul>
+                    <div class="col-md-6 margin-bottom-20">
+                        <div class="fat-heading-abb">
+                            <a href="single-category.html"><i class="fa fa-folder"></i> Account Settings <span class="cat-count">(@ViewBag.accSettingsCount)</span></a>
+                        </div>
+                        <div class="fat-content-small padding-left-30">
+                            <ul>
+                                @foreach (var item in ViewBag.accSettList)
+                                {
+                                    <li> <a href="@Url.Action("singleArticle","KnowledgeBases", new { id = @item.ID})"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
+                                }
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6 margin-bottom-20">
-                    <div class="fat-heading-abb">
-                        <a href="single-category.html"><i class="fa fa-folder"></i> Account Settings <span class="cat-count">(@ViewBag.accSettingsCount)</span></a>
+                    <div class="col-md-6 margin-bottom-20">
+                        <div class="fat-heading-abb">
+                            <a href="single-category.html"><i class="fa fa-folder"></i> Configurations <span class="cat-count">(@ViewBag.configurationsCount)</span></a>
+                        </div>
+                        <div class="fat-content-small padding-left-30">
+                            <ul>
+                                @foreach (var item in ViewBag.ConfigurationList)
+                                {
+                                    <li> <a href="@Url.Action("singleArticle","KnowledgeBases", new { id = @item.ID})"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
+                                }
+                            </ul>
+                        </div>
                     </div>
-                    <div class="fat-content-small padding-left-30">
-                        <ul>
-                            @foreach (var item in ViewBag.accSettList)
-                            {
-                                <li> <a href="@Url.Action("singleArticle","KnowledgeBases", new { id = @item.ID})"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
-                            }
-                        </ul>
+                    <div class="col-md-6 margin-bottom-20">
+                        <div class="fat-heading-abb">
+                            <a href="single-category.html"><i class="fa fa-folder"></i> Security <span class="cat-count">(@ViewBag.securityCount)</span></a>
+                        </div>
+                        <div class="fat-content-small padding-left-30">
+                            <ul>
+                                @foreach (var item in ViewBag.SecurityList)
+                                {
+                                    <li> <a href="@Url.Action("singleArticle","KnowledgeBases", new { id = @item.ID})"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
+                                }
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6 margin-bottom-20">
-                    <div class="fat-heading-abb">
-                        <a href="single-category.html"><i class="fa fa-folder"></i> Configurations <span class="cat-count">(@ViewBag.configurationsCount)</span></a>
-                    </div>
-                    <div class="fat-content-small padding-left-30">
-                        <ul>
-                            @foreach (var item in ViewBag.ConfigurationList)
-                            {
-                                <li> <a href="@Url.Action("singleArticle","KnowledgeBases", new { id = @item.ID})"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 margin-bottom-20">
-                    <div class="fat-heading-abb">
-                        <a href="single-category.html"><i class="fa fa-folder"></i> Security <span class="cat-count">(@ViewBag.securityCount)</span></a>
-                    </div>
-                    <div class="fat-content-small padding-left-30">
-                        <ul>
-                            @foreach (var item in ViewBag.SecurityList)
-                            {
-                                <li> <a href="@Url.Action("singleArticle","KnowledgeBases", new { id = @item.ID})"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
-                            }
-                        </ul>
-                    </div>
-                </div>
+                }
 
-               <a href="knowledge-base.html" class="btn btn-primary" style="margin-left: 325px;">
-                    <i class="fa fa-align-justify"></i> View All
-                </a>
+                else
+                {
+                    <div class="col-md-6 margin-bottom-20">
+                        <div class="fat-heading-abb">
+                            <a href="#"><i class="fa fa-folder"></i> Results</a>
+                        </div>
+                        <div class="fat-content-small padding-left-30">
+                            <ul>
+                                @if (Enumerable.Count(ViewBag.searchedArticle) == 0)
+                                {
+                                    <li class="text-center">No results found..</li>
+                                }
+                                else
+                                {
+                                    foreach (var item in ViewBag.searchedArticle)
+                                    {
+                                        <li> <a href="@Url.Action("singleArticle", "KnowledgeBases", new { id = @item.ID })"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
 
@@ -107,8 +135,10 @@
                     <hr class="style-three">
                     <div class="fat-content-small padding-left-10">
                         <ul>
-                            <li> <a href="#"><i class="fa fa-file-text-o"></i> How to change account password?</a> </li>
-                            <li> <a href="#"><i class="fa fa-file-text-o"></i> How to edit order details?</a> </li>
+                            @foreach (var item in ViewBag.popularArticle)
+                            {
+                                <li> <a href="@Url.Action("singleArticle","KnowledgeBases", new { id = @item.ID})"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -122,7 +152,10 @@
                     <hr class="style-three">
                     <div class="fat-content-small padding-left-10">
                         <ul>
-                            <li> <a href="#"><i class="fa fa-file-text-o"></i> How to change username?</a> </li>
+                           @foreach (var item in ViewBag.latestArticle)
+                           {
+                            <li> <a href="@Url.Action("singleArticle","KnowledgeBases", new { id = @item.ID})"><i class="fa fa-file-text-o"></i>@item.Solution</a> </li>
+                           }
                         </ul>
                     </div>
                 </div>

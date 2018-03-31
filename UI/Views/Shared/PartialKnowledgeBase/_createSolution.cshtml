@@ -31,20 +31,21 @@
                 @Html.EditorFor(model => model.Solution, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder="Enter solution name..."} })
             </div>
         </div>
-        <br /><br /><br />
+        <br />
 
-        <div class="form-group">
-            <label class="control-label col-md-2"> Details:</label>
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Details, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder="Add details...", @style="width: 420px;" } })
+        <div class="form-group" style="margin-top:40px;">
+            <label class="control-label col-md-2">Details:</label>
+            <br />
+            <div class="box-body pad">
+                @Html.TextArea("Details", null, new { @class = "textarea", @placeholder = "Place some details here..", @style = "width:100%;height:200px;font-size:14px;line-height:18px;border:1px solid #dddddd;padding:10px;", required = "required" })
             </div>
         </div>
-        <br /><br /><br />
+        <br />
 
         @Html.HiddenFor(Model=>Model.idConsultant)
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-10">
                 <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </div>
