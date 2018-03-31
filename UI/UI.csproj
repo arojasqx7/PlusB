@@ -6661,7 +6661,6 @@
     <Content Include="Views\KnowledgeBases\Index.cshtml" />
     <Content Include="Views\Shared\PartialKnowledgeBase\_createSolution.cshtml" />
     <Content Include="Views\KnowledgeBases\singleArticle.cshtml" />
-    <Content Include="Views\KnowledgeBases\singleCategory.cshtml" />
     <Content Include="Views\Shared\PartialKnowledgeBase\_deleteSolution.cshtml" />
   </ItemGroup>
   <ItemGroup>
