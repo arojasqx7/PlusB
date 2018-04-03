@@ -24,6 +24,7 @@ namespace Domain.DAL
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<CustomerSLA> CustomerSLAS { get; set; }
         public DbSet<PerformanceEvaluation> PerformanceEvalutions { get; set; }
+        public DbSet<ConsultantKPI> ConsultantsKPIs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

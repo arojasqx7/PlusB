@@ -11,15 +11,12 @@ namespace Domain.Entities
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime CreationDate { get; set; }
 
+        [Index(IsUnique =true)]
+        [StringLength(450)]
         public string Name { get; set; }
 
         public string Objective { get; set; }
 
         public double FormulaValue { get; set; }
-
-        [ForeignKey("Consultant")]
-        public int IdConsultant { get; set; }
-
-        public virtual Consultant Consultant { get;set;}
     }
 }
