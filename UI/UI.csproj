@@ -225,6 +225,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AttachmentController.cs" />
+    <Compile Include="Controllers\ConsultantKPIsController.cs" />
     <Compile Include="Controllers\ConsultantsController.cs" />
     <Compile Include="Controllers\ConsultantUserController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
@@ -6654,7 +6655,6 @@
     <Content Include="Views\Shared\PartialSLA\_createSLA.cshtml" />
     <Content Include="Views\Shared\PartialSLA\_deleteSLA.cshtml" />
     <Content Include="Views\Shared\PartialSLA\_editSLA.cshtml" />
-    <Content Include="Views\Shared\PartialCustomerSLA\_deleteSLACustomer.cshtml" />
     <Content Include="Views\Tickets\resolvedIncidentsByConsultant.cshtml" />
     <Content Include="Views\CustomerSLAs\Create.cshtml" />
     <Content Include="Views\Metrics\viewDetails.cshtml" />
@@ -6667,6 +6667,7 @@
     <Content Include="Views\Shared\PartialKPI\_createKPI.cshtml" />
     <Content Include="Views\Shared\PartialKPI\_editKPI.cshtml" />
     <Content Include="Views\Shared\PartialKPI\_deleteKPI.cshtml" />
+    <Content Include="Views\ConsultantKPIs\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

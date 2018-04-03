@@ -1,11 +1,13 @@
-﻿@model IEnumerable<Domain.Entities.CustomerSLA>
+﻿@model IEnumerable<Domain.Entities.ConsultantKPI>
+
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
     <section class="content-header">
-        <h1>Assign new Service Level Agreement to company..</h1>
+        <h1>Assign Key Performance Indicator to consultant..</h1>
     </section>
 
 <br />
@@ -14,20 +16,20 @@
         <div class="col-xs-12">
             <div class="box box-default">
                 <div class="box-header">
-                    <h2 class="box-title">Available SLAs</h2>
+                    <h2 class="box-title">Available KPIs</h2>
                 </div>
                 <br />
                 <div class="box-body">
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
-                        @Html.Hidden("IdCustomer", new { @Value = ViewBag.IdCustomer })
+                        @Html.Hidden("IdConsultant", new { @Value = ViewBag.idConsultant })
 
                         <div style="display:inline-flex;" class="col-md-12">
                             <div class="form-group col-md-8">
-                                <label class="col-md-2">Select SLA:</label>
+                                <label class="col-md-2">Select KPI:</label>
                                 <div class="col-md-10">
-                                    @Html.DropDownList("IdSLA", null, "----   Choose Service Level Agreement   ----", htmlAttributes: new { @class = "form-control", @required = "required" })
+                                    @Html.DropDownList("idKPI", null, "----   Choose Key Performance Indicator   ----", htmlAttributes: new { @class = "form-control", @required = "required" })
                                 </div>
                             </div>
                             <div class="form-group">
@@ -40,25 +42,25 @@
                     <br />
                     <br />
                     <div class="box-header">
-                        <h2 class="box-title" style="margin-left:-10px;">List of assigned SLAs</h2>
+                        <h2 class="box-title" style="margin-left:-10px;">List of assigned KPIs</h2>
                     </div>
                     <table class="table table-hover">
                         <tr>
-                            <th>Company</th>
-                            <th>SLA Name</th>
+                            <th>Consultant</th>
+                            <th>KPI Name</th>
                             <th></th>
                         </tr>
                         @foreach (var item in Model)
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Customer.CompanyName)
+                                    @Html.DisplayFor(modelItem => item.Consultant.FullName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.SLA.Name)
+                                    @Html.DisplayFor(modelItem => item.KPI.Name)
                                 </td>
                                 <td>
-                                    @Html.Raw("<a href='/CustomerSLAs/Delete/" + item.ID + "' id='" + item.ID + "' class='btn btn-danger' data-toggle='tooltip' title='Delete'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                                    @Html.Raw("<a href='/ConsultantKPIs/Delete/" + item.ID + "' id='" + item.ID + "' class='btn btn-danger' data-toggle='tooltip' title='Delete'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                                 </td>
                             </tr>
                         }
@@ -68,4 +70,3 @@
         </div>
     </div>
 </section>
-

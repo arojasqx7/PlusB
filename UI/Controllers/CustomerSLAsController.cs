@@ -14,8 +14,8 @@ namespace UI.Controllers
     public class CustomerSLAsController : Controller
     {
         private PlusBContext db = new PlusBContext();
-        ILog logger = LogManager.GetLogger(typeof(TaskTypesController));
-        // GET: CustomerSLAs
+        ILog logger = LogManager.GetLogger(typeof(CustomerSLAsController));
+
         public ActionResult Index()
         {
             var customerSLAS = db.CustomerSLAS.Include(c => c.Customer).Include(c => c.SLA);
