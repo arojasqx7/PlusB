@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
@@ -10,18 +11,19 @@ namespace Domain.Entities
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateSent { get; set; }
 
-        public int Question1 { get; set; }
+        public int Answer1 { get; set; }
 
-        public int Question2 { get; set; }
+        public int Answer2 { get; set; }
 
-        public string Question3 { get; set; }
+        public string Answer3 { get; set; }
 
         public string Comments { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DateAnswered { get; set; }
 
-        public int IdTicket { get; set; }
+        [ForeignKey("Ticket")]
+        public int idTicket { get; set; }
 
         public virtual Ticket Ticket { get; set; }
     }
