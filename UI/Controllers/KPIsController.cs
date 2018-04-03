@@ -7,25 +7,25 @@ using Domain.Entities;
 using Persistence.Repositories;
 using log4net;
 using PagedList;
+using UI.toastr;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
-using UI.toastr;
 
 namespace UI.Controllers
 {
-    public class SLAsController : Controller
+    [Authorize(Roles = "Administrator")]
+    public class KPIsController : Controller
     {
         private PlusBContext db = new PlusBContext();
-        private ISLARepository slaRepo;
-        ILog logger = LogManager.GetLogger(typeof(ImpactsController));
+        private IKPIRepository kpiRepo;
+        ILog logger = LogManager.GetLogger(typeof(KPIsController));
 
-        public SLAsController()
+        public KPIsController()
         {
-            this.slaRepo = new SLARepository(new PlusBContext());
+            this.kpiRepo = new KPIRepository(new PlusBContext());
         }
 
-        // GET: SLAs
-        [Authorize(Roles = "Administrator")]
+        // GET: KPIs
         public ViewResult Index(string currentFilter, string searchString, int? page)
         {
             if (searchString != null)
@@ -39,74 +39,68 @@ namespace UI.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var SLA = slaRepo.GetSLAs();
+            var KPI = kpiRepo.GetKPIs();
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                SLA = SLA.Where(s => s.Name.Contains(searchString));
+                KPI = KPI.Where(s => s.Name.Contains(searchString));
             }
 
-            int pageSize = 5;
+            int pageSize = 3;
             int pageNumber = (page ?? 1);
-            return View(SLA.OrderBy(x => x.Name).ToPagedList(pageNumber, pageSize));
+            return View(KPI.OrderBy(x => x.Name).ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: SLAs/Create
-        public PartialViewResult Create()
-        {
-            return PartialView();
-        }
-
-        // POST: SLAs/Create
+        // POST: KPIs/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CreationDate,Name,Scope,ResolutionTimeAverage,SupportType,PriorityName,ResponseTime")] SLA sLA)
+        public ActionResult Create([Bind(Include = "ID,CreationDate,Name,Objective,FormulaValue")] KPI kPI)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    slaRepo.InsertSLA(sLA);
-                    slaRepo.Save();
-                    this.AddToastMessage("SLA", "SLA created successfully!", ToastType.Success);
+                    kpiRepo.InsertKPI(kPI);
+                    kpiRepo.Save();
+                    this.AddToastMessage("KPI", "KPI created successfully!", ToastType.Success);
                     return RedirectToAction("Index");
                 }
-                catch (DbUpdateException sqlExc)
+                catch (DbUpdateException ex)
                 {
-                    var sqlException = sqlExc.GetBaseException() as SqlException;
+                    var sqlException = ex.GetBaseException() as SqlException;
                     if (sqlException != null)
                     {
-                        logger.Error(sqlExc.ToString());
-                        this.AddToastMessage("SLA", "SLA already exists, please verify.", ToastType.Error);
+                        logger.Error(ex.ToString());
+                        this.AddToastMessage("KPI", "KPI already exists, please verify.", ToastType.Error);
                     }
                     else
                     {
                         throw;
                     }
-                }  
+                }
             }
             return RedirectToAction("Index");
         }
 
-        // GET: SLAs/Edit/5
+        // GET: KPIs/Edit/5
         public PartialViewResult Edit(int id)
         {
-            SLA sla = slaRepo.GetSLAByID(id);
-            return PartialView("PartialSLA/_editSLA", sla);
+            KPI kPI = kpiRepo.GetKPIByID(id);
+            return PartialView("PartialKPI/_editKPI", kPI);
         }
 
-        // POST: SLAs/Edit/5
+        // POST: KPIs/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CreationDate,Name,Scope,ResolutionTimeAverage,SupportType,PriorityName,ResponseTime")] SLA sLA)
+        public ActionResult Edit([Bind(Include = "ID,CreationDate,Name,Objective,FormulaValue")] KPI kPI)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    slaRepo.UpdateSLA(sLA);
-                    slaRepo.Save();
-                    this.AddToastMessage("SLA", "SLA edited successfully", ToastType.Success);
+                    kpiRepo.UpdateKPI(kPI);
+                    kpiRepo.Save();
+                    this.AddToastMessage("KPI", "KPI edited successfully", ToastType.Success);
                     return Json(new { success = true });
                 }
                 catch (DbUpdateException sqlExc)
@@ -115,7 +109,7 @@ namespace UI.Controllers
                     if (sqlException != null)
                     {
                         logger.Error(sqlExc.ToString());
-                        this.AddToastMessage("SLA", "SLA already exists, please verify.", ToastType.Error);
+                        this.AddToastMessage("KPI", "KPI already exists, please verify.", ToastType.Error);
                     }
                     else
                     {
@@ -123,25 +117,25 @@ namespace UI.Controllers
                     }
                 }
             }
-            return PartialView("PartialSLA/_editSLA", sLA);
+            return PartialView("PartialKPI/_editKPI", kPI);
         }
 
-        // GET: SLAs/Delete/5
+        // GET: KPIs/Delete/5
         public ActionResult Delete(bool? saveChangesError = false, int id = 0)
         {
-            SLA sla = slaRepo.GetSLAByID(id);
-            return PartialView("PartialSLA/_deleteSLA", sla);
+            KPI kpi = kpiRepo.GetKPIByID(id);
+            return PartialView("PartialKPI/_deleteKPI", kpi);
         }
 
-        // POST: SLAs/Delete/5
+        // POST: KPIs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SLA sLA = slaRepo.GetSLAByID(id);
-            slaRepo.DeleteSLA(id);
-            slaRepo.Save();
-            this.AddToastMessage("SLA", "SLA has been deleted.", ToastType.Success);
+            KPI kPI = kpiRepo.GetKPIByID(id);
+            kpiRepo.DeleteKPI(id);
+            kpiRepo.Save();
+            this.AddToastMessage("KPI", "KPI has been deleted.", ToastType.Success);
             return Json(new { success = true });
         }
 

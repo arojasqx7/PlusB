@@ -232,6 +232,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ImpactsController.cs" />
     <Compile Include="Controllers\KnowledgeBasesController.cs" />
+    <Compile Include="Controllers\KPIsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MetricsController.cs" />
     <Compile Include="Controllers\SeveritiesController.cs" />
@@ -6662,6 +6663,10 @@
     <Content Include="Views\Shared\PartialKnowledgeBase\_createSolution.cshtml" />
     <Content Include="Views\KnowledgeBases\singleArticle.cshtml" />
     <Content Include="Views\Shared\PartialKnowledgeBase\_deleteSolution.cshtml" />
+    <Content Include="Views\KPIs\Index.cshtml" />
+    <Content Include="Views\Shared\PartialKPI\_createKPI.cshtml" />
+    <Content Include="Views\Shared\PartialKPI\_editKPI.cshtml" />
+    <Content Include="Views\Shared\PartialKPI\_deleteKPI.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

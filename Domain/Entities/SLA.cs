@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,5 +26,9 @@ namespace Domain.Entities
 
         public double ResponseTime { get; set; }
 
+        public static IEnumerable<KPI> Where(Func<object, bool> p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

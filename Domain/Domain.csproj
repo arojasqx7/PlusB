@@ -53,6 +53,7 @@
     <Compile Include="DAL\PlusBContext.cs" />
     <Compile Include="Entities\Attachment.cs" />
     <Compile Include="Entities\Consultant.cs" />
+    <Compile Include="Entities\ConsultantKPI.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\CustomerSLA.cs" />
     <Compile Include="Entities\Impact.cs" />
@@ -95,6 +96,14 @@
     <Compile Include="Migrations\201803310616362_KB-Modification.Designer.cs">
       <DependentUpon>201803310616362_KB-Modification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804030314166_ConsultantKPI.cs" />
+    <Compile Include="Migrations\201804030314166_ConsultantKPI.Designer.cs">
+      <DependentUpon>201804030314166_ConsultantKPI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804030346508_ConsultantKPIUniqueIndex.cs" />
+    <Compile Include="Migrations\201804030346508_ConsultantKPIUniqueIndex.Designer.cs">
+      <DependentUpon>201804030346508_ConsultantKPIUniqueIndex.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -123,6 +132,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803310616362_KB-Modification.resx">
       <DependentUpon>201803310616362_KB-Modification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804030314166_ConsultantKPI.resx">
+      <DependentUpon>201804030314166_ConsultantKPI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804030346508_ConsultantKPIUniqueIndex.resx">
+      <DependentUpon>201804030346508_ConsultantKPIUniqueIndex.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
