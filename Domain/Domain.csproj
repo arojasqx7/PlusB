@@ -104,6 +104,10 @@
     <Compile Include="Migrations\201804030346508_ConsultantKPIUniqueIndex.Designer.cs">
       <DependentUpon>201804030346508_ConsultantKPIUniqueIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804030837395_SurveyFK.cs" />
+    <Compile Include="Migrations\201804030837395_SurveyFK.Designer.cs">
+      <DependentUpon>201804030837395_SurveyFK.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -138,6 +142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804030346508_ConsultantKPIUniqueIndex.resx">
       <DependentUpon>201804030346508_ConsultantKPIUniqueIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804030837395_SurveyFK.resx">
+      <DependentUpon>201804030837395_SurveyFK.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
