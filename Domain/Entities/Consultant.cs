@@ -36,10 +36,6 @@ namespace Domain.Entities
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime HireDate { get; set; }
 
-        public int? IdSLA { get; set; }
-
-        public virtual SLA SLA { get; set; }
-
         public string FullName
         {
             get

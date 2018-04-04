@@ -27,11 +27,22 @@
             @Html.EditorFor(model => model.Objective, new { htmlAttributes = new { @class = "form-control", @placeholder = "Objective...", @required = "required" } })
         </div>
     </div>
-        <br />
-        <br />
-        <br />
+    <br />
+    <br />
+    <br />
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Compliance Percentage:</label>
+        <div class="input-group col-md-8">
+            @Html.EditorFor(model => model.FormulaValue, new { htmlAttributes = new { @class = "form-control", @placeholder = "Compliance Percentage...", @required = "required" } })
+            <span class="input-group-addon"><strong>%</strong></span>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
         <input type="submit" value="Submit" class="btn btn-success pull-right" />
-        <br />
+    <br />
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
