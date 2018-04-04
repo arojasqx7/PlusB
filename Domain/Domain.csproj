@@ -59,6 +59,7 @@
     <Compile Include="Entities\Impact.cs" />
     <Compile Include="Entities\KnowledgeBase.cs" />
     <Compile Include="Entities\KPI.cs" />
+    <Compile Include="Entities\KPIEvaluation.cs" />
     <Compile Include="Entities\PerformanceEvaluation.cs" />
     <Compile Include="Entities\Severity.cs" />
     <Compile Include="Entities\SLA.cs" />
@@ -108,6 +109,22 @@
     <Compile Include="Migrations\201804030837395_SurveyFK.Designer.cs">
       <DependentUpon>201804030837395_SurveyFK.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804031707388_KPIEvaluationEntity.cs" />
+    <Compile Include="Migrations\201804031707388_KPIEvaluationEntity.Designer.cs">
+      <DependentUpon>201804031707388_KPIEvaluationEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804032058581_RemoveIDSLAfromConsultant.cs" />
+    <Compile Include="Migrations\201804032058581_RemoveIDSLAfromConsultant.Designer.cs">
+      <DependentUpon>201804032058581_RemoveIDSLAfromConsultant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804040404179_addTicketIdToKPIEval.cs" />
+    <Compile Include="Migrations\201804040404179_addTicketIdToKPIEval.Designer.cs">
+      <DependentUpon>201804040404179_addTicketIdToKPIEval.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804040510569_doubleKPI.cs" />
+    <Compile Include="Migrations\201804040510569_doubleKPI.Designer.cs">
+      <DependentUpon>201804040510569_doubleKPI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -145,6 +162,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804030837395_SurveyFK.resx">
       <DependentUpon>201804030837395_SurveyFK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804031707388_KPIEvaluationEntity.resx">
+      <DependentUpon>201804031707388_KPIEvaluationEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804032058581_RemoveIDSLAfromConsultant.resx">
+      <DependentUpon>201804032058581_RemoveIDSLAfromConsultant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804040404179_addTicketIdToKPIEval.resx">
+      <DependentUpon>201804040404179_addTicketIdToKPIEval.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804040510569_doubleKPI.resx">
+      <DependentUpon>201804040510569_doubleKPI.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

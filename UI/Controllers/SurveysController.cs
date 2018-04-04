@@ -24,9 +24,8 @@ namespace UI.Controllers
         }
 
         // GET: Surveys/Create
-        public ActionResult Create()
+        public ActionResult fillSurvey(int idTicket)
         {
-            ViewBag.idTicket = new SelectList(db.Tickets, "Id", "ShortDescription");
             return View();
         }
 
@@ -34,7 +33,7 @@ namespace UI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,DateSent,Answer1,Answer2,Answer3,Comments,DateAnswered,idTicket")] Survey survey)
+        public ActionResult fillSurvey([Bind(Include = "ID,DateSent,Answer1,Answer2,Answer3,Comments,DateAnswered,idTicket")] Survey survey)
         {
             if (ModelState.IsValid)
             {
@@ -43,7 +42,6 @@ namespace UI.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.idTicket = new SelectList(db.Tickets, "Id", "ShortDescription", survey.idTicket);
             return View(survey);
         }
 

@@ -558,7 +558,7 @@ namespace UI.Controllers
                                                                  "<table border='0' cellpadding='0'cellspacing='0'>" +
                                                                 "   <tbody>" +
                                                                "      <tr>" +
-                                                              "         <td style='text-align:center;'><a>http://localhost:65158/Surveys/Create</a></td>" +
+                                                              "         <td style='text-align:center;'><a>http://localhost:65158/Surveys/Create/"+IDTicket+"</a></td>" +
                                                              "        </tr>" +
                                                             "       </tbody>" +
                                                            "      </table>" +
