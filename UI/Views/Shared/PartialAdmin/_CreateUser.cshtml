@@ -13,10 +13,12 @@
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
 
+        <p class="text-success" style="font-size: 13px;margin-left: 15px;">Password must contain:  Numbers, Uppercase letter and Special character. </p>
+        <br />
         <div class="form-group">
             @Html.LabelFor(model => model.Email, "Email:", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-8">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", required="required"} })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", required="required", placeholder="Email..."} })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -25,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Password, "Password:", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-8">
-                @Html.PasswordFor(model => model.Password, new { @class = "form-control", required = "required" })
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", required = "required", placeholder= "Password..." })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -50,16 +52,19 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-primary" />
-
             </div>
         </div>
+        <br />
+
+        if (ViewBag.PassReq != null)
+        {
+            <span class="text-danger">@ViewBag.PassReq</span>
+        }
     }
 </div>
 
 <div class="modal-footer"></div>
 
-
-<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 <script>  
     $(function() {
         $('#CustomerDiv').hide();

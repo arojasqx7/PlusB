@@ -1,5 +1,4 @@
 ﻿using Domain.DAL;
-using UI.Extensions;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -149,7 +148,7 @@ namespace UI.Controllers
                 else
                 {
                     ViewBag.Roles = GetAllRolesAsSelectList();
-                    ModelState.AddModelError("PassRequirements", "Error: Failed to create the user. Check password requirements.");
+                    ViewBag.PassReq = "Failed to create the user. Check password requirements.";
                     return View(paramExpandedUserDTO);
                 }
             }
@@ -539,7 +538,7 @@ namespace UI.Controllers
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
-            var colRoleSelectList = roleManager.Roles.OrderBy(x => x.Name).ToList();
+            var colRoleSelectList = roleManager.Roles.Where(x=> x.Name != "Consultant").OrderBy(x => x.Name).ToList();
 
             foreach (var item in colRoleSelectList)
             {

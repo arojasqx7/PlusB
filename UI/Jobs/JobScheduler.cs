@@ -34,8 +34,19 @@ namespace UI.Jobs
               )
             .Build();
 
+            //Third Job (Automated Routing)
+            IJobDetail routingJob = JobBuilder.Create<automaticRoutingJob>().Build();
+            ITrigger routingTrigger = TriggerBuilder.Create()
+            .WithIdentity("thirdTrigger", "group1")
+            .WithSimpleSchedule(x => x
+                .WithIntervalInMinutes(20)
+                .RepeatForever())
+            .Build();
+
+            //Job Schedulers Firing
             scheduler.ScheduleJob(Job, Trigger); // Schedule First Job
             scheduler.ScheduleJob(KPIJob,KPITrigger); //Schedule Second Job
+            scheduler.ScheduleJob(routingJob, routingTrigger); //Schedule Third Job
         }
     }
 }
