@@ -249,6 +249,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Jobs\automaticRoutingJob.cs" />
     <Compile Include="Jobs\KPIEvaluationJob.cs" />
     <Compile Include="Jobs\performanceEvalutionJob.cs" />
     <Compile Include="Jobs\JobScheduler.cs" />
