@@ -22,6 +22,9 @@ namespace UI.Jobs
         public void Execute(IJobExecutionContext context)
         {
             var yesterday = DateTime.Today.AddDays(-1);
+            DateTime today = DateTime.Now;
+            TimeSpan currentHour = TimeSpan.Parse(today.ToString("HH:mm:ss tt"));
+            var shortDate = today.Date;
             bool sendNotification = false;
 
             try
@@ -40,6 +43,8 @@ namespace UI.Jobs
                 {
                     Ticket ticket = db.Tickets.Find(t.Id);
                     ticket.Id_Consultant = getLessAvgConsultant.Consultant.ID;
+                    ticket.AssignmentDate = shortDate;
+                    ticket.AssignmentTime = currentHour;
                     db.Set<Ticket>().AddOrUpdate(ticket);
                     db.SaveChanges();
                     sendNotification = true;
