@@ -28,6 +28,9 @@ namespace UI.Controllers
         private static double hoursResult;
         private static int idCustomerIndex;
         private ApplicationUserManager _userManager;
+        private static double riskPercentage = 0;
+        private static double riskPercentageSLAFailure = 0;
+        private static double riskPeriodicUpdate = 0;
 
         public TicketsController()
         {
@@ -444,9 +447,204 @@ namespace UI.Controllers
             {
                 logger.Error(ex.ToString());
             }
-
             return RedirectToAction("Index", "Tickets");
         }
+
+        // Risk Monitor Region
+        #region Risk Calculation Methods
+        public double escalationRisk(int id)
+        {
+            //Get ticket per id received from Ajax call
+            Ticket ticket = ticketRepo.GetTicketByID(id);
+
+            //Get open hour and current hour to perform the hours diff calculation
+            DateTime hourTicketOpened = ticket.Date + ticket.OpenTime;
+            DateTime currentHour = DateTime.Now;
+
+            //Obtain hours value
+            TimeSpan hoursDiff = Convert.ToDateTime(currentHour).Subtract(hourTicketOpened);
+            hoursResult = hoursDiff.TotalHours;
+
+            var getSLAType = from a in db.Tickets
+                             join b in db.Customers
+                             on a.Id_Customer equals b.Id
+                             join c in db.CustomerSLAS
+                             on b.Id equals c.IdCustomer
+                             join d in db.SLAS
+                             on c.IdSLA equals d.ID
+                             where a.Id == id
+                             select new { d.SupportType, d.ResolutionTimeAverage};
+
+            string supportType = getSLAType.Select(x => x.SupportType).First();
+            int responseAvg = Convert.ToInt32(getSLAType.Select(y => y.ResolutionTimeAverage).First());
+            double escalationAVG = 0;
+
+            switch (supportType)
+            {
+                case "Standard":
+                    escalationAVG = hoursResult - responseAvg;
+
+                    if (escalationAVG >= 2 && escalationAVG <= 5)
+                    {
+                        riskPercentage = 12.6;
+                    }
+                    else if (escalationAVG >= 5 && escalationAVG <= 9)
+                    {
+                        riskPercentage = 24.1;
+                    }
+                    else if (escalationAVG > 9 && escalationAVG <= 12)
+                    {
+                        riskPercentage = 47;
+                    }
+                    else if (escalationAVG > 12 && escalationAVG <= 15)
+                    {
+                        riskPercentage = 58;
+                    }
+                    else if (escalationAVG > 15 && escalationAVG <= 19)
+                    {
+                        riskPercentage = 65;
+                    }
+                    else if (escalationAVG > 19 && escalationAVG <= 23)
+                    {
+                        riskPercentage = 73;
+                    }
+                    else if (escalationAVG > 23 && escalationAVG <= 29)
+                    {
+                        riskPercentage = 92.6;
+                    }
+                    break;
+
+                case "Premier":
+                    escalationAVG = hoursResult - responseAvg;
+
+                    if (escalationAVG >= 2 && escalationAVG <=5)
+                    {
+                        riskPercentage = 25.1;
+                    }
+                    else if (escalationAVG >= 5 && escalationAVG <= 9)
+                    {
+                        riskPercentage = 48.2;
+                    }
+                    else if (escalationAVG > 9 && escalationAVG <=12)
+                    {
+                        riskPercentage = 66.6;
+                    }
+                    else if (escalationAVG > 12 && escalationAVG <= 15)
+                    {
+                        riskPercentage = 84.9;
+                    }
+                    else if (escalationAVG > 15 && escalationAVG <= 19)
+                    {
+                        riskPercentage = 91.7;
+                    }
+                    else if(escalationAVG > 19)
+                    {
+                        riskPercentage = 97.9;
+                    }
+                    break;
+            }
+            return riskPercentage;
+        }
+
+        public double failureToMeetSLA(int id)
+        {
+            //Get ticket per id received from Ajax call
+            Ticket ticket = ticketRepo.GetTicketByID(id);
+
+            //Get open hour and current hour to perform the hours diff calculation
+            DateTime hourTicketOpened = ticket.Date + ticket.OpenTime;
+            DateTime currentHour = DateTime.Now;
+
+            //Obtain hours value
+            TimeSpan hoursDiff = Convert.ToDateTime(currentHour).Subtract(hourTicketOpened);
+            hoursResult = hoursDiff.TotalHours;
+
+            var getSLAResponseTime = (from a in db.Tickets
+                                     join b in db.Customers
+                                     on a.Id_Customer equals b.Id
+                                     join c in db.CustomerSLAS
+                                     on b.Id equals c.IdCustomer
+                                     join d in db.SLAS
+                                     on c.IdSLA equals d.ID
+                                     where a.Id == id
+                                     select new { d.SupportType, d.ResolutionTimeAverage });
+
+            int slaAvg = Convert.ToInt32(getSLAResponseTime.Select(y => y.ResolutionTimeAverage).First());
+            string supportType = getSLAResponseTime.Select(x => x.SupportType).First();
+            double hoursTakenSoFar = 0;
+
+            switch (supportType)
+            {
+                case "Standard":
+                    hoursTakenSoFar = hoursResult - slaAvg;
+
+                    if (hoursTakenSoFar >= -7 && hoursTakenSoFar <= -5)
+                    {
+                        riskPercentageSLAFailure = 2;
+                    }
+                    else if (hoursTakenSoFar >= -5 && hoursTakenSoFar <= -3)
+                    {
+                        riskPercentageSLAFailure = 15;
+                    }
+                    else if (hoursTakenSoFar >= -3 && hoursTakenSoFar <= -1)
+                    {
+                        riskPercentageSLAFailure = 54;
+                    }
+                    else if (hoursTakenSoFar >= 0)
+                    {
+                        riskPercentageSLAFailure = 100;
+                    }
+                    break;
+
+                case "Premier":
+                    hoursTakenSoFar = hoursResult - slaAvg;
+
+                    if (hoursTakenSoFar >= -7 && hoursTakenSoFar <= -5)
+                    {
+                        riskPercentageSLAFailure = 5;
+                    }
+                    else if (hoursTakenSoFar >= -5 && hoursTakenSoFar <= -3)
+                    {
+                        riskPercentageSLAFailure = 30;
+                    }
+                    else if (hoursTakenSoFar >= -3 && hoursTakenSoFar <= -1)
+                    {
+                        riskPercentageSLAFailure = 78;
+                    }
+                    else if (hoursTakenSoFar >= 0)
+                    {
+                        riskPercentageSLAFailure = 100;
+                    }
+                    break;
+            }
+            return riskPercentageSLAFailure;
+        }
+
+        public double periodicUpdateRisk(int id)
+        {
+            DateTime currentHour = DateTime.Now;
+
+            TicketActivity getLastActivityOnTicket = db.TicketActivities.Where(x => x.idTicket == id)
+                                                     .ToArray().LastOrDefault();
+
+            if (getLastActivityOnTicket == null)
+            {
+                return 0;
+            }
+            else
+            {
+                DateTime LastActivity = getLastActivityOnTicket.Date + getLastActivityOnTicket.Time;
+
+                //Obtain hours value
+                TimeSpan hoursDiff = Convert.ToDateTime(currentHour).Subtract(LastActivity);
+                hoursResult = hoursDiff.TotalHours;
+                riskPeriodicUpdate = Math.Round(hoursResult,2);
+                return riskPeriodicUpdate;
+            }
+        }
+        #endregion
+
+        #region SendMail Sendgrid Methods
 
         private void SendEmail()
         {
@@ -602,6 +800,7 @@ namespace UI.Controllers
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             var response = client.SendEmailAsync(msg);
         }
+        #endregion
 
         #region public ApplicationUserManager UserManager
         public ApplicationUserManager UserManager

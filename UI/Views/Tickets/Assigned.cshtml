@@ -15,7 +15,9 @@
 </style>
 
 <section class="content-header">
-        <h1>Incident: @Html.DisplayFor(model => model.Id)</h1>
+        <label id="ticketID" style="display:none;">@Html.DisplayFor(model => model.Id)</label>
+
+        <h1>Incident No: @Html.DisplayFor(model => model.Id)</h1>
         <h4>
             Status:
             @if (Model.Status == "Open")
@@ -40,13 +42,14 @@
 
             }
         </h4>
+        <h4>Company: @Html.DisplayFor(model => model.Customer.CompanyName)</h4>
         <h4>Creator: @Html.DisplayFor(model => model.Creator)</h4>
     @using (Html.BeginForm("UpdateStatus", "Tickets", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.Id)
 
-       <div class="col-xs-4" style="float:right;margin-top:-50px; margin-right:-15px;display:inline-flex;">
+       <div class="col-xs-4" style="float:right;margin-top:-90px; margin-right:-15px;display:inline-flex;">
                 @Html.DropDownListFor(x => x.Status, new List<SelectListItem>
                {
                   new SelectListItem() {Text = "Work In Progress", Value="Work In Progress"},
@@ -63,13 +66,63 @@
     }
 </section>
 
-<br /><br />
+<br />
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <div class="box box-default">
+            <div class="box box-solid">
+                <div class="box-header">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <h3 class="box-title">Risk Analysis Monitor</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-default btn-sm" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-4 text-center">
+                            <input id="periodicUpdateRiskAvg" type="text" class="knob" data-skin="tron" data-thickness="0.2" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true" data-toggle="tooltip" title="Risk">
+                            <div class="knob-label"><strong>Number of hours without update.</strong></div>
+                            <br />
+                            <button class="btn btn-default btn-xs">Show actions to take</button>
+                        </div>
+                        <div class="col-xs-6 col-md-4 text-center">
+                            <input id="escalationRiskAvg" type="text" class="knob" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954" data-readonly="true" data-toggle="tooltip" title="Risk">
+                            <div class="knob-label"><strong>Escalation Risk</strong></div>
+                            <br />
+                            <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal-escalation">Show actions to take</button>
+                        </div>
+                        <div class="col-xs-6 col-md-4 text-center">
+                            <input id="failureSLARisk" type="text" class="knob" value="10" data-skin="tron" data-thickness="0.1" data-width="90" data-height="90" data-fgColor="#00a65a" data-readonly="true" data-toggle="tooltip" title="Risk">
+                            <div class="knob-label"><strong>Failure to meet SLAs</strong></div>
+                            <br />
+                            <button class="btn btn-default btn-xs">Show actions to take</button>
+                        </div>
+                        @*<div class="col-xs-6 col-md-3 text-center">
+                            <input type="text" class="knob" value="75" data-skin="tron" data-thickness="0.2" data-width="120" data-width="120" data-height="120" data-fgColor="#f56954" data-readonly="true" data-toggle="tooltip" title="Risk">
+                            <div class="knob-label"><strong>Failure to meet KPIs</strong></div>
+                            <br />
+                            <button class="btn btn-default btn-xs">Show actions to take</button>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+    <br />
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-solid">
                 <div class="box-header">
                     <h2 class="box-title ">Subject: <span class="text-bold txtHover" style="margin-left:25px;">@Html.DisplayFor(model => model.ShortDescription)</span></h2>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-default btn-sm" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="box-body">
                     <div class="row">
@@ -122,11 +175,67 @@
     </div>
 </section>
 
+<div class="modal fade" id="modal-escalation">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">X</span>
+                </button>
+                <h4 class="modal-title">Escalation risk details & Actions to take</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("PartialRisks/_escalationRiskDetails")
+
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
 
 @section Scripts{
-    <script>
+@Scripts.Render("~/Scripts/Modals.js")
+
+<script>
     $(document).ready(function () {
         $("#txtActivity").focus();
+        var idTicket = $('#ticketID').text();
+
+        $.ajax({
+            url: '/Tickets/escalationRisk',
+            data: { 'id': idTicket },
+            type: 'GET',
+            success: function (data) {
+                $('#escalationRiskAvg').val(data).trigger('change');;
+            },
+            error: function () {
+                alert('Error occured while getting Risk');
+            }
+        });
+
+        $.ajax({
+            url: '/Tickets/failureToMeetSLA',
+            data: { 'id': idTicket },
+            type: 'GET',
+            success: function (data) {
+                $('#failureSLARisk').val(data).trigger('change');;
+            },
+            error: function () {
+                alert('Error occured while getting Risk');
+            }
+        });
+
+        $.ajax({
+            url: '/Tickets/periodicUpdateRisk',
+            data: { 'id': idTicket },
+            type: 'GET',
+            success: function (data) {
+                $('#periodicUpdateRiskAvg').val(data).trigger('change');;
+            },
+            error: function () {
+                alert('Error occured while getting Risk');
+            }
+        });
     });
 
     $("#txtActivity").keyup(function () {
@@ -137,5 +246,5 @@
             $('#btnSave').show();
         }
     });
-    </script>
+</script>
 }

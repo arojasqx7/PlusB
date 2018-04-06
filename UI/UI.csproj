@@ -6577,6 +6577,7 @@
     <Content Include="Views\Surveys\fillSurvey.cshtml" />
     <Content Include="Views\Surveys\Index.cshtml" />
     <Content Include="Views\Metrics\KPIEvaluation.cshtml" />
+    <Content Include="Views\Shared\PartialRisks\_escalationRiskDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
