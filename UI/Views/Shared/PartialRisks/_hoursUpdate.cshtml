@@ -1,0 +1,23 @@
+﻿@*@{
+    double riskNo = Convert.ToDouble(TempData["PeriodicUpdateRisk"]);
+}
+
+<h4>Your hours without update risk average is <strong>@riskNo</strong></h4>
+<h5>Please take the following considerations:</h5>
+<br />
+
+@if (riskNo == 100)
+{
+    <ul>
+        <li><span class="glyphicon glyphicon-asterisk"></span> Involve more resources.</li>
+        <li><span class="glyphicon glyphicon-asterisk"></span> Elaborate a containment plan to work on incidents.</li>
+    </ul>
+}
+
+else if (riskNo == 78)
+{
+    <ul>
+        <li><span class="glyphicon glyphicon-asterisk"></span> Involve more resources.</li>
+        <li><span class="glyphicon glyphicon-asterisk"></span> Elaborate a containment plan to work on incidents.</li>
+    </ul>
+}*@

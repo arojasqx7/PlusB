@@ -1,2 +1,29 @@
 ﻿
-hgusdhuidahui
+<h4>Escalation risk average</h4>
+<h5>Please take the following considerations:</h5>
+<br />
+
+<p>@Model</p>
+    @*@if (@riskNo == 97.9)
+    {
+    <ul>
+        <li><span class="glyphicon glyphicon-asterisk"></span> Involve more resources.</li>
+        <li><span class="glyphicon glyphicon-asterisk"></span> Send an update and call the customer ASAP.</li>
+        <li><span class="glyphicon glyphicon-asterisk"></span> Report Incident flow to your manager.</li>
+    </ul>
+    }
+    else if(@riskNo == 91.7)
+    {
+        <ul>
+            <li><span class="glyphicon glyphicon-asterisk"></span> Keep sending constant updates to the customer.</li>
+            <li><span class="glyphicon glyphicon-asterisk"></span> Call the customer ASAP.</li>
+            <li><span class="glyphicon glyphicon-asterisk"></span> Send possible workaround to the customer</li>
+        </ul>
+    }
+    else
+    {
+        <ul>
+            <li><span class="glyphicon glyphicon-asterisk">Keep contant updates.</span></li>
+            <li><span class="glyphicon glyphicon-asterisk">Avoid waste of time.</span></li>
+        </ul>
+    }*@

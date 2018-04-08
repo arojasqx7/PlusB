@@ -487,6 +487,7 @@ namespace UI.Controllers
                     if (escalationAVG >= 2 && escalationAVG <= 5)
                     {
                         riskPercentage = 12.6;
+                       
                     }
                     else if (escalationAVG >= 5 && escalationAVG <= 9)
                     {
@@ -540,9 +541,11 @@ namespace UI.Controllers
                     else if(escalationAVG > 19)
                     {
                         riskPercentage = 97.9;
+                        ViewBag.EscalationRisk = "Involve more resources.";
                     }
                     break;
             }
+           // ViewBag.EscalationRisk = riskPercentage;
             return riskPercentage;
         }
 
@@ -617,6 +620,7 @@ namespace UI.Controllers
                     }
                     break;
             }
+            TempData["SLAFailureRisk"] = riskPercentageSLAFailure;
             return riskPercentageSLAFailure;
         }
 
@@ -639,6 +643,7 @@ namespace UI.Controllers
                 TimeSpan hoursDiff = Convert.ToDateTime(currentHour).Subtract(LastActivity);
                 hoursResult = hoursDiff.TotalHours;
                 riskPeriodicUpdate = Math.Round(hoursResult,2);
+                TempData["PeriodicUpdateRisk"] = riskPeriodicUpdate;
                 return riskPeriodicUpdate;
             }
         }

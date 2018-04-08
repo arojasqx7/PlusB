@@ -6578,6 +6578,8 @@
     <Content Include="Views\Surveys\Index.cshtml" />
     <Content Include="Views\Metrics\KPIEvaluation.cshtml" />
     <Content Include="Views\Shared\PartialRisks\_escalationRiskDetails.cshtml" />
+    <Content Include="Views\Shared\PartialRisks\_hoursUpdate.cshtml" />
+    <Content Include="Views\Shared\PartialRisks\_meetSLARiskDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
