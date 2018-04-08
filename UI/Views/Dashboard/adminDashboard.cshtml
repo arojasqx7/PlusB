@@ -1,8 +1,17 @@
-﻿
-@{
-    ViewBag.Title = "adminDashboard";
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var jss = new System.Web.Script.Serialization.JavaScriptSerializer();
+    var userInfoJson = jss.Serialize(ViewBag.techBreakdownList);
+    var closedOpenJson = jss.Serialize(ViewBag.getHistoryLast7Days);
 }
+
+<style>
+    .info-box-number
+    {
+        font-size:26px;
+    }
+</style>
 
 <section class="content-header">
     <h1>Administrator Dashboard</h1>
@@ -11,66 +20,141 @@
 <br />
 <section class="content">
     <div class="row">
-        <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-aqua">
-                <div class="inner">
-                    <h3>150</h3>
-
-                    <p>Customers</p>
+        <div class="col-md-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="ion ion-ios-people-outline"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Consultants</span>
+                    <span class="info-box-number" id="consultantNo"></span>
                 </div>
-                <div class="icon">
-                    <i class="fa fa-handshake-o"></i>
-                </div>
-                <a href="@Url.Action("Index","Customers")" class="small-box-footer">
-                    More info <i class="fa fa-arrow-circle-right"></i>
-                </a>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="ion-clock"></i></span>
 
-        <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-yellow">
-                <div class="inner">
-                    <h3>44</h3>
-
-                    <p>Consultants</p>
+                <div class="info-box-content">
+                    <span class="info-box-text">Open Incidents</span>
+                    <span class="info-box-number" id="openTicks"></span>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="@Url.Action("Index","ConsultantUser")" class="small-box-footer">
-                    More info <i class="fa fa-arrow-circle-right"></i>
-                </a>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="ion-arrow-return-right"></i></span>
 
-        <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-green">
-                <div class="inner">
-                    <h3>53</h3>
-                    <p>Active Tickets</p>
+                <div class="info-box-content">
+                    <span class="info-box-text">Unassigned</span>
+                    <span class="info-box-number" id="unassTicks"></span>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                    More info <i class="fa fa-arrow-circle-right"></i>
-                </a>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="ion-briefcase"></i></span>
 
-        <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-red">
-                <div class="inner">
-                    <h3>65</h3>
-                    <p>Escalations</p>
+                <div class="info-box-content">
+                    <span class="info-box-text">Companies</span>
+                    <span class="info-box-number" id="companiesNo"></span>
                 </div>
-                <div class="icon">
-                    <i class="fa fa-exclamation-triangle"></i>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Incident History Last 7 Days</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>                    
+                    </div>
                 </div>
-                <a href="#" class="small-box-footer">
-                    More info <i class="fa fa-arrow-circle-right"></i>
-                </a>
+                <div class="box-body chart-responsive">
+                    <div class="chart" id="bar-chart" style="height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Technology Breakdown</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body chart-responsive">
+                    <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+@section Scripts
+{
+@Scripts.Render("~/bundles/morris")
+@Scripts.Render("~/bundles/raphael")
+
+<script>
+        $(document).ready(function () {
+            $.get("/Dashboard/consultantNo", function (message) {
+                $('#consultantNo').html(message);
+            });
+
+            $.get("/Dashboard/openTickets", function (message) {
+                $('#openTicks').html(message);
+            });
+
+            $.get("/Dashboard/unassignedTickets", function (message) {
+                $('#unassTicks').html(message);
+            });
+
+            $.get("/Dashboard/companiesNo", function (message) {
+                $('#companiesNo').html(message);
+            });
+
+            $.get("/Dashboard/companiesNo", function (message) {
+                $('#companiesNo').html(message);
+            });
+
+            $.get("/Dashboard/getTechnologyBreakdown");
+
+            $.get("/Dashboard/getIncidentHistoryLast7Days");
+        });
+
+        $(function () {
+
+            "use strict";
+
+            var jsonClosedOpen = JSON.parse('@Html.Raw(closedOpenJson)').Data;
+
+            //BAR CHART
+            var bar = new Morris.Bar({
+                element: 'bar-chart',
+                resize: true,
+                data: jsonClosedOpen,
+                barColors: ['#f39c12', '#3c8dbc'],
+                xkey: 'y',
+                ykeys: ['a', 'b'],
+                labels: ['Open', 'Closed'],
+                hideHover: 'auto'
+            });
+
+            //Store JSON from controller
+            var jsonInfo = JSON.parse('@Html.Raw(userInfoJson)').Data;
+
+            //DONUT CHART
+            var donut = new Morris.Donut({
+                element: 'sales-chart',
+                resize: true,
+                colors: ["#3c8dbc", "#f56954", "#f39c12"],
+                data: jsonInfo,
+                hideHover: 'auto'
+            });
+         });
+</script>
+}
