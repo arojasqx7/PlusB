@@ -4,6 +4,11 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .lbl{font-size:12px;}
+    .textArea{width:80%;height:70px;}
+    .marginLeft{margin-left:5px;}
+</style>
 
 <section class="content-header">
     <h1>Survey Satisfaction</h1>
@@ -15,72 +20,84 @@
         <div class="col-xs-12">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h2 class="box-title">Fill survey details</h2>
+                    <h2 class="box-title">How satisfied are you with:</h2>
                 </div>
+                <br />
                 <div class="box-body">
-                    <br />
                         @using (Html.BeginForm())
                         {
                             @Html.AntiForgeryToken()
                             <div class="form-group">
-                                @Html.LabelFor(model => model.DateSent, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.DateSent, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.DateSent, "", new { @class = "text-danger" })
+                                <div class="col-md-12">
+                                    <label class="lbl">Overall, how satisfied are you with the consultant assigned?</label>
+                                    <br />
+                                    <br />
+                                    @Html.RadioButtonFor(model => model.Answer1, "Very Satisfied", new { required = "required" }) <span class="lbl marginLeft">Very Satisfied</span>
+                                    <br />
+                                    @Html.RadioButtonFor(model => model.Answer1, "Satisfied") <span class="lbl marginLeft">Satisfied</span>
+                                    <br />
+                                    @Html.RadioButtonFor(model => model.Answer1, "Neutral") <span class="lbl marginLeft">Neutral</span>
+                                    <br />
+                                    @Html.RadioButtonFor(model => model.Answer1, "Dissatisfied")<span class="lbl marginLeft">Dissatisfied</span>
+                                    <br />
+                                    @Html.RadioButtonFor(model => model.Answer1, "Very Dissatisfied")<span class="lbl marginLeft">Very Dissatisfied</span>
                                 </div>
                             </div>
-
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Answer1, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Answer1, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Answer1, "", new { @class = "text-danger" })
+                                <div class="col-md-12">
+                                    <label class="lbl">Overall, how satisfied are you with the consultant assigned?</label>
+                                    <br />
+                                    <br />
+                                    @Html.RadioButtonFor(model => model.Answer2, "Very Satisfied", new { required = "required" }) <span class="lbl marginLeft">Very Satisfied</span>
+                                    <br />
+                                    @Html.RadioButtonFor(model => model.Answer2, "Satisfied") <span class="lbl marginLeft">Satisfied</span>
+                                    <br />
+                                    @Html.RadioButtonFor(model => model.Answer2, "Neutral") <span class="lbl marginLeft">Neutral</span>
+                                    <br />
+                                    @Html.RadioButtonFor(model => model.Answer2, "Dissatisfied")<span class="lbl marginLeft">Dissatisfied</span>
+                                    <br />
+                                    @Html.RadioButtonFor(model => model.Answer2, "Very Dissatisfied")<span class="lbl marginLeft">Very Dissatisfied</span>
                                 </div>
                             </div>
-
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Answer2, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Answer2, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Answer2, "", new { @class = "text-danger" })
+                                <div class="col-md-8">
+                                    <label class="lbl">Please tell us how we could improve the quality of support we provide to you or your organization:</label>
+                                    <br />
+                                    @Html.TextAreaFor(model => model.Answer3, new { htmlAttributes = new { @class = "textArea",style= "width:80%;height:70px;" } })
                                 </div>
                             </div>
-
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Answer3, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Answer3, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Answer3, "", new { @class = "text-danger" })
+                                <div class="col-md-12">
+                                    <label class="lbl">Overall, how satisfied are you with the consultant assigned?</label>
+                                    <br />
+                                    <br />
+                                    @Html.RadioButtonFor(model => model.Answer4, 5) <span class="lbl marginLeft">Very Satisfied</span> 
+                                    <br />
+                                    @Html.RadioButtonFor(model => model.Answer4, 2, new { required="required"})<span class="lbl marginLeft">Neutral</span>
+                                    <br />
+                                    @Html.RadioButtonFor(model => model.Answer4, 1)<span class="lbl marginLeft">Dissatisfied</span>
                                 </div>
                             </div>
-
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                                <div class="col-md-8">
+                                    <label class="lbl">Add recommendations / suggestions </label>
+                                    <br />
+                                    @Html.TextAreaFor(model => model.Comments, new { htmlAttributes = new { @class = "textArea", style = "width:80%;height:70px;" } })
                                 </div>
                             </div>
-
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
                             <div class="form-group">
-                                @Html.LabelFor(model => model.DateAnswered, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.DateAnswered, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.DateAnswered, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.idTicket, "idTicket", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.DropDownList("idTicket", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.idTicket, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Create" class="btn btn-default" />
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-send"></span>    Send </button>
                                 </div>
                             </div>
                         }

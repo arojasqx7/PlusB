@@ -6580,6 +6580,9 @@
     <Content Include="Views\Shared\PartialRisks\_escalationRiskDetails.cshtml" />
     <Content Include="Views\Shared\PartialRisks\_hoursUpdate.cshtml" />
     <Content Include="Views\Shared\PartialRisks\_meetSLARiskDetails.cshtml" />
+    <Content Include="Views\NotificationViews\notificationInfo.cshtml" />
+    <Content Include="Views\Surveys\answeredSurvey.cshtml" />
+    <Content Include="Views\Surveys\surveyAlertCreation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
