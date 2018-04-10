@@ -37,12 +37,12 @@
                                 <label for="inputName" class="col-sm-2 control-label">From:</label>
 
                                 <div class="col-sm-3" style="display:inline-flex;">
-                                    @Html.TextBox("DateFrom", null, new { @class = "form-control datepicker", @placeholder = "From..", @required = "required", @readonly = "readonly", @style = "margin-left:10px;background-color: #fff;" })
+                                    @Html.TextBox("DateFrom", null, new { @class = "form-control", @id = "datepicker", @placeholder = "From..", @required = "required", @style = "margin-left:10px;", @autocomplete="off"})
                                 </div>
 
                                 <div class="col-sm-3" style="display:inline-flex;">
                                     <label for="to" class="control-label">To:</label>
-                                    @Html.TextBox("DateTo", null, new { @class = "form-control datepicker", @placeholder = "To..", @required = "required", @style = "margin-left:10px;background-color: #fff;", @readonly = "readonly" })
+                                    @Html.TextBox("DateTo", null, new { @class = "form-control", @id= "datepicker2", @placeholder = "To..", @required = "required", @style = "margin-left:10px;", @autocomplete = "off" })
                                 </div>
                             </div>
                         </div>
@@ -88,5 +88,15 @@
 <script src="~/Scripts/jquery/dist/jquery.min.js"></script>
 <script src="~/Scripts/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script>
-    $('.datepicker').datepicker("option", "dateFormat", "dd/mm/yyyy");
+    $('#datepicker').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'dd/mm/yyyy'
+    })
+
+    $('#datepicker2').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'dd/mm/yyyy'
+    })
 </script>
