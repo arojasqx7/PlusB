@@ -31,6 +31,7 @@ namespace UI.Controllers
         private static double riskPercentage = 0;
         private static double riskPercentageSLAFailure = 0;
         private static double riskPeriodicUpdate = 0;
+        private static bool notificationCheck = false;
 
         public TicketsController()
         {
@@ -378,6 +379,9 @@ namespace UI.Controllers
             {
                 try
                 {
+                    var customerEmail = db.Tickets.Where(x => x.Id.Equals(IDTicket)).Select(x => x.Creator).FirstOrDefault();
+                    emailToSend = customerEmail;
+
                     ticket.ClosedDate = shortDate;
                     ticket.ClosedTime = currentCloseHour;
                     ticket.AverageResolution = obtainAvgResolution();
@@ -390,6 +394,16 @@ namespace UI.Controllers
                 catch (Exception ex)
                 {
                     logger.Error(ex.ToString());
+                }
+
+                //return to proper page according to role
+                if (User.IsInRole("Consultant"))
+                {
+                    return RedirectToAction("MyTickets", "Tickets");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Tickets");
                 }
             }
             else
@@ -405,15 +419,15 @@ namespace UI.Controllers
                 {
                     logger.Error(ex.ToString());
                 }
-            }
-           
+
                 //return to proper page according to role
                 if (User.IsInRole("Consultant"))
                 {
                     var customerEmail = db.Tickets.Where(x => x.Id.Equals(IDTicket)).Select(x => x.Creator).FirstOrDefault();
                     emailToSend = customerEmail;
                     statusToSend = status;
-                    SendEmail(); // send notification
+                    // send notification
+                    SendEmail();
                     return RedirectToAction("MyTickets", "Tickets");
                 }
                 else
@@ -422,9 +436,11 @@ namespace UI.Controllers
                     var consultant_Email = db.Consultants.Where(y => y.ID.Equals(consultantEmail)).Select(y => y.Email).FirstOrDefault();
                     emailToSend = consultant_Email;
                     statusToSend = status;
-                    SendEmail(); // send notification
+                    // send notification
+                    SendEmail();
                     return RedirectToAction("Index", "Tickets");
                 }
+            }         
         }
 
         [HttpPost]
@@ -649,8 +665,29 @@ namespace UI.Controllers
         }
         #endregion
 
-        #region SendMail Sendgrid Methods
+        [HttpGet]
+        public PartialViewResult NotificationChecker()
+        {
+            return PartialView("NotificationViews/sidebarSettings");
+        }
 
+        [HttpPost]
+        public void NotificationChecker(bool checkResp = false)
+        {
+            notificationCheck = checkResp;
+
+            if (notificationCheck == true)
+            {
+                this.AddToastMessage("Notifications", "Notifications have been enabled!", ToastType.Info);
+            }
+            else
+            {
+                this.AddToastMessage("Notifications", "Notifications have been disabled!", ToastType.Info);
+            }
+            //return View("~/Views/NotificationViews/notificationInfo.cshtml");
+        }
+
+        #region SendMail Sendgrid Methods
         private void SendEmail()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
@@ -730,6 +767,7 @@ namespace UI.Controllers
 
         private void sendSurveyEmail()
         {
+
             var user = UserManager.FindById(User.Identity.GetUserId());
             var apiKey = "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";
             var client = new SendGridClient(apiKey);
@@ -753,7 +791,7 @@ namespace UI.Controllers
                                                        "<td style='font-family:sans-serif;font-size:14px;vertical-align:top;'>" +
                                                          "<p>Hi there,</p>" +
                                                          "<p>You were invited to evaluate the service provided by the consultant in charge of the incidente.</p>" +
-                                                         "<p>Please click the follwoing link</p>"+
+                                                         "<p>Please click the following link</p>"+
                                                          "<table border='0' cellpadding='0'cellspacing='0'>" +
                                                            "<tbody>" +
                                                              "<tr>" +
@@ -761,7 +799,7 @@ namespace UI.Controllers
                                                                  "<table border='0' cellpadding='0'cellspacing='0'>" +
                                                                 "   <tbody>" +
                                                                "      <tr>" +
-                                                              "         <td style='text-align:center;'><a>http://localhost:65158/Surveys/Create/"+IDTicket+"</a></td>" +
+                                                              "         <td style='text-align:center;'><a href='http://localhost:65158/Surveys/fillSurvey/"+IDTicket+ "'>Go to Survey</a></td>" +
                                                              "        </tr>" +
                                                             "       </tbody>" +
                                                            "      </table>" +

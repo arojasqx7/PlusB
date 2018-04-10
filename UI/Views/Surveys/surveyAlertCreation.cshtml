@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "surveyAlertCreation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>Filled survey</h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="error-page">
+
+        <h2 class="headline text-green"> <span class="glyphicon glyphicon-ok"></span></h2>
+
+        <br />
+        <div class="error-content">
+            <h3 class="text-green"> Survey answered successfully!!</h3>
+            <p>
+                Thanks for participating in the survey satisfaction.
+                Results were submitted to PlusB Management, you may <a href="@Url.Action("Login","Account")">login</a> to continue the work flow.
+            </p>
+        </div>
+    </div>
+</section>
+

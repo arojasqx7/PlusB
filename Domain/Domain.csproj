@@ -125,6 +125,14 @@
     <Compile Include="Migrations\201804040510569_doubleKPI.Designer.cs">
       <DependentUpon>201804040510569_doubleKPI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804091901582_SurveyFlag.cs" />
+    <Compile Include="Migrations\201804091901582_SurveyFlag.Designer.cs">
+      <DependentUpon>201804091901582_SurveyFlag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804100411241_SurveyChange4.cs" />
+    <Compile Include="Migrations\201804100411241_SurveyChange4.Designer.cs">
+      <DependentUpon>201804100411241_SurveyChange4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -174,6 +182,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804040510569_doubleKPI.resx">
       <DependentUpon>201804040510569_doubleKPI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804091901582_SurveyFlag.resx">
+      <DependentUpon>201804091901582_SurveyFlag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100411241_SurveyChange4.resx">
+      <DependentUpon>201804100411241_SurveyChange4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -11,16 +11,20 @@ namespace Domain.Entities
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateSent { get; set; }
 
-        public int Answer1 { get; set; }
+        public string Answer1 { get; set; }
 
-        public int Answer2 { get; set; }
+        public string Answer2 { get; set; }
 
         public string Answer3 { get; set; }
+
+        public int Answer4 { get; set; }
 
         public string Comments { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DateAnswered { get; set; }
+
+        public int IsAnswered { get; set; }
 
         [ForeignKey("Ticket")]
         public int idTicket { get; set; }
