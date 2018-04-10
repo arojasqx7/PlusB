@@ -503,31 +503,42 @@ namespace UI.Controllers
                     if (escalationAVG >= 2 && escalationAVG <= 5)
                     {
                         riskPercentage = 12.6;
-                       
+                        TempData["escalationRisk"] = riskPercentage;
                     }
                     else if (escalationAVG >= 5 && escalationAVG <= 9)
                     {
                         riskPercentage = 24.1;
+                        TempData["escalationRisk"] = riskPercentage;
                     }
                     else if (escalationAVG > 9 && escalationAVG <= 12)
                     {
                         riskPercentage = 47;
+                        TempData["escalationRisk"] = riskPercentage;
                     }
                     else if (escalationAVG > 12 && escalationAVG <= 15)
                     {
                         riskPercentage = 58;
+                        TempData["escalationRisk"] = riskPercentage;
                     }
                     else if (escalationAVG > 15 && escalationAVG <= 19)
                     {
                         riskPercentage = 65;
+                        TempData["escalationRisk"] = riskPercentage;
                     }
                     else if (escalationAVG > 19 && escalationAVG <= 23)
                     {
                         riskPercentage = 73;
+                        TempData["escalationRisk"] = riskPercentage;
                     }
                     else if (escalationAVG > 23 && escalationAVG <= 29)
                     {
                         riskPercentage = 92.6;
+                        TempData["escalationRisk"] = riskPercentage;
+                    }
+                    else
+                    {
+                        riskPercentage = 100;
+                        TempData["escalationRisk"] = riskPercentage;
                     }
                     break;
 
@@ -537,6 +548,7 @@ namespace UI.Controllers
                     if (escalationAVG >= 2 && escalationAVG <=5)
                     {
                         riskPercentage = 25.1;
+                        TempData["escalationRisk"] = riskPercentage;
                     }
                     else if (escalationAVG >= 5 && escalationAVG <= 9)
                     {
@@ -545,23 +557,25 @@ namespace UI.Controllers
                     else if (escalationAVG > 9 && escalationAVG <=12)
                     {
                         riskPercentage = 66.6;
+                        TempData["escalationRisk"] = riskPercentage;
                     }
                     else if (escalationAVG > 12 && escalationAVG <= 15)
                     {
                         riskPercentage = 84.9;
+                        TempData["escalationRisk"] = riskPercentage;
                     }
                     else if (escalationAVG > 15 && escalationAVG <= 19)
                     {
                         riskPercentage = 91.7;
+                        TempData["escalationRisk"] = riskPercentage;
                     }
                     else if(escalationAVG > 19)
                     {
                         riskPercentage = 97.9;
-                        ViewBag.EscalationRisk = "Involve more resources.";
+                        TempData["escalationRisk"] = riskPercentage;
                     }
                     break;
             }
-           // ViewBag.EscalationRisk = riskPercentage;
             return riskPercentage;
         }
 
@@ -600,18 +614,22 @@ namespace UI.Controllers
                     if (hoursTakenSoFar >= -7 && hoursTakenSoFar <= -5)
                     {
                         riskPercentageSLAFailure = 2;
+                        TempData["SLAFailureRisk"] = riskPercentageSLAFailure;
                     }
                     else if (hoursTakenSoFar >= -5 && hoursTakenSoFar <= -3)
                     {
                         riskPercentageSLAFailure = 15;
+                        TempData["SLAFailureRisk"] = riskPercentageSLAFailure;
                     }
                     else if (hoursTakenSoFar >= -3 && hoursTakenSoFar <= -1)
                     {
                         riskPercentageSLAFailure = 54;
+                        TempData["SLAFailureRisk"] = riskPercentageSLAFailure;
                     }
                     else if (hoursTakenSoFar >= 0)
                     {
                         riskPercentageSLAFailure = 100;
+                        TempData["SLAFailureRisk"] = riskPercentageSLAFailure;
                     }
                     break;
 
@@ -621,22 +639,26 @@ namespace UI.Controllers
                     if (hoursTakenSoFar >= -7 && hoursTakenSoFar <= -5)
                     {
                         riskPercentageSLAFailure = 5;
+                        TempData["SLAFailureRisk"] = riskPercentageSLAFailure;
                     }
                     else if (hoursTakenSoFar >= -5 && hoursTakenSoFar <= -3)
                     {
                         riskPercentageSLAFailure = 30;
+                        TempData["SLAFailureRisk"] = riskPercentageSLAFailure;
                     }
                     else if (hoursTakenSoFar >= -3 && hoursTakenSoFar <= -1)
                     {
                         riskPercentageSLAFailure = 78;
+                        TempData["SLAFailureRisk"] = riskPercentageSLAFailure;
                     }
                     else if (hoursTakenSoFar >= 0)
                     {
                         riskPercentageSLAFailure = 100;
+                        TempData["SLAFailureRisk"] = riskPercentageSLAFailure;
                     }
                     break;
             }
-            TempData["SLAFailureRisk"] = riskPercentageSLAFailure;
+
             return riskPercentageSLAFailure;
         }
 

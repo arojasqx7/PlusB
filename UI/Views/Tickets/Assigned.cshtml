@@ -84,29 +84,23 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-6 col-md-4 text-center">
-                            <input id="periodicUpdateRiskAvg" type="text" class="knob" data-skin="tron" data-thickness="0.2" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true" data-toggle="tooltip" title="Risk">
+                            <input id="periodicUpdateRiskAvg" type="text" class="knob" data-skin="tron" data-thickness="0.2" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true" data-toggle="tooltip" title="Hours without update risk">
                             <div class="knob-label"><strong>Number of hours without update.</strong></div>
                             <br />
                             <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal-update">Show actions to take</button>
                         </div>
                         <div class="col-xs-6 col-md-4 text-center">
-                            <input id="escalationRiskAvg" type="text" class="knob" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954" data-readonly="true" data-toggle="tooltip" title="Risk">
+                            <input id="escalationRiskAvg" type="text" class="knob" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954" data-readonly="true" data-toggle="tooltip" title="Escalation risk">
                             <div class="knob-label"><strong>Escalation Risk</strong></div>
                             <br />
                             <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal-escalation">Show actions to take</button>
                         </div>
                         <div class="col-xs-6 col-md-4 text-center">
-                            <input id="failureSLARisk" type="text" class="knob" value="10" data-skin="tron" data-thickness="0.1" data-width="90" data-height="90" data-fgColor="#00a65a" data-readonly="true" data-toggle="tooltip" title="Risk">
+                            <input id="failureSLARisk" type="text" class="knob" value="10" data-skin="tron" data-thickness="0.1" data-width="90" data-height="90" data-fgColor="#00a65a" data-readonly="true" data-toggle="tooltip" title="Failure to meet SLA risk">
                             <div class="knob-label"><strong>Failure to meet SLAs</strong></div>
                             <br />
                             <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal-meetSLA">Show actions to take</button>
                         </div>
-                        @*<div class="col-xs-6 col-md-3 text-center">
-                            <input type="text" class="knob" value="75" data-skin="tron" data-thickness="0.2" data-width="120" data-width="120" data-height="120" data-fgColor="#f56954" data-readonly="true" data-toggle="tooltip" title="Risk">
-                            <div class="knob-label"><strong>Failure to meet KPIs</strong></div>
-                            <br />
-                            <button class="btn btn-default btn-xs">Show actions to take</button>
-                        </div>*@
                     </div>
                 </div>
             </div>
@@ -176,23 +170,6 @@
     </div>
 </section>
 
-<div class="modal fade" id="modal-escalation">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">X</span>
-                </button>
-                <h4 class="modal-title">Escalation risk details & Actions to take</h4>
-            </div>
-            <div class="modal-body">
-                @Html.Partial("PartialRisks/_escalationRiskDetails", (string)ViewBag.EscalationRisk)
-            </div>
-            <div class="modal-footer"></div>
-        </div>
-    </div>
-</div>
-
 <div class="modal fade" id="modal-update">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -203,7 +180,71 @@
                 <h4 class="modal-title">Hours without update details & Actions to take</h4>
             </div>
             <div class="modal-body">
-                @Html.Partial("PartialRisks/_hoursUpdate", TempData["PeriodicUpdateRisk"])
+                <p>Hours with no update: <strong>@Convert.ToInt32(TempData["PeriodicUpdateRisk"])</strong></p>
+                <p>Actions to take:</p>
+
+                    @if(Convert.ToInt32(TempData["PeriodicUpdateRisk"]) >= 95)
+                    {
+                       <ul>
+                           <li><span class="glyphicon glyphicon-asterisk"></span> Escalate the ticket to next level support.</li>
+                           <li><span class="glyphicon glyphicon-asterisk"></span> Send ASAP a report to your manager why you did not update this ticket.</li>
+                       </ul>
+                    }
+                    else if (Convert.ToInt32(TempData["PeriodicUpdateRisk"]) >= 60 && Convert.ToInt32(TempData["PeriodicUpdateRisk"]) <= 94)
+                    {
+                        <ul>
+                            <li><span class="glyphicon glyphicon-asterisk"></span> Send ASAP an update to the customer.</li>
+                            <li><span class="glyphicon glyphicon-asterisk"></span> Call the customer to let him know about next steps.</li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul>
+                            <li><span class="glyphicon glyphicon-asterisk"></span> Keep updating the ticket.</li>
+                            <li><span class="glyphicon glyphicon-asterisk"></span> Generate documentation about possible fixes.</li>
+                        </ul>
+                    }
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-escalation">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">X</span>
+                </button>
+                <h4 class="modal-title">Escalation risk details & Actions to take</h4>
+            </div>
+            <div class="modal-body">
+                <p>Escalation Risk percentage: <strong>@Convert.ToInt32(TempData["escalationRisk"])</strong></p>
+                <p>Actions to take:</p>
+
+                    @if (Convert.ToInt32(TempData["escalationRisk"]) >= 95)
+                    {
+                        <ul>
+                            <li><span class="glyphicon glyphicon-asterisk"></span> Contact your manager to alert about this ticket.</li>
+                            <li><span class="glyphicon glyphicon-asterisk"></span> Call inmediately the customer with a valid action plan to resolve.</li>
+                            <li><span class="glyphicon glyphicon-asterisk"></span> Elevate the ticket to next level support.</li>
+                        </ul>
+                    }
+                    else if (Convert.ToInt32(TempData["escalationRisk"]) >= 60 && Convert.ToInt32(TempData["escalationRisk"]) <= 94)
+                    {
+                        <ul>
+                            <li><span class="glyphicon glyphicon-asterisk"></span> Call ASAP the customer with a valid update.</li>
+                            <li><span class="glyphicon glyphicon-asterisk"></span> Involve extra resources help.</li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul>
+                            <li><span class="glyphicon glyphicon-asterisk"></span> Keep updating the ticket.</li>
+                            <li><span class="glyphicon glyphicon-asterisk"></span> Alert the customer about next steps to implement.</li>
+                        </ul>
+                    }
             </div>
             <div class="modal-footer"></div>
         </div>
@@ -220,7 +261,32 @@
                 <h4 class="modal-title">Failure to meet SLA risk details & Actions to take</h4>
             </div>
             <div class="modal-body">
-                @Html.Partial("PartialRisks/_meetSLARiskDetails", TempData["SLAFailureRisk"])
+                <p>Escalation Risk percentage: <strong>@Convert.ToInt32(TempData["SLAFailureRisk"])</strong></p>
+                <p>Actions to take:</p>
+
+                @if (Convert.ToInt32(TempData["SLAFailureRisk"]) >= 80)
+                {
+                    <ul>
+                        <li><span class="glyphicon glyphicon-asterisk"></span> Create an action plan to tackle issues on this ticket.</li>
+                        <li><span class="glyphicon glyphicon-asterisk"></span> Provide a true time resolution to the customer.</li>
+                        <li><span class="glyphicon glyphicon-asterisk"></span> Alert your manager about this ticket.</li>
+                    </ul>
+                }
+                else if (Convert.ToInt32(TempData["SLAFailureRisk"]) >= 40 && Convert.ToInt32(TempData["SLAFailureRisk"]) <= 79)
+                {
+                    <ul>
+                        <li><span class="glyphicon glyphicon-asterisk"></span> Generate documentation and investigate all scenarios and solutions.</li>
+                        <li><span class="glyphicon glyphicon-asterisk"></span> Involve extra resources help.</li>
+                    </ul>
+                }
+                else
+                {
+                    <ul>
+                        <li><span class="glyphicon glyphicon-asterisk"></span> Call the customer and try to resolve the issue on the call.</li>
+                        <li><span class="glyphicon glyphicon-asterisk"></span> Alert the customer about next steps to implement.</li>
+                        <li><span class="glyphicon glyphicon-asterisk"></span> Keep close contact</li>
+                    </ul>
+                }
             </div>
             <div class="modal-footer"></div>
         </div>
