@@ -871,3 +871,17 @@ ERROR 2018-04-09 23:53:44,817  1645ms TicketsController      Execute            
    en UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Jobs\automaticRoutingJob.cs:línea 40
 ERROR 2018-04-09 23:56:03,215   824ms TicketsController      Execute            - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
    en UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Jobs\automaticRoutingJob.cs:línea 40
+ERROR 2018-04-11 00:12:04,242  1161ms TicketsController      Execute            - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Jobs\automaticRoutingJob.cs:línea 40
+ERROR 2018-04-11 00:13:29,555  1088ms TicketsController      Execute            - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Jobs\automaticRoutingJob.cs:línea 40
+ERROR 2018-04-11 00:20:24,278  1235ms TicketsController      Execute            - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Jobs\automaticRoutingJob.cs:línea 40
+ERROR 2018-04-11 00:40:38,065 1215022ms TicketsController      Execute            - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Jobs\automaticRoutingJob.cs:línea 40
+ERROR 2018-04-11 00:52:06,563  2700ms TicketsController      Execute            - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Jobs\automaticRoutingJob.cs:línea 40
+ERROR 2018-04-11 01:12:04,085 1200221ms TicketsController      Execute            - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Jobs\automaticRoutingJob.cs:línea 40
+ERROR 2018-04-11 10:47:30,507  1062ms TicketsController      Execute            - System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) en C:\Users\andrey.rojas\Documents\Visual Studio 2015\Projects\PlusB\UI\Jobs\automaticRoutingJob.cs:línea 40
