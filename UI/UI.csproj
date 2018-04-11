@@ -236,6 +236,7 @@
     <Compile Include="Controllers\KPIsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MetricsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\SeveritiesController.cs" />
     <Compile Include="Controllers\SLAsController.cs" />
     <Compile Include="Controllers\SurveysController.cs" />
@@ -6586,6 +6587,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

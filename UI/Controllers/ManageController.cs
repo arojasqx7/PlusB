@@ -10,6 +10,7 @@ using UI.toastr;
 using UI.Extensions;
 using Domain.DAL;
 using Persistence.Repositories;
+using System.Data.Entity;
 
 namespace UI.Controllers
 {
@@ -111,33 +112,66 @@ namespace UI.Controllers
             if (User.IsInRole("Consultant"))
             {
                 int idConsultantLogged = int.Parse(User.Identity.GetConsultantId());
-                string usernameLogged = User.Identity.GetUserName();
-                var consultantInfo = from x in db.Consultants
-                                     where x.ID.Equals(idConsultantLogged)
-                                     select x;
+                string usernameLogged =  User.Identity.GetUserName();
+
+                var consultantInfo =  db.Consultants
+                                      .Where(id => id.ID == idConsultantLogged)
+                                      .AsNoTracking();
 
                 //Get User ticket activity...
-                var ticketActivity = db.TicketActivities.Where(x=>x.User.Equals(usernameLogged)).OrderByDescending(x=>x.Date).ThenByDescending(x=>x.Time).Take(5);
+                var ticketActivity =  db.TicketActivities
+                                     .Where(x=> x.User == usernameLogged)
+                                     .OrderByDescending(x=>x.Date)
+                                     .ThenByDescending(x=>x.Time)
+                                     .AsNoTracking()
+                                     .Take(5);
                     
                 ViewBag.data = consultantInfo;
                 ViewBag.activityData = ticketActivity;
             }
+
             else if (User.IsInRole("Administrator"))
             {
                 string usernameLogged = User.Identity.GetUserName();
-                var adminInfo =      from x in db.Consultants
-                                     where x.FirstName.Equals("Unassigned")
-                                     select x;
 
-                var ticketActivityAdmin = db.TicketActivities.Where(x => x.User.Equals(usernameLogged)).OrderByDescending(x => x.Date).ThenByDescending(x => x.Time).Take(5);
+                var adminInfo =     db.Consultants
+                                    .Where(consultant => consultant.FirstName == "Unassigned")
+                                    .AsNoTracking();
+
+                var ticketActivityAdmin = db.TicketActivities
+                                         .Where(x => x.User == usernameLogged)
+                                         .OrderByDescending(x => x.Date)
+                                         .ThenByDescending(x => x.Time)
+                                         .AsNoTracking()
+                                         .Take(5);
 
                 ViewBag.data = adminInfo;
                 ViewBag.activityData = ticketActivityAdmin;
             }
+
+            else
+            {
+                int idCustomerLogged = int.Parse(User.Identity.GetCustomerId());
+                string usernameLogged = User.Identity.GetUserName();
+
+                var customerInfo =  db.Customers
+                                    .Where(customer => customer.Id == idCustomerLogged)
+                                    .AsNoTracking();
+
+                var ticketActivityCustomer = db.TicketActivities
+                                             .Where(x => x.User == usernameLogged)
+                                             .OrderByDescending(x => x.Date)
+                                             .ThenByDescending(x => x.Time)
+                                             .AsNoTracking()
+                                             .Take(5);
+
+                ViewBag.dataCustomer = customerInfo;
+                ViewBag.activityData = ticketActivityCustomer;
+            }
+
             return View();
         }
 
-        //
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]

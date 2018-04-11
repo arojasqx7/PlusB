@@ -29,7 +29,7 @@ namespace UI.Models
 
         public string Address { get; set; }
 
-        public string PhoneNumber { get; set; }
+        public int PhoneNumber { get; set; }
 
         public string JobTitle { get; set; }
 

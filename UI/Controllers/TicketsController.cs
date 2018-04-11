@@ -14,6 +14,10 @@ using UI.toastr;
 using Microsoft.AspNet.Identity;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections;
+using System.Text;
 
 namespace UI.Controllers
 {
@@ -32,6 +36,7 @@ namespace UI.Controllers
         private static double riskPercentageSLAFailure = 0;
         private static double riskPeriodicUpdate = 0;
         private static bool notificationCheck = false;
+        private static List<Ticket> reportResolvedIncidentsByConsultant = new List<Ticket>();
 
         public TicketsController()
         {
@@ -198,10 +203,13 @@ namespace UI.Controllers
         public ViewResult resolvedIncidentsByConsultant(int Id_Consultant, DateTime DateFrom, DateTime DateTo)
         {
             var ticketsResolvedbyRange =  ticketRepo.GetTickets()
-                                         .Where(x=>x.ClosedDate >= DateFrom && x.ClosedDate <= DateTo && x.Id_Consultant.Equals(Id_Consultant))
+                                         .Where(x=>x.ClosedDate >= DateFrom 
+                                          && x.ClosedDate <= DateTo 
+                                          && x.Id_Consultant == Id_Consultant)
                                          .OrderBy(x => x.ClosedDate).ThenBy(x=>x.ClosedTime)
                                          .ToList();
 
+            reportResolvedIncidentsByConsultant = ticketsResolvedbyRange; // assign rangeList to the Report List 
             ViewBag.TodalTickets = ticketsResolvedbyRange.Count();
             ViewBag.Id_Consultant = new SelectList(db.Consultants.Where(x => !x.FirstName.Contains("Unassigned")).OrderBy(x => x.FirstName), "ID", "FullName");
             return View(ticketsResolvedbyRange);
@@ -789,7 +797,6 @@ namespace UI.Controllers
 
         private void sendSurveyEmail()
         {
-
             var user = UserManager.FindById(User.Identity.GetUserId());
             var apiKey = "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";
             var client = new SendGridClient(apiKey);
@@ -867,7 +874,31 @@ namespace UI.Controllers
         }
         #endregion
 
-        #region public ApplicationUserManager UserManager
+        #region ExportData
+        public void exportToCSV()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendFormat("{0},{1},{2},{3}", "Consutant", "Open Date", "Closed Date", "Description",Environment.NewLine);
+
+            foreach (var item in reportResolvedIncidentsByConsultant)
+            {
+                sb.AppendFormat("{0},{1},{2},{3}", item.Consultant.FullName, item.Date, item.ClosedDate, item.ShortDescription);
+            }
+
+            var response = System.Web.HttpContext.Current.Response;
+            response.BufferOutput = true;
+            response.Clear();
+            response.ClearHeaders();
+            response.ContentEncoding = Encoding.Unicode;
+            response.AddHeader("content-disposition", "attachment;filename=ResolvedIncidentsByConsultant.csv");
+            response.ContentType = "text/plain";
+            response.Write(sb.ToString());
+            response.End();
+        }
+        #endregion
+
+            #region public ApplicationUserManager UserManager
         public ApplicationUserManager UserManager
         {
             get
