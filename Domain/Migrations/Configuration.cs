@@ -28,7 +28,7 @@ namespace Domain.Migrations
                  ManagerName = "Francisco Alvarado",
                  Country = "Costa Rica",
                  Address = "Escazu",
-                 PhoneNumber = "22244852",
+                 PhoneNumber = 22451215,
                  EmailAddress = "info@plusb.com",
                  SupportType = null,
                  InitialDate = Convert.ToDateTime("01/01/2000")
@@ -46,7 +46,7 @@ namespace Domain.Migrations
                   ManagerName = "Alcidez Lopez",
                   Country = "Costa Rica",
                   Address = "San Jose",
-                  PhoneNumber = "22244852",
+                  PhoneNumber = 22560012,
                   EmailAddress = "info@sapiensdev.com",
                   SupportType = null,
                   InitialDate = Convert.ToDateTime("01/01/2000")
@@ -66,7 +66,7 @@ namespace Domain.Migrations
                     Email = "info@plusb.com",
                     Pais = "Costa Rica",
                     Address = "Escazu",
-                    PhoneNumber = "22244852",
+                    PhoneNumber = 22841036,
                     JobTitle = "Admin",
                     HireDate = Convert.ToDateTime("01/01/2000")
                 }

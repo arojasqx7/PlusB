@@ -17,6 +17,8 @@
         @Styles.Render("~/Content/pagedList")
         @Styles.Render("~/Content/morris")
         @Styles.Render("~/Content/toastr")
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
@@ -311,6 +313,9 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="@Url.Action("resolvedIncidentsByConsultant","Tickets")"><i class="fa fa-check"></i>View Resolved by Consultant</a></li>
+                                <li><a href="@Url.Action("resolvedIncidentsByConsultant","Tickets")"><i class="fa fa-check"></i>Resolution Time</a></li>
+                                <li><a href="@Url.Action("resolvedIncidentsByConsultant","Tickets")"><i class="fa fa-check"></i>KPI Status</a></li>
+                                <li><a href="@Url.Action("resolvedIncidentsByConsultant","Tickets")"><i class="fa fa-check"></i>SLA Status</a></li>
                             </ul>
                         </li>
                      }

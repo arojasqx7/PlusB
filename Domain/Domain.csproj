@@ -133,6 +133,10 @@
     <Compile Include="Migrations\201804100411241_SurveyChange4.Designer.cs">
       <DependentUpon>201804100411241_SurveyChange4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804102302563_UpdatePhoneInteger.cs" />
+    <Compile Include="Migrations\201804102302563_UpdatePhoneInteger.Designer.cs">
+      <DependentUpon>201804102302563_UpdatePhoneInteger.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -188,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804100411241_SurveyChange4.resx">
       <DependentUpon>201804100411241_SurveyChange4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804102302563_UpdatePhoneInteger.resx">
+      <DependentUpon>201804102302563_UpdatePhoneInteger.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

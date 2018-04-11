@@ -60,14 +60,7 @@
         </div>
         <br /><br />
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Email:</label>
-            <div class="col-md-8">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", type = "email", required = "required" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <br /><br />
+        @Html.HiddenFor(model => model.Email)
 
         <div class="form-group">
             <label class="control-label col-md-2">Country:</label>
@@ -86,7 +79,7 @@
         <br /><br />
 
         <div class="form-group">
-            <label class="control-label col-md-2">Phone:</label>
+            <label class="control-label col-md-2">Mobile:</label>
             <div class="col-md-8">
                 @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", required = "required" } })
             </div>
@@ -118,15 +111,16 @@
                 @Html.EditorFor(model => model.HireDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
             </div>
         </div>
-        <br /><br />
-
+        <br />
+        <br />
+        <br />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-success" />
             </div>
         </div>
 
-        <br /><br />
+        <br />
         <div class="form-group">
             <div class="col-md-8">
                 <span class="text-danger">@Html.Raw(ViewBag.Message)</span>
