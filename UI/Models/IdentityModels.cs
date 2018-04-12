@@ -2,8 +2,11 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
 using System.Linq;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace UI.Models
 {
@@ -13,6 +16,13 @@ namespace UI.Models
         //CustomerID & ConsultantID Extended properties NEW COLUMNS 
         public string CustomerID { get; set; }
         public string ConsultantID { get; set; }
+
+        public ApplicationUser()
+        : base()
+        {
+            PreviousUserPasswords = new List<PreviousPassword>();
+        }
+        public virtual IList<PreviousPassword> PreviousUserPasswords { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -52,4 +62,20 @@ namespace UI.Models
             return new ApplicationDbContext();
         }
     }
+
+    public class PreviousPassword
+    { 
+        public PreviousPassword()
+        {
+            CreateDate = DateTimeOffset.Now;
+        }
+
+        [Key, Column(Order = 0)]
+        public string PasswordHash { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
+        [Key, Column(Order = 1)]
+        public string UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
+    }
+
 }

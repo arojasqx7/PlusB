@@ -8,7 +8,6 @@ using Microsoft.Owin.Security;
 using UI.Models;
 using System.Configuration;
 using Microsoft.AspNet.Identity.EntityFramework;
-using UI.Extensions;
 
 namespace UI.Controllers
 {
