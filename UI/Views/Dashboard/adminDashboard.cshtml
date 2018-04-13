@@ -3,7 +3,11 @@
 
     var jss = new System.Web.Script.Serialization.JavaScriptSerializer();
     var userInfoJson = jss.Serialize(ViewBag.techBreakdownList);
-    var closedOpenJson = jss.Serialize(ViewBag.getHistoryLast7Days);
+    var closedOpenJson = jss.Serialize(ViewBag.getHistoryLast7Days).Replace("\"\\/Date(", "").Replace(")\\/\"", "");
+    var year = closedOpenJson.getFullYear();
+    var month = closedOpenJson.getMonth() + 1;
+    var day = closedOpenJson.getDate();
+    var formatted = year + "-" + month + "-" + day;
 }
 
 <style>
@@ -127,7 +131,6 @@
         });
 
         $(function () {
-
             "use strict";
 
             var jsonClosedOpen = JSON.parse('@Html.Raw(closedOpenJson)').Data;

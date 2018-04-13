@@ -2,11 +2,15 @@
 using log4net;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace UI.Controllers
 {
@@ -44,6 +48,8 @@ namespace UI.Controllers
             ViewBag.Data1 = totalCriticalCustomer().ToString();
             ViewBag.Data2 = totalMajorCustomer().ToString();
             ViewBag.Data3 = totalMinorCustomer().ToString();
+            ViewBag.surveyAnsweredList = getSurveyHistoryLast7Days();
+           // ViewBag.surveyAnsweredDays = getSurveyHistoryDays();
             return View();
         }
 
@@ -447,9 +453,31 @@ namespace UI.Controllers
                           .Count();
             return tickets;
         }
+
+        public JsonResult getSurveyHistoryLast7Days()
+        {
+            DateTime _7DaysAgo = DateTime.Now.AddDays(-7);
+            var short7Days = _7DaysAgo.Date;
+
+            var surveysLastDays =   (from surveys in db.Surveys
+                                    where surveys.DateSent >= short7Days
+                                    group new { surveys } by new { surveys.DateSent } into b
+                                    select new
+                                    {
+                                        y =     b.Key.DateSent,
+                                        item1 = b.Where(x => x.surveys.IsAnswered == 1
+                                                && x.surveys.DateSent >= short7Days)
+                                                .Select(x => x.surveys.ID)
+                                                .Count()
+                                    })
+                                    .AsNoTracking()
+                                    .ToList();
+
+            return Json(surveysLastDays, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
-        #region public ApplicationUserManager UserManager
+            #region public ApplicationUserManager UserManager
         public ApplicationUserManager UserManager
         {
             get

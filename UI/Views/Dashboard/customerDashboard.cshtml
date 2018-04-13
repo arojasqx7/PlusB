@@ -1,6 +1,9 @@
 ﻿@{
     ViewBag.Title = "customerDashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var jss = new System.Web.Script.Serialization.JavaScriptSerializer();
+   var surveyInfoJson = jss.Serialize(ViewBag.surveyAnsweredList).Replace("\"\\/Date(", "").Replace(")\\/\"", "");
 }
 
 <section class="content-header">
@@ -112,16 +115,16 @@
                     <h3 class="box-title">Incident severities currently open</h3>
                 </div>
                 <div class="box-body">
-                    <canvas id="pieChart" style="height:200px"></canvas>
+                    <canvas id="pieChart" style="height:200px;"></canvas>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="box box-solid">
+            <div class="box box-solid" style="margin-top:-65px;">
                 <div class="box-header with-border">
-                    <h3 class="box-title">No answered surveys last 7 days</h3>
+                    <h3 class="box-title">Answered surveys last 7 days</h3>
                 </div>
                 <div class="box-body chart-responsive">
                     <div class="chart" id="line-chart" style="height: 300px;"></div>
@@ -172,6 +175,8 @@
         $.get("/Dashboard/closedTicketsCustomer", function (message) {
             $('#closedTickets').html(message);
         });
+
+        $.get("/Dashboard/getSurveyHistoryLast7Days");
     });
 
     //****************** PIE CHART ***************************
@@ -214,25 +219,17 @@
     pieChart.Doughnut(PieData, pieOptions)
     //************ END PIE CHART **************
 
+    var jsonSurveyList = JSON.parse('@Html.Raw(surveyInfoJson)').Data;
+
         // LINE CHART
-        var line = new Morris.Line({
-            element: 'line-chart',
-            resize: true,
-            data: [
-              { y: '2011 Q1', item1: 2666 },
-              { y: '2011 Q2', item1: 2778 },
-              { y: '2011 Q3', item1: 4912 },
-              { y: '2011 Q4', item1: 3767 },
-              { y: '2012 Q1', item1: 6810 },
-              { y: '2012 Q2', item1: 5670 },
-              { y: '2012 Q3', item1: 4820 },
-              { y: '2012 Q4', item1: 15073 },
-              { y: '2013 Q1', item1: 10687 },
-              { y: '2013 Q2', item1: 8432 }
-            ],
+    var line = new Morris.Line({
+        element: 'line-chart',
+        resize: true,
+        // data:jsonSurveyList,
+        data: jsonSurveyList,
             xkey: 'y',
             ykeys: ['item1'],
-            labels: ['Item 1'],
+            labels: ['Qty'],
             lineColors: ['#3c8dbc'],
             hideHover: 'auto'
         });
