@@ -9,6 +9,7 @@ namespace Domain.Entities
         public int ID { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Column(TypeName = "date")]
         public DateTime DateSent { get; set; }
 
         public string Answer1 { get; set; }

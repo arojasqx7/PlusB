@@ -2,17 +2,28 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
 using System.Linq;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
+using Domain.Entities;
 
 namespace UI.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        
         //CustomerID & ConsultantID Extended properties NEW COLUMNS 
         public string CustomerID { get; set; }
         public string ConsultantID { get; set; }
+        public int getNotification { get; set; }
+
+        public ApplicationUser()
+        : base()
+        {
+        }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -52,4 +63,20 @@ namespace UI.Models
             return new ApplicationDbContext();
         }
     }
+
+    public class PreviousPassword
+    { 
+        public PreviousPassword()
+        {
+            CreateDate = DateTimeOffset.Now;
+        }
+
+        [Key, Column(Order = 0)]
+        public string PasswordHash { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
+        [Key, Column(Order = 1)]
+        public string UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
+    }
+
 }

@@ -62,7 +62,7 @@ namespace UI.Controllers
 
                 try
                 {
-                    DateTime? dateTicketClosed = ticket.ClosedDate + ticket.ClosedTime;
+                    DateTime? dateTicketClosed = ticket.ClosedDate;
 
                     var surveyDetails = new Survey
                     {

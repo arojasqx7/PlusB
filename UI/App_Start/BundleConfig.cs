@@ -78,6 +78,9 @@ namespace UI
             bundles.Add(new ScriptBundle("~/bundles/dashboard2").Include(
                       "~/Scripts/dashboard2.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/iCheck").Include(
+                      "~/Scripts/icheck.min.js"));
+
             //***************Start of CSS Bundles*************************
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
@@ -136,6 +139,10 @@ namespace UI
 
             bundles.Add(new StyleBundle("~/Content/KnowledgeBase").Include(
                   "~/Content/KnowledgeBaseStyle.css"));
+
+            bundles.Add(new StyleBundle("~/Content/iCheck").Include(
+                  "~/Content/iCheck/all.css",
+                  "~/Content/iCheck/flat/_all.css"));
         }
     }
 }

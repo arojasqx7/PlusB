@@ -16,6 +16,7 @@
         @Styles.Render("~/Content/datatables.net-bs")
         @Styles.Render("~/Content/pagedList")
         @Styles.Render("~/Content/morris")
+        @Styles.Render("~/Content/iCheck")
         @Styles.Render("~/Content/toastr")
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -35,127 +36,6 @@
                 </a>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <!-- Messages: style can be found in dropdown.less-->
-                        @*<li class="dropdown messages-menu">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-envelope-o"></i>
-            <span class="label label-success">4</span>
-        </a>
-        <ul class="dropdown-menu">
-            <li class="header">You have 4 messages</li>
-            <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                    <li>
-                        <!-- start message -->
-                        <a href="#">
-                            <div class="pull-left">
-                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                            </div>
-                            <h4>
-                                Support Team
-                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                            </h4>
-                            <p>Why not buy a new awesome theme?</p>
-                        </a>
-                    </li>
-                    <!-- end message -->
-                    <li>
-                        <a href="#">
-                            <div class="pull-left">
-                                <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                            </div>
-                            <h4>
-                                AdminLTE Design Team
-                                <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                            </h4>
-                            <p>Why not buy a new awesome theme?</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="pull-left">
-                                <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                            </div>
-                            <h4>
-                                Developers
-                                <small><i class="fa fa-clock-o"></i> Today</small>
-                            </h4>
-                            <p>Why not buy a new awesome theme?</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="pull-left">
-                                <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                            </div>
-                            <h4>
-                                Sales Department
-                                <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                            </h4>
-                            <p>Why not buy a new awesome theme?</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="pull-left">
-                                <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                            </div>
-                            <h4>
-                                Reviewers
-                                <small><i class="fa fa-clock-o"></i> 2 days</small>
-                            </h4>
-                            <p>Why not buy a new awesome theme?</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="footer"><a href="#">See All Messages</a></li>
-        </ul>
-    </li>
-    <!-- Notifications: style can be found in dropdown.less -->
-    <li class="dropdown notifications-menu">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-bell-o"></i>
-            <span class="label label-warning">10</span>
-        </a>
-        <ul class="dropdown-menu">
-            <li class="header">You have 10 notifications</li>
-            <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                            page and may cause design problems
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-users text-red"></i> 5 new members joined
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-user text-red"></i> You changed your username
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="footer"><a href="#">View all</a></li>
-        </ul>
-    </li>
- *@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -163,13 +43,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
-                                <li class="user-header">
-                                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                                    <p>
-                                        Alexander Pierce - Web Developer
-                                        <small>Member since Nov. 2012</small>
-                                    </p>
-                                </li>
+
                                 <!-- Menu Body -->
                                 <li class="user-body">
                                     <div class="row">
@@ -213,7 +87,6 @@
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
-
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-cog"></i> <span>Administration</span>
@@ -226,7 +99,6 @@
                                 <li><a href="@Url.Action("ViewAllRoles","Admin")"><i class="fa fa-tasks"></i> Roles</a></li>
                             </ul>
                         </li>
-
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-eye"></i> <span>Incident Monitor</span>
@@ -240,7 +112,6 @@
                                 <li><a href="@Url.Action("UnassignedList","Tickets")"><i class="fa fa-bars"></i>View Unassigned</a></li>                          
                             </ul>
                         </li>
-
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-edit"></i> <span>Incident Management</span>
@@ -266,19 +137,16 @@
                                 <i class="fa fa-handshake-o"></i> <span>Customers</span>
                             </a>
                         </li>
-
                         <li>
                             <a href="@Url.Action("Index","Technologies")">
                                 <i class="fa fa-code-fork"></i><span>Technologies</span>
                             </a>
                         </li>
-
                         <li>
                             <a href="@Url.Action("Index","ConsultantUser")">
                                 <i class="fa fa-user-plus"></i> <span>Consultants</span>
                             </a>
                         </li>
-
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-line-chart"></i> <span>Metrics</span>
@@ -291,19 +159,16 @@
                                 <li><a href="@Url.Action("KPIEvaluation","Metrics")"><i class="fa fa-area-chart"></i>KPI Evaluation</a></li>
                             </ul>
                         </li>
-
                         <li>
                             <a href="@Url.Action("Index","SLAs")">
                                 <i class="fa fa-spinner"></i> <span>SLA</span>
                             </a>
                         </li>
-
                         <li>
                             <a href="@Url.Action("Index","KPIs")">
                                 <i class="fa fa-area-chart"></i> <span>KPI</span>
                             </a>
                         </li>
-
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-copy"></i> <span>Reports</span>
@@ -319,7 +184,6 @@
                             </ul>
                         </li>
                      }
-
                      else if (User.IsInRole("Consultant"))
                      {
                         <li>
@@ -327,7 +191,11 @@
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
-
+                        <li>
+                            <a href="@Url.Action("notificationSettings","Notifications")">
+                                <i class="fa fa-gear"></i> <span>Settings</span>
+                            </a>
+                        </li>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-file-text-o"></i> <span>Incidents</span>
@@ -341,13 +209,11 @@
                                 <li><a href="@Url.Action("Resolved","Tickets")"><i class="fa fa-check"></i>Resolved</a></li>
                             </ul>
                         </li>
-
                         <li>
                             <a href="@Url.Action("Index","KnowledgeBases")">
                                 <i class="fa fa-database"></i> <span>Knowledge Base</span>
                             </a>
                         </li>
-
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-copy"></i> <span>Reports</span>
@@ -367,7 +233,11 @@
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
-
+                        <li>
+                            <a href="@Url.Action("notificationSettings","Notifications")">
+                                <i class="fa fa-gear"></i> <span>Settings</span>
+                            </a>
+                        </li>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-file-text-o"></i> <span>Incidents</span>
@@ -381,7 +251,6 @@
                                 <li><a href="@Url.Action("resolvedIncidents","Tickets")"><i class="fa fa-check"></i>Resolved</a></li>
                             </ul>
                         </li>
-
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-copy"></i> <span>Reports</span>
@@ -404,17 +273,14 @@
                                 </span>
                             </a>
                         </li>
-
                     }
                 </ul>
             </section>
-            <!-- /.sidebar -->
         </aside>
 
         <div class="content-wrapper">
             @RenderBody()
         </div>
-            <hr />
             <footer class="main-footer" style="text-align:center;">
                 <div class="pull-right hidden-xs">
                     <b>Version</b> 1.1
@@ -425,39 +291,19 @@
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
-            <!-- Create the tabs -->
             <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
                 <li style="display:none;"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
                 <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-bell"></i></a></li>
             </ul>
-            <!-- Tab panes -->
             <div class="tab-content">
-                <!-- Home tab content -->
                 <div class="tab-pane" id="control-sidebar-home-tab">
-
                 </div>
                 <!-- Settings tab content -->
-                <div class="tab-pane" id="control-sidebar-settings-tab">
+                @*<div class="tab-pane" id="control-sidebar-settings-tab">
                     <h3 class="control-sidebar-heading">Notification Settings</h3>
-
-                    @using (Html.BeginForm("NotificationChecker", "Tickets", FormMethod.Post))
-                     {
-                        @Html.AntiForgeryToken()
-
-                        <div class="form-group">
-                            <label class="control-sidebar-subheading">
-                                Turn off notifications
-                                <input type="checkbox" class="pull-right" value="true" onchange="this.form.submit()" name="checkResp" id="NotifChecker" />
-                                <input type="hidden" value="false" name="checkResp" />
-                                @*@Html.CheckBox("checkResp", new { onchange="this.form.submit();", id="chk"} )*@
-                            </label>
-                        </div>
-                    }
-
-                </div>
+                </div>*@
             </div>
         </aside>
-
         <div class="control-sidebar-bg"></div>
     </div>
     <!-- ./wrapper -->
@@ -479,8 +325,8 @@
     @Scripts.Render("~/bundles/wysihtml5")
     @Scripts.Render("~/bundles/jquery-slimscroll")
     @Scripts.Render("~/bundles/datatables")
+    @Scripts.Render("~/bundles/iCheck")
     <script>$.widget.bridge('uibutton', $.ui.button);</script>
     @RenderSection("scripts", required: false)
-
 </body>
 </html>

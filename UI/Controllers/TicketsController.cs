@@ -18,6 +18,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections;
 using System.Text;
+using UI.Models;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace UI.Controllers
 {
@@ -35,7 +38,6 @@ namespace UI.Controllers
         private static double riskPercentage = 0;
         private static double riskPercentageSLAFailure = 0;
         private static double riskPeriodicUpdate = 0;
-        private static bool notificationCheck = false;
         private static List<Ticket> reportResolvedIncidentsByConsultant = new List<Ticket>();
 
         public TicketsController()
@@ -376,6 +378,7 @@ namespace UI.Controllers
         [HttpPost]
         public ActionResult UpdateStatus(int id, string status)
         {
+            ApplicationUser loggedUser = UserManager.FindById(User.Identity.GetUserId());
             DateTime today = DateTime.Now;
             TimeSpan currentCloseHour = TimeSpan.Parse(today.ToString("HH:mm:ss tt"));
             var shortDate = today.Date;
@@ -387,9 +390,12 @@ namespace UI.Controllers
             {
                 try
                 {
-                    var customerEmail = db.Tickets.Where(x => x.Id.Equals(IDTicket)).Select(x => x.Creator).FirstOrDefault();
-                    emailToSend = customerEmail;
+                    var customerEmail = db.Tickets
+                                        .Where(x => x.Id == IDTicket)
+                                        .Select(x => x.Creator)
+                                        .FirstOrDefault();
 
+                    emailToSend = customerEmail;
                     ticket.ClosedDate = shortDate;
                     ticket.ClosedTime = currentCloseHour;
                     ticket.AverageResolution = obtainAvgResolution();
@@ -414,6 +420,7 @@ namespace UI.Controllers
                     return RedirectToAction("Index", "Tickets");
                 }
             }
+            //ELSE status NOT closed
             else
             {
                 try
@@ -431,21 +438,59 @@ namespace UI.Controllers
                 //return to proper page according to role
                 if (User.IsInRole("Consultant"))
                 {
-                    var customerEmail = db.Tickets.Where(x => x.Id.Equals(IDTicket)).Select(x => x.Creator).FirstOrDefault();
+                    var customerEmail = db.Tickets
+                                        .Where(x => x.Id == IDTicket)
+                                        .Select(x => x.Creator)
+                                        .FirstOrDefault();
+
                     emailToSend = customerEmail;
                     statusToSend = status;
-                    // send notification
-                    SendEmail();
+
+                    //Code to call Store Procedure...
+                    SqlConnection connection = new SqlConnection("Data Source=KEIDY-LPT\\SQLEXPRESS;Initial Catalog=PlusBContext;Integrated Security=True;");
+                    var command = new SqlCommand("getNotificationFlag", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@emailUser", emailToSend);
+                    connection.Open();
+                    int queryResult = (int)command.ExecuteScalar();
+                    connection.Close();
+
+                    // send notification but first validate if notifications are enabled...
+                    if (queryResult == 1)
+                    {
+                        SendEmail();
+                    }                   
                     return RedirectToAction("MyTickets", "Tickets");
                 }
                 else
                 {
-                    var consultantEmail = db.Tickets.Where(x => x.Id.Equals(IDTicket)).Select(x => x.Id_Consultant).FirstOrDefault();
-                    var consultant_Email = db.Consultants.Where(y => y.ID.Equals(consultantEmail)).Select(y => y.Email).FirstOrDefault();
-                    emailToSend = consultant_Email;
+                    var consultantID =     db.Tickets
+                                          .Where(x => x.Id == IDTicket)
+                                          .Select(x => x.Id_Consultant)
+                                          .FirstOrDefault();
+
+                    var consultantEmail =  db.Consultants
+                                           .Where(y => y.ID == consultantID)
+                                           .Select(y => y.Email)
+                                           .FirstOrDefault();
+
+                    emailToSend = consultantEmail;
                     statusToSend = status;
-                    // send notification
-                    SendEmail();
+
+                    //Code to call Store Procedure...
+                    SqlConnection connection = new SqlConnection("Data Source=KEIDY-LPT\\SQLEXPRESS;Initial Catalog=PlusBContext;Integrated Security=True;");
+                    var command = new SqlCommand("getNotificationFlag", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@emailUser", emailToSend);
+                    connection.Open();
+                    int queryResult = (int)command.ExecuteScalar();
+                    connection.Close();
+
+                    // send notification but first validate if notifications are enabled...
+                    if (queryResult == 1)
+                    {
+                        SendEmail();
+                    }
                     return RedirectToAction("Index", "Tickets");
                 }
             }         
@@ -694,28 +739,6 @@ namespace UI.Controllers
             }
         }
         #endregion
-
-        [HttpGet]
-        public PartialViewResult NotificationChecker()
-        {
-            return PartialView("NotificationViews/sidebarSettings");
-        }
-
-        [HttpPost]
-        public void NotificationChecker(bool checkResp = false)
-        {
-            notificationCheck = checkResp;
-
-            if (notificationCheck == true)
-            {
-                this.AddToastMessage("Notifications", "Notifications have been enabled!", ToastType.Info);
-            }
-            else
-            {
-                this.AddToastMessage("Notifications", "Notifications have been disabled!", ToastType.Info);
-            }
-            //return View("~/Views/NotificationViews/notificationInfo.cshtml");
-        }
 
         #region SendMail Sendgrid Methods
         private void SendEmail()
