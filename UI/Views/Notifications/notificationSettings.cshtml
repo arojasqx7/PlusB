@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "notificationSettings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content-header">
+    <h1>System Settings</h1>
+</section>
+
+<br />
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-solid">
+                <div class="col-md-8">
+                    <!-- Custom Tabs (Pulled to the right) -->
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs pull-right">
+                            <li class="active"><a href="#tab_1-1" data-toggle="tab">Notifications</a></li>
+                            <li><a href="#tab_2-2" data-toggle="tab">Tab 2</a></li>
+                            <li><a href="#tab_3-2" data-toggle="tab">Tab 3</a></li>
+                            <li class="pull-left header"><i class="fa fa-gears"></i> Settings</li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_1-1">
+                                <b>Enable / Disable notifications</b>
+                                <p>
+                                    <br />
+                                    Check to enable or Uncheck to disable if you want to receive email notifications about 
+                                    the work flow inside PlusB system.
+                                </p>
+                                <br />
+                                @using (Html.BeginForm("enableDisableNotification", "Notifications", FormMethod.Post))
+                                {
+                                    <div class="form-group">
+                                        @if (ViewBag.flag == true)
+                                        {
+                                            <input type="checkbox" value="true" name="checkResp" checked="checked"><label style="margin-left:10px;">Notification Settings</label>
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" value="true" name="checkResp"><label style="margin-left:10px;">Notification Settings</label>
+                                        }
+                                    </div>
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-save"></i> Save</button>
+                                }
+                            </div>
+
+                            <div class="tab-pane" id="tab_2-2">
+                                The European languages are members of the same family. Their separate existence is a myth.
+                                For science, music, sport, etc, Europe uses the same vocabulary.
+                            </div>
+                            <div class="tab-pane" id="tab_3-2">
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

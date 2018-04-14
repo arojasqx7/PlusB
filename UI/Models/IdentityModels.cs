@@ -7,22 +7,23 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
+using Domain.Entities;
 
 namespace UI.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        
         //CustomerID & ConsultantID Extended properties NEW COLUMNS 
         public string CustomerID { get; set; }
         public string ConsultantID { get; set; }
+        public int getNotification { get; set; }
 
         public ApplicationUser()
         : base()
         {
-            PreviousUserPasswords = new List<PreviousPassword>();
         }
-        public virtual IList<PreviousPassword> PreviousUserPasswords { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

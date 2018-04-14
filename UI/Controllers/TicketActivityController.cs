@@ -7,6 +7,8 @@ using Persistence.Repositories;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -69,18 +71,56 @@ namespace UI.Controllers
 
                 if (User.IsInRole("Consultant"))
                 {
-                    var customerEmail = db.Tickets.Where(x => x.Id.Equals(IDTicket)).Select(x => x.Creator).FirstOrDefault();
+                    var customerEmail = db.Tickets
+                                        .Where(x => x.Id == IDTicket)
+                                        .Select(x => x.Creator)
+                                        .FirstOrDefault();
+
                     emailToSend = customerEmail;
                     activityToSend = activity;
-                    SendEmail(); // send notification 
+
+                    //Code to call Store Procedure...
+                    SqlConnection connection = new SqlConnection("Data Source=KEIDY-LPT\\SQLEXPRESS;Initial Catalog=PlusBContext;Integrated Security=True;");
+                    var command = new SqlCommand("getNotificationFlag", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@emailUser", emailToSend);
+                    connection.Open();
+                    int queryResult = (int)command.ExecuteScalar();
+                    connection.Close();
+
+                    if (queryResult == 1)
+                    {
+                        SendEmail(); // send notification 
+                    }
                 }
                 else
                 {
-                    var consultantEmail = db.Tickets.Where(x => x.Id.Equals(IDTicket)).Select(x=>x.Id_Consultant).FirstOrDefault();
-                    var consultant_Email = db.Consultants.Where(y => y.ID.Equals(consultantEmail)).Select(y=>y.Email).FirstOrDefault();
+                    var consultantEmail = db.Tickets
+                                         .Where(x => x.Id == IDTicket)
+                                         .Select(x=>x.Id_Consultant)
+                                         .FirstOrDefault();
+
+                    var consultant_Email =  db.Consultants
+                                           .Where(y => y.ID == consultantEmail)
+                                           .Select(y=>y.Email)
+                                           .FirstOrDefault();
+
                     emailToSend = consultant_Email;
                     activityToSend = activity;
-                    SendEmail(); // send notification 
+
+                    //Code to call Store Procedure...
+                    SqlConnection connection = new SqlConnection("Data Source=KEIDY-LPT\\SQLEXPRESS;Initial Catalog=PlusBContext;Integrated Security=True;");
+                    var command = new SqlCommand("getNotificationFlag", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@emailUser", emailToSend);
+                    connection.Open();
+                    int queryResult = (int)command.ExecuteScalar();
+                    connection.Close();
+
+                    if (queryResult == 1)
+                    {
+                        SendEmail(); // send notification 
+                    }
                 }
 
             }
