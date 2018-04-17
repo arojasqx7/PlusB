@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Domain.Entities.Ticket>
+@{
+    ViewBag.Title = "invoiceList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>Invoice</h1>
+</section>
+
+<br />
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-solid">
+                <div class="box-header">
+                </div>
+                <div class="box-body">
+                    @using (Html.BeginForm("invoiceList", "Invoice", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">Choose Company:</label>
+                                <div class="col-sm-6">
+                                    @Html.DropDownList("Id_Customer", (IEnumerable<SelectListItem>)ViewBag.Id_Customer, "----- Choose customer to check Invoice Information -----", new { @class = "form-control", @required = "required" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <button type="submit" class="btn btn-default" style="margin-top:-20px;"><i class="fa fa-share"></i> View</button>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">From:</label>
+
+                                <div class="col-sm-3" style="display:inline-flex;">
+                                    @Html.TextBox("DateFrom", null, new { @class = "form-control", @id = "datepicker", @placeholder = "From..", @required = "required", @style="border-radius:5px;", @autocomplete = "off" })
+                                </div>
+
+                                <div class="col-sm-3" style="display:inline-flex;">
+                                    <label for="to" class="control-label">To:</label>
+                                    @Html.TextBox("DateTo", null, new { @class = "form-control", @id = "datepicker2", @placeholder = "To..", @required = "required", @style = "margin-left:10px;border-radius:5px;", @autocomplete = "off" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <br />
+                    <br />
+                    <br />
+
+                    <table class="table table-bordered table-hover text-center">
+                        <tr>
+                            <th> Date</th>
+                            <th> Ticket No </th>
+                            <th> Consultant</th>
+                            <th> Status</th>
+                            <th> Details</th>
+                        </tr>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => item.ClosedDate) </td>
+                                    <td> @Html.DisplayFor(modelItem => item.Id) </td>
+                                    <td> @Html.DisplayFor(modelItem => item.Consultant.FullName) </td>
+                                    <td> @Html.DisplayFor(modelItem => item.Status) </td>
+                                    <td><a href="@Url.Action("viewInvoiceDetails","Invoice", new {idTicket = @item.Id})" >View Details</a> </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Scripts/jquery/dist/jquery.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script>
+
+    //$(document).ready(function () {
+    //    $.get("/Invoice/Cats");
+    //});
+        $('#datepicker').datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            format: 'dd/mm/yyyy'
+        })
+
+        $('#datepicker2').datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            format: 'dd/mm/yyyy'
+        })
+</script>

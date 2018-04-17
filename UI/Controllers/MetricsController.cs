@@ -19,7 +19,6 @@ namespace UI.Controllers
         public ActionResult PerformanceEvaluation()
         {
             ViewBag.Id_Consultant = new SelectList(db.Consultants.Where(x => !x.FirstName.Contains("Unassigned")).OrderBy(x => x.FirstName), "ID", "FullName");
-
             return View();
         }
 

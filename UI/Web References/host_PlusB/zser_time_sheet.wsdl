@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>
+    <sidl:sidl xmlns:sidl="http://www.sap.com/2007/03/sidl" />
+  </wsdl:documentation>
+  <wsp:UsingPolicy wsdl:required="true" />
+  <wsp:Policy wsu:Id="BN__ZSER_TIME_SHEET">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+        <saptrnbnd:OptimizedMimeSerialization xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization" wsp:Optional="true" />
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" wsp:Optional="true" />
+      </wsp:All>
+      <wsp:All>
+        <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+        <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml" xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/" wsp:Optional="true" />
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" wsp:Optional="true" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="BN__ZSER_TIME_SHEET_soap12">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+        <saptrnbnd:OptimizedMimeSerialization xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization" wsp:Optional="true" />
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" wsp:Optional="true" />
+      </wsp:All>
+      <wsp:All>
+        <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+        <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml" xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/" wsp:Optional="true" />
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" wsp:Optional="true" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="IF__ZSER_TIME_SHEET">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sapsession:Session xmlns:sapsession="http://www.sap.com/webas/630/soap/features/session/">
+          <sapsession:enableSession>false</sapsession:enableSession>
+        </sapsession:Session>
+        <sapcentraladmin:CentralAdministration xmlns:sapcentraladmin="http://www.sap.com/webas/700/soap/features/CentralAdministration/" wsp:Optional="true">
+          <sapcentraladmin:BusinessApplicationID>0050568F83381EE693D304D52DDEC57E</sapcentraladmin:BusinessApplicationID>
+        </sapcentraladmin:CentralAdministration>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZcrmTimeSheet">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions">
+      <xsd:simpleType name="char10">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char17">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="17" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char50">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="50" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="date10">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="10" />
+          <xsd:pattern value="\d\d\d\d-\d\d-\d\d" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="decimal5.2">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="5" />
+          <xsd:fractionDigits value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric10">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="10" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:schema>
+    <xsd:schema xmlns:n0="urn:sap-com:document:sap:rfc:functions" attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style">
+      <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" />
+      <xsd:simpleType name="RfcException.Message.Number">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="3" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="ZesCrmTimeCats">
+        <xsd:sequence>
+          <xsd:element name="IdTicket" type="n0:char50" />
+          <xsd:element name="IdConsultor" type="n0:char17" />
+          <xsd:element name="IdCliente" type="n0:char10" />
+          <xsd:element name="Fecha" type="n0:date10" />
+          <xsd:element name="Horas" type="n0:decimal5.2" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RfcException.Message">
+        <xsd:sequence>
+          <xsd:element name="ID" type="xsd:string" />
+          <xsd:element name="Number" type="tns:RfcException.Message.Number" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ZcrmTimeSheet.RfcException">
+        <xsd:sequence>
+          <xsd:element name="Name" type="tns:ZcrmTimeSheet.RfcExceptions" />
+          <xsd:element minOccurs="0" name="Text" type="xsd:string" />
+          <xsd:element minOccurs="0" name="Message" type="tns:RfcException.Message" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="ZcrmTimeSheet.RfcExceptions">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="FechaInvalida" />
+          <xsd:enumeration value="NoCamposObligatorios" />
+          <xsd:enumeration value="NoRangoNumeros" />
+          <xsd:enumeration value="NoRegistros" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="ZcrmTimeSheet.Exception" type="tns:ZcrmTimeSheet.RfcException" />
+      <xsd:element name="ZcrmTimeSheet">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="DatosEntrada" type="tns:ZesCrmTimeCats" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZcrmTimeSheetResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IdRegistro" type="n0:numeric10" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ZcrmTimeSheet">
+    <wsdl:part name="parameters" element="tns:ZcrmTimeSheet" />
+  </wsdl:message>
+  <wsdl:message name="ZcrmTimeSheetResponse">
+    <wsdl:part name="parameter" element="tns:ZcrmTimeSheetResponse" />
+  </wsdl:message>
+  <wsdl:message name="ZcrmTimeSheet.Exception">
+    <wsdl:part name="ZcrmTimeSheet.Exception" element="tns:ZcrmTimeSheet.Exception" />
+  </wsdl:message>
+  <wsdl:portType name="ZSER_TIME_SHEET">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#IF__ZSER_TIME_SHEET" />
+    </wsp:Policy>
+    <wsdl:operation name="ZcrmTimeSheet">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZcrmTimeSheet" />
+      </wsp:Policy>
+      <wsdl:input message="tns:ZcrmTimeSheet" />
+      <wsdl:output message="tns:ZcrmTimeSheetResponse" />
+      <wsdl:fault name="ZcrmTimeSheet.Exception" message="tns:ZcrmTimeSheet.Exception" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ZSER_TIME_SHEET" type="tns:ZSER_TIME_SHEET">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#BN__ZSER_TIME_SHEET" />
+    </wsp:Policy>
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ZcrmTimeSheet">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZSER_TIME_SHEET:ZcrmTimeSheetRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ZcrmTimeSheet.Exception">
+        <soap:fault use="literal" name="ZcrmTimeSheet.Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ZSER_TIME_SHEET_soap12" type="tns:ZSER_TIME_SHEET">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#BN__ZSER_TIME_SHEET_soap12" />
+    </wsp:Policy>
+    <wsoap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ZcrmTimeSheet">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZSER_TIME_SHEET:ZcrmTimeSheetRequest" style="document" />
+      <wsdl:input>
+        <wsoap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ZcrmTimeSheet.Exception">
+        <wsoap12:fault use="literal" name="ZcrmTimeSheet.Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ZSER_TIME_SHEET">
+    <wsdl:port name="ZSER_TIME_SHEET" binding="tns:ZSER_TIME_SHEET">
+      <soap:address location="http://srvg-ecdapp.jicohen.local:8000/sap/bc/srt/rfc/sap/zser_time_sheet/200/zser_time_sheet/zser_time_sheet" />
+    </wsdl:port>
+    <wsdl:port name="ZSER_TIME_SHEET_soap12" binding="tns:ZSER_TIME_SHEET_soap12">
+      <wsoap12:address location="http://srvg-ecdapp.jicohen.local:8000/sap/bc/srt/rfc/sap/zser_time_sheet/200/zser_time_sheet/zser_time_sheet" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
