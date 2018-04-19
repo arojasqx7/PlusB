@@ -58,6 +58,7 @@ namespace Domain.Entities
 
         public double? AverageResolution { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         public double? TotalResolutionHours { get; set; }
 
         public int AutoAssigned { get; set; }

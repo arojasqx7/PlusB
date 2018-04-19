@@ -141,6 +141,10 @@
     <Compile Include="Migrations\201804122308402_DateSurveyformat.Designer.cs">
       <DependentUpon>201804122308402_DateSurveyformat.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804190047269_HourPriceTechnologies.cs" />
+    <Compile Include="Migrations\201804190047269_HourPriceTechnologies.Designer.cs">
+      <DependentUpon>201804190047269_HourPriceTechnologies.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -202,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804122308402_DateSurveyformat.resx">
       <DependentUpon>201804122308402_DateSurveyformat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804190047269_HourPriceTechnologies.resx">
+      <DependentUpon>201804190047269_HourPriceTechnologies.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

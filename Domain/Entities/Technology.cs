@@ -15,5 +15,7 @@ namespace Domain.Entities
         public string Description { get; set; }
 
         public int Weight { get; set; }
+
+        public double HourPrice { get; set; }
     }
 }
