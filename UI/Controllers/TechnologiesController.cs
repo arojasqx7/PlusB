@@ -63,7 +63,7 @@ namespace UI.Controllers
 
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Description,Weight")] Technology technology)
+        public ActionResult Create([Bind(Include = "ID,Name,Description,Weight,HourPrice")] Technology technology)
         {
             if (ModelState.IsValid)
             {
@@ -101,7 +101,7 @@ namespace UI.Controllers
         // POST: Technologies/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Description,Weight")] Technology technology)
+        public ActionResult Edit([Bind(Include = "ID,Name,Description,Weight,HourPrice")] Technology technology)
         {
             if (ModelState.IsValid)
             {
@@ -143,7 +143,7 @@ namespace UI.Controllers
         // POST: Technologies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed([Bind(Include = "ID,Name,Description,Weight")] int id)
+        public ActionResult DeleteConfirmed([Bind(Include = "ID,Name,Description,Weight,HourPrice")] int id)
         {
             Technology technology = technologyRepo.GetTechnologyByID(id);
             technologyRepo.DeleteTechnology(id);

@@ -44,6 +44,7 @@
                             <th>Name</th>
                             <th>Description</th>
                             <th>Weight</th>
+                            <th>Hour Price</th>
                             <th></th>
                         </tr>
 
@@ -58,6 +59,9 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Weight)
+                                </td>
+                                <td>
+                                    $@Html.DisplayFor(modelItem => item.HourPrice)
                                 </td>
                                 <td>
                                     @Html.Raw("<a data-modal='' href='/Technologies/Edit/" + item.ID + "' id='" + item.ID + "' class='btn btn-default' data-toggle='tooltip' title='Edit'> <span class='glyphicon glyphicon-edit'> </span> </a>")
