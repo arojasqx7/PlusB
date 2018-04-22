@@ -8,6 +8,8 @@ using Microsoft.Owin.Security;
 using UI.Models;
 using System.Configuration;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using UI.Extensions;
 
 namespace UI.Controllers
 {
@@ -205,16 +207,23 @@ namespace UI.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                string To = model.Email;
+
+                if (user == null)
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    return View("ForgotPassword");
                 }
+                else
+                {
+                    var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
 
+                    var callbackUrl = Url.Action("ResetPassword", "Account", new { UserId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    string body = "<b>Please find the Password Reset Link. </b><br/>" + callbackUrl;
+
+                    EmailManager.SendEmail(To, body);
+                }
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            return View("ForgotPasswordConfirmation");
         }
 
         //
@@ -244,12 +253,14 @@ namespace UI.Controllers
             {
                 return View(model);
             }
+
             var user = await UserManager.FindByNameAsync(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
+
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
