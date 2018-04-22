@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Web;
 using UI.Controllers;
 
 namespace UI.Jobs
@@ -33,16 +32,23 @@ namespace UI.Jobs
                 IList<Ticket> getUnassignedTickets = db.Tickets.Where(x => x.Id_Consultant == 1).ToList();
 
                 // Get Yesterday's consultant with less Performance Average
-                var getYesterdayAvgByConsultant = db.PerformanceEvalutions.Where(x => x.Date == yesterday).ToList();
-                var getLessAvgConsultant = getYesterdayAvgByConsultant.Take(1).Min();
+                var getLessAvgPerformanceScore = db.PerformanceEvalutions
+                                                  .Where(x => x.Date == yesterday)
+                                                  .Select(x => x.PerformanceAverage)
+                                                  .Min();
+
+                var getLessConsultantInfo = db.PerformanceEvalutions
+                                                 .Where(x => x.PerformanceAverage == getLessAvgPerformanceScore
+                                                  && x.Date == yesterday);
+
 
                 // Extract consultant email in emailToSend static var
-                emailToSend = getLessAvgConsultant.Consultant.Email;
+                emailToSend = getLessConsultantInfo.Select(x=>x.Consultant.Email).First();
 
                 foreach (var t in getUnassignedTickets)
                 {
                     Ticket ticket = db.Tickets.Find(t.Id);
-                    ticket.Id_Consultant = getLessAvgConsultant.Consultant.ID;
+                    ticket.Id_Consultant = getLessConsultantInfo.Select(x => x.Consultant.ID).First();
                     ticket.AssignmentDate = shortDate;
                     ticket.AssignmentTime = currentHour;
                     db.Set<Ticket>().AddOrUpdate(ticket);

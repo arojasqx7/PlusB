@@ -20,6 +20,7 @@ namespace Domain.Entities
         [ForeignKey("KPI")]
         public int idKPI{ get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         public double Score { get; set; }
 
         public string Range { get; set; }

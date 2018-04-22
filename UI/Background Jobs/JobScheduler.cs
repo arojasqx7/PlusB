@@ -1,16 +1,23 @@
 ﻿using Quartz;
 using Quartz.Impl;
+using UI.Background_Jobs;
 
 namespace UI.Jobs
 {
     public class JobScheduler
     {
+        private static readonly JobSchedulerOptions DefaultOptions = new JobSchedulerOptions();
+
         public static void Start()
+        {
+            Start(DefaultOptions);
+        }
+
+        public static void Start(JobSchedulerOptions options)
         {
             IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
             scheduler.Start();
 
-            //First Job (Performance Evaluation
             IJobDetail Job = JobBuilder.Create<performanceEvalutionJob>().Build();
             ITrigger Trigger = TriggerBuilder.Create()
             .WithIdentity("firstTrigger", "group1")
@@ -18,11 +25,10 @@ namespace UI.Jobs
               (s =>
                  s.WithIntervalInHours(24)
                 .OnEveryDay()
-                .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(23, 55))
+                .StartingDailyAt(options.PerformanceScheduleTimeStart)
               )
             .Build();
 
-            //Second Job (KPI Daily evaluation)
             IJobDetail KPIJob = JobBuilder.Create<KPIEvaluationJob>().Build();
             ITrigger KPITrigger = TriggerBuilder.Create()
             .WithIdentity("secondTrigger", "group1")
@@ -30,23 +36,21 @@ namespace UI.Jobs
               (s =>
                  s.WithIntervalInHours(24)
                 .OnEveryDay()
-                .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(23, 56))
+                .StartingDailyAt(options.KPIEvalutionTimeStart)
               )
             .Build();
 
-            //Third Job (Automated Routing)
             IJobDetail routingJob = JobBuilder.Create<automaticRoutingJob>().Build();
             ITrigger routingTrigger = TriggerBuilder.Create()
             .WithIdentity("thirdTrigger", "group1")
             .WithSimpleSchedule(x => x
-                .WithIntervalInMinutes(20)
+                .WithIntervalInMinutes(options.AutomaticRoutingMinuteStart)
                 .RepeatForever())
             .Build();
 
-            //Job Schedulers Firing
-            scheduler.ScheduleJob(Job, Trigger); // Schedule First Job
-            scheduler.ScheduleJob(KPIJob,KPITrigger); //Schedule Second Job
-            scheduler.ScheduleJob(routingJob, routingTrigger); //Schedule Third Job
+            scheduler.ScheduleJob(Job, Trigger); 
+            scheduler.ScheduleJob(KPIJob,KPITrigger); 
+            scheduler.ScheduleJob(routingJob, routingTrigger);
         }
     }
 }

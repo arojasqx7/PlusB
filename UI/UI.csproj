@@ -50,6 +50,10 @@
       <HintPath>..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -224,6 +228,8 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Background Jobs\JobSchedulerOptions.cs" />
+    <Compile Include="Background Jobs\SingletonJob.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AttachmentController.cs" />
@@ -250,6 +256,7 @@
     <Compile Include="Controllers\TicketAttachmentController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Controllers\ToastrController.cs" />
+    <Compile Include="Controllers\TriggerJobController.cs" />
     <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -3038,6 +3045,7 @@
     <Content Include="Web References\host_PlusB\ZcrmTimeSheetResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Views\Admin\FireJobs.cshtml" />
     <None Include="Web References\host_PlusB\zser_time_sheet.wsdl" />
   </ItemGroup>
   <ItemGroup>

@@ -22,6 +22,7 @@ namespace Domain.Entities
 
         public double TotalHoursTaken { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         public double PerformanceAverage { get; set; }
 
         public virtual Consultant Consultant { get; set; }

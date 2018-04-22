@@ -32,27 +32,31 @@ namespace UI.Jobs
                                  where a.Status == "Closed" && a.ClosedDate == shortDate
                                  select new { a.Id, a.Id_Consultant, e.ID, Score = ((e.FormulaValue + a.TotalResolutionHours) / c.ResolutionTimeAverage) };
 
-                    foreach (var i in getKPIData)   // Run a loop to extract id for every consultant
+                    foreach (var data in getKPIData)   // Run a loop to extract id for every consultant
                     {
                         string range;
-                        if (i.Score > 10)
+                        if (data.Score > 0 && data.Score <= 10)
                         {
-                            range = "Good";   
+                            range = "Under average";   
+                        }
+                        else if (data.Score > 10 && data.Score <= 25)
+                        {
+                            range = "Good";
                         }
                         else
                         {
-                            range = "Under average";
+                            range = "Exceed Expectation";
                         }
                         try
                         {
                             var KPIEvalDetails = new KPIEvaluation
                             {
                                 Date = shortDate,
-                                idConsultant = i.Id_Consultant,
-                                idKPI = i.ID,
-                                Score = Convert.ToDouble(i.Score),
+                                idConsultant = data.Id_Consultant,
+                                idKPI = data.ID,
+                                Score = Convert.ToDouble(data.Score),
                                 Range = range, 
-                                idTicket = i.Id
+                                idTicket = data.Id
                             };
                             using (var x = new PlusBContext())
                             {

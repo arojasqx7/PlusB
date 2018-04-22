@@ -35,13 +35,12 @@ namespace UI.Controllers
             else
             {
                 var performanceByRange = db.PerformanceEvalutions
-                                        .Where(performance => performance.idConsultant == Id_Consultant
-                                         && performance.Date >= DateFrom
-                                         && performance.Date <= DateTo)
+                                         .Where(performance => performance.idConsultant == Id_Consultant
+                                          && performance.Date >= DateFrom
+                                          && performance.Date <= DateTo)
                                          .OrderBy(x => x.Date)
                                          .AsNoTracking()
                                          .ToList();
-
                 return View(performanceByRange);
             }
         }
@@ -79,7 +78,6 @@ namespace UI.Controllers
             ViewBag.Techdata = technologyList.ToList();
             ViewBag.EscalateData = escalatedCount;
             ViewBag.datePerf = perfEval.Date.Date;
-
             return View();
         }
 
@@ -93,13 +91,11 @@ namespace UI.Controllers
                     PerformanceEvaluation perfEval = db.PerformanceEvalutions.Find(urlID);
 
                     var incidentsList =  (from ticket in db.Tickets
-                                         where ticket.Id_Consultant == perfEval.idConsultant
-                                         && ticket.ClosedDate == perfEval.Date
-                                         select "Ticket #" + " " + ticket.Id)
-                                         .ToList();
-
+                                          where ticket.Id_Consultant == perfEval.idConsultant
+                                          && ticket.ClosedDate == perfEval.Date
+                                          select "Ticket #" + " " + ticket.Id)
+                                          .ToList();
                     return Json(incidentsList, JsonRequestBehavior.AllowGet);
-
                 }
                 else
                 {
@@ -110,7 +106,6 @@ namespace UI.Controllers
                                          && ticket.ClosedDate == perfEval.Date
                                          select "Ticket #" + " " + ticket.Id)
                                          .ToList();
-
                     return Json(incidentsList, JsonRequestBehavior.AllowGet);
                 }
           }
@@ -148,7 +143,6 @@ namespace UI.Controllers
                                                  (ticket.TotalResolutionHours / sla.ResolutionTimeAverage) > 30 ? 7
                                                  : 0
                                     ).ToList(); ;
-
                 return Json(incidentsData, JsonRequestBehavior.AllowGet);
             }
             else
@@ -180,13 +174,12 @@ namespace UI.Controllers
                                                 (ticket.TotalResolutionHours / sla.ResolutionTimeAverage) > 30 ? 7
                                                 : 0
                                     ).ToList();
-
                 return Json(incidentsData, JsonRequestBehavior.AllowGet);
             }
         }
 
         #region KPI Evalution Metrics Methods
-        // This GET/POST open the KPI Evaluation Metric 
+
         public ActionResult KPIEvaluation()
         {
             ViewBag.Id_Consultant = new SelectList(db.Consultants.Where(x => !x.FirstName.Contains("Unassigned")).OrderBy(x => x.FirstName), "ID", "FullName");
@@ -212,10 +205,8 @@ namespace UI.Controllers
                                  .OrderBy(x => x.Date)
                                  .AsNoTracking()
                                  .ToList();
-
                 return View(KPIByRange);
-            }
-                
+            }               
         }
         #endregion
     }
