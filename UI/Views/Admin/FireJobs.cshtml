@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "FireJobs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>Jobs Configuration</h1>
+</section>
+
+<br />
+<section class="content">
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="box box-solid">
+                <div class="box-body">
+                    <div class="col-md-10">
+                        <p>
+                            Is not recommended to run manually the jobs since it will alter the metrics of the application.
+                        </p>
+                        <br />
+                        <table class="table table-bordered table-hover text-center">
+                            <tr>
+                                <th>Job Name</th>
+                                <th>Run</th>
+                            </tr>
+                            <tr>
+                                <td>Automatic Routing</td>
+                                <td><a href="/Admin/RunAutomaticRoutingJobManually" class="btn btn-danger"><i class="fa fa-clock-o"></i>    Run</a></td>
+                            </tr>
+                            <tr>
+                                <td>Key Performance Indicator Evalution</td>
+                                <td><a href="/Admin/RunKPIEvalJobManually" class="btn btn-danger"><i class="fa fa-clock-o"></i> Run</a></td>
+                            </tr>
+                            <tr>
+                                <td>Performance Evalution</td>
+                                <td><a href="/Admin/RunPerfEvalJobManually" class="btn btn-danger"><i class="fa fa-clock-o"></i>    Run</a></td>
+                            </tr>
+                        </table>
+                      </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>

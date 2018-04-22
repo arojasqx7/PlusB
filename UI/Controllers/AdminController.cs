@@ -9,10 +9,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using UI.Background_Jobs;
 using UI.Models;
+using UI.toastr;
 
 namespace UI.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
         private ApplicationUserManager _userManager;
@@ -20,8 +23,7 @@ namespace UI.Controllers
         private PlusBContext db = new PlusBContext();
 
         // GET: /Admin/
-        [Authorize(Roles = "Administrator")]
-        #region public ActionResult Index(string searchStringUserNameOrEmail)
+
         public ActionResult Index(string searchStringUserNameOrEmail, string currentFilter, int? page)
         {
             try
@@ -92,13 +94,10 @@ namespace UI.Controllers
                 return View(col_UserDTO.ToPagedList(1, 25));
             }
         }
-        #endregion
 
         // Users *****************************
 
         // GET: /Admin/Edit/Create 
-        //[Authorize(Roles = "Administrator")]
-        #region public PartialViewResult Create()
         public PartialViewResult Create()
         {
             ExpandedUserDTO objExpandedUserDTO = new ExpandedUserDTO();
@@ -106,15 +105,12 @@ namespace UI.Controllers
             ViewBag.Roles = GetAllRolesAsSelectList();
             ViewBag.Customers = GetCustomers();
 
-            return PartialView("PartialAdmin/_CreateUser",objExpandedUserDTO);
+            return PartialView("PartialAdmin/_CreateUser", objExpandedUserDTO);
         }
-        #endregion
 
         // PUT: /Admin/Create
-        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        #region public ActionResult Create(ExpandedUserDTO paramExpandedUserDTO)
         public ActionResult Create(ExpandedUserDTO paramExpandedUserDTO)
         {
             try
@@ -160,23 +156,17 @@ namespace UI.Controllers
                 return Json(new { success = true });
             }
         }
-        #endregion
 
         // GET: /Admin/Edit/TestUser 
-        //[Authorize(Roles = "Administrator")]
-        #region public PartialViewResult EditUser(string UserName)
         public PartialViewResult EditUser(string UserName)
         {
             ExpandedUserDTO objExpandedUserDTO = GetUser(UserName);
-            return PartialView("PartialAdmin/_EditUser",objExpandedUserDTO);
+            return PartialView("PartialAdmin/_EditUser", objExpandedUserDTO);
         }
-        #endregion
 
         // PUT: /Admin/EditUser
-        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        #region public ActionResult EditUser(ExpandedUserDTO paramExpandedUserDTO)
         public ActionResult EditUser(ExpandedUserDTO paramExpandedUserDTO)
         {
             try
@@ -201,11 +191,8 @@ namespace UI.Controllers
                 return View("EditUser", GetUser(paramExpandedUserDTO.UserName));
             }
         }
-        #endregion
 
         // DELETE: /Admin/DeleteUser
-        [Authorize(Roles = "Administrator")]
-        #region public ActionResult DeleteUser(string UserName)
         public ActionResult DeleteUser(string UserName)
         {
             try
@@ -242,11 +229,8 @@ namespace UI.Controllers
                 return View("EditUser", GetUser(UserName));
             }
         }
-        #endregion
 
         // GET: /Admin/EditRoles/TestUser 
-        [Authorize(Roles = "Administrator")]
-        #region PartialViewResult EditRoles(string UserName)
         public PartialViewResult EditRoles(string UserName)
         {
             UserName = UserName.ToLower();
@@ -257,15 +241,12 @@ namespace UI.Controllers
             UserAndRolesDTO objUserAndRolesDTO =
                 GetUserAndRoles(UserName);
 
-            return PartialView("PartialAdmin/_EditRoles",objUserAndRolesDTO);
+            return PartialView("PartialAdmin/_EditRoles", objUserAndRolesDTO);
         }
-        #endregion
 
         // PUT: /Admin/EditRoles/TestUser 
-        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        #region public ActionResult EditRoles(UserAndRolesDTO paramUserAndRolesDTO)
         public ActionResult EditRoles(UserAndRolesDTO paramUserAndRolesDTO)
         {
             try
@@ -302,11 +283,7 @@ namespace UI.Controllers
                 return RedirectToAction("Index", "Admin");
             }
         }
-        #endregion
 
-        // DELETE: /Admin/DeleteRole?UserName="TestUser&RoleName=Administrator
-        [Authorize(Roles = "Administrator")]
-        #region public ActionResult DeleteRole(string UserName, string RoleName)
         public ActionResult DeleteRole(string UserName, string RoleName)
         {
             try
@@ -333,7 +310,7 @@ namespace UI.Controllers
                         "Error: Cannot delete Administrator Role for the current user");
                 }
 
-                // Go get the User
+                // get the User
                 ApplicationUser user = UserManager.FindByName(UserName);
                 // Remove User from role
                 UserManager.RemoveFromRoles(user.Id, RoleName);
@@ -353,13 +330,8 @@ namespace UI.Controllers
                 return RedirectToAction("Index", "Admin");
             }
         }
-        #endregion
-
-        // Roles *****************************
 
         // GET: /Admin/ViewAllRoles
-        [Authorize(Roles = "Administrator")]
-        #region public ActionResult ViewAllRoles()
         public ActionResult ViewAllRoles()
         {
             var roleManager =
@@ -377,24 +349,16 @@ namespace UI.Controllers
 
             return View("ViewAllRoles", colRoleDTO);
         }
-        #endregion
 
-        // GET: /Admin/AddRole
-        [Authorize(Roles = "Administrator")]
-        #region public ActionResult AddRole()
         public PartialViewResult AddRole()
         {
             RoleDTO objRoleDTO = new RoleDTO();
 
             return PartialView("PartialAdmin/_AddRole", objRoleDTO);
         }
-        #endregion
 
-        // PUT: /Admin/AddRole
-        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        #region public ActionResult AddRole(RoleDTO paramRoleDTO)
         public ActionResult AddRole(RoleDTO paramRoleDTO)
         {
             try
@@ -422,7 +386,7 @@ namespace UI.Controllers
                     roleManager.Create(new IdentityRole(RoleName));
                 }
 
-               // return RedirectToAction("Index");
+                // return RedirectToAction("Index");
                 return Json(new { success = true });
             }
             catch (Exception ex)
@@ -431,11 +395,7 @@ namespace UI.Controllers
                 return View("AddRole");
             }
         }
-        #endregion
 
-        // DELETE: /Admin/DeleteUserRole?RoleName=TestRole
-        [Authorize(Roles = "Administrator")]
-        #region public ActionResult DeleteUserRole(string RoleName)
         public ActionResult DeleteUserRole(string RoleName)
         {
             try
@@ -452,7 +412,7 @@ namespace UI.Controllers
                 var UsersInRole = roleManager.FindByName(RoleName).Users.Count();
                 if (UsersInRole > 0)
                 {
-                    throw new Exception(String.Format("Canot delete {0} Role because it still has users.",RoleName));
+                    throw new Exception(String.Format("Canot delete {0} Role because it still has users.", RoleName));
                 }
 
                 var objRoleToDelete = (from objRole in roleManager.Roles
@@ -464,7 +424,7 @@ namespace UI.Controllers
                 }
                 else
                 {
-                    throw new Exception(String.Format( "Canot delete {0} Role does not exist.",RoleName));
+                    throw new Exception(String.Format("Canot delete {0} Role does not exist.", RoleName));
                 }
 
                 List<RoleDTO> colRoleDTO = (from objRole in roleManager.Roles
@@ -474,7 +434,7 @@ namespace UI.Controllers
                                                 RoleName = objRole.Name
                                             }).ToList();
 
-                return RedirectToAction("ViewAllRoles","Admin",colRoleDTO);
+                return RedirectToAction("ViewAllRoles", "Admin", colRoleDTO);
             }
             catch (Exception ex)
             {
@@ -494,12 +454,7 @@ namespace UI.Controllers
                 return RedirectToAction("ViewAllRoles", "Admin", colRoleDTO);
             }
         }
-        #endregion
 
-
-        // Utility
-
-        #region public ApplicationUserManager UserManager
         public ApplicationUserManager UserManager
         {
             get
@@ -513,9 +468,7 @@ namespace UI.Controllers
                 _userManager = value;
             }
         }
-        #endregion
 
-        #region public ApplicationRoleManager RoleManager
         public ApplicationRoleManager RoleManager
         {
             get
@@ -529,16 +482,14 @@ namespace UI.Controllers
                 _roleManager = value;
             }
         }
-        #endregion
 
-        #region GetAllRolesAsSelectList()
         private List<SelectListItem> GetAllRolesAsSelectList()
         {
             List<SelectListItem> SelectRoleListItems = new List<SelectListItem>();
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
-            var colRoleSelectList = roleManager.Roles.Where(x=> x.Name != "Consultant").OrderBy(x => x.Name).ToList();
+            var colRoleSelectList = roleManager.Roles.Where(x => x.Name != "Consultant").OrderBy(x => x.Name).ToList();
 
             foreach (var item in colRoleSelectList)
             {
@@ -552,20 +503,15 @@ namespace UI.Controllers
 
             return SelectRoleListItems;
         }
-        #endregion
 
-        // This method hopefully brings all Customer's ids
-        #region GetCustomers()
         private IEnumerable<SelectListItem> GetCustomers()
         {
-                return db.Customers.
-                ToList()
-                .Where(x=>x.Id != 1)
-                .Select(d => new SelectListItem { Text = d.CompanyName, Value = d.Id.ToString() });
+            return db.Customers.
+            ToList()
+            .Where(x => x.Id != 1)
+            .Select(d => new SelectListItem { Text = d.CompanyName, Value = d.Id.ToString() });
         }
-        #endregion
 
-        #region GetUser()
         private ExpandedUserDTO GetUser(string paramUserName)
         {
             ExpandedUserDTO objExpandedUserDTO = new ExpandedUserDTO();
@@ -580,10 +526,8 @@ namespace UI.Controllers
             objExpandedUserDTO.LockoutEndDateUtc = result.LockoutEndDateUtc;
             objExpandedUserDTO.AccessFailedCount = result.AccessFailedCount;
             objExpandedUserDTO.PhoneNumber = result.PhoneNumber;
-
             return objExpandedUserDTO;
         }
-        #endregion
 
         #region private ExpandedUserDTO UpdateDTOUser(ExpandedUserDTO objExpandedUserDTO)
         private ExpandedUserDTO UpdateDTOUser(ExpandedUserDTO paramExpandedUserDTO)
@@ -709,5 +653,35 @@ namespace UI.Controllers
             return colRolesUserInNotIn;
         }
         #endregion
+
+        [HttpGet]
+        public ActionResult FireJobs()
+        {
+            return View();
+        }
+
+        public ActionResult RunAutomaticRoutingJobManually()
+        {
+            SingletonJob job = SingletonJob.GetObject();          
+            job.GetAutomaticRoutingJob();
+            this.AddToastMessage("Automatic Routing Job","Job was executed successfully..",ToastType.Success);
+            return RedirectToAction("adminDashboard", "Dashboard");
+        }
+
+        public ActionResult RunPerfEvalJobManually()
+        {
+            SingletonJob job = SingletonJob.GetObject();
+            job.GetPerformanceEvaluationJob();
+            this.AddToastMessage("Performance Evaluation Job", "Job was executed successfully..", ToastType.Success);
+            return RedirectToAction("adminDashboard", "Dashboard");
+        }
+
+        public ActionResult RunKPIEvalJobManually()
+        {
+            SingletonJob job = SingletonJob.GetObject();
+            job.GetKPIEvaluationJob();
+            this.AddToastMessage("KPI Evaluation Job", "Job was executed successfully..", ToastType.Success);
+            return RedirectToAction("adminDashboard", "Dashboard");
+        }
     }
 }

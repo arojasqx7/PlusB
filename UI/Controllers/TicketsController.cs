@@ -15,12 +15,15 @@ using Microsoft.AspNet.Identity;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections;
-using System.Text;
 using UI.Models;
 using System.Data.SqlClient;
 using System.Data;
+using System.IO;
+using System.Web.UI;
+using System.Web.Helpers;
+using iTextSharp.text;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.text.pdf;
 
 namespace UI.Controllers
 {
@@ -204,17 +207,27 @@ namespace UI.Controllers
         [Authorize(Roles = "Administrator")]
         public ViewResult resolvedIncidentsByConsultant(int Id_Consultant, DateTime DateFrom, DateTime DateTo)
         {
-            var ticketsResolvedbyRange =  ticketRepo.GetTickets()
-                                         .Where(x=>x.ClosedDate >= DateFrom 
-                                          && x.ClosedDate <= DateTo 
-                                          && x.Id_Consultant == Id_Consultant)
-                                         .OrderBy(x => x.ClosedDate).ThenBy(x=>x.ClosedTime)
-                                         .ToList();
-
-            reportResolvedIncidentsByConsultant = ticketsResolvedbyRange; // assign rangeList to the Report List 
-            ViewBag.TodalTickets = ticketsResolvedbyRange.Count();
             ViewBag.Id_Consultant = new SelectList(db.Consultants.Where(x => !x.FirstName.Contains("Unassigned")).OrderBy(x => x.FirstName), "ID", "FullName");
-            return View(ticketsResolvedbyRange);
+
+            if (DateFrom > DateTo)
+            {
+                this.AddToastMessage("Date range validation", "Date From is greather than Date To, please verify.", ToastType.Error);
+                return View();
+            }
+            else
+            {
+                var ticketsResolvedbyRange = ticketRepo.GetTickets()
+                                             .Where(x => x.ClosedDate >= DateFrom
+                                              && x.ClosedDate <= DateTo
+                                              && x.Id_Consultant == Id_Consultant)
+                                             .OrderBy(x => x.ClosedDate).ThenBy(x => x.ClosedTime)
+                                             .ToList();
+
+                reportResolvedIncidentsByConsultant = ticketsResolvedbyRange; // assign rangeList to the Report List 
+                ViewBag.TodalTickets = ticketsResolvedbyRange.Count();
+                
+                return View(ticketsResolvedbyRange);
+            }
         }
 
         // GET: Tickets/Details/5
@@ -380,7 +393,7 @@ namespace UI.Controllers
         {
             ApplicationUser loggedUser = UserManager.FindById(User.Identity.GetUserId());
             DateTime today = DateTime.Now;
-            TimeSpan currentCloseHour = TimeSpan.Parse(today.ToString("HH:mm:ss tt"));
+            TimeSpan currentCloseHour = TimeSpan.Parse(today.ToString("HH:mm:ss"));
             var shortDate = today.Date;
             IDTicket = id;
             Ticket ticket = ticketRepo.GetTicketByID(id);
@@ -900,28 +913,60 @@ namespace UI.Controllers
         #region ExportData
         public void exportToCSV()
         {
-            var sb = new StringBuilder();
+            var grid = new System.Web.UI.WebControls.GridView();
+            grid.DataSource = reportResolvedIncidentsByConsultant;
+            grid.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=ResolvedIncidentsByConsultant.xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            grid.RenderControl(htw);
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+        }
 
-            sb.AppendFormat("{0},{1},{2},{3}", "Consutant", "Open Date", "Closed Date", "Description",Environment.NewLine);
+        public void exportToPDF()
+        {
+            var reducedList = reportResolvedIncidentsByConsultant
+                             .Select(data => new { data.Id, data.ClosedDate, data.Customer.CompanyName, data.Creator, data.ShortDescription, data.TotalResolutionHours })
+                             .ToList();
 
-            foreach (var item in reportResolvedIncidentsByConsultant)
-            {
-                sb.AppendFormat("{0},{1},{2},{3}", item.Consultant.FullName, item.Date, item.ClosedDate, item.ShortDescription);
-            }
+            var grid = new System.Web.UI.WebControls.GridView();
+            grid.DataSource = reducedList;
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("content-disposition", "attachment;filename=IncidentsResolvedByConsultant.pdf");
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
 
-            var response = System.Web.HttpContext.Current.Response;
-            response.BufferOutput = true;
-            response.Clear();
-            response.ClearHeaders();
-            response.ContentEncoding = Encoding.Unicode;
-            response.AddHeader("content-disposition", "attachment;filename=ResolvedIncidentsByConsultant.csv");
-            response.ContentType = "text/plain";
-            response.Write(sb.ToString());
-            response.End();
+            StringWriter stringWriter = new StringWriter();
+            HtmlTextWriter htmlTextWriter = new HtmlTextWriter(stringWriter);
+
+            grid.DataBind();
+            grid.RenderControl(htmlTextWriter);
+            grid.HeaderRow.Style.Add("font-weight", "bold;");
+            grid.HeaderRow.Style.Add("font-size", "8px;");
+            grid.HeaderRow.Style.Add("text-align", "center;");
+            grid.Style.Add("text-decoration", "none;");
+            grid.Style.Add("font-family", "Arial, Helvetica, sans-serif;");
+            grid.Style.Add("font-size", "8px;");
+            grid.Style.Add("text-align", "center;");
+
+            StringReader sr = new StringReader(stringWriter.ToString());
+            Document doc = new Document(PageSize.A2, 7f, 7f, 7f, 0f);
+            HTMLWorker htmlparser = new HTMLWorker(doc);
+            PdfWriter.GetInstance(doc, Response.OutputStream);
+            doc.Open();
+            htmlparser.Parse(sr);
+            doc.Close();
+            Response.Write(doc);
+            Response.End();
         }
         #endregion
 
-            #region public ApplicationUserManager UserManager
+        #region public ApplicationUserManager UserManager
         public ApplicationUserManager UserManager
         {
             get

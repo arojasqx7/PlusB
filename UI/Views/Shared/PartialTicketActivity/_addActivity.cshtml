@@ -3,8 +3,8 @@
 @using (Html.BeginForm("Create", "TicketActivity", FormMethod.Post))
 {
 
-    @Html.HiddenFor(x=>x.Date, new {@Value= @DateTime.Now.ToShortDateString()})
-    @Html.HiddenFor(x=>x.Time, new {@Value= DateTime.Now.ToLongTimeString()})
+    @Html.HiddenFor(x=>x.Date, new {@Value= DateTime.Now.ToShortDateString()})
+    @Html.HiddenFor(x=>x.Time, new {@Value= DateTime.Now.ToString("HH:mm:ss")})
 
     <div class="row">
     @Html.AntiForgeryToken()

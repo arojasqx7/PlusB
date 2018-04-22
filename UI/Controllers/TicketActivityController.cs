@@ -48,7 +48,7 @@ namespace UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(DateTime date,TimeSpan time, string activity)
+        public ActionResult Create(DateTime date, TimeSpan time, string activity)
         {
             try
             { 

@@ -1130,3 +1130,283 @@ ERROR 2018-04-18 22:34:31,628  1515ms TicketsController      Execute            
 ERROR 2018-04-18 22:38:21,803  2257ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
    at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 40
 INFO  2018-04-18 22:39:02,551 43005ms InvoiceController      Cats               - Information inserted to SAP CATS
+ERROR 2018-04-18 22:47:42,762  1446ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 40
+ERROR 2018-04-18 23:00:03,249   887ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 40
+ERROR 2018-04-18 23:04:55,138   823ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 40
+ERROR 2018-04-18 23:24:54,494 1200179ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 40
+ERROR 2018-04-18 23:41:03,759  3265ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 40
+ERROR 2018-04-19 00:23:53,646 36567ms etAttachmentController techAvgConsultant  - System.InvalidOperationException: The cast to value type 'System.Int32' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__3[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.Sum(IQueryable`1 source)
+   at UI.Controllers.DashboardController.techAvgConsultant() in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Controllers\DashboardController.cs:line 177
+ERROR 2018-04-19 17:20:14,927 378226ms etAttachmentController techAvgConsultant  - System.InvalidOperationException: The cast to value type 'System.Int32' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__3[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.Sum(IQueryable`1 source)
+   at UI.Controllers.DashboardController.techAvgConsultant() in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Controllers\DashboardController.cs:line 177
+ERROR 2018-04-19 17:21:50,354 473653ms etAttachmentController MoveNext           - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Controllers.TicketAttachmentController.<Create>d__6.MoveNext() in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Controllers\TicketAttachmentController.cs:line 97
+INFO  2018-04-19 17:38:34,482 204726ms InvoiceController      Cats               - Information inserted to SAP CATS
+ERROR 2018-04-20 17:23:07,160 1016213ms ImpactsController      Create             - System.Data.Entity.Infrastructure.DbUpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.Entity.Core.UpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.SqlClient.SqlException: Cannot insert duplicate key row in object 'dbo.Severity' with unique index 'IX_SeverityName'. The duplicate key value is (Minor).
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.<Reader>b__c(DbCommand t, DbCommandInterceptionContext`1 c)
+   at System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.Reader(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   at System.Data.Entity.Internal.InterceptableDbCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.Execute(Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.<Update>b__2(UpdateTranslator ut)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.Update[T](T noChangesResult, Func`2 updateFunction)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.Update()
+   at System.Data.Entity.Core.Objects.ObjectContext.<SaveChangesToStore>b__35()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesToStore(SaveOptions options, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass2a.<SaveChangesInternal>b__27()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Persistence.Repositories.SeveritiesRepository.Save() in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\Persistence\Repositories\SeveritiesRepository.cs:line 50
+   at UI.Controllers.SeveritiesController.Create(Severity severity) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Controllers\SeveritiesController.cs:line 50
+INFO  2018-04-20 17:32:57,412 1606465ms InvoiceController      Cats               - Information inserted to SAP CATS
+ERROR 2018-04-21 12:00:32,686  3819ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 40
+ERROR 2018-04-21 12:15:00,949  1313ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 40
+ERROR 2018-04-21 15:48:36,491  1206ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 15:50:18,796   971ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 16:15:08,516  1118ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 16:16:47,110  1051ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 16:20:34,593  1064ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 16:32:35,212   940ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 16:42:03,244  1091ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 16:42:58,683 56530ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 16:50:09,013   938ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 16:55:12,141  1042ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 16:55:48,964 37866ms etAttachmentController MoveNext           - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Controllers.TicketAttachmentController.<Create>d__6.MoveNext() in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Controllers\TicketAttachmentController.cs:line 97
+ERROR 2018-04-21 16:56:14,208 63110ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 16:59:13,963   986ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:31,987 79010ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:31,987 79010ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:32,013 79036ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:32,013 79036ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:32,789 79813ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:34,789 81812ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:36,792 83815ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:46,114 93137ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:46,121 93144ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:46,138 93161ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:46,146 93169ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:46,791 93814ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:48,793 95816ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:50,789 97812ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:52,782 99805ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:54,788 101811ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:56,811 103834ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:00:58,791 105814ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:00,790 107813ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:02,822 109845ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:04,801 111824ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:06,786 113809ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:08,804 115827ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:10,788 117811ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:12,810 119833ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:14,785 121808ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:16,805 123828ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:18,792 125815ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:20,785 127808ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:22,792 129815ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:24,794 131817ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:26,788 133811ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:28,788 135811ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:30,792 137815ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:32,792 139815ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:34,788 141811ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:36,791 143814ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:38,797 145820ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:40,789 147812ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:42,790 149813ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:44,791 151814ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:46,790 153813ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:48,793 155816ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:50,792 157815ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:52,796 159819ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:54,789 161812ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:56,794 163817ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:01:58,797 165820ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:00,790 167813ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:02,801 169825ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:04,791 171814ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:06,787 173810ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:08,784 175807ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:10,807 177830ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:12,789 179812ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:14,809 181832ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:16,783 183806ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:18,787 185811ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:20,793 187816ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:22,791 189814ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:24,802 191825ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:26,804 193827ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:28,792 195815ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:30,791 197814ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:32,788 199811ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:34,804 201827ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:02:36,793 203816ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:07:17,722  1046ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:08:48,177   946ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:12:27,291   987ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:15:52,818   976ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:26:56,237  1081ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:32:38,447   982ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:35:51,281  1041ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:47:12,092   980ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 17:55:33,203 20053ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 18:02:13,484 420334ms TicketsController      Execute            - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Jobs.automaticRoutingJob.Execute(IJobExecutionContext context) in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Background Jobs\automaticRoutingJob.cs:line 39
+ERROR 2018-04-21 18:53:13,884 216460ms etAttachmentController MoveNext           - System.NullReferenceException: Object reference not set to an instance of an object.
+   at UI.Controllers.TicketAttachmentController.<Create>d__6.MoveNext() in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Controllers\TicketAttachmentController.cs:line 97
+ERROR 2018-04-21 19:23:54,577 13051ms etAttachmentController techAvgConsultant  - System.InvalidOperationException: The cast to value type 'System.Int32' failed because the materialized value is null. Either the result type's generic parameter or the query must use a nullable type.
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__3[TResult](IEnumerable`1 sequence)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   at System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.Sum(IQueryable`1 source)
+   at UI.Controllers.DashboardController.techAvgConsultant() in C:\Users\andrey.rojas\documents\visual studio 2015\Projects\PlusB\UI\Controllers\DashboardController.cs:line 177
