@@ -1,29 +1,28 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Web.Mvc;
-using Domain.DAL;
+﻿using Domain.DAL;
 using Domain.Entities;
-using UI.Extensions;
+using iTextSharp.text;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.text.pdf;
+using log4net;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using PagedList;
 using Persistence.Repositories;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
-using PagedList;
-using log4net;
-using UI.toastr;
-using Microsoft.AspNet.Identity;
-using System.Web;
-using Microsoft.AspNet.Identity.Owin;
 using System.Collections.Generic;
-using UI.Models;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.Entity;
+using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 using System.Web.UI;
-using System.Web.Helpers;
-using iTextSharp.text;
-using iTextSharp.text.html.simpleparser;
-using iTextSharp.text.pdf;
+using UI.Extensions;
+using UI.Models;
+using UI.toastr;
 
 namespace UI.Controllers
 {
@@ -574,7 +573,7 @@ namespace UI.Controllers
                     else if (escalationAVG >= 5 && escalationAVG <= 9)
                     {
                         riskPercentage = 24.1;
-                        TempData["escalationRisk"] = riskPercentage;
+                        ViewBag.escalationRisk = riskPercentage;
                     }
                     else if (escalationAVG > 9 && escalationAVG <= 12)
                     {

@@ -257,6 +257,7 @@
     <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Controllers\ToastrController.cs" />
     <Compile Include="Controllers\TriggerJobController.cs" />
+    <Compile Include="Extensions\EmailManager.cs" />
     <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -3046,6 +3047,8 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Views\Admin\FireJobs.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <None Include="Web References\host_PlusB\zser_time_sheet.wsdl" />
   </ItemGroup>
   <ItemGroup>
