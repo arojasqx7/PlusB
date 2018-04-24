@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace UI
 {
@@ -30,7 +29,7 @@ namespace UI
             bundles.Add(new ScriptBundle("~/bundles/raphael").Include(
                        "~/Scripts/raphael/raphael.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jquery.sparkline").Include(
+            bundles.Add(new ScriptBundle("~/bundles/jquerySparkline").Include(
                       "~/Scripts/jquery-sparkline/dist/jquery.sparkline.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jvectormap").Include(
@@ -47,14 +46,11 @@ namespace UI
             bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
                    "~/Scripts/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jquery.slimscroll").Include(
+            bundles.Add(new ScriptBundle("~/bundles/jquerySlimscroll").Include(
                  "~/Scripts/jquery.slimscroll/jquery.slimscroll.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/fastclick").Include(
                  "~/Scripts/fastclick.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/jquery-slimscroll").Include(
-                "~/Scripts/jquery-slimscroll/jquery.slimscroll.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/wysihtml5").Include(
                  "~/Scripts/bootstrap3-wysihtml5.all.js",
@@ -69,7 +65,7 @@ namespace UI
                  "~/Scripts/jquery.dataTables.min.js",
                  "~/Scripts/dataTables.bootstrap.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/chart.js").Include(
+            bundles.Add(new ScriptBundle("~/bundles/chartJS").Include(
                        "~/Scripts/Chart.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/toastr").Include(
@@ -101,7 +97,19 @@ namespace UI
                       "~/Content/AdminLTE.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/skins").Include(
-                     "~/Content/skins/_all-skins.css"));
+                     "~/Content/skins/_all-skins.css",
+                     "~/Content/skins/skin-black-light.min.css",
+                     "~/Content/skins/skin-black.min.css",
+                     "~/Content/skins/skin-blue-light.min.css",
+                     "~/Content/skins/skin-blue.min.css",
+                     "~/Content/skins/skin-green-light.min.css",
+                     "~/Content/skins/skin-green.min.css",
+                     "~/Content/skins/skin-purple-light.min.css",
+                     "~/Content/skins/skin-purple.min.css",
+                     "~/Content/skins/skin-red-light.min.css",
+                     "~/Content/skins/skin-red.min.css",
+                     "~/Content/skins/skin-yellow-light.min.css",
+                     "~/Content/skins/skin-yellow.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/datepicker").Include(
                      "~/Content/datepicker/bootstrap-datepicker.min.css",
@@ -119,10 +127,7 @@ namespace UI
             bundles.Add(new StyleBundle("~/Content/logincss").Include(
                     "~/Content/LoginStyle.css"));
 
-            bundles.Add(new StyleBundle("~/Content/datatables.net-bs").Include(
-                    "~/Content/datatables.net-bs/dataTables.bootstrap.min.css"));
-
-            bundles.Add(new StyleBundle("~/Content/placeholder-icons").Include(
+            bundles.Add(new StyleBundle("~/Content/placeholderIcons").Include(
                     "~/Content/placeholder-icons.css"));
 
             bundles.Add(new StyleBundle("~/Content/dropzone").Include(

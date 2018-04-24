@@ -217,8 +217,8 @@ namespace UI.Controllers
                 {
                     var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
 
-                    var callbackUrl = Url.Action("ResetPassword", "Account", new { UserId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    string body = "<b>Please find the Password Reset Link. </b><br/>" + callbackUrl;
+                    var callbackUrl = "<a href='" + Url.Action("ResetPassword", "Account", new { UserId = user.Id, code = code }, protocol: Request.Url.Scheme)+ "'> link</a>";
+                    string body = "<b>Please find the Password Reset Link: </b>"   +   callbackUrl;
 
                     EmailManager.SendEmail(To, body);
                 }

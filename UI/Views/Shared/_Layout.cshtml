@@ -5,19 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>PlusB | Service Desk</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="~/Content/skins/_all-skins.css" rel="stylesheet" />
         @Styles.Render("~/Content/bootstrap")
         @Styles.Render("~/Content/fontawesome")
         @Styles.Render("~/Content/ionicons")
         @Styles.Render("~/Content/adminLTE")
-        @Styles.Render("~/Content/skins")
         @Styles.Render("~/Content/datepicker")
         @Styles.Render("~/Content/jvectormap")
         @Styles.Render("~/Content/wysihtml5")
-        @Styles.Render("~/Content/datatables.net-bs")
         @Styles.Render("~/Content/pagedList")
         @Styles.Render("~/Content/morris")
         @Styles.Render("~/Content/iCheck")
         @Styles.Render("~/Content/toastr")
+        @Styles.Render("~/Content/placeholderIcons")
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -182,7 +182,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="@Url.Action("resolvedIncidentsByConsultant","Tickets")"><i class="fa fa-copy"></i> View Resolved by Consultant</a></li>
+                                <li><a href="@Url.Action("resolvedIncidentsByConsultant","Tickets")"><i class="fa fa-file"></i> View Resolved by Consultant</a></li>
                                 <li><a href="@Url.Action("resolvedIncidentsByConsultant","Tickets")">Resolution Time</a></li>
                                 <li><a href="@Url.Action("resolvedIncidentsByConsultant","Tickets")">KPI Status</a></li>
                                 <li><a href="@Url.Action("resolvedIncidentsByConsultant","Tickets")">SLA Status</a></li>
@@ -227,7 +227,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="@Url.Action("","")"><i class="fa fa-level-up"></i>Report #1</a></li>
+                                <li><a href="@Url.Action("IncidentHistoryConsultant","Reports")"><i class="fa fa-file"></i>Incident History</a></li>
                             </ul>
                         </li>
                      }
@@ -264,13 +264,9 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="@Url.Action("","")"><i class="fa fa-level-up"></i>Report #1</a></li>
+                                <li><a href="@Url.Action("IncidentHistoryCustomer","Reports")"><i class="fa fa-file"></i>Incident History</a></li>
                             </ul>
                         </li>
-                     }
-                     else
-                     {
-
                      }
                 </ul>
             </section>
@@ -296,10 +292,6 @@
             <div class="tab-content">
                 <div class="tab-pane" id="control-sidebar-home-tab">
                 </div>
-                <!-- Settings tab content -->
-                @*<div class="tab-pane" id="control-sidebar-settings-tab">
-                    <h3 class="control-sidebar-heading">Notification Settings</h3>
-                </div>*@
             </div>
         </aside>
         <div class="control-sidebar-bg"></div>
@@ -312,16 +304,15 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/morris")
     @Scripts.Render("~/bundles/raphael")
-    @Scripts.Render("~/bundles/jquery.sparkline")
+    @Scripts.Render("~/bundles/jquerySparkline")
     @Scripts.Render("~/bundles/jvectormap")
     @Scripts.Render("~/bundles/knob")
     @Scripts.Render("~/bundles/moment")
     @Scripts.Render("~/bundles/datepicker")
-    @Scripts.Render("~/bundles/jquery.slimscroll")
+    @Scripts.Render("~/bundles/jquerySlimscroll")
     @Scripts.Render("~/bundles/fastclick")
     @Scripts.Render("~/bundles/adminLTE")
     @Scripts.Render("~/bundles/wysihtml5")
-    @Scripts.Render("~/bundles/jquery-slimscroll")
     @Scripts.Render("~/bundles/datatables")
     @Scripts.Render("~/bundles/iCheck")
     <script>$.widget.bridge('uibutton', $.ui.button);</script>

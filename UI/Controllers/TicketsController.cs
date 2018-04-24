@@ -307,7 +307,7 @@ namespace UI.Controllers
         public ActionResult AssignTicket(Ticket objTicket)
         {
             DateTime today = DateTime.Now;
-            TimeSpan currentHour = TimeSpan.Parse(today.ToString("HH:mm:ss tt"));
+            TimeSpan currentHour = TimeSpan.Parse(today.ToString("HH:mm:ss"));
             var shortDate = today.Date;
             int idConsultant = int.Parse(User.Identity.GetConsultantId()); // obtain id from claims
 
