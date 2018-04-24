@@ -475,18 +475,6 @@
     <Content Include="Scripts\bootstrap-datepicker\js\locales\bootstrap-datepicker.zh-TW.js" />
     <Content Include="Content\datepicker\daterangepicker.css" />
     <Content Include="Scripts\daterangepicker.js" />
-    <Content Include="bower_components\bootstrap-daterangepicker\demo.html" />
-    <Content Include="bower_components\bootstrap-daterangepicker\drp.png" />
-    <Content Include="bower_components\bootstrap-daterangepicker\example\amd\index.html" />
-    <Content Include="bower_components\bootstrap-daterangepicker\example\amd\main.js" />
-    <Content Include="bower_components\bootstrap-daterangepicker\example\amd\require.js" />
-    <Content Include="bower_components\bootstrap-daterangepicker\example\browserify\bundle.js" />
-    <Content Include="bower_components\bootstrap-daterangepicker\example\browserify\index.html" />
-    <Content Include="bower_components\bootstrap-daterangepicker\example\browserify\main.js" />
-    <Content Include="bower_components\bootstrap-daterangepicker\package.js" />
-    <Content Include="bower_components\bootstrap-daterangepicker\website\index.html" />
-    <Content Include="bower_components\bootstrap-daterangepicker\website\website.css" />
-    <Content Include="bower_components\bootstrap-daterangepicker\website\website.js" />
     <Content Include="bower_components\bootstrap-timepicker\js\bootstrap-timepicker.js" />
     <Content Include="bower_components\bootstrap\dist\css\bootstrap-theme.css" />
     <Content Include="bower_components\bootstrap\dist\css\bootstrap-theme.min.css" />
@@ -547,24 +535,6 @@
     <Content Include="bower_components\Flot\jquery.flot.threshold.js" />
     <Content Include="bower_components\Flot\jquery.flot.time.js" />
     <Content Include="bower_components\Flot\jquery.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\bindings\inputmask.binding.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\dependencyLibs\inputmask.dependencyLib.jquery.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\dependencyLibs\inputmask.dependencyLib.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\global\document.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\global\window.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\inputmask.date.extensions.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\inputmask.extensions.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\inputmask.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\inputmask.numeric.extensions.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\inputmask.phone.extensions.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\inputmask.regex.extensions.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\jquery.inputmask.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\phone-codes\phone-be.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\phone-codes\phone-nl.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\phone-codes\phone-ru.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\phone-codes\phone-uk.js" />
-    <Content Include="bower_components\inputmask\dist\inputmask\phone-codes\phone.js" />
     <Content Include="bower_components\inputmask\dist\jquery.inputmask.bundle.js" />
     <Content Include="bower_components\inputmask\dist\min\inputmask\inputmask.date.extensions.min.js" />
     <Content Include="bower_components\inputmask\dist\min\inputmask\inputmask.extensions.min.js" />
@@ -2692,29 +2662,17 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\skins\skin-black-light.css" />
     <Content Include="Content\skins\skin-black-light.min.css" />
-    <Content Include="Content\skins\skin-black.css" />
     <Content Include="Content\skins\skin-black.min.css" />
-    <Content Include="Content\skins\skin-blue-light.css" />
     <Content Include="Content\skins\skin-blue-light.min.css" />
-    <Content Include="Content\skins\skin-blue.css" />
     <Content Include="Content\skins\skin-blue.min.css" />
-    <Content Include="Content\skins\skin-green-light.css" />
     <Content Include="Content\skins\skin-green-light.min.css" />
-    <Content Include="Content\skins\skin-green.css" />
     <Content Include="Content\skins\skin-green.min.css" />
-    <Content Include="Content\skins\skin-purple-light.css" />
     <Content Include="Content\skins\skin-purple-light.min.css" />
-    <Content Include="Content\skins\skin-purple.css" />
     <Content Include="Content\skins\skin-purple.min.css" />
-    <Content Include="Content\skins\skin-red-light.css" />
     <Content Include="Content\skins\skin-red-light.min.css" />
-    <Content Include="Content\skins\skin-red.css" />
     <Content Include="Content\skins\skin-red.min.css" />
-    <Content Include="Content\skins\skin-yellow-light.css" />
     <Content Include="Content\skins\skin-yellow-light.min.css" />
-    <Content Include="Content\skins\skin-yellow.css" />
     <Content Include="Content\skins\skin-yellow.min.css" />
     <Content Include="Content\skins\_all-skins.css" />
     <Content Include="Content\AdminLTE.css" />
@@ -2741,8 +2699,6 @@
     <Content Include="plugins\input-mask\jquery.inputmask.phone.extensions.js" />
     <Content Include="plugins\input-mask\jquery.inputmask.regex.extensions.js" />
     <Content Include="plugins\input-mask\phone-codes\readme.txt" />
-    <Content Include="plugins\jQueryUI\jquery-ui.js" />
-    <Content Include="plugins\jQueryUI\jquery-ui.min.js" />
     <Content Include="plugins\timepicker\bootstrap-timepicker.css" />
     <Content Include="plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="plugins\timepicker\bootstrap-timepicker.min.css" />
@@ -2756,18 +2712,6 @@
     <Content Include="Scripts\bootstrap-datepicker\dist\css\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Scripts\bootstrap-datepicker\dist\css\bootstrap-datepicker3.css.map" />
     <Content Include="Scripts\bootstrap-datepicker\dist\css\bootstrap-datepicker3.standalone.css.map" />
-    <Content Include="bower_components\bootstrap-daterangepicker\.bower.json" />
-    <Content Include="bower_components\bootstrap-daterangepicker\bower.json" />
-    <Content Include="bower_components\bootstrap-daterangepicker\daterangepicker.scss" />
-    <Content Include="bower_components\bootstrap-daterangepicker\example\browserify\README.md" />
-    <Content Include="bower_components\bootstrap-daterangepicker\package.json" />
-    <Content Include="bower_components\bootstrap-daterangepicker\README.md" />
-    <Content Include="bower_components\bootstrap-timepicker\.bower.json" />
-    <Content Include="bower_components\bootstrap-timepicker\bower.json" />
-    <Content Include="bower_components\bootstrap-timepicker\CHANGELOG.md" />
-    <Content Include="bower_components\bootstrap-timepicker\css\timepicker.less" />
-    <Content Include="bower_components\bootstrap-timepicker\LICENSE" />
-    <Content Include="bower_components\bootstrap-timepicker\README.md" />
     <Content Include="bower_components\bootstrap\.bower.json" />
     <Content Include="bower_components\bootstrap\bower.json" />
     <Content Include="bower_components\bootstrap\CHANGELOG.md" />
@@ -2804,7 +2748,6 @@
     <Content Include="bower_components\bootstrap\less\close.less" />
     <Content Include="bower_components\bootstrap\less\code.less" />
     <Content Include="bower_components\bootstrap\less\component-animations.less" />
-    <Content Include="Content\dropdowns.less" />
     <Content Include="bower_components\bootstrap\less\forms.less" />
     <Content Include="bower_components\bootstrap\less\glyphicons.less" />
     <Content Include="bower_components\bootstrap\less\grid.less" />
@@ -2917,6 +2860,7 @@
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\PlusB - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -3049,6 +2993,8 @@
     <Content Include="Views\Admin\FireJobs.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Reports\IncidentHistoryConsultant.cshtml" />
+    <Content Include="Views\Reports\IncidentHistoryCustomer.cshtml" />
     <None Include="Web References\host_PlusB\zser_time_sheet.wsdl" />
   </ItemGroup>
   <ItemGroup>
