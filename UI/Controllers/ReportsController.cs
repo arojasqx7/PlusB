@@ -19,8 +19,10 @@ namespace UI.Controllers
     {
         private PlusBContext db = new PlusBContext();
         private ApplicationUserManager _userManager;
-        private static List<Ticket> ticketHistoryConsultantList = new List<Ticket>();
-        private static List<Ticket> ticketHistoryCustomerList   = new List<Ticket>();
+        private static List<Ticket> ticketHistoryConsultantList  = new List<Ticket>();
+        private static List<Ticket> ticketHistoryCustomerList    = new List<Ticket>();
+        private static List<Ticket> ResolutionAvgValueAdmin = new List<Ticket>();
+        private static List<Ticket> ResolutionAvgValueConsultant = new List<Ticket>();
 
         [Authorize(Roles = "Consultant")]
         public ActionResult IncidentHistoryConsultant()
@@ -90,6 +92,87 @@ namespace UI.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
+        public ActionResult ResolutionTimeEstimate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult ResolutionTimeEstimate(DateTime DateFrom, DateTime DateTo)
+        {
+            if (DateFrom > DateTo)
+            {
+                this.AddToastMessage("Date range validation", "Date From is greather than Date To, please verify.", ToastType.Error);
+                return View();
+            }
+            else
+            {
+                    var ticketResolutionEstimate = db.Tickets
+                                                   .Where(x => x.ClosedDate >= DateFrom
+                                                    && x.ClosedDate <= DateTo)
+                                                   .OrderBy(x => x.ClosedDate).ThenBy(x => x.ClosedTime)
+                                                   .AsNoTracking()
+                                                   .ToList();
+
+                    double? sumResolutionEstimate = ticketResolutionEstimate.Sum(x => x.TotalResolutionHours);
+
+                    double? resolutionValue = sumResolutionEstimate / ticketResolutionEstimate.Count();
+                    
+                    if (resolutionValue < 0 || Double.IsNaN(resolutionValue.Value))
+                    {
+                        resolutionValue = 0;
+                    }
+
+                    ViewBag.ResolutionAvgValue = Math.Round(resolutionValue.Value,2);
+                    ResolutionAvgValueAdmin = ticketResolutionEstimate;
+                    return View(ticketResolutionEstimate);
+                }
+            }
+
+        [Authorize(Roles = "Consultant")]
+        public ActionResult ResolutionTimeEstimateConsultant()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult ResolutionTimeEstimateConsultant(DateTime DateFrom, DateTime DateTo)
+        {
+            if (DateFrom > DateTo)
+            {
+                this.AddToastMessage("Date range validation", "Date From is greather than Date To, please verify.", ToastType.Error);
+                return View();
+            }
+            else
+            {
+                var consultantUser = UserManager.FindById(User.Identity.GetUserId());
+
+                var ticketResolutionEstimate =  db.Tickets
+                                               .Where(x => x.ClosedDate >= DateFrom
+                                                && x.ClosedDate <= DateTo
+                                                && x.Consultant.Email == consultantUser.Email)
+                                               .OrderBy(x => x.ClosedDate).ThenBy(x => x.ClosedTime)
+                                               .AsNoTracking()
+                                               .ToList();
+
+                double? sumResolutionEstimate = ticketResolutionEstimate.Sum(x => x.TotalResolutionHours);
+
+                double? resolutionValue = sumResolutionEstimate / ticketResolutionEstimate.Count();
+
+                if (resolutionValue < 0 || Double.IsNaN(resolutionValue.Value))
+                {
+                    resolutionValue = 0;
+                }
+
+                ViewBag.ResolutionAvgValue = Math.Round(resolutionValue.Value, 2);
+                ResolutionAvgValueConsultant = ticketResolutionEstimate;
+                return View(ticketResolutionEstimate);
+            }
+        }
+
+        #region Export Methods
+
         public void exportIncidentHistoryCustomerToCSV()
         {
             var grid = new System.Web.UI.WebControls.GridView();
@@ -125,6 +208,47 @@ namespace UI.Controllers
             Response.Flush();
             Response.End();
         }
+
+        public void exportResolutionTimeReport()
+        {
+            var grid = new System.Web.UI.WebControls.GridView();
+            var reducedList = ResolutionAvgValueAdmin
+                             .Select(data => new {data.Id,data.ShortDescription, data.ClosedDate, data.Consultant.FullName, data.TotalResolutionHours});
+            grid.DataSource = reducedList;
+            grid.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=ResolutionTimeAdministrator.xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            grid.RenderControl(htw);
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+        }
+
+        public void exportResolutionTimeReportConsultant()
+        {
+            var grid = new System.Web.UI.WebControls.GridView();
+            var reducedList = ResolutionAvgValueConsultant
+                             .Select(data => new { data.Id, data.ShortDescription, data.ClosedDate, data.Consultant.FullName, data.TotalResolutionHours });
+            grid.DataSource = reducedList;
+            grid.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=ResolutionTimeConsultant.xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            grid.RenderControl(htw);
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+        }
+        #endregion
 
         #region public ApplicationUserManager UserManager
         public ApplicationUserManager UserManager
