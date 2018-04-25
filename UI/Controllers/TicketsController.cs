@@ -863,7 +863,7 @@ namespace UI.Controllers
                                                                  "<table border='0' cellpadding='0'cellspacing='0'>" +
                                                                 "   <tbody>" +
                                                                "      <tr>" +
-                                                              "         <td style='text-align:center;'><a href='http://localhost:65158/Surveys/fillSurvey/"+IDTicket+ "'>Go to Survey</a></td>" +
+                                                              "         <td style='text-align:center;'><a href='https://plusb.azurewebsites.net/Surveys/fillSurvey/" + IDTicket+ "'>Go to Survey</a></td>" +
                                                              "        </tr>" +
                                                             "       </tbody>" +
                                                            "      </table>" +

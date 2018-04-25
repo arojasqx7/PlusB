@@ -87,6 +87,18 @@ namespace UI.Controllers
                 context.Tickets.Add(ticketDetails);
                 context.SaveChanges();
                 this.AddToastMessage("Incident", "Incident created successfully.", ToastType.Success);
+
+                var consultantEmails =  db.Consultants
+                                        .Where(consultant => consultant.ID != 1)
+                                        .Select(consultant => consultant.Email)
+                                        .ToList();
+
+                foreach (var email in consultantEmails)
+                {
+                    string body = "<b>A new Incident has been opened </b>";
+                    string subject = "Consultant - New Incident created";
+                    EmailManager.SendEmail(email, body, subject);
+                }
             }
 
             try
