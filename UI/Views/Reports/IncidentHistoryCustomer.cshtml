@@ -106,24 +106,22 @@
     if (rowCount == 1)
     {
         $("#btnExcel").attr('class', 'btn btn-success disabled');
-        $("#btnPDF").attr('class', 'btn btn-danger disabled');
     }
     else
     {
         $("#btnExcel").attr('class', 'btn btn-success');
-        $("#btnPDF").attr('class', 'btn btn-danger');
     }
 
     $('#datepicker').datepicker({
         autoclose: true,
         todayHighlight: true,
-        format: 'dd/mm/yyyy'
+        format: 'MM/dd/yyyy'
     })
 
     $('#datepicker2').datepicker({
         autoclose: true,
         todayHighlight: true,
-        format: 'dd/mm/yyyy'
+        format: 'MM/dd/yyyy'
     })
 </script>
 

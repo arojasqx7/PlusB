@@ -2995,6 +2995,8 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Reports\IncidentHistoryConsultant.cshtml" />
     <Content Include="Views\Reports\IncidentHistoryCustomer.cshtml" />
+    <Content Include="Views\Reports\ResolutionTimeEstimate.cshtml" />
+    <Content Include="Views\Reports\ResolutionTimeEstimateConsultant.cshtml" />
     <None Include="Web References\host_PlusB\zser_time_sheet.wsdl" />
   </ItemGroup>
   <ItemGroup>
