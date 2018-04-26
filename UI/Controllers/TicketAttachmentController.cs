@@ -109,7 +109,6 @@ namespace UI.Controllers
                     Stream str = file.InputStream;
                     BinaryReader Br = new BinaryReader(str);
                     Byte[] FileDetail = Br.ReadBytes((Int32)str.Length);
-                    //end methods
 
                     //query to extract last Ticket Id
                     var lastTicketId = (from i in ticketRepo.GetTickets()

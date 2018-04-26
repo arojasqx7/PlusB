@@ -295,30 +295,22 @@ namespace UI.Controllers
             return Json(new { success = true });
         }
 
-        //code to assign ticket to consultant 
-        [Authorize(Roles = "Consultant")]
-        public ActionResult AssignTicket(int id)
+        [HttpPost]
+        public ActionResult AssignTicketPost(int id)
         {
             Ticket ticket = ticketRepo.GetTicketByID(id);
-            return PartialView("PartialTickets/_assignTicket", ticket);
-        }
-
-        [HttpPost]
-        public ActionResult AssignTicket(Ticket objTicket)
-        {
             DateTime today = DateTime.Now;
             TimeSpan currentHour = TimeSpan.Parse(today.ToString("HH:mm:ss"));
             var shortDate = today.Date;
-            int idConsultant = int.Parse(User.Identity.GetConsultantId()); // obtain id from claims
+            int idConsultant = int.Parse(User.Identity.GetConsultantId()); 
 
-            Ticket ticket = ticketRepo.GetTicketByID(objTicket.Id); // Get all ticket details
-            ticket.Id_Consultant = idConsultant; //assigning consultantID to ticket
+            ticket.Id_Consultant = idConsultant; 
             ticket.AssignmentDate = shortDate;
             ticket.AssignmentTime = currentHour;
             ticketRepo.UpdateTicket(ticket);
             ticketRepo.Save();
             this.AddToastMessage("Incidents", "Incident # " + ticket.Id + " assigned to me!", ToastType.Success);
-            return RedirectToAction("MyTickets", "Tickets");
+            return RedirectToAction("consultantDashboard", "Dashboard");
         }
 
         // GET

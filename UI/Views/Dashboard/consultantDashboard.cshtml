@@ -24,7 +24,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
                 <span class="info-box-icon bg-green-active"><i class="fa fa-thumbs-o-up"></i></span>
@@ -34,7 +33,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
                 <span class="info-box-icon bg-green-active"><i class="ion ion-stats-bars"></i></span>
@@ -44,7 +42,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
                 <span class="info-box-icon bg-red-active"><i class="ion-alert-circled"></i></span>
@@ -145,7 +142,7 @@
 
 @section Scripts
 {
-@Scripts.Render("~/bundles/chart.js")
+@Scripts.Render("~/bundles/chartJS")
 <script>
     $(document).ready(function () {
         $.get("/Dashboard/ticketsInBacklogConsultant",function(message){
