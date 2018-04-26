@@ -219,8 +219,9 @@ namespace UI.Controllers
 
                     var callbackUrl = "<a href='" + Url.Action("ResetPassword", "Account", new { UserId = user.Id, code = code }, protocol: Request.Url.Scheme)+ "'> link</a>";
                     string body = "<b>Please find the Password Reset Link: </b>"   +   callbackUrl;
+                    string subject = "Forgot Password Functionality";
 
-                    EmailManager.SendEmail(To, body);
+                    EmailManager.SendEmail(To, body, subject);
                 }
             }
             return View("ForgotPasswordConfirmation");

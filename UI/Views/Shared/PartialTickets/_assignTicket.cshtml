@@ -7,7 +7,7 @@
     <h4 class="modal-title text-bold">Do you want to assign this ticket to you?</h4>
 </div>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("AssignTicket", "Tickets",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -29,10 +29,8 @@
         <strong>Technology: </strong>   @Html.DisplayFor(model => model.Technology.Name)
         <br />
     </div>
-
     <div class="modal-footer">
         <button class="btn btn-success" type="submit" id="assignTicket">Assign to me</button>
         <button class="btn btn-danger" data-dismiss="modal">No</button>     
     </div>
-
 }

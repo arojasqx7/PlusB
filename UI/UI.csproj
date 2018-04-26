@@ -256,7 +256,6 @@
     <Compile Include="Controllers\TicketAttachmentController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Controllers\ToastrController.cs" />
-    <Compile Include="Controllers\TriggerJobController.cs" />
     <Compile Include="Extensions\EmailManager.cs" />
     <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">

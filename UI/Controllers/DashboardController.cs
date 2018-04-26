@@ -12,10 +12,10 @@ namespace UI.Controllers
 {
     public class DashboardController : Controller
     {
-    private PlusBContext db = new PlusBContext();
-    private ApplicationUserManager _userManager;
-    ILog logger = LogManager.GetLogger(typeof(TicketAttachmentController));
-    DateTime today = Convert.ToDateTime(DateTime.Today.ToShortDateString());
+        private PlusBContext db = new PlusBContext();
+        private ApplicationUserManager _userManager;
+        ILog logger = LogManager.GetLogger(typeof(TicketAttachmentController));
+        DateTime today = Convert.ToDateTime(DateTime.Today.ToShortDateString());
 
         [Authorize(Roles = "Administrator")]
         public ActionResult adminDashboard()
@@ -473,7 +473,7 @@ namespace UI.Controllers
         }
         #endregion
 
-            #region public ApplicationUserManager UserManager
+        #region public ApplicationUserManager UserManager
         public ApplicationUserManager UserManager
         {
             get

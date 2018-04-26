@@ -295,30 +295,22 @@ namespace UI.Controllers
             return Json(new { success = true });
         }
 
-        //code to assign ticket to consultant 
-        [Authorize(Roles = "Consultant")]
-        public ActionResult AssignTicket(int id)
+        [HttpPost]
+        public ActionResult AssignTicketPost(int id)
         {
             Ticket ticket = ticketRepo.GetTicketByID(id);
-            return PartialView("PartialTickets/_assignTicket", ticket);
-        }
-
-        [HttpPost]
-        public ActionResult AssignTicket(Ticket objTicket)
-        {
             DateTime today = DateTime.Now;
             TimeSpan currentHour = TimeSpan.Parse(today.ToString("HH:mm:ss"));
             var shortDate = today.Date;
-            int idConsultant = int.Parse(User.Identity.GetConsultantId()); // obtain id from claims
+            int idConsultant = int.Parse(User.Identity.GetConsultantId()); 
 
-            Ticket ticket = ticketRepo.GetTicketByID(objTicket.Id); // Get all ticket details
-            ticket.Id_Consultant = idConsultant; //assigning consultantID to ticket
+            ticket.Id_Consultant = idConsultant; 
             ticket.AssignmentDate = shortDate;
             ticket.AssignmentTime = currentHour;
             ticketRepo.UpdateTicket(ticket);
             ticketRepo.Save();
             this.AddToastMessage("Incidents", "Incident # " + ticket.Id + " assigned to me!", ToastType.Success);
-            return RedirectToAction("MyTickets", "Tickets");
+            return RedirectToAction("consultantDashboard", "Dashboard");
         }
 
         // GET
@@ -863,7 +855,7 @@ namespace UI.Controllers
                                                                  "<table border='0' cellpadding='0'cellspacing='0'>" +
                                                                 "   <tbody>" +
                                                                "      <tr>" +
-                                                              "         <td style='text-align:center;'><a href='http://localhost:65158/Surveys/fillSurvey/"+IDTicket+ "'>Go to Survey</a></td>" +
+                                                              "         <td style='text-align:center;'><a href='https://plusb.azurewebsites.net/Surveys/fillSurvey/" + IDTicket+ "'>Go to Survey</a></td>" +
                                                              "        </tr>" +
                                                             "       </tbody>" +
                                                            "      </table>" +
