@@ -88,19 +88,9 @@
                 @Html.ValidationMessageFor(model => model.Id_TaskType, "", new { @class = "text-danger" })
             </div>
         </div>
-        <br /><br />
+        <br />
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-8">
-               @Html.DropDownListFor(x => x.Status, new List<SelectListItem>
-                   {
-                    new SelectListItem() {Text = "Open", Value="Open"},
-                    new SelectListItem() {Text = "Work In Progress", Value="Work In Progress"},
-                   }, new { @class = "form-control select2" })
-            </div>
-        </div>
-
+        @Html.HiddenFor(model => model.Status)
         @Html.HiddenFor(model => model.Id_Consultant)
     </div>
 

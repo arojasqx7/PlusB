@@ -44,7 +44,7 @@ namespace UI.Controllers
             ViewBag.Id_Impact = new SelectList(db.Impacts, "Id", "ImpactName");
             ViewBag.Id_Severity = new SelectList(db.Severities, "Id", "SeverityName");
             ViewBag.Id_TaskType = new SelectList(db.TaskTypes, "Id", "TaskName");
-            ViewBag.Id_Technology = new SelectList(db.Technologies, "ID", "Name");
+            ViewBag.Id_Technology = new SelectList(db.Technologies.OrderBy(x => x.Name), "ID", "Name");
             return View();
         }
 
@@ -106,6 +106,7 @@ namespace UI.Controllers
                 foreach (HttpPostedFileBase file in files)
                 {
                     //Methods to convert attachment to byte[]
+                    String FileExt = Path.GetExtension(file.FileName).ToUpper();
                     Stream str = file.InputStream;
                     BinaryReader Br = new BinaryReader(str);
                     Byte[] FileDetail = Br.ReadBytes((Int32)str.Length);
@@ -132,7 +133,6 @@ namespace UI.Controllers
             catch (Exception ex)
             {
                 logger.Error(ex.ToString());
-               // return RedirectToAction("Index", "Tickets");
             }
 
             if (User.IsInRole("Customer"))

@@ -10,8 +10,11 @@
     }
 </style>
 
+<br />
+<br />
+<br />
 <section class="content-header">
-    <h1>Invoice<small>#007612</small></h1>
+    <h1>Invoice</h1>
 </section>
 
 <br />
@@ -37,13 +40,6 @@
                             <i class="fa fa-phone"></i>         @Html.DisplayFor(modelItem => modelItem.Customer.PhoneNumber)<br>
                             <i class="fa fa-envelope"></i>      @Html.DisplayFor(modelItem => modelItem.Customer.EmailAddress)
                         </address>
-                    </div>
-                    <div class="col-sm-4 invoice-col">
-                        <b>Invoice #007612</b><br>
-                        <br>
-                        <b>Order ID:</b> 4F3S8J<br>
-                        <b>Payment Due:</b> 2/22/2014<br>
-                        <b>Account:</b> 968-34567
                     </div>
                     <div class="col-xs-8" style="left:12%;margin-top:25px;">
                         <table class="table table-striped">
@@ -73,8 +69,6 @@
                             <img src="~/Images/paypal2.png" alt="Paypal">
                         </div>
                         <div class="col-xs-6">
-                            <p class="lead">Amount Due 2/22/2014</p>
-
                             <div class="table-responsive">
                                 <table class="table">
                                     <tr>
@@ -93,9 +87,8 @@
                             </div>
                         </div>
                     </div>
+                    <br />
                     <div class="col-xs-10">
-                        <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Generate PDF</a>
-
                         @using (Html.BeginForm("Cats", "Invoice", FormMethod.Post))
                         {
                          <button type="submit" class="btn btn-primary pull-right">

@@ -10,6 +10,9 @@
     .btn-default {background-color: transparent; border-color:transparent;}
 </style>
 
+<br />
+<br />
+<br />
 <section class="content-header" style="display:inline-flex;">
    <h1 style="margin-left:25px;"> Metrics Details</h1>
 </section>
@@ -49,7 +52,7 @@
                                 <div class="info-box bg-red">
                                     <span class="info-box-icon"><i class="fa fa-exclamation-triangle"></i></span>
                                     <div class="info-box-content">
-                                        <span class="info-box-text">NUMBER OF ESCALATIONS DURING THE DAY</span>
+                                        <span class="info-box-text">ESCALATIONS</span>
                                         <span class="info-box-number" style="font-size:28px;">@ViewBag.EscalateData</span>
                                     </div>
                                 </div>
@@ -85,7 +88,7 @@
 
 @section Scripts
 {
-@Scripts.Render("~/bundles/chart.js")
+@Scripts.Render("~/bundles/chartJS")
 
 <script>
 

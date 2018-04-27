@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using UI.Models;
+using UI.toastr;
 
 namespace UI.Controllers
 {
@@ -18,10 +19,12 @@ namespace UI.Controllers
         private ApplicationUserManager _userManager;
         private PlusBContext db = new PlusBContext();
         private IConsultantsRepository consultantUserRepo;
+        private ITicketsRepository ticketRepo;
 
         public ConsultantUserController()
         {
             this.consultantUserRepo = new ConsultantsRepository(new PlusBContext());
+            this.ticketRepo = new TicketsRepository(new PlusBContext());
         }
 
         // GET: ConsultantUser
@@ -85,6 +88,49 @@ namespace UI.Controllers
             var CreateConsultantUser = UserManager.Create(consultantUser, Password);
             var roleConsultant = UserManager.AddToRole(consultantUser.Id, "Consultant");
             return RedirectToAction("Index");
+        }
+
+        // GET: Consultants/Delete/5
+        public ActionResult Delete(bool? saveChangesError = false, int id = 0)
+        {
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Delete failed. Try again.";
+            }
+            Consultant consultant = consultantUserRepo.GetConsultantByID(id);
+            return PartialView("PartialConsultants/_deleteConsultant", consultant);
+        }
+
+        // POST: Consultants/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Consultant consultant = consultantUserRepo.GetConsultantByID(id);
+
+            var ConsultantToDeleteTickets = db.Tickets
+                                            .Where(x => x.Id_Consultant == consultant.ID
+                                            && x.Status != "Closed")
+                                            .Select(x => x.Id)
+                                            .ToList();
+
+            foreach(var i in ConsultantToDeleteTickets)
+            {
+                Ticket ticket = ticketRepo.GetTicketByID(i);
+                ticket.Id_Consultant = 1;
+                ticketRepo.UpdateTicket(ticket);
+                ticketRepo.Save();
+            }
+
+            consultantUserRepo.DeleteConsultant(id);
+            consultantUserRepo.Save();
+
+            ApplicationUser user = UserManager.Users.FirstOrDefault(u => u.ConsultantID == consultant.ID.ToString());
+            UserManager.Delete(user);
+            this.AddToastMessage("Remove Consultant","Consultant has been removed successfully.",ToastType.Success);
+
+            
+            return Json(new { success = true });
         }
 
         public void ListOfCountries()

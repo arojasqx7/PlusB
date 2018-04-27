@@ -15,6 +15,9 @@
     }
 </style>
 
+<br />
+<br />
+<br />
 <section class="content-header">
         <label id="ticketID" style="display:none;">@Html.DisplayFor(model => model.Id)</label>
 
@@ -93,18 +96,6 @@
                             <input id="escalationRiskAvg" type="text" class="knob" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954" data-readonly="true" data-toggle="tooltip" title="Escalation risk">
                             <div class="knob-label"><strong>Escalation Risk</strong></div>
                             <br />
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    Action <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                </ul>
-                            </div>
                         </div>
                         <div class="col-xs-6 col-md-4 text-center">
                             <input id="failureSLARisk" type="text" class="knob" value="10" data-skin="tron" data-thickness="0.1" data-width="90" data-height="90" data-fgColor="#00a65a" data-readonly="true" data-toggle="tooltip" title="Failure to meet SLA risk">
@@ -191,9 +182,8 @@
                 <h4 class="modal-title">Hours without update details & Actions to take</h4>
             </div>
             <div class="modal-body">
-                <p>Hours with no update: <strong>@Convert.ToInt32(TempData["PeriodicUpdateRisk"])</strong></p>
+                <p>Hours with no update: <strong>@TempData["PeriodicUpdateRisk"]</strong></p>
                 <p>Actions to take:</p>
-
                     @if(Convert.ToInt32(TempData["PeriodicUpdateRisk"]) >= 95)
                     {
                        <ul>

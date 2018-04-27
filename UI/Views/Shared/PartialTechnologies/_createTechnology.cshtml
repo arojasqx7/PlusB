@@ -21,7 +21,7 @@
             <div class="form-group" style="margin-top:20px;">
                 <label class="control-label col-md-2">Hour Price:</label>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.HourPrice, new { htmlAttributes = new { @class = "form-control", @placeholder = "Hour Price" } })
+                    @Html.EditorFor(model => model.HourPrice, new { htmlAttributes = new { @class = "form-control", @placeholder = "Hour Price", @type="number" } })
                 </div>
             </div>
             <br />

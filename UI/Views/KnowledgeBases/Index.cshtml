@@ -14,6 +14,9 @@
 </style>
 
 <br />
+<br />
+<br />
+<br />
 <section class="content-header col-md-12" style="display:inline-flex;">
     <h1>Knowledge Base</h1>
 
@@ -23,7 +26,7 @@
             <div class="input-group">
                 @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @id = "txtSearch", @placeholder = "What do you need help with?", @type = "search" })
                 <span class="input-group-btn">
-                    <button class="btn btn-primary" type="submit"><span><i class="fa fa-search"></i></span></button>
+                    <button class="btn btn-default" type="submit"><span><i class="fa fa-search"></i></span></button>
                 </span>
             </div>
         }

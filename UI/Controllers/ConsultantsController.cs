@@ -137,28 +137,6 @@ namespace UI.Controllers
             return PartialView("PartialConsultants/_editConsultant", consultant);
         }
 
-        // GET: Consultants/Delete/5
-        public ActionResult Delete(bool? saveChangesError = false, int id = 0)
-        {
-            if (saveChangesError.GetValueOrDefault())
-            {
-                ViewBag.ErrorMessage = "Delete failed. Try again.";
-            }
-            Consultant consultant = consultantRepo.GetConsultantByID(id);
-            return PartialView("PartialConsultants/_deleteConsultant", consultant);
-        }
-
-        // POST: Consultants/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Consultant consultant = consultantRepo.GetConsultantByID(id);
-            consultantRepo.DeleteConsultant(id);
-            consultantRepo.Save();
-            return Json(new { success = true });
-        }
-
         //This method lists all countries and send them in a ViewBag.CountryList
         public void ListOfCountries()
         {

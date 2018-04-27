@@ -80,7 +80,7 @@ namespace UI.Controllers
                     activityToSend = activity;
 
                     //Code to call Store Procedure...
-                    SqlConnection connection = new SqlConnection("Data Source=KEIDY-LPT\\SQLEXPRESS;Initial Catalog=PlusBContext;Integrated Security=True;");
+                    SqlConnection connection = new SqlConnection("Initial Catalog=PlusBContext;Data Source=tcp:arojas.database.windows.net,1433;User ID=arojas;Password=Test123!;");
                     var command = new SqlCommand("getNotificationFlag", connection);
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@emailUser", emailToSend);
@@ -109,7 +109,7 @@ namespace UI.Controllers
                     activityToSend = activity;
 
                     //Code to call Store Procedure...
-                    SqlConnection connection = new SqlConnection("Data Source=KEIDY-LPT\\SQLEXPRESS;Initial Catalog=PlusBContext;Integrated Security=True;");
+                    SqlConnection connection = new SqlConnection("Initial Catalog=PlusBContext;Data Source=tcp:arojas.database.windows.net,1433;User ID=arojas;Password=Test123!;");
                     var command = new SqlCommand("getNotificationFlag", connection);
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@emailUser", emailToSend);

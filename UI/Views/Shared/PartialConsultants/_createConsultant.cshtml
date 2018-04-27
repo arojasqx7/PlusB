@@ -133,6 +133,9 @@
 <script src="~/Scripts/jquery/dist/jquery.min.js"></script>
 <script src="~/Scripts/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script>
-    $('.datepicker').datepicker("setDate", new Date());
-    $('.datepicker').datepicker("option", "dateFormat", "dd/mm/yyyy");
+    $('.datepicker').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'dd/mm/yyyy'
+    })
 </script>

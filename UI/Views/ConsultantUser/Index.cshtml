@@ -3,6 +3,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br />
+<br />
+<br />
 <section class="content-header">
     <h1>Consultants</h1>
 </section>
@@ -65,7 +68,7 @@
                                     <span>
                                         <a href="@Url.Action("Create","ConsultantKPIs", new { idConsultant = item.ID})" data-toggle="tooltip" data-placement="top" title="Assign KPI" class="btn btn-default"><span class='glyphicon glyphicon-stats'> </span></a>
                                     </span>
-                                    @Html.Raw("<a data-modal='' href='/Consultants/Delete/" + item.ID + "' id='" + item.ID + "' class='btn btn-danger' data-toggle='tooltip' title='Delete'> <span class='glyphicon glyphicon-trash'> </span> </a>")
+                                    @Html.Raw("<a data-modal='' href='/ConsultantUser/Delete/" + item.ID + "' id='" + item.ID + "' class='btn btn-danger' data-toggle='tooltip' title='Delete'> <span class='glyphicon glyphicon-trash'> </span> </a>")
                                 </td>
                             </tr>
                         }
@@ -75,6 +78,7 @@
         </div>
     </div>
 </section>
+
 <div class="modal fade" id="modal-default">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -91,6 +95,7 @@
         </div>
     </div>
 </div>
+
 <div id='myModal' class='modal fade in'>
     <div class="modal-dialog">
         <div class="modal-content">
@@ -98,6 +103,9 @@
         </div>
     </div>
 </div>
+
 @section Scripts{
-    @Scripts.Render("~/Scripts/Modals.js")
+@Scripts.Render("~/Scripts/Modals.js")
+@Scripts.Render("~/bundles/bootstrap")
+
 }

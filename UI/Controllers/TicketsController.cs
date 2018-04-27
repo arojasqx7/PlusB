@@ -97,8 +97,9 @@ namespace UI.Controllers
             }
             ViewBag.CurrentFilter = searchString;
 
-            var unassignedTickets = db.Tickets.Include(t => t.Consultant).Include(t => t.Customer).Include(t => t.Impact).Include(t => t.Severity).Include(t => t.TaskType).Include(t => t.Technology)
-                                    .Where(x => x.Consultant.FirstName.Equals("Unassigned"));
+            var unassignedTickets =  db.Tickets.Include(t => t.Consultant).Include(t => t.Customer).Include(t => t.Impact).Include(t => t.Severity).Include(t => t.TaskType).Include(t => t.Technology)
+                                    .Where(x => x.Consultant.FirstName == "Unassigned"
+                                     && x.Status != "Closed");
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -451,7 +452,7 @@ namespace UI.Controllers
                     statusToSend = status;
 
                     //Code to call Store Procedure...
-                    SqlConnection connection = new SqlConnection("Data Source=KEIDY-LPT\\SQLEXPRESS;Initial Catalog=PlusBContext;Integrated Security=True;");
+                    SqlConnection connection = new SqlConnection("Initial Catalog=PlusBContext;Data Source=tcp:arojas.database.windows.net,1433;User ID=arojas;Password=Test123!;");
                     var command = new SqlCommand("getNotificationFlag", connection);
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@emailUser", emailToSend);
@@ -482,7 +483,7 @@ namespace UI.Controllers
                     statusToSend = status;
 
                     //Code to call Store Procedure...
-                    SqlConnection connection = new SqlConnection("Data Source=KEIDY-LPT\\SQLEXPRESS;Initial Catalog=PlusBContext;Integrated Security=True;");
+                    SqlConnection connection = new SqlConnection("Initial Catalog=PlusBContext;Data Source=tcp:arojas.database.windows.net,1433;User ID=arojas;Password=Test123!;");
                     var command = new SqlCommand("getNotificationFlag", connection);
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@emailUser", emailToSend);
@@ -723,21 +724,27 @@ namespace UI.Controllers
         {
             DateTime currentHour = DateTime.Now;
 
-            TicketActivity getLastActivityOnTicket = db.TicketActivities.Where(x => x.idTicket == id)
-                                                     .ToArray().LastOrDefault();
+            TicketActivity getLastActivityOnTicket = db.TicketActivities
+                                                     .Where(x => x.idTicket == id)
+                                                     .ToArray()
+                                                     .LastOrDefault();
 
             if (getLastActivityOnTicket == null)
             {
-                return 0;
+                Ticket ticket = ticketRepo.GetTicketByID(id);
+                TimeSpan hoursDiff = Convert.ToDateTime(currentHour).Subtract(ticket.Date);
+                hoursResult = hoursDiff.TotalHours;
+                riskPeriodicUpdate = Math.Round(hoursResult);
+                TempData["PeriodicUpdateRisk"] = riskPeriodicUpdate;
+                return riskPeriodicUpdate;
             }
             else
             {
                 DateTime LastActivity = getLastActivityOnTicket.Date + getLastActivityOnTicket.Time;
 
-                //Obtain hours value
                 TimeSpan hoursDiff = Convert.ToDateTime(currentHour).Subtract(LastActivity);
                 hoursResult = hoursDiff.TotalHours;
-                riskPeriodicUpdate = Math.Round(hoursResult,2);
+                riskPeriodicUpdate = Math.Round(hoursResult);
                 TempData["PeriodicUpdateRisk"] = riskPeriodicUpdate;
                 return riskPeriodicUpdate;
             }

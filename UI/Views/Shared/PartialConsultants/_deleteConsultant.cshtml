@@ -121,7 +121,7 @@
 
     // function to delete row
     function confirmedDeletion($button){
-        $.post("@Url.Action("Delete", "ConsultantsController")", { id : id } , function (data) {
+        $.post("@Url.Action("Delete", "ConsultantUserController")", { id : id } , function (data) {
         if(data.Success) {
             $button.closest('tr').remove();
         }

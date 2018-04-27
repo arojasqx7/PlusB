@@ -108,23 +108,20 @@
     }
 </div>
 
+@section Script
+{
+    <script>
+        $('#DeleteCustomer').click(function () {
+            $('#myModal').modal('hide');
+        });
 
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-
-<script>
-    $('#DeleteCustomer').click(function () {
-        $('#myModal').modal('hide');
-    });
-
-    // function to delete row
-    function confirmedDeletion($button){
-        $.post("@Url.Action("Delete", "CustomersController")", { id : id } , function (data) {
-        if(data.Success) {
-            $button.closest('tr').remove();
+        // function to delete row
+        function confirmedDeletion($button){
+            $.post("@Url.Action("Delete", "CustomersController")", { id : id } , function (data) {
+            if(data.Success) {
+                $button.closest('tr').remove();
+            }
+        });
         }
-    });
-    }
-</script>
+    </script>
+}
